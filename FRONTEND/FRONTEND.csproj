@@ -102,6 +102,7 @@
     <Content Include="angular\Controller\CalculoValoracaoController.js" />
     <Content Include="angular\Controller\ConsultaFitasOrdenadasController.js" />
     <Content Include="angular\Controller\ConsultaRoteiroOrdenadoController.js" />
+    <Content Include="angular\Controller\ConsultaVeiculacaoMerchaController.js" />
     <Content Include="angular\Controller\CriticaValoracaoController.js" />
     <Content Include="angular\Controller\DeParaData.js" />
     <Content Include="angular\Controller\DeParaPeriodo.js" />
@@ -121,6 +122,8 @@
     <Content Include="angular\Controller\FitaPatrocinioController.js" />
     <Content Include="angular\Controller\GeracaoCEController.js" />
     <Content Include="angular\Controller\GeracaoFaturaController.js" />
+    <Content Include="angular\Controller\GradeMerchaCadastroController.js" />
+    <Content Include="angular\Controller\GradeMerchaController.js" />
     <Content Include="angular\Controller\HorarioExibicaoController.js" />
     <Content Include="angular\Controller\ImpressaoCeController.js" />
     <Content Include="angular\Controller\indexController.js" />
@@ -142,9 +145,11 @@
     <Content Include="angular\Controller\PrevisaoVendasMensalController.js" />
     <Content Include="angular\Controller\PrevisaoVendasNovaAgencia.js" />
     <Content Include="angular\Controller\PrevisaoVendasVeiculoController.js" />
+    <Content Include="angular\Controller\PropagacaoGradeMerchaController.js" />
     <Content Include="angular\Controller\PropagacaoMapaController.js" />
     <Content Include="angular\Controller\ReabreCEController.js" />
     <Content Include="angular\Controller\RetornoPlaylistController.js" />
+    <Content Include="angular\Controller\RoteiroMerchaController.js" />
     <Content Include="angular\Controller\TabelaPrecoImportacaoController.js" />
     <Content Include="angular\Controller\TabelaPrecosMolCadastroController.js" />
     <Content Include="angular\Controller\TabelaPrecosMolController.js" />
@@ -155,6 +160,7 @@
     <Content Include="IndexAdm.html" />
     <Content Include="IndexChecking.html" />
     <Content Include="IndexFaturamento.html" />
+    <Content Include="IndexMercha.html" />
     <Content Include="IndexRoteiro.html" />
     <Content Include="IndexProg.html" />
     <Content Include="IndexVendas.html" />
@@ -312,6 +318,7 @@
     <Content Include="js\vendor\XTABLES\Buttons-1.5.1\css\common.scss" />
     <Content Include="js\vendor\XTABLES\Buttons-1.5.1\css\mixins.scss" />
     <Content Include="js\vendor\XTABLES\language\Pt_BR.json" />
+    <Content Include="template\SimulacaoDispo.html" />
     <Content Include="template\modalHistorico.html" />
     <Content Include="template\PesquisaGradeCompensacao.html" />
     <Content Include="view\Am_Consulta.html" />
@@ -331,6 +338,7 @@
     <Content Include="view\ConsultaProgramacaoDiaria.html" />
     <Content Include="view\ConsultaProgramacaoDiariaDetalhe.html" />
     <Content Include="view\ConsultaRoteiroOrdenado.html" />
+    <Content Include="view\ConsultaVeiculacaoMercha.html" />
     <Content Include="view\CriticaValoracao.html" />
     <Content Include="view\DashboardTeste.html" />
     <Content Include="view\DashEvolucaoVendas.html" />
@@ -348,7 +356,8 @@
     <Content Include="view\GeneroCadastro.html" />
     <Content Include="view\GeracaoCE.html" />
     <Content Include="view\GeracaoFatura.html" />
-    <Content Include="view\GradeCadastro - Copy.html" />
+    <Content Include="view\GradeMerchaCadastro.html" />
+    <Content Include="view\GradeMercha.html" />
     <Content Include="view\GradeCadastro.html" />
     <Content Include="view\HorarioExibicao.html" />
     <Content Include="view\ImpressaoComprovante.html" />
@@ -418,6 +427,7 @@
     <Content Include="view\Grade.html" />
     <Content Include="view\Programa.html" />
     <Content Include="view\ProgramaCadastro.html" />
+    <Content Include="view\PropagacaoGradeMercha.html" />
     <Content Include="view\PropagacaoGrade.html" />
     <Content Include="view\PropagacaoMapa.html" />
     <Content Include="view\PropostaPendenteAprovacao.html" />
@@ -433,6 +443,7 @@
     <Content Include="view\RegraAprovacao.html" />
     <Content Include="view\Composicao_Break.html" />
     <Content Include="view\RetornoPlayList.html" />
+    <Content Include="view\RoteiroMercha.html" />
     <Content Include="view\Roteiro.html" />
     <Content Include="view\ConsultaVeiculacao.html" />
     <Content Include="view\Simulacao - Copy.html" />

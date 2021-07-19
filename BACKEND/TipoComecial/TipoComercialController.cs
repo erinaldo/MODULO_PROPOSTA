@@ -7,16 +7,16 @@ namespace PROPOSTA
     {
         //=================================Lista de Tipo Comercial
         [Route("api/TipoComercialListar")]
-        [HttpGet]
+        [HttpPost]
         [ActionName("TipoComercialListar")]
         [Authorize()]
-        public IHttpActionResult TipoComercialListar()
+        public IHttpActionResult TipoComercialListar([FromBody] TipoComercial.TipoComercialFiltro Param)
         {
             SimLib clsLib = new SimLib();
             TipoComercial Cls = new TipoComercial(User.Identity.Name);
             try
             {
-                DataTable dtb = Cls.TipoComercialListar(0);
+                DataTable dtb = Cls.TipoComercialListar(Param);
                 return Ok(dtb);
             }
             catch (Exception Ex)

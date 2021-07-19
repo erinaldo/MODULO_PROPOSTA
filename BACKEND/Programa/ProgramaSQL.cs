@@ -72,6 +72,7 @@ namespace PROPOSTA
                     Programa.Indica_Boletim     = dtb.Rows[0]["Indica_Boletim"].ToString().ConvertToBoolean();
                     Programa.Indica_Internet    = dtb.Rows[0]["Indica_Internet"].ToString().ConvertToBoolean();
                     Programa.Indica_Faixa       = dtb.Rows[0]["Indica_Faixa"].ToString().ConvertToBoolean();
+                    Programa.Indica_Merchandising= dtb.Rows[0]["Indica_Merchandising"].ToString().ConvertToBoolean();
                     Programa.Cod_A_JOVE         = dtb.Rows[0]["Cod_A_JOVE"].ToString();
                     Programa.Cod_N_JOVE         = dtb.Rows[0]["Cod_N_JOVE"].ToString().ConvertToInt32();
                     Programa.Indica_Patrocinio  = dtb.Rows[0]["Indica_Patrocinio"].ToString().ConvertToBoolean();
@@ -317,6 +318,7 @@ namespace PROPOSTA
                 Adp.SelectCommand.Parameters.AddWithValue("@Par_Indica_Boletim", pPrograma.Indica_Boletim);
                 Adp.SelectCommand.Parameters.AddWithValue("@Par_Indica_Internet", pPrograma.Indica_Internet);
                 Adp.SelectCommand.Parameters.AddWithValue("@Par_Indica_Faixa", pPrograma.Indica_Faixa);
+                Adp.SelectCommand.Parameters.AddWithValue("@Par_Indica_Merchandising", pPrograma.Indica_Merchandising);
                 Adp.SelectCommand.Parameters.AddWithValue("@Par_Qtd_Cotas", pPrograma.Qtd_Cotas);
                 Adp.SelectCommand.Parameters.AddWithValue("@Par_Horario_Exibicao", pPrograma.Horario_Exibicao);
                 Adp.SelectCommand.Parameters.AddWithValue("@Par_Indica_Patrocinio", pPrograma.Indica_Patrocinio);

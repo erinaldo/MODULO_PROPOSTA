@@ -1097,6 +1097,34 @@
     routeName: 'Apresentadores - Cadastro',
     RouteId: 'Apresentadores@New'
     })
+    .when('/GradeMercha', {
+        templateUrl: 'view/GradeMercha.html',
+        authorize: true,
+        controller: 'GradeMerchaController',
+        routeName: 'Grade de Merchandising',
+        RouteId: 'GradeMercha@Index'
+    })
+    .when('/GradeMerchaCadastro/:Action/:Veiculo/:Data/:Programa', {
+        templateUrl: 'view/GradeMerchaCadastro.html',
+        controller: 'GradeMerchaCadastroController',
+        authorize: true,
+        routeName: 'Edição da Grade de Merchandising',
+        RouteId: 'GradeMercha@New'
+    })
+    .when('/ConsultaVeiculacoesMercha', {
+        templateUrl: 'view/ConsultaVeiculacaoMercha.html',
+        controller: 'ConsultaVeiculacaoMerchaController',
+        authorize: true,
+        routeName: "Consulta de Veiculações Merchandising",
+        RouteId: 'Veiculacao@Consulta'
+    })
+    .when('/RoteiroMercha', {
+        templateUrl: 'view/RoteiroMercha.html',
+        controller: 'RoteiroMerchaController',
+        authorize: true,
+        routeName: "Roteiro de Merchandising",
+        RouteId: 'Mercha@Roteiro'
+    })
     .otherwise({ redirectTo: "/blank" })
 });
 

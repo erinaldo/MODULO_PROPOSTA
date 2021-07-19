@@ -155,6 +155,8 @@ namespace PROPOSTA
             public String Desconto_Aplicado { get; set; }
             public String Tipo_Desconto { get; set; }
             public Boolean Tem_Grade { get; set; }
+            public String BackGroundColor { get; set; }
+            public String ForeColor { get; set; }
             public String Critica { get; set; } //mensagem na distribuicao das insercoes
             public Boolean Status { get; set; } //retorno de sucesso ou nao na distribuicao das insercoes
         }
@@ -222,6 +224,7 @@ namespace PROPOSTA
             public Int32 Id_Midia { get; set; }
             public String Competencia { get; set; }
             public String Cod_Programa { get; set; }
+            public byte Abrangencia { get; set; }
             public String Cod_Tipo_Comercial { get; set; }
             public String Cod_Caracteristica { get; set; }
             public Int32 Qtd_Insercoes { get; set; }
@@ -233,6 +236,7 @@ namespace PROPOSTA
             public String Cod_Empresa_Faturamento { get; set; }
             public Int32 Duracao { get; set; }
             public List<VeiculoModel> Veiculos { get; set; }
+            
         }
         public class Param_Aprovacao_Model
         {
@@ -272,6 +276,28 @@ namespace PROPOSTA
         {
             public Int32 Id_Esquema { get; set; }
             public Byte Tipo_Duplicacao { get; set; }
+        }
+        public class FiltroDispoModel
+        {
+            public String Competencia { get; set; }
+            public String  Cod_Programa{ get; set; }
+            public List<VeiculoModel> Veiculos { get; set; }
+        }
+        public class DispoModel
+        {
+            public String Cod_Veiculo { get; set; }
+            public DateTime Data_Exibicao{ get; set; }
+            public String Cod_Programa { get; set; }
+            public String Nome_Programa { get; set; }
+            public String Programa_Text{ get; set; }
+            public String Hora_Inicio{ get; set; }
+            public String Hora_Termino{ get; set; }
+            public Int32 Dispo_Net { get; set; }
+            public Int32 Dispo_Local { get; set; }
+            public Int32 Absorvido_Net { get; set; }
+            public Int32 Absorvido_Local { get; set; }
+            public Int32 Saldo_Net { get; set; }
+            public Int32 Saldo_Local { get; set; }
         }
     }
 }

@@ -8,9 +8,8 @@ namespace PROPOSTA
 
     public partial class TipoComercial
     {
-        public static string Cod_Tipo_Comercial { get; private set; }
 
-        public DataTable TipoComercialListar(Int32 pIdTipoComercial)
+        public DataTable TipoComercialListar(TipoComercialFiltro Param)
         {
             clsConexao cnn = new clsConexao(this.Credential);
             cnn.Open();
@@ -22,6 +21,10 @@ namespace PROPOSTA
                 SqlCommand cmd = cnn.Procedure(cnn.Connection, "PR_PROPOSTA_TipoComercial_Listar");
                 Adp.SelectCommand = cmd;
                 Adp.SelectCommand.Parameters.AddWithValue("@Par_Login", this.CurrentUser);
+                Adp.SelectCommand.Parameters.AddWithValue("@Par_Indica_Merchandising", Param.Indica_Merchandising);
+                Adp.SelectCommand.Parameters.AddWithValue("@Par_Indica_OnLine", Param.Indica_OnLine);
+                Adp.SelectCommand.Parameters.AddWithValue("@Par_Indica_OffLine", Param.Indica_OffLine);
+
                 Adp.Fill(dtb);
             }
             catch (Exception)

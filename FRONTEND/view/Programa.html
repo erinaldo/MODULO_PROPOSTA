@@ -25,6 +25,7 @@
                         <th>Cod. Programa</th>
                         <th>Título</th>
                         <th>Gênero</th>
+                        <th>Grade Merch</th>
                         <th>Eventos</th>
                         <th>Rotativo</th>
                         <th>Local</th>
@@ -47,6 +48,9 @@
                         <td>{{::Programa.Cod_Programa}}</td>
                         <td>{{::Programa.Titulo}}</td>
                         <td>{{::Programa.Descricao}}</td>
+                        <td style="text-align:center">
+                            <label ng-show="Programa.Indica_Merchandising"><span class="fa fa-check text-success" style="font-size:20px"></span></label>
+                        </td>
                         <td style="text-align:center">
                             <label ng-show="Programa.indica_evento"><span class="fa fa-check text-success" style="font-size:20px"></span></label>
                         </td>

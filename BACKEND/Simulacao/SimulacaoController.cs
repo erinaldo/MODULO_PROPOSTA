@@ -400,26 +400,7 @@ namespace PROPOSTA
             }
         }
 
-        //[Route("api/DuplicarEsquema/{Id_Esquema}/{Tipo}")]
-        //[HttpGet]
-        //[ActionName("DuplicarEsquema")]
-        //[Authorize()]
-        //public IHttpActionResult DuplicarEsquema(Int32 Id_Esquema,Int32 Tipo)
-        //{
-        //    SimLib clsLib = new SimLib();
-        //    Simulacao Cls = new Simulacao(User.Identity.Name);
-
-        //    try
-        //    {
-        //        DataTable dtbRetorno = Cls.DuplicarEsquema(Id_Esquema,Tipo);
-        //        return Ok(dtbRetorno);
-        //    }
-        //    catch (Exception Ex)
-        //    {
-        //        clsLib.EmailErrorToSuporte(User.Identity.Name, Ex.Message.ToString(), Ex.Source, Ex.StackTrace);
-        //        throw new Exception(Ex.Message);
-        //    }
-        //}
+       
 
         [Route("api/DuplicarEsquema")]
         [HttpPost]
@@ -710,6 +691,26 @@ namespace PROPOSTA
                 DataTable dtbRetorno = Cls.ListHistorico(Id_Simulacao);
                 return Ok(dtbRetorno);
 
+            }
+            catch (Exception Ex)
+            {
+                clsLib.EmailErrorToSuporte(User.Identity.Name, Ex.Message.ToString(), Ex.Source, Ex.StackTrace);
+                throw new Exception(Ex.Message);
+            }
+        }
+
+        [Route("api/Simulacao/ConsultarDispo")]
+        [HttpPost]
+        [ActionName("ConsultarDispo")]
+        [Authorize()]
+        public IHttpActionResult ConsultarDispo([FromBody]  Simulacao.FiltroDispoModel Param)
+        {
+            SimLib clsLib = new SimLib();   
+            try
+            {
+                Simulacao Cls = new Simulacao(User.Identity.Name);
+                List<Simulacao.DispoModel> Retorno =   Cls.ConsultarDispo(Param);
+                return Ok(Retorno);
             }
             catch (Exception Ex)
             {

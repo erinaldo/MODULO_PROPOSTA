@@ -63,6 +63,13 @@
             'color': 'black',
             'url': 'indexFaturamento.html'
         },
+        {
+            'Id': 7, 'Name': 'SIM-Merchandising',
+            'Text': 'Controle de Merchandising',
+            'bgcolor': 'rgb(153, 49, 142)',
+            'color': 'white',
+            'url': 'indexMercha.html'
+        },
     ];
     $scope.ShortMenus = [
         {
@@ -90,8 +97,8 @@
                 { 'Title': 'Manutenção de Mapa Reserva', 'Url': $rootScope.pageUrl + 'IndexOpec.html#/MapaReserva' },
                 { 'Title': 'Determinação de Títulos', 'Url': $rootScope.pageUrl + 'IndexOpec.html#/Determinacao' },
                 { 'Title': 'Importar Propostas', 'Url': $rootScope.pageUrl + 'IndexOpec.html#/MapaReservaImport' },
-                { 'Title': 'Propagação de Mapa Reserva', 'Url': $rootScope.pageUrl + 'IndexOpec.html#/MapaReservaImport' },
-                { 'Title': 'Consulta de Veiculações', 'Url': $rootScope.pageUrl + 'IndexOpec.html#/PropagacaoMapa' },
+                { 'Title': 'Propagação de Mapa Reserva', 'Url': $rootScope.pageUrl + 'IndexOpec.html#/PropagacaoMapa' },
+                { 'Title': 'Consulta de Veiculações', 'Url': $rootScope.pageUrl + 'IndexOpec.html#/ConsultaVeiculacoes' },
             ],
         },
         {
@@ -162,6 +169,15 @@
                 { 'Title': 'Pesquisa de Faturas', 'Url': $rootScope.pageUrl + 'IndexFaturamento.html#/FaturasPesquisa' },
                 { 'Title': 'Valoração de Contratos', 'Url': $rootScope.pageUrl + 'IndexFaturamento.html#/CalculoValoracao' },
                 { 'Title': 'Crítica da Valoração', 'Url': $rootScope.pageUrl + 'IndexFaturamento.html#/CriticaValoracao' },
+
+            ],
+        },
+        {
+            'Title': 'Merchandising',
+            'SubItens': [
+                { 'Title': 'Grade de Merchandising', 'Url': $rootScope.pageUrl + 'IndexMercha.html#/GradeMercha' },
+                { 'Title': 'Veiculações de Merchandising', 'Url': $rootScope.pageUrl + 'IndexMercha.html#/ConsultaVeiculacoesMercha' },
+                { 'Title': 'Roteiro de Merchandising', 'Url': $rootScope.pageUrl + 'IndexMercha.html#/RoteiroMercha' },
 
             ],
         },

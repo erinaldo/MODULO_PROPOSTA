@@ -36,7 +36,12 @@ namespace PROPOSTA
 
         }
 
-
+        public class TipoComercialFiltro
+        {
+            public Boolean Indica_Merchandising { get; set; }
+            public Boolean Indica_OnLine{ get; set; }
+            public Boolean Indica_OffLine{ get; set; }
+        }
 
     }
 }

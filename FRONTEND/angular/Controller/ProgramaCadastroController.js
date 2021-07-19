@@ -76,11 +76,6 @@
 // Aqui foi definindo funções para apresentadores
     $scope.SelecionarApresentadores = function () {
         $scope.PesquisaTabelas = NewPesquisaTabelas();
-        //var _url = 'ListarTabela/Apresentador'
-        //_url += '?Abrangencia=' + $scope.Simulacao.Esquemas[$scope.currentEsquema].Abrangencia;
-        //_url += '&Mercado=' + NullToString($scope.Simulacao.Esquemas[$scope.currentEsquema].Cod_Mercado);
-        //_url += '&Empresa=' + NullToString($scope.Simulacao.Cod_Empresa_Venda);
-        //_url += '&Empresa_Faturamento=' + NullToString($scope.Simulacao.Esquemas[$scope.currentEsquema].Cod_Empresa_Faturamento);
         httpService.Get(_url).then(function (response) {
             $scope.PesquisaTabelas = {}
             if (response.data) {

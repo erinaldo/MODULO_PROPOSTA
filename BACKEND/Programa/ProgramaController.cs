@@ -28,7 +28,7 @@ namespace PROPOSTA
                 throw new Exception(Ex.Message);
             }
         }
-        //=================================Obtem dados do Programa jOÃO MARIA AJUDOU FAZER ESTA PARTE
+        //=================================Obtem dados do Programa 
         [Route("api/GetProgramaData/{Cod_Programa}")]
         [HttpGet]
         [ActionName("GetProgramaData")]

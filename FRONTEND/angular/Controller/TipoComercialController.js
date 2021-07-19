@@ -22,7 +22,7 @@
     { 'title': 'Codigo Exibidora', 'visible': true, 'searchable': true, 'sortable': true },
     { 'title': 'Tipo Comercialização', 'visible': true, 'searchable': true, 'sortable': true },
     ];
-
+    $scope.Filtro = { 'Indica_Merchandising': true, 'Indica_OnLine': true, 'Indica_OffLine': true }
     //====================Quando terminar carga do grid, torna view do grid visible
     $scope.RepeatFinished = function () {
         $rootScope.routeloading = false;
@@ -39,7 +39,7 @@
         $scope.TipoComerciais = [];
         $scope.ShowGrid = false;
         $('#dataTable').dataTable().fnDestroy();
-        httpService.Get('TipoComercialListar').then(function (response) {
+        httpService.Post('TipoComercialListar',$scope.Filtro).then(function (response) {
             if (response) {
                 $scope.TipoComerciais = response.data;
                 if ($scope.TipoComerciais.length == 0) {
@@ -53,7 +53,7 @@
         param = {};
         param.language = fnDataTableLanguage();
         param.lengthMenu = [[7, 10, 25, 50, -1], [7, 10, 25, 50, "Todos"]];
-        param.pageLength = 10;
+        param.pageLength = 7;
         param.scrollCollapse = true;
         param.paging = true;
 

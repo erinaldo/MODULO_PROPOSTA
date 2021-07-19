@@ -312,6 +312,9 @@
     <Compile Include="AM\AMController.cs" />
     <Compile Include="AM\AMModel.cs" />
     <Compile Include="AM\AMSql.cs" />
+    <Compile Include="GradeMercha\GradeMerchaController.cs" />
+    <Compile Include="GradeMercha\GradeMerchaModel.cs" />
+    <Compile Include="GradeMercha\GradeMerchaSql.cs" />
     <Compile Include="HorarioExibicao\HorarioExibicaoController.cs" />
     <Compile Include="HorarioExibicao\HorarioExibicaoModel.cs" />
     <Compile Include="HorarioExibicao\HorarioExibicaoSql.cs" />
@@ -364,6 +367,7 @@
     <Compile Include="ParRetorPlayList\ParRetorPlayListModel.cs" />
     <Compile Include="ParRetorPlayList\ParRetorPlayListSql.cs" />
     <Compile Include="PDF\ImpressaoComprovante.cs" />
+    <Compile Include="PDF\ImpressaoRoteiroMercha.cs" />
     <Compile Include="PDF\ImpressaoRoteiro.cs" />
     <Compile Include="PDF\ImpressaoMapa.cs" />
     <Compile Include="PDF\ImpressaoProposta.cs" />
@@ -394,6 +398,9 @@
     <Compile Include="RetornoPlayList\RetornoPlaylistController.cs" />
     <Compile Include="RetornoPlayList\RetornoPlaylistModel.cs" />
     <Compile Include="RetornoPlayList\RetornoPlaylistSql.cs" />
+    <Compile Include="RoteiroMercha\RoteiroMerchaController.cs" />
+    <Compile Include="RoteiroMercha\RoteiroMerchaModel.cs" />
+    <Compile Include="RoteiroMercha\RoteiroMerchaSql.cs" />
     <Compile Include="Roteiro\ConsultaVeiculacaoController.cs" />
     <Compile Include="Roteiro\ConsultaVeiculacaoModel.cs" />
     <Compile Include="Roteiro\ConsultaVeiculacaoSql.cs" />

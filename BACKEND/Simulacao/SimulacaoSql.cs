@@ -470,6 +470,8 @@ namespace PROPOSTA
                         Tem_Grade = drw["Tem_Grade"].ToString().ConvertToBoolean(),
                         Dia_Semana = drw["Dia_Semana"].ToString(),
                         Dia = drw["Dia"].ToString(),
+                        BackGroundColor = drw["BackGroundColor"].ToString(),
+                        ForeColor= drw["ForeColor"].ToString(),
                     });
                 }
             }
@@ -568,6 +570,7 @@ namespace PROPOSTA
                 Adp.SelectCommand.Parameters.AddWithValue("@Par_Login", this.CurrentUser);
                 Adp.SelectCommand.Parameters.AddWithValue("@Par_Competencia", intCompetencia);
                 Adp.SelectCommand.Parameters.AddWithValue("@Par_Cod_Programa", Param.Cod_Programa);
+                Adp.SelectCommand.Parameters.AddWithValue("@Par_Abrangencia", Param.Abrangencia);
                 Adp.SelectCommand.Parameters.AddWithValue("@Par_Veiculos", xmlVeiculo);
                 Adp.SelectCommand.Parameters.AddWithValue("@Par_Cod_Tipo_Comercial", Param.Cod_Tipo_Comercial);
                 Adp.SelectCommand.Parameters.AddWithValue("@Par_Cod_Caracteristica", Param.Cod_Caracteristica);
@@ -602,6 +605,8 @@ namespace PROPOSTA
                             Status = drw["Status"].ToString().ConvertToBoolean(),
                             Critica = drw["Critica"].ToString(),
                             Qtd = (drw["Qtd"].ToString()) == "0" ? null : drw["Qtd"].ToString(),
+                            BackGroundColor = drw["BackGroundColor"].ToString(),
+                            ForeColor= drw["ForeColor"].ToString(),
                         });
                     }
                 }
@@ -1118,6 +1123,58 @@ namespace PROPOSTA
                 cnn.Close();
             }
             return dtb;
+        }
+        public List<DispoModel> ConsultarDispo(FiltroDispoModel Param)
+        {
+            DataTable dtb = new DataTable();
+            clsConexao cnn = new clsConexao(this.Credential);
+            cnn.Open();
+            SqlDataAdapter Adp = new SqlDataAdapter();
+            SimLib clsLib = new SimLib();
+            List<DispoModel> Dispo = new List<DispoModel>();
+            try
+            {
+                for (int i = 0; i < Param.Veiculos.Count; i++)
+                {
+                    SqlCommand cmd = cnn.Procedure(cnn.Connection, "Pr_Proposta_Grade_List");
+                    Adp.SelectCommand = cmd;
+                    cmd.Parameters.AddWithValue("@Par_Login", this.CurrentUser);
+                    cmd.Parameters.AddWithValue( "@Par_Cod_Veiculo", Param.Veiculos[i].Cod_Veiculo);
+                    cmd.Parameters.AddWithValue( "@Par_Competencia", clsLib.CompetenciaInt(Param.Competencia));
+                    cmd.Parameters.AddWithValue( "@Par_Cod_Programa", Param.Cod_Programa);
+                    Adp.Fill(dtb);
+                    foreach (DataRow drw in dtb.Rows)
+                    {
+                        Dispo.Add(new DispoModel()
+                        { Cod_Veiculo = drw["Cod_Veiculo"].ToString(),
+                            Data_Exibicao = drw["Data_Exibicao"].ToString().ConvertToDatetime(),
+                            Cod_Programa = drw["Cod_Programa"].ToString(),
+                            Nome_Programa = drw["Nome_Programa"].ToString(),
+                            Hora_Inicio = drw["Hora_Inicio"].ToString(),
+                            Hora_Termino = drw["Hora_Termino"].ToString(),
+                            Dispo_Net = drw["Dispo_Net"].ToString().ConvertToInt32(),
+                            Dispo_Local = drw["Dispo_Local"].ToString().ConvertToInt32(),
+                            Absorvido_Net = drw["Absorvido_Net"].ToString().ConvertToInt32(),
+                            Absorvido_Local = drw["Absorvido_Local"].ToString().ConvertToInt32(),
+                            Saldo_Net = drw["Saldo_Net"].ToString().ConvertToInt32(),
+                            Saldo_Local = drw["Saldo_Local"].ToString().ConvertToInt32(),
+                            Programa_Text = drw["Cod_Programa"].ToString() + '-' + drw["Nome_Programa"].ToString(),
+                        });
+                    }
+                    cmd.Dispose();
+                    Adp.Dispose();
+                    dtb.Dispose();
+                }
+            }
+            catch (Exception)
+            {
+                throw;
+            }
+            finally
+            {
+                cnn.Close();
+            }
+            return Dispo;
         }
 
     }

@@ -156,7 +156,16 @@
                         </div>
                     </div>
                 </div>
-
+                <!--====================Grade de Merchandising-->
+                <div class="col-md-2 margin-top-10">
+                    <div class="form-group">
+                        <div class="input-group">
+                            <div class="app-checkbox">
+                                <label><input type="checkbox" name="app-checkbox-1" ng-model="Programa.Indica_Merchandising" /> Grade de Merchandising<span></span></label>
+                            </div>
+                        </div>
+                    </div>
+                </div>
             </div>
 
             <!--====================Codigo JOVE ALFANUMERICO E NUMERICO-->
@@ -358,16 +367,9 @@
                     </tbody>
                 </table>
             </div>
-            <!--===================Botoes-->
-            <div class="row margin-top-20">
-                <div class="col-md-12">
-                    <button type="submit" class="btn btn-success" ng-click="SalvarPrograma(Programa)"  ng-disabled="frmProgramaCadastro.$invalid">Salvar</button>
-                    <button type="button" class="btn btn-danger" ng-click="ExcluirPrograma(Programa)" ng-show="Parameters.Action=='Edit'" ng-disabled="!PermissaoDelete">Excluir</button>
-                    <a href="#Programa" class="btn btn-warning">Cancelar</a>
-                </div>
-            </div>
+          
 
-            <!--</div>-->
+            
             <!--=================================Selecao de Apresentadores-->
             <div class="modal fade" id="ModalSelecaoApresentador" tabindex="-1" role="dialog" aria-labelledby="modal-warning-header">
                 <div class="modal-dialog modal-primary" role="document">
@@ -470,7 +472,16 @@
 
 
         </div>
-
+        <!--===================Botoes-->
+        <div class="fixed-buttons-bottom">
+            <div class="row">
+                <div class="col-md-12">
+                    <button type="submit" class="btn btn-success" ng-click="SalvarPrograma(Programa)" ng-disabled="frmProgramaCadastro.$invalid">Salvar</button>
+                    <button type="button" class="btn btn-danger" ng-click="ExcluirPrograma(Programa)" ng-show="Parameters.Action=='Edit'" ng-disabled="!PermissaoDelete">Excluir</button>
+                    <a href="#Programa" class="btn btn-warning">Cancelar</a>
+                </div>
+            </div>
+        </div>
     </form>
 </div>
 <div ng-include="'template/SelectItem.html'"></div>

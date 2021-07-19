@@ -11,6 +11,7 @@
     $scope.PesquisaTabelas = { "Items": [], 'FiltroTexto': '', ClickCallBack: '', 'Titulo': '', 'MultiSelect': false };
     $scope.IniciarCalculo = false;
     $scope.DescontoDetalhado = "[]";
+    $scope.ListaDispo= "[]";
     $scope.Distribuicao = [{ 'Tipo': 'D', 'Descricao': 'Por Dia' }, { 'Tipo': 'M', 'Descricao': 'No Periodo' }]
     $scope.Info = { 'Title': '', 'Text': '' };
     $scope.GeracaoProposta = {};
@@ -233,7 +234,7 @@
     };
     //==============================Mudou algum dado da midia
     $scope.fnChangeMidia = function (pMidia, pField, pIndica_OnLine) {
-        pMidia.IsValid = false;
+       // pMidia.IsValid = false;
         switch (pField) {
             case 'Dia_Inicio':
                 break;
@@ -503,12 +504,14 @@
             'Validade_Inicio': $scope.Simulacao.Validade_Inicio,
             'Validade_Termino': $scope.Simulacao.Validade_Termino,
             'Cod_Empresa_Faturamento': pEsquema.Cod_Empresa_Faturamento,
-            'Duracao': pMidia.Duracao
+            'Duracao': pMidia.Duracao,
+            'Abrangencia':pEsquema.Abrangencia
         };
         httpService.Post("DistribuirInsercoes", _data).then(function (response) {
             if (response) {
                 if (response.data[0].Status) {
                     pMidia.Insercoes = response.data;
+                    console.log(pMidia.Insercoes);
                     pMidia.IsValid = true;
                     $scope.ChangePendenteCalculo();
                     $scope.SalvarSimulacao($scope.Simulacao, false); //verifica se é viavel ja salvar e revalorar ou espera clicar em recalcular
@@ -679,6 +682,17 @@
             if (response) {
                 $scope.DescontoDetalhado = response.data;
                 $("#modalDescontoDetalhe").modal(true);
+            };
+        });
+    };
+    //===================================Consulta da Dispo
+    $scope.ConsultarDispo= function (pEsquema,pCodPrograma) {
+        $scope.ListaDispo = [];
+        var _data = {'Competencia':pEsquema.Competencia,'Cod_Programa':pCodPrograma,'Veiculos':pEsquema.Veiculos}
+        httpService.Post("Simulacao/ConsultarDispo", _data).then(function (response) {
+            if (response) {
+                $scope.ListaDispo= response.data;
+                $("#modalSimulacaoDispo").modal(true);
             };
         });
     };

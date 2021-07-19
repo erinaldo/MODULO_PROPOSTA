@@ -4,12 +4,38 @@
     }
 </style>
 <div class="container">
-    <div class="block table-responsive" ng-show="ShowGrid">
+    <div class="block" ng-show="ShowGrid">
         <!--===================================Botoes-->
-        <a id="btnNovoTipoComercial" class="btn btn-primary" ng-disabled="!PermissaoNew" href="#TipoComercialCadastro/New/0">Novo Tipo Comercial</a>
-        <!--<a a href="#tipodocumentoNew/New/0" id="btnNovoTipoDocumento" display="none"></a>-->
-
-        <button id="ExportReporttoExcel" class="btn btn-warning" ng-disabled="TipoComerciais.length==1">Exportar Excel</button>
+        <div class="row">
+            <div class="col-md-4">
+                <a id="btnNovoTipoComercial" class="btn btn-primary" ng-disabled="!PermissaoNew" href="#TipoComercialCadastro/New/0">Novo Tipo Comercial</a>
+                <button id="ExportReporttoExcel" class="btn btn-warning" ng-disabled="TipoComerciais.length==1">Exportar Excel</button>
+            </div>
+            <div class="col-md-8" style="display:inline-flex">
+                <div class="form-group">
+                    <div class="input-group">
+                        <div class="app-checkbox">
+                            <label><input type="checkbox" name="app-checkbox-1" ng-model="Filtro.Indica_Merchandising" /> Merchandising<span></span></label>
+                        </div>
+                    </div>
+                </div>
+                <div class="form-group">
+                    <div class="input-group">
+                        <div class="app-checkbox">
+                            <label><input type="checkbox" name="app-checkbox-1" ng-model="Filtro.Indica_OnLine" /> On-Line<span></span></label>
+                        </div>
+                    </div>
+                </div>
+                <div class="form-group">
+                    <div class="input-group">
+                        <div class="app-checkbox">
+                            <label><input type="checkbox" name="app-checkbox-1" ng-model="Filtro.Indica_OffLine" /> Off-Line<span></span></label>
+                        </div>
+                    </div>
+                </div>
+                <button class="btn btn-default btn-sm" style="height:40px"><span class="fa fa-refresh" ng-click="CarregarTipoComercial()"></span></button>
+            </div>
+        </div>
         <div class="box table-responsive " style="min-height:600px">
             <table id="dataTable" class="table table-striped table-bordered">
                 <thead>

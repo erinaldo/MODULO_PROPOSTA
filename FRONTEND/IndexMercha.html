@@ -43,16 +43,9 @@
                         </li>
                         <li><a href="#PortalApp" class="navbar-link"><span class="fa fa-home" style="display:inline-block;font-size:20px"></span></a></li>
                         <li><a href="#portal" class="navbar-link"><span class="fa fa-newspaper-o" style="display:inline-block;font-size:20px"></span></a></li>
-                        <li><a href="#usuario" class="navbar-link"><span class="nav-icon-hexa">Pt</span>Usuários</a></li>]
-                        <li>
-                            <a href="#" class="navbar-link"><span class="nav-icon-hexa">Pt</span>Parâmetros</a>
-                            <ul>
-                                <li><a href="#Parametro" class="navbar-link"><span class="nav-icon-hexa">Pt</span>Parâmetros Gerais</a></li>
-                                <li><a href="#ParametroValoracao" class="navbar-link"><span class="nav-icon-hexa">Pt</span>Parâmetros de Valoração</a></li>
-                            </ul>
-                        </li>
-                        <li><a href="#cadastro" class="navbar-link"><span class="nav-icon-hexa"></span>Cadastros</a></li>
-                        <li><a href="#numeracao" class="navbar-link"><span class="nav-icon-hexa"></span>Fechamento de Competência</a></li>
+                        <li><a href="#GradeMercha">Grade de Merchandising</a></li>
+                        <li><a href="#ConsultaVeiculacoesMercha">Veiculações Merchandising</a></li>
+                        <li><a href="#RoteiroMercha">Roteiro de Merchandising</a></li>
                         <li ng-controller="loginController"><a href="" ng-click="app_Logout()"><span class="icon-exit"></span> Sair</a></li>
                     </ul>
                 </nav>
@@ -164,61 +157,11 @@
     <script src="angular/Controller/AprovarPendentes_Controller.js?Hash=V117"></script>
     <script src="angular/Controller/PortalApp.js?Hash=V117"></script>
     <!---====================================================================================Controles desse modulo-->
-    <script src="angular/Controller/MenuCadastroController.js?Hash=V117"></script>
-    <script src="angular/Controller/CaracVeiculCadastroController.js?Hash=V117"></script>
-    <script src="angular/Controller/CaracVeiculController.js?Hash=V117"></script>
-    <script src="angular/Controller/CategoriaClienteCadastroController.js?Hash=V117"></script>
-    <script src="angular/Controller/CategoriaClienteController.js?Hash=V117"></script>
-    <script src="angular/Controller/CondPgtoCadastroController.js?Hash=V117"></script>
-    <script src="angular/Controller/CondPgtoController.js?Hash=V117"></script>
-    <script src="angular/Controller/ContatoCadastroController.js?Hash=V117"></script>
-    <script src="angular/Controller/ContatoController.js?Hash=V117"></script>
-    <script src="angular/Controller/EmpresaCadastroController.js?Hash=V117"></script>
-    <script src="angular/Controller/EmpresaController.js?Hash=V117"></script>
-    <script src="angular/Controller/GeneroCadastroController.js?Hash=V117"></script>
-    <script src="angular/Controller/GeneroController.js?Hash=V117"></script>
-    <script src="angular/Controller/MercadoCadastroController.js?Hash=V117"></script>
-    <script src="angular/Controller/MercadoController.js?Hash=V117" ?Hash=V117></script>
-    <script src="angular/Controller/MotivoAlterNegocCadastroController.js?Hash=V117"></script>
-    <script src="angular/Controller/MotivoAlterNegocController.js?Hash=V117"></script>
-    <script src="angular/Controller/MotivoFalhaCadastroController.js?Hash=V117"></script>
-    <script src="angular/Controller/MotivoFalhaController.js?Hash=V117"></script>
-    <script src="angular/Controller/MotivoCancelamentoCadastroController.js?Hash=V117"></script>
-    <script src="angular/Controller/MotivoCancelamentoController.js?Hash=V117"></script>
-    <script src="angular/Controller/ProdutoCadastroController.js?Hash=V117"></script>
-    <script src="angular/Controller/ProdutoController.js?Hash=V117"></script>
-    <script src="angular/Controller/QualidadeCadastroController.js?Hash=V117"></script>
-    <script src="angular/Controller/QualidadeController.js?Hash=V117"></script>
-    <script src="angular/Controller/RedeCadastroController.js?Hash=V117"></script>
-    <script src="angular/Controller/RedeController.js?Hash=V117"></script>
-    <script src="angular/Controller/TerceiroCadastroController.js?Hash=V117"></script>
-    <script src="angular/Controller/TerceiroController.js?Hash=V117"></script>
-    <script src="angular/Controller/TipoComercialCadastroController.js?Hash=V117"></script>
-    <script src="angular/Controller/TipoComercialController.js?Hash=V117"></script>
-    <script src="angular/Controller/TipoMidiaCadastroController.js?Hash=V117"></script>
-    <script src="angular/Controller/TipoMidiaController.js?Hash=V117"></script>
-    <script src="angular/Controller/VeiculoCadastroController.js?Hash=V117"></script>
-    <script src="angular/Controller/VeiculoController.js?Hash=V117"></script>
-    <script src="angular/Controller/UsuarioController.js?Hash=V117"></script>
-    <script src="angular/Controller/ParametroCadastroController.js?Hash=V117"></script>
-    <script src="angular/Controller/ParametroController.js?Hash=V117"></script>
-    <script src="angular/Controller/ParametroValoracaoCadastroController.js?Hash=V117"></script>
-    <script src="angular/Controller/ParametroValoracaoController.js?Hash=V117"></script>
-    <script src="angular/Controller/ProgramaController.js?Hash=V117"></script>
-    <script src="angular/Controller/ProgramaCadastroController.js?Hash=V117"></script>
-    <script src="angular/Controller/NaturezadeServicoCadastroController.js?Hash=V117"></script>
-    <script src="angular/Controller/NaturezadeServicoController.js?Hash=V117"></script>
-    <script src="angular/Controller/TabelaPrecosCadastroController.js?Hash=V117"></script>
-    <script src="angular/Controller/TabelaPrecosController.js?Hash=V117"></script>
-    <script src="angular/Controller/NumeracaoCadastroController.js?Hash=V117"></script>
-    <script src="angular/Controller/NumeracaoController.js?Hash=V117"></script>v
-    <script src="angular/Controller/TiposComercializacaoController.js?Hash=V117"></script>
-    <script src="angular/Controller/TiposComercializacaoCadastroController.js?Hash=V117"></script>
-    <script src="angular/Controller/TabelaPrecosMolCadastroController.js?Hash=V117"></script>
-    <script src="angular/Controller/TabelaPrecosMolController.js?Hash=V117"></script>
-    <script src="angular/Controller/TabelaPrecoImportacaoController.js?Hash=V117"></script>
-    <script src="angular/Controller/ApresentadoresCadastroController.js?Hash=V117"></script>
-    <script src="angular/Controller/ApresentadoresController.js?Hash=V117"></script>
+    <script src="angular/Controller/GradeMerchaController.js?Hash=V117"></script>
+    <script src="angular/Controller/GradeMerchaCadastroController.js?Hash=V117"></script>
+    <script src="angular/Controller/ConsultaVeiculacaoMerchaController.js?Hash=V117"></script>
+    <script src="angular/Controller/RoteiroMerchaController.js?Hash=V117"></script>
+
     <!--====================================================================================PLUGINS -->
     <script src="js/vendor/XTABLES/DataTables-1.10.16/js/jquery.dataTables.js?Hash=V117"></script>
     <script src="js/vendor/XTABLES/DataTables-1.10.16/js/dataTables.bootstrap.min.js?Hash=V117"></script>
@@ -237,22 +180,25 @@
     <script src="js/vendor/jspdf/zlib.js?Hash=V117"></script>
     <script src="js/vendor/jspdf/jspdf.min.js?Hash=V117"></script>
     <script src="js/vendor/jspdf/html2canvas.js?Hash=V117"></script>
+
     <div ng-include="'template/wait.html'"></div>
 </body>
 </html>
 <script type="text/javascript">
     $(document).ready(function () {
         $('body').keydown(function (e) {
-            var rx = /INPUT|SELECT|TEXTAREA/i;
-            if (e.keyCode == 8) {
-                if (!rx.test(e.target.tagName) || e.target.disabled || e.target.readOnly) {
-                    e.preventDefault();
+                var rx = /INPUT|SELECT|TEXTAREA/i;
+                if (e.keyCode == 8) {
+                    if (!rx.test(e.target.tagName) || e.target.disabled || e.target.readOnly) {
+                        e.preventDefault();
+                    };
                 };
-            };
             //}
         });
         $(".navbar-link").click(function () {
             $(".app-header-navigation").removeClass("show");
         });
     });
+
+
 </script>

@@ -819,6 +819,11 @@
                                     ng-click="AdicionarMidia(Simulacao.Esquemas[currentEsquema])">
                                 <span class="fa fa-plus" ng-disabled="true"></span> Adicionar Mídias
                             </button>
+                            <button class="btn btn-default btn-sm"
+                                    ng-show="Simulacao.Esquemas[currentEsquema].Competencia && Simulacao.Esquemas[currentEsquema].Veiculos.length>0"
+                                    ng-click="ConsultarDispo(Simulacao.Esquemas[currentEsquema],'')">
+                                    Consultar Dispo
+                            </button>
                             <!--=======================================digitacao da midia Normal-->
                             <div class="table table-responsive" ng-show="!Simulacao.Esquemas[currentEsquema].Indica_Midia_OnLine">
                                 <table id="tbDigitacaoEsquema" class="table table-bordered" style="border:solid 2px #e5e5e5 !important">
@@ -1001,7 +1006,8 @@
                                                 </div>
                                             </td>
                                             <td><button ng-show="Simulacao.Permite_Editar" class="btn btn-default btn-sm" style="margin:0px 0px !important" ng-click="RemoverMidia(midia)"><span class="fa fa-trash"></span></button></td>
-                                            <td style="width:80px"><button class="btn btn-success btn-sm" style="margin:0px 0px !important" ng-show="!midia.IsValid" ng-click="DistrubuirInsercoes(Simulacao.Esquemas[currentEsquema] ,midia)">Ok</button></td>
+                                            <!--<td style="width:80px"><button class="btn btn-success btn-sm" style="margin:0px 0px !important" ng-show="!midia.IsValid" ng-click="DistrubuirInsercoes(Simulacao.Esquemas[currentEsquema] ,midia)">Ok</button></td>-->
+                                            <td style="width:80px"><button class="btn btn-success btn-sm" style="margin:0px 0px !important" ng-click="DistrubuirInsercoes(Simulacao.Esquemas[currentEsquema] ,midia)">Ok</button></td>
                                         </tr>
                                     </tbody>
                                 </table>
@@ -1257,18 +1263,19 @@
                                     </tr>
                                 </thead>
                                 <tbody>
-                                    <tr ng-repeat="Linha in Simulacao.Esquemas[currentEsquema].Midias track by $index">
+                                    <tr ng-repeat="Linha in Simulacao.Esquemas[currentEsquema].Midias | filter:{IsValid:true} track by $index">
+                                        
                                         <td style="min-height:40px">
-                                            <span ng-show="Linha.IsValid">{{Linha.Cod_Programa | uppercase}}</span>
+                                            <span class="span-btn" style="text-decoration:underline" data-toggle="tooltip" title="Ver Dispo" ng-click="ConsultarDispo(Simulacao.Esquemas[currentEsquema],Linha.Cod_Programa)" ng-show="Linha.IsValid">{{Linha.Cod_Programa | uppercase}}</span>
                                         </td>
                                         <td><span ng-show="Linha.IsValid">{{Linha.Cod_Caracteristica | uppercase}}</span></td>
                                         <td><span ng-show="Linha.IsValid">{{Linha.Cod_Tipo_Comercial | uppercase}}</span></td>
                                         <td><span ng-show="Linha.IsValid">{{Linha.Duracao}}</span></td>
-                                        <td class="td-insercoes" ng-repeat="insercao in Linha.Insercoes track by $index" ng-style="{'background-color':(insercao.Tem_Grade) ?'#fff':'#f2f2f2'}">
+                                        <td class="td-insercoes" ng-repeat="insercao in Linha.Insercoes track by $index" ng-style="{'background-color':insercao.BackGroundColor}">
                                             <input ng-model="insercao.Qtd"
                                                    ng-disabled="!Simulacao.Permite_Editar"
                                                    ng-model-options="{updateOn: 'blur'}"
-                                                   style="width:20px;border:none;text-align:center;background-color:#fff"
+                                                   ng-style="{'width':'20px','border':'none','text-align':'center','background-color':insercao.BackGroundColor,'color':insercao.ForeColor}"
                                                    maxlength="3"
                                                    ng-show="insercao.Tem_Grade"
                                                    onkeypress="return NumericOnly(event)"
@@ -1357,6 +1364,7 @@
 <div ng-include="'template/DescontoDetalhe.html'"></div>
 <div ng-include="'template/GeracaoProposta.html'"></div>
 <div ng-include="'template/modalHistorico.html'"></div>
+<div ng-include="'template/SimulacaoDispo.html'"></div>
 
 <script type="text/javascript">
     $(document).ready(function () {

@@ -245,12 +245,12 @@ function GetDictionary() {
         this.value = TimeUnformat(this);
     });
     
-    $('input[style*="text-transform:uppercase"]').blur(function () {
-        this.value = this.value.toUpperCase();
-        var ctrl = angular.element(this).data('$ngModelController');
-        ctrl.$setViewValue(this.value);
-        ctrl.$commitViewValue();
-    });
+    //$('input[style*="text-transform:uppercase"]').blur(function () {
+    //    this.value = this.value.toUpperCase();
+    //    var ctrl = angular.element(this).data('$ngModelController');
+    //    ctrl.$setViewValue(this.value);
+    //    ctrl.$commitViewValue();
+    //});
     
 }
 

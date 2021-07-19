@@ -15,6 +15,7 @@
         { 'title': 'Cod_Programa', 'visible': true, 'searchable': true, 'sortable': true },
         { 'title': 'Titulo', 'visible': true, 'searchable': true, 'sortable': true },
         { 'title': 'Descricao', 'visible': true, 'searchable': true, 'sortable': true },
+        { 'title': 'Grade Merch', 'visible': true, 'searchable': true, 'sortable': true },
         { 'title': 'Indica_evento', 'visible': true, 'searchable': true, 'sortable': true },
         { 'title': 'Indica_Rotativo', 'visible': true, 'searchable': true, 'sortable': true },
         { 'title': 'Indica_Local', 'visible': true, 'searchable': true, 'sortable': true },

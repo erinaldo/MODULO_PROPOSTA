@@ -3,8 +3,6 @@
     <form name="frmGrade" autocomplete="off">
         <div class="row">
             <div class="col-md-6">
-                <a style='background-color:#6ea038;border:none;height:30px;padding:7px 10px 10px 10px';color:#fff;vertical-align:middle;border-radius: 5px;margin-right:20px;text-decoration: none !important;cursor:pointer';></a>
-                <a style="padding:10px 10px 10px 10px"
                 <div class="block">
                     <div class="row">
                         <div class="alert alert-primary alert-icon-block text-center" role="alert">
@@ -13,7 +11,7 @@
                     </div>
                     <div class="row">
                         <!--=============================Rede-->
-                        <div class="col-md-3" style="vertical-align:middle">
+                        <div class="col-md-3">
                             <div class="form-group">
                                 <label class="field-x" for="txtRede">Rede</label>
                                 <select class="form-control"
@@ -34,12 +32,12 @@
                                     </div>
                                     <input class="form-control"
                                            name="txtCodPrograma"
+                                           style="text-transform:uppercase"
                                            ng-model="Grade.Cod_Programa"
                                            ng-disabled="Parameters.Action=='Edit'"
                                            ng-model-options="{updateOn: 'blur'}"
                                            ng-change="fnChangePrograma(Grade.RedeId,Grade.Cod_Programa)"
-                                           maxlength="4"
-                                           style="text-transform:uppercase">
+                                           maxlength="4">
                                 </div>
                             </div>
                         </div>
@@ -61,6 +59,7 @@
                                 <label for="txtHorarioInicial" class="field-x">Hor.Inicio</label>
                                 <input class="form-control time"
                                        name="txtHorarioInicial"
+                                       ng-disabled="true"
                                        ng-model="Grade.Horario_Inicial"
                                        maxlength="5">
                             </div>
@@ -71,6 +70,7 @@
                                 <label for="txtHorarioFinal " class="field-x">Hor.Término</label>
                                 <input class="form-control time"
                                        name="txtHorarioFinal"
+                                       ng-disabled="true"
                                        ng-model="Grade.Horario_Final"
                                        maxlength="5">
                             </div>
@@ -81,24 +81,25 @@
                                 <label class="field-x" for="txtFaixaHoraria">Faixa Horaria</label>
                                 <select class="form-control"
                                         ng-model="Grade.Faixa_Horaria"
+                                        ng-disabled="true"
                                         name="txtFaixaHoraria"
                                         ng-options="Faixas.Codigo as Faixas.Descricao for Faixas in Faixas"></select>
                             </div>
                         </div>
                     </div>
                     <div class="row">
-                        <!--=============================Dispo Net-->
+                        <!--=============================Disponibilidade-->
                         <div class="col-md-3">
                             <div class="form-group">
-                                <label for="txtDispoNet" class="field-x">Dispo Net</label>
+                                <label for="txtDisponibilidade" class="field-x">Disponibilidade</label>
                                 <input class="form-control numeric"
                                        name="txtDispoNet"
-                                       ng-model="Grade.Dispo_Net"
+                                       ng-model="Grade.Disponibilidade"
                                        maxlength="6">
                             </div>
                         </div>
                         <!--=============================Dispo Local-->
-                        <div class="col-md-4">
+                        <!--<div class="col-md-4">
                             <div class="form-group">
                                 <label for="txtDispoLocal" class="field-x">Dispo Local</label>
                                 <input class="form-control numeric"
@@ -106,8 +107,7 @@
                                        ng-model="Grade.Dispo_Local"
                                        maxlength="6">
                             </div>
-                        </div>
-
+                        </div>-->
                     </div>
                 </div>
             </div>
@@ -198,10 +198,8 @@
                             </div>
                         </div>
                     </div>
-
                 </div>
             </div>
-
         </div>
         <div class="row">
             <!--========================botoes de acoes-->
@@ -211,7 +209,7 @@
                     <button type="button" class="btn btn-danger" ng-click="ExcluirGrade(Grade)" ng-show="PermissaoDelete && Parameters.Action=='Edit'">Excluir</button>
                     <button type="button" class="btn btn-info" ng-click="DesativarGrade(Grade,false)" ng-show="PermissaoActivate && Parameters.Action=='Edit'">Desativar</button>
                     <button type="button" class="btn btn-info" ng-click="DesativarGrade(Grade,true)" ng-show="PermissaoActivate && Parameters.Action=='Edit'">Reativar</button>
-                    <a href="#Grade" class="btn btn-warning">Cancelar</a>
+                    <a href="#GradeMercha" class="btn btn-warning">Cancelar</a>
                 </div>
             </div>
         </div>
