@@ -1,0 +1,132 @@
+﻿<style>
+    .label-flag {
+        height: 30px !important;
+        padding-top: 8px !important;
+    }
+</style>
+<!--==============================================Grid -->
+<div class="container">
+    <div class="block table-responsive" ng-show="CurrentShow=='Grid'">
+        <button id="btnNovoGrupo" class="btn btn-primary" ng-click="EditarGrupoUsuario(0)" ng-disabled="!PermissaoNew">Novo Grupo</button>
+        <button id="ExportReporttoExcel" class="btn btn-warning" ng-disabled="GrupoUsuarios.length==1">Exportar Excel</button>
+        <div class="box table-responsive " style="min-height:600px">
+            <table id="dataTable" class="table table-striped table-bordered" cellspacing="0">
+                <thead>
+                    <tr>
+                        <th></th>
+                        <th>Código</th>
+                        <th>Descrição</th>
+                        <th>Status</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr ng-repeat="grupo in GrupoUsuarios track by $index" on-finish-render="ngRepeatFinished()">
+                        <td style="width:50px">
+                            <button class="btn btn-default" ng-click="EditarGrupoUsuario(grupo.Id_Grupo)" ng-disabled="!PermissaoEdit">
+                                <span class="fa fa-edit fa-crud"></span>
+                            </button>
+                        </td>
+                        <td style="white-space:nowrap">
+                            {{grupo.Cod_Grupo}}
+                        </td>
+                        <td>{{::grupo.Descricao}}</td>
+                        <td style="text-align:center">
+                            <label ng-class="grupo.Status ? 'label label-success' : 'label label-danger'" style="width:100% ">
+                                {{::grupo.Descricao_Status}}
+                            </label>
+                        </td>
+                    </tr>
+                </tbody>
+            </table>
+        </div>
+
+
+    </div>
+</div>
+<!--==============================================Cadastro -->
+<div class="container" ng-show="CurrentShow=='Dados'">
+    <div class="block">
+        <div class="row">
+            <div class="col-md-2">
+                <div class="form-group">
+                    <label for="txtCodGrupo">Código</label>
+                    <input id="txtCodGrupo"
+                           class="form-control"
+                           maxlength="15"
+                           style="text-transform:uppercase"
+                           ng-model-options="{updateOn: 'blur'}"
+                           ng-model="Ctrl.Cod_Grupo" />
+                </div>
+            </div>
+            <div class="col-md-3">
+                <div class="form-group">
+                    <label for="txtNome">Descrição</label>
+                    <input id="txtNome" class="form-control" maxlength="50" style="text-transform:uppercase" ng-model="Ctrl.Descricao" />
+                </div>
+            </div>
+        </div>
+        
+        <div class="row margin-top-10">
+            <div class="col-md-12">
+                <button ng-class="CurrentTab=='Perfil' ? 'btn btntab-Selected' : 'btn btntab'" ng-click="CurrentTab='Perfil'">Perfil de Acesso</button>
+                <button ng-class="CurrentTab=='Associar' ? 'btn btntab-Selected' : 'btn btntab'" ng-click="CurrentTab='Associar'">Associar Usuários</button>
+            </div>
+        </div>
+        <!--=============================Perfil-->
+        <div class="block margin-top-20" ng-show="CurrentTab=='Perfil'">
+            <div class="form-group">
+                <div class="input-group">
+                    <div class="app-checkbox">
+                        <label><input type="checkbox" name="app-checkbox-1" ng-model="checkBoxPerfil" ng-click="MarcarPerfil()" /> Marcar/Desmarcar Todos<span></span></label>
+                    </div>
+                </div>
+            </div>
+            <div style="max-height:400px;overflow-y:auto;overflow-x:hidden;border:solid 1px silver">
+                <div class="col-md-12" ng-repeat="perfil in Ctrl.Perfil">
+                    <div class="app-checkbox" style="width:auto;margin-top:5px" ng-style="{'margin-left':((perfil.Nivel-1)*60)}">
+                        <label><input type="checkbox" name="app-checkbox-1" ng-model="perfil.Selected" ng-click="CheckPerfil(perfil)" />  {{perfil.Descricao_Funcao}} <span></span></label>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <!--=============================Associar Usuários-->
+        <div class="block margin-top-20" ng-show="CurrentTab=='Associar'">
+            <div class="form-group">
+                <div class="input-group">
+                    <div class="app-checkbox">
+                        <label><input type="checkbox" name="app-checkbox-1" ng-model="checkBoxAssociar" ng-click="MarcarUsuarios()" /> Marcar/Desmarcar Todos<span></span></label>
+                    </div>
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-md-3" ng-repeat="usuario in Ctrl.Usuarios">
+                    <div class="app-checkbox" style="width:auto;margin-top:5px">
+                        <label><input type="checkbox" name="app-checkbox-1" ng-model="usuario.Selected" />  {{usuario.Login}}-{{usuario.Nome}} <span></span></label>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+
+            <!--=============================Botoes-->
+            <div class="fixed-buttons-bottom">
+                <div class="row">
+                    <div class="col-md-12">
+                        <btn class="btn btn-success" ng-click="SalvarGrupoUsuario()">Salvar</btn>
+                        <btn class="btn btn-danger" ng-click="ExcluirGrupoUsuario(Ctrl.Id_Grupo)" ng-show="PermissaoExcluir">Excluir</btn>
+                        <btn class="btn btn-info" ng-click="DesativarReativar(Ctrl.Id_Grupo, false)" ng-show="PermissaoDesativar && Ctrl.Status==1">Desativar</btn>
+                        <btn class="btn btn-info" ng-click="DesativarReativar(Ctrl.Id_Grupo, true)" ng-show="PermissaoDesativar && Ctrl.Status==0">Reativar</btn>
+                        <btn class="btn btn-warning" ng-click="CancelaEdicao()">Cancela</btn>
+                    </div>
+                </div>
+            </div>
+        </div>
+</div>
+<div ng-include="'template/PesquisaTabela.html'"></div>
+<script type="text/javascript">
+    $(document).ready(function () {
+        $('#ExportReporttoExcel').on('click', function () {
+            $('.buttons-excel').click()
+        });
+    });
+</script>

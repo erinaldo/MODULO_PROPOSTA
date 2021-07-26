@@ -5,7 +5,7 @@
     }
 </style>
 <!--==============================================Grid -->
-<div class="container" >
+<div class="container">
     <div class="block table-responsive" ng-show="CurrentShow=='Grid'">
         <button id="btnNovoUsuarioUsuario" class="btn btn-primary" ng-click="EditarUsuario(0)" ng-disabled="!PermissaoNew">Novo Usuario</button>
         <button id="ExportReporttoExcel" class="btn btn-warning" ng-disabled="Usuarios.length==1">Exportar Excel</button>
@@ -13,31 +13,35 @@
             <table id="dataTable" class="table table-striped table-bordered" cellspacing="0">
                 <thead>
                     <tr>
-                        <th>#ID</th>
+                        <th></th>
                         <th>Login</th>
                         <th>Nome</th>
                         <th>Email</th>
                         <th>Telefone</th>
                         <th>Cargo</th>
                         <th>Nivel de Acesso</th>
+                        <th>Exigir Token de Acesso</th>
                         <th>Status</th>
                     </tr>
                 </thead>
                 <tbody>
-                    <tr ng-repeat="Usuario in Usuarios track by $index"  on-finish-render="ngRepeatFinished()">
+                    <tr ng-repeat="Usuario in Usuarios track by $index" on-finish-render="ngRepeatFinished()">
                         <td style="width:50px">
                             <button class="btn btn-default" ng-click="EditarUsuario(Usuario.Id_Usuario)" ng-disabled="!PermissaoEdit">
                                 <span class="fa fa-edit fa-crud"></span>
                             </button>
                         </td>
                         <td style="white-space:nowrap">
-                        {{Usuario.Login}}
+                            {{Usuario.Login}}
                         </td>
                         <td>{{::Usuario.Nome}}</td>
                         <td>{{::Usuario.Email}}</td>
                         <td>{{::Usuario.Telefone}}</td>
                         <td>{{::Usuario.Cargo}}</td>
                         <td>{{::Usuario.Descricao_Nivel_Acesso}}</td>
+                        <td style="text-align:center">
+                            <span class="fa fa-check fa-2x" style="color:seagreen" ng-show="Usuario.Indica_Token"></span>
+                        </td>
                         <td style="text-align:center">
                             <label ng-class="Usuario.Status ? 'label label-success' : 'label label-danger'" style="width:100% ">
                                 {{::Usuario.Descricao_Status}}
@@ -56,21 +60,21 @@
             <div class="col-md-2">
                 <div class="form-group">
                     <label for="txtLogin">Login</label>
-                    <input id="txtLogin" 
-                           class="form-control" 
-                           maxlength="20" 
-                           style="text-transform:uppercase" 
+                    <input id="txtLogin"
+                           class="form-control"
+                           maxlength="20"
+                           style="text-transform:uppercase"
                            ng-model-options="{updateOn: 'blur'}"
                            ng-model="Ctrl.Login" />
                 </div>
             </div>
-            <div class="col-md-2">
+            <div class="col-md-3">
                 <div class="form-group">
                     <label for="txtNome">Nome</label>
                     <input id="txtNome" class="form-control" maxlength="30" style="text-transform:uppercase" ng-model="Ctrl.Nome" />
                 </div>
             </div>
-            <div class="col-md-2">
+            <div class="col-md-3">
                 <div class="form-group">
                     <label for="Email">Email</label>
                     <input id="txtEmail" class="form-control" maxlength="50" style="text-transform:uppercase" ng-model="Ctrl.Email" />
@@ -82,6 +86,8 @@
                     <input id="txtTelefone" class="form-control" maxlength="20" style="text-transform:uppercase" ng-model="Ctrl.Telefone" />
                 </div>
             </div>
+        </div>
+        <div class="row">
             <div class="col-md-2">
                 <div class="form-group">
                     <label for="txtCargo">Cargo</label>
@@ -89,7 +95,7 @@
                 </div>
             </div>
 
-            <div class="col-md-2">
+            <div class="col-md-3">
                 <div class="form-group">
                     <label for="optNivelAcesso">Nivel de Acesso</label>
                     <div class="input-group">
@@ -97,6 +103,21 @@
                     </div>
                 </div>
             </div>
+            <div class="col-md-3">
+                <div class="input-group" style="margin-top:20px">
+                    <div class="app-checkbox">
+                        <label><input type="checkbox" name="app-checkbox-1" ng-model="Ctrl.Indica_Token" ng-click="MarcarPerfil()" /> Exigir Token no Login<span></span></label>
+                    </div>
+                </div>
+            </div>
+            <!--<div class="col-md-2">
+                <div class="form-group">
+                    <label for="optEnvioToken">Forma de Envio do Token</label>
+                    <div class="input-group">
+                        <select class="form-control" ng-model="Ctrl.Forma_EnvioToken" name="optEnvioToken" ng-options="Forma_EnvioToken.Id as Forma_EnvioToken.Descricao for Forma_EnvioToken in Forma_EnvioToken"></select>
+                    </div>
+                </div>
+            </div>-->
         </div>
 
         <div class="row margin-top-10">
@@ -104,6 +125,7 @@
                 <button ng-class="CurrentTab=='Perfil' ? 'btn btntab-Selected' : 'btn btntab'" ng-click="CurrentTab='Perfil'">Perfil de Acesso</button>
                 <button ng-class="CurrentTab=='Empresa' ? 'btn btntab-Selected' : 'btn btntab'" ng-click="CurrentTab='Empresa'">Empresas Validas</button>
                 <button ng-class="CurrentTab=='Hierarquia' ? 'btn btntab-Selected' : 'btn btntab'" ng-click="CurrentTab='Hierarquia'" ng-disabled="!Ctrl.Login">Hierarquia</button>
+                <button ng-class="CurrentTab=='Grupo' ? 'btn btntab-Selected' : 'btn btntab'" ng-click="CurrentTab='Grupo'" ng-disabled="!Ctrl.Login">Associar a Grupos</button>
             </div>
         </div>
 
@@ -163,14 +185,32 @@
                                 </label>
                             </td>
                         </tr>
-                        
+
                     </tbody>
                 </table>
             </div>
         </div>
+        <!--=============================Associar Grupos-->
+        <div class="block margin-top-20" ng-show="CurrentTab=='Grupo' && Ctrl.Grupos.length>0">
+            <div class="form-group">
+                <div class="input-group">
+                    <div class="app-checkbox">
+                        <label><input type="checkbox" name="app-checkbox-1" ng-model="checkBoxAssociar" ng-click="MarcarGrupos()" /> Marcar/Desmarcar Todos<span></span></label>
+                    </div>
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-md-3" ng-repeat="grupo in Ctrl.Grupos">
+                    <div class="app-checkbox" style="width:auto;margin-top:5px">
+                        <label><input type="checkbox" name="app-checkbox-1" ng-model="grupo.Selected" /> {{grupo.Descricao}} <span></span></label>
+                    </div>
+                </div>
+            </div>
+        </div>
+
         <!--=============================Botoes-->
         <div class="fixed-buttons-bottom">
-            <div class="row" >
+            <div class="row">
                 <div class="col-md-12">
                     <btn class="btn btn-success" ng-click="SalvarUsuario()">Salvar</btn>
                     <btn class="btn btn-danger" ng-click="ExcluirUsuario(Ctrl.Id_Usuario)" ng-show="PermissaoExcluir">Excluir</btn>

@@ -14,7 +14,7 @@
         { 'Link': 'Contato', 'Title': 'Contatos' },
         { 'Link': 'TipoMidia', 'Title': 'Tipo de Mídia' },
         { 'Link': 'Qualidade', 'Title': 'Qualidades da Veiculaçao' },
-        { 'Link': 'MotivoCancelamento', 'Title': 'Motivo de Cancelamento da Fatura' },
+        { 'Link': 'MotivoCancelamento', 'Title': 'Motivo de Cancelamento' },
         { 'Link': 'TabelaPrecos', 'Title': 'Tabela de Preços' },
         { 'Link': 'TabelaPrecosMol', 'Title': 'Tabela de Preços Mídia On Line' },
         { 'Link': 'Programa', 'Title': 'Programas' },

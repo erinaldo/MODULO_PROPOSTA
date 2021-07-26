@@ -178,8 +178,6 @@
         //---------------------Choque de Concorrencia
         for (var i = 0; i < $scope.Roteiro.length; i++) {
             if ($scope.Roteiro[i].Indica_Comercial && $scope.Roteiro[i].Id_Break == $scope.Roteiro[Index_Destino].Id_Break) {
-                console.log($scope.Roteiro[i].Cod_Produto);
-                console.log($scope.Comerciais[Index_Origem].Cod_Produto);
                 if ($scope.Roteiro[i].Cod_Produto.substr(0, 6) == $scope.Comerciais[Index_Origem].Cod_Produto.substr(0, 6) && $scope.Consistencia.Concorrencia && $scope.Comerciais[Index_Origem].Cod_Produto.trim()!="") {
                     _Mensagem += "Existe um produto concorrente nesse break."
                     break;

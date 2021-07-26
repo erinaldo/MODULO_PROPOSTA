@@ -92,7 +92,69 @@ namespace PROPOSTA
             }
         }
 
+        [Route("api/credential/checklogin")]
+        [HttpPost]
+        [ActionName("checklogin")]
+        //[Authorize()]
+        public IHttpActionResult checklogin([FromBody] apiCredential.CheckLoginModel Param)
+        {
 
+            apiCredential Cls = new apiCredential(User.Identity.Name);
+            try
+            {
+                DataTable Retorno = Cls.CheckLogin(Param);
+
+                return Ok(Retorno);
+            }
+            catch (Exception Ex)
+            {
+                throw new Exception(Ex.Message);
+            }
+        }
+
+        [Route("api/credential/GetToken")]
+        [HttpPost]
+        [ActionName("GetToken")]
+        //[Authorize()]
+        public IHttpActionResult GetToken([FromBody] apiCredential.CheckLoginModel Param)
+        {
+            apiCredential Cls = new apiCredential(User.Identity.Name);
+            try
+            {
+                DataTable Retorno = Cls.GetToken(Param);
+
+                return Ok(Retorno);
+            }
+            catch (Exception Ex)
+            {
+                throw new Exception(Ex.Message);
+            }
+        }
+
+        [Route("api/credential/AppGetToken/{Login}")]
+        [HttpGet]
+        [ActionName("AppGetToken")]
+        [Authorize()]
+        public IHttpActionResult AppGetToken(String Login)
+        {
+            apiCredential Cls = new apiCredential(User.Identity.Name);
+            try
+            {
+                DataTable Retorno = Cls.AppGetToken(Login);
+                apiCredential.AppToken Token = new apiCredential.AppToken();
+                if (Retorno.Rows.Count>0)
+                {
+                    Token.Login = Login;
+                    Token.Email = Retorno.Rows[0]["Email"].ToString();
+                    Token.Token= Retorno.Rows[0]["Token"].ToString();
+                }
+                return Ok(Token);
+            }
+            catch (Exception Ex)
+            {
+                throw new Exception(Ex.Message);
+            }
+        }
     }
 }
    

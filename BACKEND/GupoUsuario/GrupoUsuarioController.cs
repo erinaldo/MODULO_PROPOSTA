@@ -5,19 +5,19 @@ using System.Collections.Generic;
 
 namespace PROPOSTA
 {
-    public class UsuarioController : ApiController
+    public class GrupoUsuarioController : ApiController
     {
-        [Route("api/UsuarioListar")]
+        [Route("api/GrupoUsuarioListar")]
         [HttpGet]
-        [ActionName("UsuarioListar")]
+        [ActionName("GrupoUsuarioListar")]
         [Authorize()]
-        public IHttpActionResult UsuarioListar()
+        public IHttpActionResult GrupoUsuarioListar()
         {
             SimLib clsLib = new SimLib();
-            Usuario Cls = new Usuario(User.Identity.Name);
+            GrupoUsuario Cls = new GrupoUsuario(User.Identity.Name);
             try
             {
-                DataTable dtb = Cls.UsuarioListar(0);
+                DataTable dtb = Cls.GrupoUsuarioListar(0);
                 return Ok(dtb);
             }
             catch (Exception Ex)
@@ -27,31 +27,29 @@ namespace PROPOSTA
             }
         }
 
-        [Route("api/GetUsuario/{pIdUsuario}")]
+        [Route("api/GetGrupoUsuario/{pIdGrupoUsuario}")]
         [HttpGet]
-        [ActionName("GetUsuario")]
+        [ActionName("GetGrupoUsuario")]
         [Authorize()]
-        public IHttpActionResult GetUsuario(Int32 pIdUsuario)
+        public IHttpActionResult GetGrupoUsuario(Int32 pIdGrupoUsuario)
         {
             SimLib clsLib = new SimLib();
-            Usuario Cls = new Usuario(User.Identity.Name);
+            GrupoUsuario Cls = new GrupoUsuario(User.Identity.Name);
             try
             {
-                Usuario.UsuarioModel Usuario = new Usuario.UsuarioModel();
-                if (pIdUsuario==0)
+                GrupoUsuario.GrupoUsuarioModel GrupoUsuario = new GrupoUsuario.GrupoUsuarioModel();
+                if (pIdGrupoUsuario==0)
                 {
-                    Usuario.Nivel_Superior= new List<Usuario.HierarquiaModel>();
-                    Usuario.Nivel_Inferior = new List<Usuario.HierarquiaModel>();
-                    Usuario.Perfil = Cls.addPerfil(0);
-                    Usuario.Empresas = Cls.addEmpresas(0);
-                    Usuario.Grupos= Cls.addGrupos(0);
+                    GrupoUsuario.Perfil = Cls.addPerfil(0);
+                    GrupoUsuario.Usuarios = Cls.addUsuarios(0);
+
                 }
                 else
                 {
-                    Usuario = Cls.GetUsuario(pIdUsuario);
+                    GrupoUsuario = Cls.GetGrupoUsuario(pIdGrupoUsuario);
                 }
                 
-                return Ok(Usuario);
+                return Ok(GrupoUsuario);
             }
             catch (Exception Ex)
             {
@@ -60,18 +58,18 @@ namespace PROPOSTA
             }
         }
 
-        [Route("api/SalvarUsuario")]
+        [Route("api/SalvarGrupoUsuario")]
         [HttpPost]
-        [ActionName("SalvarUsuario")]
+        [ActionName("SalvarGrupoUsuario")]
         [Authorize()]
         
-        public IHttpActionResult SalvarUsuario([FromBody] Usuario.UsuarioModel Usuario )
+        public IHttpActionResult SalvarGrupoUsuario([FromBody] GrupoUsuario.GrupoUsuarioModel GrupoUsuario )
         {
             SimLib clsLib = new SimLib();
-            Usuario Cls = new Usuario(User.Identity.Name);
+            GrupoUsuario Cls = new GrupoUsuario(User.Identity.Name);
             try
             {
-                DataTable retorno = Cls.SalvarUsuario(Usuario);
+                DataTable retorno = Cls.SalvarGrupoUsuario(GrupoUsuario);
                 return Ok(retorno);
             }
             catch (Exception Ex)
@@ -81,17 +79,17 @@ namespace PROPOSTA
             }
         }
 
-        [Route("api/DesativarReativar")]
+        [Route("api/DesativarReativarGrupoUsurio")]
         [HttpPost]
-        [ActionName("DesativarReativar")]
+        [ActionName("DesativarReativarGrupoUsurio")]
         [Authorize()]
-        public IHttpActionResult DesativarReativar([FromBody] Usuario.UsuarioModel Usuario)
+        public IHttpActionResult DesativarReativarGrupoUsurio([FromBody] GrupoUsuario.GrupoUsuarioModel GrupoUsuario)
         {
             SimLib clsLib = new SimLib();
-            Usuario Cls = new Usuario(User.Identity.Name);
+            GrupoUsuario Cls = new GrupoUsuario(User.Identity.Name);
             try
             {
-                Cls.DesativarReativar(Usuario);
+                Cls.DesativarReativar(GrupoUsuario);
                 return Ok(true);
             }
             catch (Exception Ex)
@@ -101,17 +99,17 @@ namespace PROPOSTA
             }
         }
 
-        [Route("api/ExcluirUsuario")]
+        [Route("api/ExcluirGrupoUsuario")]
         [HttpPost]
-        [ActionName("ExcluirUsuario")]
+        [ActionName("ExcluirGrupoUsuario")]
         [Authorize()]
-        public IHttpActionResult ExcluirUsuario([FromBody] Usuario.UsuarioModel Usuario)
+        public IHttpActionResult ExcluirGrupoUsuario([FromBody] GrupoUsuario.GrupoUsuarioModel GrupoUsuario)
         {
             SimLib clsLib = new SimLib();
-            Usuario Cls = new Usuario(User.Identity.Name);
+            GrupoUsuario Cls = new GrupoUsuario(User.Identity.Name);
             try
             {
-                Cls.ExcluirUsuario(Usuario);
+                Cls.ExcluirGrupoUsuario(GrupoUsuario);
                 return Ok(true);
             }
             catch (Exception Ex)

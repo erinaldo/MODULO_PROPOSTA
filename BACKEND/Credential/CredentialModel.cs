@@ -21,7 +21,6 @@ namespace PROPOSTA
             public Int32 RouteId{ get; set; }
             public String UserName{ get; set; }
             public String Password{ get; set; }
-
         }
         public class RememberPassword
         {
@@ -31,6 +30,18 @@ namespace PROPOSTA
             public String Url;
             public String Senha;
             public String Token;
+        }
+        public class CheckLoginModel
+        {
+            public String login { get; set; }
+            public String password { get; set; }
+        }
+        
+        public class AppToken
+        {
+            public String Login { get; set;}
+            public String Email { get; set;}
+            public String Token { get; set; }
         }
     }
 }

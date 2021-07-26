@@ -24,7 +24,7 @@ namespace PROPOSTA
             //String strMensagemUsuario = "<html><head></head><body>";
             //strMensagemUsuario += "<h3>Olá " + UserName + "</h3>";
             //strMensagemUsuario += "<br>";
-            //strMensagemUsuario += "<p>Notamos que ocorreu um erro durante a utilização do Sistema Módulo Proposta.</p>";
+            //strMensagemUsuario += "<p>Notamos que ocorreu um erro durante a utilização do Sistema Sim Vendas.</p>";
             //strMensagemUsuario += "<p>Não se preocupe que nossa Equipe de Suporte já está verificando.</p>";
             //strMensagemUsuario += "<p>Mensagem de erro</p>";
             //strMensagemUsuario += "<p>" + pMensagemErro + "</p>";

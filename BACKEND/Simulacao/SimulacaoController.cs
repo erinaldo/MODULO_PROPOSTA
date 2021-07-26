@@ -492,7 +492,7 @@ namespace PROPOSTA
                 DataTable dtbEmail = Cls.SendAprovacao(Param);
                 foreach (DataRow drw in dtbEmail.Rows)
                 {
-                    clsLib.EnviaEmail(drw["Destinatario"].ToString(), null, null, "Módulo Proposta - Solicitação de Aprovação", drw["Texto_Email"].ToString(),"");
+                    clsLib.EnviaEmail(drw["Destinatario"].ToString(), null, null, "Sim Vendas - Solicitação de Aprovação", drw["Texto_Email"].ToString(),"");
                 };
                 return Ok(true);
             }
@@ -609,7 +609,7 @@ namespace PROPOSTA
                         strBody += "<p style='font-size=9'>" + "Email enviado automáticamente,favor não responder." + "</p>";
                         //strBody += "</body>";
                         //strBody += "</html>";
-                        clsLib.EnviaEmail(Param.Email_Contato,Param.Email_Copia,"","Módulo Proposta - Proposta Comercial",strBody,strPath+strPdfName);
+                        clsLib.EnviaEmail(Param.Email_Contato,Param.Email_Copia,"","Sim Vendas - Proposta Comercial",strBody,strPath+strPdfName);
                     }
                     
                 }

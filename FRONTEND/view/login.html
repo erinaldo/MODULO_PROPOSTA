@@ -1,12 +1,12 @@
 ﻿<div class="app app-fh" ng-controller="loginController">
+    
     <div class="app-login-box" style="width:500px !important">
         <div class="app-login-box-user">
             <img src="img/no-image.png" alt="User" />
         </div>
-        <div class="app-login-box-title">
+        <div class="app-login-box-title" ng-show="showLogin">
             <div class="subtitle">Informe suas credenciais</div>
             <div class="app-login-box-container">
-
                 <form name="formLogin">
                     <div class="form-group">
                         <input type="text" class="form-control" name="username" ng-model="app_user.login" value="" placeholder="Login" ng-required="true">
@@ -14,12 +14,18 @@
                     <div class="form-group">
                         <input type="password" class="form-control" ng-model="app_user.password" name="password" placeholder="Senha" ng-required="true">
                     </div>
-                    <div class="form-group">
+                        <!--<div class="form-group">
+                            <input type="text" class="form-control" onkeypress="return NumericOnly(event)" maxlength="6" ng-model="app_user.Token" name="password" placeholder="Informe o Token recebido no App Cartv">
+                        </div>-->
+                    <!--<div class="form-group">
                         <button class="btn btn-success btn-block" ng-click="setLogin(app_user)" ng-disabled="formLogin.$invalid">Login  </button>
+                    </div>-->
+                    <div class="form-group">
+                        <button class="btn btn-success btn-block" ng-click="CheckLogin(app_user)" ng-disabled="formLogin.$invalid">Login  </button>
                     </div>
+                    
                     <a href="#newpassword" class="btn btn-warning btn-block">Esqueci minha senha</a>
                 </form>
-                
             </div>
             <div ng-show="!CookieEnabled">
                 <h4>Esse sistema utiliza cookies</h4>
@@ -27,9 +33,34 @@
                 <p>Ative-os nas configurações para continuar.</p>
             </div>    
         </div>
-        
+
+        <div class="app-login-box-title" ng-show="showToken">
+            <div class="subtitle">
+                Informe o Token obtido no App Cartv ou clique em Obter token para receber no Email.
+            </div>
+            <div class="app-login-box-container">
+                    <div class="form-group">
+                        <input type="text" class="form-control" onkeypress="return NumericOnly(event)" placeholder="Token" maxlength="6" ng-model="app_user.Token">
+                    </div>
+                
+                    <div class="row">
+                        <div class="col-md-4">
+                            <button class="btn btn-success btn-block" ng-click="setLogin(app_user)">Ok</button>
+                        </div>
+                        <div class="col-md-4">
+                            <button class="btn btn-info btn-block" ng-click="GetToken(app_user)">Obter Token</button>
+                        </div>
+                        <div class="col-md-4">
+                            <button class="btn btn-warning btn-block" ng-click="showLogin=true;showToken=false">Cancela  </button>
+                        </div>
+                    </div>
+                <div class="row margin-top-10">
+                    <div class="col-md-12">
+                        {{Msg_Token}}
+                    </div>
+                </div>
+                
+            </div>
+        </div>
     </div>
-
-    
-
 </div>  

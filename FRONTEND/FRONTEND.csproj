@@ -155,6 +155,7 @@
     <Content Include="angular\Controller\TabelaPrecosMolController.js" />
     <Content Include="angular\Controller\TiposComercializacaoCadastroController.js" />
     <Content Include="angular\Controller\TiposComercializacaoController.js" />
+    <Content Include="angular\Controller\GrupoUsuarioController.js" />
     <Content Include="css\custom - Copy.css" />
     <Content Include="Index.html" />
     <Content Include="IndexAdm.html" />
@@ -465,6 +466,7 @@
     <Content Include="view\TiposComercializacao.html" />
     <Content Include="view\TiposComercializacaoCadastro.html" />
     <Content Include="view\UnderConstrution.html" />
+    <Content Include="view\GrupoUsuario.html" />
     <Content Include="view\Usuario.html" />
     <Content Include="view\Veiculo.Html" />
     <Content Include="img\web.config" />

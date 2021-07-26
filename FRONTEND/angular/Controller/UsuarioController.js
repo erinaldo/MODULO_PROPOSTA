@@ -5,10 +5,12 @@
     $scope.CurrentTab = "Perfil";
     $scope.checkBoxEmpresa = false;
     $scope.checkBoxPerfil = false;
+    $scope.checkBoxAssociar = false
     
     $scope.NivelAcesso = [{ 'Id': 1, 'Descricao': 'Padrão' }, { 'Id': 2, 'Descricao': 'Administrador' }]
+    $scope.Forma_EnvioToken = [{ 'Id': 1, 'Descricao': 'App-Cartv' }, { 'Id': 2, 'Descricao': 'Email' }]
     $scope.NewUsuario = function () {
-        $scope.Ctrl = { 'Login': '', 'Nome': '', 'Email': '', 'Telefone': '', 'Cargo': '', 'Id_Nivel_Acesso':'','Nivel_Superior':[],'Nivel_Inferior':[]};
+        $scope.Ctrl = { 'Login': '', 'Nome': '', 'Email': '', 'Telefone': '', 'Cargo': '', 'Id_Nivel_Acesso':'','Nivel_Superior':[],'Nivel_Inferior':[],'Indica_Token':false,'Forma_EnvioToken':'','Grupos':[]};
     }
     $scope.Ctrl = $scope.NewUsuario();
     $scope.gridheaders = [{ 'title': '#ID', 'visible': true, 'searchable': false, 'sortable': true },
@@ -18,6 +20,7 @@
                             { 'title': 'Telefone', 'visible': true, 'searchable': true, 'sortable': true },
                             { 'title': 'Cargo', 'visible': true, 'searchable': true, 'sortable': true },
                             { 'title': 'Nivel de Acesso', 'visible': true, 'searchable': true, 'sortable': true },
+                            { 'title': 'Exigir Token', 'visible': true, 'searchable': true, 'sortable': true },
                             { 'title': 'Status', 'visible': true, 'searchable': true, 'sortable': true },
     ];
 
@@ -114,8 +117,6 @@
     //=====================Marcou uma funcao do Perfil
     $scope.CheckPerfil = function (pPerfil) {
         if (!pPerfil.Selected) {
-
-        
         for (var i = 0; i < $scope.Ctrl.Perfil.length; i++) {
             if ($scope.Ctrl.Perfil[i].Id_Funcao_Root == pPerfil.Id_Funcao) {
                 $scope.Ctrl.Perfil[i].Selected = pPerfil.Selected;
@@ -224,6 +225,12 @@
             if (pNivel[i].Login.trim() == pLogin.trim()) {
                 pNivel.splice(i, 1);
             };
+        };
+    };
+    //=====================Marcar / Desmarcar todos os grupos
+    $scope.MarcarGrupos = function () {
+        for (var i = 0; i < $scope.Ctrl.Grupos.length; i++) {
+            $scope.Ctrl.Grupos[i].Selected = $scope.checkBoxAssociar;
         };
     };
     //====================Funcao para configurar o Grid

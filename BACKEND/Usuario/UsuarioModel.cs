@@ -27,8 +27,11 @@ namespace PROPOSTA
             public List<PerfilModel> Perfil { get; set; }
             public List<EmpresaModel> Empresas { get; set; }
             public Int32 Id_Nivel_Acesso { get; set; }
+            public Boolean Indica_Token { get; set; }
+            public Byte Forma_EnvioToken { get; set; }
             public List<HierarquiaModel> Nivel_Superior { get; set; }
             public List<HierarquiaModel> Nivel_Inferior { get; set; }
+            public List<GrupoModel> Grupos { get; set; }
         }
         public class PerfilModel
         {
@@ -50,6 +53,13 @@ namespace PROPOSTA
             public String Login { get; set; }
             public String Nome { get; set; }
         }
+        public class GrupoModel
+        {
+            public String Id_Grupo { get; set; }
+            public String Cod_Grupo{ get; set; }
+            public String Descricao{ get; set; }
+            public Boolean Selected { get; set; }
 
+        }
     }
 }

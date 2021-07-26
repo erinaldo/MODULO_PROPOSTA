@@ -132,6 +132,13 @@
         routeName: 'Cadastro de Usuários',
         RouteId: 'Usuario@Index'
     })
+    .when('/grupousuario', {
+        templateUrl: 'view/GrupoUsuario.html',
+        authorize: true,
+        controller: 'GrupoUsuarioController',
+        routeName: 'Grupo Usuários',
+        RouteId: 'GrupoUsuario@Index'
+    })
     .when('/mercado', {
         templateUrl: 'view/Mercado.html',
         authorize: true,
@@ -927,7 +934,7 @@
              authorize: true,
              controller: 'NumeracaoController',
              routeName: 'Numeracao',
-             RouteId: 'Numeracao@Fiscais'
+             RouteId: 'Numeracao@New'
          })
 
         .when('/NumeracaoCadastro/:Action/:Id', {

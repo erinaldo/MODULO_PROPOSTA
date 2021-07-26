@@ -62,10 +62,13 @@ namespace PROPOSTA
                     Usuario.Telefone = dtb.Rows[0]["Telefone"].ToString();
                     Usuario.Cargo = dtb.Rows[0]["Cargo"].ToString();
                     Usuario.Id_Nivel_Acesso = dtb.Rows[0]["Id_Nivel_Acesso"].ToString().ConvertToInt32();
+                    Usuario.Indica_Token = dtb.Rows[0]["Indica_Token"].ToString().ConvertToBoolean();
+                    Usuario.Forma_EnvioToken= dtb.Rows[0]["Forma_EnvioToken"].ToString().ConvertToByte();
                     Usuario.Nivel_Superior = this.AddNivel(pIdUsuario, 1);
                     Usuario.Nivel_Inferior = this.AddNivel(pIdUsuario, 2);
                     Usuario.Perfil = this.addPerfil(pIdUsuario);
                     Usuario.Empresas = this.addEmpresas(pIdUsuario);
+                    Usuario.Grupos = this.addGrupos(pIdUsuario);
 
                 }
             }
@@ -190,6 +193,43 @@ namespace PROPOSTA
 
             return Empresas;
         }
+        public List<GrupoModel> addGrupos(Int32 pIdUsuario)
+        {
+            clsConexao cnn = new clsConexao(this.Credential);
+            cnn.Open();
+            List<GrupoModel> Grupos = new List<GrupoModel>();
+            try
+            {
+                SqlDataAdapter Adp = new SqlDataAdapter();
+                DataTable dtb = new DataTable("dtb");
+                SqlCommand cmd = cnn.Procedure(cnn.Connection, "Pr_Proposta_Composicao_Usuario_Grupo_List");
+                Adp.SelectCommand = cmd;
+                Adp.SelectCommand.Parameters.AddWithValue("@Par_Id_Usuario", pIdUsuario);
+                Adp.Fill(dtb);
+                foreach (DataRow drw in dtb.Rows)
+                {
+                    Grupos.Add(new GrupoModel()
+                    {
+                        Id_Grupo= drw["Id_Grupo"].ToString(),
+                        Cod_Grupo = drw["Cod_Grupo"].ToString(),
+                        Descricao = drw["Descricao"].ToString(),
+                        Selected = drw["Selected"].ToString().ConvertToBoolean(),
+                    }
+                    );
+                }
+            }
+            catch (Exception)
+            {
+
+                throw;
+            }
+            finally
+            {
+                cnn.Close();
+            }
+
+            return Grupos;
+        }
         public DataTable SalvarUsuario(UsuarioModel Usuario)
         {
             clsConexao cnn = new clsConexao(this.Credential);
@@ -217,6 +257,11 @@ namespace PROPOSTA
             {
                 xmlNivelInferior = clsLib.SerializeToString(Usuario.Nivel_Inferior);
             }
+            String xmlGrupos = null;
+            if (Usuario.Grupos.Count > 0)
+            {
+                xmlGrupos = clsLib.SerializeToString(Usuario.Grupos);
+            }
             try
             {
                 SqlCommand cmd = cnn.Procedure(cnn.Connection, "PR_PROPOSTA_Usuario_Salvar");
@@ -227,11 +272,14 @@ namespace PROPOSTA
                 Adp.SelectCommand.Parameters.AddWithValue("@Par_Telefone", Usuario.Telefone);
                 Adp.SelectCommand.Parameters.AddWithValue("@Par_Cargo", Usuario.Cargo);
                 Adp.SelectCommand.Parameters.AddWithValue("@Par_Email", Usuario.Email);
+                Adp.SelectCommand.Parameters.AddWithValue("@Par_Indica_Token", Usuario.Indica_Token);
+                Adp.SelectCommand.Parameters.AddWithValue("@Par_Forma_EnvioToken", Usuario.Forma_EnvioToken);
                 Adp.SelectCommand.Parameters.AddWithValue("@Par_Nivel_Acesso", Usuario.Id_Nivel_Acesso);
                 Adp.SelectCommand.Parameters.AddWithValue("@Par_Perfil", xmlPerfil);
                 Adp.SelectCommand.Parameters.AddWithValue("@Par_Empresa", xmlEmpresas);
                 Adp.SelectCommand.Parameters.AddWithValue("@Par_Hierarquia_Pai", xmlNivelSuperior);
                 Adp.SelectCommand.Parameters.AddWithValue("@Par_Hierarquia_Filho", xmlNivelInferior);
+                Adp.SelectCommand.Parameters.AddWithValue("@Par_Grupos", xmlGrupos);
                 Adp.Fill(dtb);
             }
             catch (Exception)

@@ -29,19 +29,36 @@ namespace webapi
                 SimLib clsLib = new SimLib();
                 var user = context.UserName;
                 var password = context.Password;
+                var cartv_token = "";
+                var validar_token = false;
+                if (context.Request.Headers.Keys.Contains("Cartv-Token"))
+                {
+                     cartv_token = context.Request.Headers["Cartv-Token"].ToString();
+                }
 
-                user = clsLib.Criptografa(user); //Criptogradar aqui por causa do Genexus que nao criptografa por javascript
-                password = clsLib.Criptografa(password); //Criptogradar aqui por causa do Genexus  por javascript
+                if (context.Request.Headers.Keys.Contains("CallFrom"))
+                {
+                    if (context.Request.Headers["CallFrom"].ToString()=="Browser")
+                    {
+                        validar_token = true;
+                    }
+                }
+                else // Mobile passa senha descriptografada
+                {
+                    user = clsLib.Criptografa(user); //Criptogradar aqui por causa do Genexus que nao criptografa por javascript
+                    password = clsLib.Criptografa(password); //Criptogradar aqui por causa do Genexus  por javascript    
+                }
 
                 var identity = new ClaimsIdentity(context.Options.AuthenticationType);
 
                 xUser xUser = new xUser();
                 xUser.Name = user;
                 xUser.Password = password;
+                xUser.Token = cartv_token;
                 String json = JsonConvert.SerializeObject(xUser);
                 identity.AddClaim(new Claim(ClaimTypes.Name, json));
 
-                DataTable dtbLogin = cls.Login(json);
+                DataTable dtbLogin = cls.Login(json,validar_token);
                 if (dtbLogin.Rows[0]["Valido"].ToString()!="1")
                 {
                     context.Response.StatusCode = 201;
@@ -73,6 +90,7 @@ namespace webapi
             public string Autenticacao;
             public String Sistema;
             public String SecretKey;
+            public String Token;
         }
     }
 }

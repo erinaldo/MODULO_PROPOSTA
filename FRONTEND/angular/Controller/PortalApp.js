@@ -85,6 +85,7 @@
             'Title': 'Administração',
             'SubItens': [
                 { 'Title': 'Usuários', 'Url': $rootScope.pageUrl + 'IndexAdm.html#/usuario' },
+                { 'Title': 'Grupo de Usuários', 'Url': $rootScope.pageUrl + 'IndexAdm.html#/grupousuario' },
                 { 'Title': 'Parâmetros Gerais', 'Url': $rootScope.pageUrl + 'IndexAdm.html#/Parametro' },
                 { 'Title': 'Parâmetros de Valoração', 'Url': $rootScope.pageUrl + 'IndexAdm.html#/ParametroValoracao' },
                 { 'Title': 'Cadastros', 'Url': $rootScope.pageUrl + 'IndexAdm.html#/cadastro' },

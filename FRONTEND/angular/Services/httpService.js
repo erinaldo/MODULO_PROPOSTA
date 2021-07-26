@@ -41,11 +41,28 @@
         return deferred.promise
     };
     
+    var _GetToken = function (pUrl, pData,pToken) {
+        var deferred = $q.defer();
+        if (!pToken) {
+            pToken = "";
+        }
+        $http({
+            method: 'POST',
+            url: config.baseUrl + "API/" + pUrl,
+            data: pData,
+            headers: {'Content-Type': 'application/x-www-form-urlencoded','Cartv-Token':pToken,'CallFrom':'Browser'}
+        }
+        ).then(function (response) {
+            deferred.resolve(response);
+        });
+        return deferred.promise
+    };
     return {
         Get:_HttpGet,
         Post:_httpPost,
         GetConfig: _GetConfig,
         MobileGet: _MobileGet,
+        GetToken:_GetToken 
     };
 
 });
