@@ -8,6 +8,26 @@ namespace PROPOSTA
 {
     public class NegociacaoController : ApiController
     {
+        [Route("api/Negociacao/Select")]
+        [HttpGet]
+        [ActionName("NegociacaoSelect")]
+        [Authorize()]
+        public IHttpActionResult NegociacaoSelect([FromUri]Negociacao.NegociacaoFiltroParam Param)
+        {
+            SimLib clsLib = new SimLib();
+            Negociacao Cls = new Negociacao(User.Identity.Name);
+            try
+            {
+                DataTable Retorno = Cls.NegociacaoSelect(Param);
+                return Ok(Retorno);
+            }
+            catch (Exception Ex)
+            {
+                clsLib.EmailErrorToSuporte(User.Identity.Name, Ex.Message.ToString(), Ex.Source, Ex.StackTrace);
+                throw new Exception(Ex.Message);
+            }
+        }
+
         [Route("api/Negociacao/List")]
         [HttpGet]
         [ActionName("NegociacaoList")]

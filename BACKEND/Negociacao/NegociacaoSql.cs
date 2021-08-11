@@ -13,6 +13,39 @@ namespace PROPOSTA
         Int32 Sequenciador_Id_Parcela= 0;
         Int32 MaxGrupo = 0;
         Int32 Maxparcela= 0;
+        public DataTable NegociacaoSelect(NegociacaoFiltroParam Param)
+        {
+            clsConexao cnn = new clsConexao(this.Credential);
+            cnn.Open();
+            SqlDataAdapter Adp = new SqlDataAdapter();
+            DataTable dtb = new DataTable("dtb");
+            SimLib clsLib = new SimLib();
+            try
+            {
+                SqlCommand cmd = cnn.Procedure(cnn.Connection, "Pr_Proposta_Negociacao_List");
+                Adp.SelectCommand = cmd;
+                Adp.SelectCommand.Parameters.AddWithValue("@Par_Login", this.CurrentUser);
+                Adp.SelectCommand.Parameters.AddWithValue("@Par_Numero_Negociacao", Param.Numero_Negociacao);
+                Adp.SelectCommand.Parameters.AddWithValue("@Par_Cod_Empresa_Venda", Param.Cod_Empresa_Venda);
+                Adp.SelectCommand.Parameters.AddWithValue("@Par_Cod_Empresa_Faturamento", Param.Cod_Empresa_Faturamento);
+                Adp.SelectCommand.Parameters.AddWithValue("@Par_Cod_Tipo_Midia", Param.Cod_Tipo_Midia);
+                Adp.SelectCommand.Parameters.AddWithValue("@Par_Competencia_Inicio", clsLib.CompetenciaInt(Param.Competencia_Inicio));
+                Adp.SelectCommand.Parameters.AddWithValue("@Par_Competencia_Fim", clsLib.CompetenciaInt(Param.Competencia_Fim));
+                Adp.SelectCommand.Parameters.AddWithValue("@Par_Agencia", Param.Agencia);
+                Adp.SelectCommand.Parameters.AddWithValue("@Par_Cliente", Param.Cliente);
+                Adp.SelectCommand.Parameters.AddWithValue("@Par_Contato", Param.Contato);
+                Adp.Fill(dtb);
+            }
+            catch (Exception)
+            {
+                throw;
+            }
+            finally
+            {
+                cnn.Close();
+            }
+            return dtb;
+        }
         public List<NegociacaoModel> NegociacaoList(NegociacaoFiltroParam Param)
         {
             clsConexao cnn = new clsConexao(this.Credential);
@@ -38,6 +71,7 @@ namespace PROPOSTA
                 Adp.Fill(dtb);
                 foreach (DataRow drw in dtb.Rows)
                 {
+                    
                     Negociacoes.Add(new NegociacaoModel
                     {
                         Numero_Negociacao = drw["Numero_Negociacao"].ToString().ConvertToInt32(),

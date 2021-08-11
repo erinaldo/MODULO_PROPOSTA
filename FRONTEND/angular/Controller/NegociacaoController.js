@@ -8,8 +8,6 @@
                             { 'title': 'Emp.Venda', 'visible': true, 'searchable': true, 'config': true, 'sortable': true },
                             { 'title': 'Emp.Faturamento', 'visible': true, 'searchable': true, 'config': true, 'sortable': true },
                             { 'title': 'Período', 'visible': true, 'searchable': true, 'config': true, 'sortable': true },
-                            { 'title': 'Agencias', 'visible': true, 'searchable': true, 'config': true, 'sortable': true },
-                            { 'title': 'Clientes', 'visible': true, 'searchable': true, 'config': true, 'sortable': true },
                             { 'title': 'Tipo de Mídia', 'visible': true, 'searchable': true, 'config': true, 'sortable': true },
                             { 'title': 'Tabela de Preços', 'visible': true, 'searchable': true, 'config': true, 'sortable': true },
                             { 'title': 'Verba Negociada', 'visible': true, 'searchable': true, 'config': true, 'sortable': true },
@@ -17,7 +15,6 @@
                             { 'title': 'Realizado Negociado', 'visible': true, 'searchable': true, 'config': true, 'sortable': true },
                             { 'title': 'Desconto Concedido', 'visible': true, 'searchable': true, 'config': true, 'sortable': true },
                             { 'title': 'Desconto Real', 'visible': true, 'searchable': true, 'config': true, 'sortable': true },
-                            { 'title': 'Contatos', 'visible': true, 'searchable': true, 'config': true, 'sortable': true },
                             { 'title': 'Status', 'visible': true, 'searchable': true, 'config': true, 'sortable': true },
     ];
     $scope.MesAnoKeys = { 'Year': new Date().getFullYear(), 'First': '', 'Last': '' }
@@ -75,7 +72,7 @@
         localStorage.setItem('NegociacaoFilter', JSON.stringify($scope.Filtro));
         $scope.CurrentShow = '';
         $('#dataTable').dataTable().fnDestroy();
-        var _url = 'Negociacao/List';
+        var _url = 'Negociacao/Select';
         _url += '?Numero_Negociacao=' + pFiltro.Id_Negociacao;
         _url += '&Validade_Inicio=' + pFiltro.Validade_Inicio;
         _url += '&Validade_Termino=' + pFiltro.Validade_Termino;

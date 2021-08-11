@@ -284,9 +284,9 @@
     <Compile Include="Faturamento\ComplementoContratoPesquisaController.cs" />
     <Compile Include="Faturamento\ComplementoContratoPesquisaModel.cs" />
     <Compile Include="Faturamento\ComplementoContratoPesquisaSql.cs" />
-    <Compile Include="Connector\CondPgto\CondPgtoController.cs" />
-    <Compile Include="Connector\CondPgto\CondPgtoModel.cs" />
-    <Compile Include="Connector\CondPgto\CondPgtoSql.cs" />
+    <Compile Include="CondPgto\CondPgtoController.cs" />
+    <Compile Include="CondPgto\CondPgtoModel.cs" />
+    <Compile Include="CondPgto\CondPgtoSql.cs" />
     <Compile Include="ConsultaProgramacaoDiaria\ConsultaProgramacaoDiariaController.cs" />
     <Compile Include="ConsultaProgramacaoDiaria\ConsultaProgramacaoDiariaModel.cs" />
     <Compile Include="ConsultaProgramacaoDiaria\ConsultaProgramacaoDiariaSql.cs" />
