@@ -1,0 +1,552 @@
+﻿<style>
+    .inputPermutas {
+        height: 30px;
+    }
+
+    #tbPermutas td, #tbPermutas th {
+        white-space: nowrap;
+    }
+
+    #tbPermutas td {
+        padding: 5px 5px !important;
+        white-space: nowrap;
+        text-align: center;
+    }
+
+        #tbPermutas td button {
+            margin: 0 0 0 0;
+        }
+
+    #tbPermutas .input-group {
+        margin-bottom: 0px;
+    }
+
+    .td-insercoes {
+        width: 30px !important;
+        padding-left: 2px !important;
+        padding-right: 2px !important;
+        text-align: center !important;
+    }
+
+    #tbMidia td, #tbMidia th {
+        padding: 2px 2px 2px 2px !important;
+        text-align: center !important;
+        vertical-align: middle !important;
+        font-size: 11px !important;
+        white-space: nowrap;
+        height: 30px !important;
+        white-space: nowrap;
+    }
+
+        #tbMidia td .form-control {
+            height: 30px;
+        }
+
+        #tbMidia td .input-group {
+            margin: 0px;
+            padding: 0px 0px 0px 0px;
+        }
+
+        #tbMidia td input {
+            text-transform: uppercase;
+            padding: 2px 2px 2px 2px;
+        }
+
+        #tbMidia td button {
+            margin: 0px 0px 0px 0px;
+        }
+
+        #tbMidia td input[disabled] {
+            background-color: white;
+        }
+</style>
+<div class="container">
+    <form name="frmContrato" autocomplete="off">
+        <div class="block">
+            <div class="row" id="divContrato">
+                <div class="alert alert-primary alert-icon-block" role="alert">
+                    <strong>1-Contrato Entrega </strong>
+                </div>
+            </div>
+
+
+            <div class="row">
+                <!--==================Numero do  Contrato-->
+                <div class="col-md-1">
+                    <div class="form-group">
+                        <label for="txtNumeroContrato" class="field-x">N.Contrato</label>
+                        <input type="text" id="txtNumeroContrato" class="form-control numeric"
+                               ng-model="permuta.Numero_Contrato"
+                               ng-disabled="!permuta.Editar_Numero_Contrato"
+                               ng-model-options="{updateOn: 'blur'}"
+                               maxlength="20" />
+                    </div>
+                </div>
+
+
+                <!--=======================================Numero Negociacao-->
+                <div class="col-md-1">
+                    <div class="form-group">
+                        <label for="txtNumeroNegociacao" class="field-x">Negociação</label>
+                        <div class="input-group">
+                            <input id="txtNumeroNegociacao" class="form-control numeric"
+                                   ng-model="permuta.Numero_Negociacao"
+                                   ng-disabled="!permuta.Editar_Numero_Negociacao"
+                                   ng-model-options="{updateOn: 'blur'}"
+                                   maxlength="10"
+                                   ng-change="NegociacaoChange(permuta.Numero_Negociacao)" />
+                        </div>
+                    </div>
+                </div>
+
+                <!--=======================================valor de Verba-->
+
+                <div class="col-md-2">
+                    <div class="form-group">
+                        <label for="txtNumeroNegociacao" class="field-x">Valor Verba</label>
+                        <div class="input-group">
+                            <input id="txtValorVerba" type="text" class="form-control"
+                                   onblur="this.value = MoneyFormat(this.value)"
+                                   onfocus="this.value = DecimalUnformat(this.value)"
+                                   onkeypress="return DecimalOnly(event)"
+                                   ng-disabled="!permuta.Editar_Valor_Verba"
+                                   style="text-align:right"
+                                   ng-model="permuta.Valor_Verba"
+                                   ng-model-options="{updateOn: 'blur'}" />
+                        </div>
+                    </div>
+                </div>
+
+                <!--==============================================Periodo Competencia Inicio-->
+                <div class="col-md-2">
+                    <div class="dictionary" dictionary="Competencia" caption="Comp. Inicial">
+                        <input ng-model="permuta.Competencia_Inicial"
+                               ng-disabled="!permuta.Editar_Competencia_Inicial"
+                               ui-MesAno ng-model-options="{updateOn: 'blur'}" />
+                        <div class="dictionary-ui-competencia" ui-Competencia typmesano="permuta.Competencia_Inicial" params="MesAnoKeys"></div>
+                    </div>
+                </div>
+
+                <!--==============================================Periodo Competencia Término-->
+                <div class="col-md-2">
+                    <div class="dictionary" dictionary="Competencia" caption="Comp. Final">
+                        <input ng-model="permuta.Competencia_Final"
+                               ng-disabled="!permuta.Editar_Competencia_Final"
+                               ui-MesAno ng-model-options="{updateOn: 'blur'}" />
+                        <div class="dictionary-ui-competencia" ui-Competencia typmesano="permuta.Competencia_Final" params="MesAnoKeys"></div>
+                    </div>
+                </div>
+
+                <!--==============================================Data Autorizacao-->
+                <div class="col-md-2">
+                    <div class="dictionary" dictionary="Data" caption="Data Autorização">
+                        <input ng-model="permuta.Data_Autorizacao"
+                               ng-disabled="!permuta.Editar_Data_Autorizacao"
+                               ui-date ng-model-options="{updateOn: 'blur'}">
+                        <div class="dictionary-ui-calendar" ui-calendar typdate="permuta.Data_Autorizacao"></div>
+                    </div>
+                </div>
+
+                <!--==================Tipo de Mídia -->
+                <div class="col-md-2" ng-controller="dictionaryController">
+                    <div class="dictionary" dictionary="TipoMidias" caption="Tipo de Mídia">
+                        <input id="txtCodTipoMidia"
+                               maxlength="10"
+                               ng-model="permuta.Cod_Tipo_Midia"
+                               ng-disabled="permuta.Editar_Tipo_Midia"
+                               ng-model-options="{updateOn: 'blur'}"
+                               ng-change="DicionaryValidate('txtCodTipoMidia')"
+                               primarybind="txtCodTipoMidia">
+                    </div>
+                </div>
+            </div>
+
+            <div class="row">
+                <!--==================Empresa de Venda-->
+                <div class="col-md-2 margin-top-10">
+                    <div class="form-group">
+                        <label for="txtEmpresaVenda">Emp.Venda</label>
+                        <div class="input-group">
+                            <div class="input-group-addon" ng-show="permuta.Editar_Empresa_Venda">
+                                <span class="fa fa-search span-btn" ng-click="PesquisaNegociacaoTerceiro(Permutas,'empresa_venda')"></span>
+                            </div>
+                            <input id="txtEmpresaVenda" class="form-control numeric"
+                                   ng-disabled="permuta.Editar_Empresa_Venda"
+                                   ng-model="permuta.Cod_Empresa_Venda"
+                                   ng-model-options="{updateOn: 'blur'}"
+                                   maxlength="3"
+                                   ng-change="ValidarNegociacaoTerceiro(Contrato,'empresa_venda','Cod_Empresa_Venda','Nome_Empresa_Venda')" />
+                        </div>
+                    </div>
+                </div>
+                <!--==============================================Nome Empresa de Venda-->
+                <div class="col-md-4 margin-top-10">
+                    <div class="form-group">
+                        <label for="txtNomeEmpresaVenda">Razao Social</label>
+                        <div class="input-group">
+                            <input type="text"
+                                   ng-disabled="true"
+                                   id="txtNomeEmpresaVenda"
+                                   class="form-control "
+                                   ng-model="permuta.Nome_Empresa_Venda">
+
+                        </div>
+                    </div>
+                </div>
+                <!--==================Empresa de Faturamento-->
+                <div class="col-md-2 margin-top-10 ">
+                    <div class="form-group">
+                        <label for="txtEmpresaFaturamento">Emp.Fat</label>
+                        <div class="input-group">
+                            <div class="input-group-addon" ng-show="permuta.Editar_Empresa_Faturamento">
+                                <span class="fa fa-search span-btn" ng-click="PesquisaNegociacaoTerceiro(permuta,'empresa_faturamento')"></span>
+                            </div>
+                            <input id="txtEmpresaFaturamento" class="form-control numeric"
+                                   ng-model="permuta.Cod_Empresa_Faturamento"
+                                   ng-disabled="permuta.Editar_Empresa_Faturamento"
+                                   ng-model-options="{updateOn: 'blur'}"
+                                   maxlength="3"
+                                   ng-change="ValidarNegociacaoTerceiro(permuta,'empresa_faturamento','Cod_Empresa_Faturamento','Nome_Empresa_Faturamento')" />
+                        </div>
+                    </div>
+                </div>
+                <!--==============================================Nome Empresa de Faturamento-->
+                <div class="col-md-4 margin-top-10">
+                    <div class="form-group">
+                        <label for="txtNomeEmpresaFaturamento">Razao Social</label>
+                        <div class="input-group">
+                            <input type="text"
+                                   ng-disabled="true"
+                                   id="txtNomeEmpresaFaturamento"
+                                   class="form-control "
+                                   ng-model="permuta.Nome_Empresa_Faturamento">
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="row">
+                <!--==============================================Cliente-->
+                <div class="col-md-2 margin-top-10">
+                    <div class="form-group">
+                        <label for="txtCodCliente">Cliente</label>
+                        <div class="input-group">
+                            <div class="input-group-addon" ng-show="permuta.Editar_Cliente">
+                                <span class="fa fa-search span-btn" ng-click="PesquisaNegociacaoTerceiro(Permutas,'cliente')"></span>
+                            </div>
+                            <input id="txtCodCliente" class="form-control"
+                                   ng-model="permuta.Cod_Cliente"
+                                   ng-disabled="permuta.Editar_Cliente"
+                                   ng-model-options="{updateOn: 'blur'}"
+                                   maxlength="6"
+                                   style="text-transform:uppercase"
+                                   ng-change="ValidarNegociacaoTerceiro(Permutas,'cliente','Cod_Cliente','Nome_Cliente')" />
+                        </div>
+                    </div>
+                </div>
+                <!--==============================================Nome Cliente-->
+                <div class="col-md-4 margin-top-10">
+                    <div class="form-group">
+                        <label for="txtNomeCliente">Razao Social</label>
+                        <div class="input-group">
+                            <input type="text"
+                                   ng-disabled="true"
+                                   id="txtNomeCliente"
+                                   class="form-control "
+                                   ng-model="permuta.Nome_Cliente">
+                        </div>
+                    </div>
+                </div>
+                <!--==============================================Agencia-->
+                <div class="col-md-2 margin-top-10">
+                    <div class="form-group">
+                        <label for="txtCodAgencia">Agência</label>
+                        <div class="input-group">
+                            <div class="input-group-addon" ng-show="permuta.Editar_Agencia">
+                                <span class="fa fa-search span-btn" ng-click="PesquisaNegociacaoTerceiro(permuta,'agencia')"></span>
+                            </div>
+                            <input id="txtCodAgencia" class="form-control "
+                                   ng-model="permuta.Cod_Agencia"
+                                   ng-disabled="permuta.Editar_Agencia"
+                                   ng-model-options="{updateOn: 'blur'}"
+                                   maxlength="6"
+                                   style="text-transform:uppercase"
+                                   ng-change="ValidarNegociacaoTerceiro(permuta,'agencia','Cod_Agencia','Nome_Agencia')" />
+                        </div>
+                    </div>
+                </div>
+                <!--==============================================Nome Agencia-->
+                <div class="col-md-4 margin-top-10">
+                    <div class="form-group">
+                        <label for="txtNomeAgencia">Razao Social</label>
+                        <div class="input-group">
+                            <input type="text"
+                                   ng-disabled="true"
+                                   id="txtNomeAgencia"
+                                   class="form-control "
+                                   ng-model="permuta.Nome_Agencia">
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="row">
+                <!--==============================================Nucleo-->
+                <div class="col-md-2 margin-top-10">
+                    <div class="form-group">
+                        <label for="txtCodNucleo">Núcleo de Vendas</label>
+                        <div class="input-group">
+                            <div class="input-group-addon" ng-show="permuta.Editar_Nucleo">
+                                <span class="fa fa-search span-btn" ng-click="PesquisaNegociacaoTerceiro(permuta,'nucleo')"></span>
+                            </div>
+                            <input id="txtCodNucleo" class="form-control"
+                                   ng-model="permuta.Cod_Nucleo"
+                                   ng-disabled="permuta.Editar_Nucleo"
+                                   ng-model-options="{updateOn: 'blur'}"
+                                   maxlength="7"
+                                   style="text-transform:uppercase"
+                                   ng-change="ValidarNegociacaoTerceiro(Contrato,'nucleo','Cod_Nucleo','Nome_Nucleo')" />
+                        </div>
+                    </div>
+                </div>
+                <!--==============================================Nome Nucleo-->
+                <div class="col-md-4 margin-top-10">
+                    <div class="form-group">
+                        <label for="txtNomeNucleo">Nome Nucleo</label>
+                        <div class="input-group">
+                            <input type="text"
+                                   ng-disabled="true"
+                                   id="txtNomeNucleo"
+                                   class="form-control "
+                                   ng-model="permuta.Nome_Nucleo">
+                        </div>
+                    </div>
+                </div>
+                <!--==============================================Contato-->
+                <div class="col-md-2 margin-top-10">
+                    <div class="form-group">
+                        <label for="txtCodContato">Contato</label>
+                        <div class="input-group">
+                            <div class="input-group-addon" ng-show="permuta.Editar_Contato">
+                                <span class="fa fa-search span-btn" ng-click="PesquisaNegociacaoTerceiro(permuta,'contato')"></span>
+                            </div>
+                            <input id="txtCodContato" class="form-control"
+                                   ng-model="permuta.Cod_Contato"
+                                   ng-disabled="permuta.Editar_Contato"
+                                   ng-model-options="{updateOn: 'blur'}"
+                                   maxlength="6"
+                                   style="text-transform:uppercase"
+                                   ng-change="ValidarNegociacaoTerceiro(Contrato,'contato','Cod_Contato','Nome_Contato')" />
+                        </div>
+                    </div>
+                </div>
+                <!--==============================================Nome Contato-->
+                <div class="col-md-4 margin-top-10">
+                    <div class="form-group">
+                        <label for="txtNomeContato">Nome Contato</label>
+                        <div class="input-group">
+                            <input type="text"
+                                   ng-disabled="true"
+                                   id="txtNomeContato"
+                                   class="form-control "
+                                   ng-model="permuta.Nome_Contato">
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!--======================Dados dos itens de Entregas-->
+            <div class="block margin-top-10">
+                <div class="row" id="divEntrega">
+                    <div class="alert alert-primary alert-icon-block" role="alert">
+                        <strong>2-Entregas</strong>
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col-md-2 margin-bottom-10">
+                        <button class="btn btn-default btn-icon-fixed btn-sm"
+                                ng-click="AdicionarEntregaPermutas(permuta)">
+                            <span class="fa fa-plus"></span> Adicionar Entregas
+                        </button>
+                    </div>
+                </div>
+                <!--================================Grid dos Itens das Permutass-->
+                <div class="table-responsive">
+                    <table id="tbPermutas" class="table table-bordered" style="border:solid 2px #e5e5e5 !important">
+                        <thead>
+                            <tr>
+                                <th></th>
+                                <th>Código</th>
+                                <th>N.Nota Fiscal</th>
+                                <th>Série</th>
+                                <th>Descrição</th>
+                                <th>Quantidade</th>
+                                <th>Vlr Liquido Unitario</th>
+                                <th>Vlr Liquido Total</th>
+                                <th>Data Emissão</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr ng-repeat="entrega in permuta.ItensEntregaPermuta track by $index">
+                                <td style="max-width:50px">
+                                    <button class="btn btn-default btn-sm" ng-click="RemoverItemEntregaPermuta(permuta,entrega)">
+                                        <span class="fa fa-trash"></span>
+                                    </button>
+                                </td>
+
+                                <td  style="max-width:50px">
+                                    <div class="form-group">
+                                        <div class="input-group">
+                                            <input type="text" class="form-control inputPermutas"
+                                                   ng-model="entrega.Id_Item_Permuta"
+                                                   maxlength="4"
+                                                   ng-change="ValidarItemPermuta(permuta,entrega)"
+                                                   ng-model-options="{updateOn: 'blur'}" />
+                                            <div class="input-group-addon">
+                                                <span class="fa fa-search span-btn" ng-click="PesquisaItemPermuta(permuta,entrega)"></span>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </td>
+
+                                <td style="width:50px">
+                                    <div class="input-group" style="min-width:50px">
+                                        <input id="txtNumero_Nota_Fiscal"
+                                               class="form-control inputPermutas "
+                                               ng-model="entrega.Numero_Nota_Fiscal"
+                                               maxlength="10"
+                                               ng-model-options="{updateOn: 'blur'}"
+                                               style="text-transform:uppercase">
+
+                                    </div>
+                                </td>
+
+                                <td style="width:50px">
+                                    <div class="input-group" style="min-width:100px">
+                                        <input id="txtSerie"
+                                               class="form-control inputPermutas"
+                                               ng-model="entrega.Serie"
+                                               maxlength="10"
+                                               ng-model-options="{updateOn: 'blur'}"
+                                               style="text-transform:uppercase">
+                                    </div>
+                                </td>
+
+                                <td>
+                                    <div class="input-group" sstyle="min-width:100px">
+                                        <input id="txtDescricao"
+                                               class="form-control inputPermutas"
+                                               ng-model="entrega.Descricao"
+                                               ng-disabled="!PermissaoDescricao"
+                                               ng-model-options="{updateOn: 'blur'}"
+                                               maxlength="50"
+                                               style="text-transform:uppercase">
+                                    </div>
+                                </td>
+                                <td style="width:50px">
+                                    <div class="input-group" style="min-width:50px">
+                                        <input id="txtQuantidade"
+                                               class="form-control inputPermutas "
+                                               ng-change="CalcularEntrega(entrega)"
+                                               ng-model="entrega.Quantidade"
+                                               ng-model-options="{updateOn: 'blur'}"
+                                               maxlength="8"
+                                               onkeypress="return NumericOnly(event)"
+                                               style="text-align:center">
+                                    </div>
+                                </td>
+
+                                <td style="width:100px">
+                                    <div class="input-group" style="min-width:100px">
+                                        <input id="txtValor_Liq_Unitario"
+                                               class="form-control  inputPermutas "
+                                               ng-model="entrega.Valor_Liq_Unitario"
+                                               ng-change="CalcularEntrega(entrega)"
+                                               ng-model-options="{updateOn: 'blur'}"
+                                               onblur="this.value = MoneyFormat(this.value)"
+                                               onfocus="this.value = DecimalUnformat(this.value)"
+                                               onkeypress="return NumericOnly(event)"
+                                               style="text-align:right"
+                                               maxlength="18">
+                                    </div>
+                                </td>
+
+                                <td style="width:100px">
+                                    <div class="input-group" style="min-width:100px">
+                                        <input id="txtVlr_Liq_Total"
+                                               class="form-control  inputPermutas "
+                                               ng-model="entrega.Vlr_Liq_Total"
+                                               ng-model-options="{updateOn: 'blur'}"
+                                               onblur="this.value = MoneyFormat(this.value)"
+                                               onfocus="this.value = DecimalUnformat(this.value)"
+                                               onkeypress="return NumericOnly(event)"
+                                               style="text-align:right"
+                                               ng-disabled="!permuta.Editar_Vlr_Liq_Total"
+                                               maxlength="18">
+                                    </div>
+                                </td>
+
+                                <td style="width:50px">
+                                    <!--==============================================Data Entrega-->
+
+                                    <div class="input-group">
+                                        <input ng-model="entrega.Data_Emissao"
+                                               ng-change=""
+                                               ui-date=""
+                                               style="min-width:100px"
+                                               ng-model-options="{updateOn: 'blur'}"
+                                               class="form-control inputPermutas"
+                                               onkeypress="return DicionarioKeyPress(this,event)"
+                                               onkeyup="DicionarioKeyUp(this)"
+                                               maxlength="10"
+                                               type="text"
+                                               keymode="numeric"
+                                               placeholder="ddmmyyyy">
+                                    </div>
+                                </td>
+
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+
+            <!--========================botoes de acoes-->
+            <div class="row">
+                <div class="fixed-buttons-bottom">
+                    <div class="col-md-10">
+                        <button class="btn btn-success" ng-click="SalvarEntregaPermuta(permuta)">Salvar</button>
+                        <button class="btn btn-warning" ng-click="CancelarEntregaPermuta()">Cancelar</button>
+                    </div>
+                </div>
+            </div>
+
+        </div>
+    </form>
+</div>
+
+<div ng-include="'template/SelectItem.html'"></div>
+<div ng-include="'template/PesquisaTabela.html'"></div>
+<div ng-include="'template/MultiSelecaoVeiculo.html'"></div>
+<script type="text/javascript">
+    $(document).ready(function () {
+
+        GetDictionary();
+        $('.anchorscroll').click(function (e) {
+            var _target = this.getAttribute("target")
+            $('html, body').animate({
+                scrollTop: $('#' + _target).offset().top - 50
+            }, 'slow');
+        });
+        $('input[type=text]').css("text-transform", "uppercase");
+
+        $("span[control_group*='icon_group']").click(function (e) {
+            var _group = this.getAttribute("control_group");
+            _group = _group.replace('icon', 'input');
+            var el = document.querySelector('[control_group="' + _group + '"]');
+            if ($(el).is(':disabled')) {
+                event.stopPropagation();
+            };
+        });
+
+    });
+
+</script>

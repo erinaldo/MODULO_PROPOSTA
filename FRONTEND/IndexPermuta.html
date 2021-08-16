@@ -1,7 +1,7 @@
 ﻿<!DOCTYPE html>
 <html lang="en" ng-app="App" ng-controller="MainController as Mc">
 <head ng-cloak>
-    <title ng-bind="'SIM-VENDAS - '+ routeName">Administração" </title>
+    <title ng-bind="'SIM-Permutas - '+ routeName">Administração" </title>
     <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1">
@@ -43,29 +43,8 @@
                         </li>
                         <li><a href="#PortalApp" class="navbar-link"><span class="fa fa-home" style="display:inline-block;font-size:20px"></span></a></li>
                         <li><a href="#portal" class="navbar-link"><span class="fa fa-newspaper-o" style="display:inline-block;font-size:20px"></span></a></li>
-                        <li><a href="" class="navbar-link"><span class="nav-icon-hexa">Pt</span>Complementos</a>
-                            <ul>
-                                <li><a href="#ComplementoContrato/1" class="navbar-link"><span class="nav-icon-hexa">Pt</span>Complementar Contrato</a></li>
-                                <li><a href="#ComplementoContrato/0" class="navbar-link"><span class="nav-icon-hexa">Pt</span>Complementar Antecipados</a></li>
-                                <li><a href="#ComplementoOutrasReceitas" class="navbar-link"><span class="nav-icon-hexa">Pt</span>Outras Receitas</a></li>
-                                <li><a href="#ComplementoContratoPesquisa" class="navbar-link"><span class="nav-icon-hexa">Pt</span>Pesquisa de Complementos</a></li>
-                            </ul>
-                        </li>
-                        <li>
-                            <a href="" class="navbar-link"><span class="nav-icon-hexa">Pt</span>Faturas</a>
-                            <ul>
-                                <li><a href="#FaturaGeracao" class="navbar-link"><span class="nav-icon-hexa">Pt</span>Geração de Faturas</a></li>
-                                <li><a href="#FaturasPesquisa" class="navbar-link"><span class="nav-icon-hexa">Pt</span>Pesquisa de Faturas</a></li>
-                            </ul>
-                        </li>
-                        <li>
-                            <a href="" class="navbar-link"><span class="nav-icon-hexa">Pt</span>Valoração</a>
-                            <ul>
-                                <li><a href="#CalculoValoracao" class="navbar-link"><span class="nav-icon-hexa">Pt</span>Valoração de Contratos</a></li>
-                                <li><a href="#CriticaValoracao" class="navbar-link"><span class="nav-icon-hexa">Pt</span>Crítica da Valoração</a></li>
-                            </ul>
-                        </li>
-                        
+                        <li><a href="#Permutas">Permutas</a></li>
+
                         <li ng-controller="loginController"><a href="" ng-click="app_Logout()"><span class="icon-exit"></span> Sair</a></li>
                     </ul>
                 </nav>
@@ -125,7 +104,7 @@
                         document.write(year)
                     </script>
                     Cartv. Todos os direitos reservados.
-                    <span class="pull-right">{{AppVersion}}</span>
+                    <span class="pull-right">VERSÃO 1.0.93</span>
                 </div>
             </div>
         </div>
@@ -177,14 +156,11 @@
     <script src="angular/Controller/AprovarPendentes_Controller.js?Hash=V119"></script>
     <script src="angular/Controller/PortalApp.js?Hash=V119"></script>
     <!---====================================================================================Controles desse modulo-->
-    <script src="angular/Controller/ComplementoContrato.js?Hash=V119"></script>
-    <script src="angular/Controller/ComplementoContratoPesquisaController.js?Hash=V119"></script>
-    <script src="angular/Controller/FaturasPesquisaController.js?Hash=V119"></script>
-    <script src="angular/Controller/GeracaoFaturaController.js?Hash=V119"></script>
-    <script src="angular/Controller/ComplementoOutrasReceitas.js?Hash=V119"></script>
-    <script src="angular/Controller/CriticaValoracaoController.js?Hash=V119"></script>
-    <script src="angular/Controller/CalculoValoracaoController.js?Hash=V119"></script>
-    <script src="angular/Controller/MapaReservaDetalheController.js?Hash=V119"></script>
+    <script src="angular/Controller/PermutasController.js?Hash=V119"></script>
+    <script src="angular/Controller/PermutasCadastroController.js?Hash=V119"></script>
+    <script src="angular/Controller/PermutasEntregaCadastroController.js?Hash=V119"></script>
+    <script src="angular/Controller/PermutasResumoController.js?Hash=V119"></script>
+
     <!--====================================================================================PLUGINS -->
     <script src="js/vendor/XTABLES/DataTables-1.10.16/js/jquery.dataTables.js?Hash=V119"></script>
     <script src="js/vendor/XTABLES/DataTables-1.10.16/js/dataTables.bootstrap.min.js?Hash=V119"></script>

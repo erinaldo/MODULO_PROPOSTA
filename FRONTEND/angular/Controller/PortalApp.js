@@ -64,11 +64,26 @@
             'url': 'indexFaturamento.html'
         },
         {
-            'Id': 7, 'Name': 'SIM-Merchandising',
+            'Id': 8, 'Name': 'SIM-Merchandising',
             'Text': 'Controle de Merchandising',
             'bgcolor': 'rgb(153, 49, 142)',
             'color': 'white',
             'url': 'indexMercha.html'
+        },
+         {
+             'Id': 9, 'Name': 'SIM-Permutas',
+             'Text': 'Gestão de Permutas',
+             'bgcolor': '#5b42d4',
+             'color': 'white',
+             'url': 'IndexPermuta.html'
+         },
+        {
+            'Id': 10, 'Name': 'SIM-Mercado',
+            'Text': 'Módulo Mercado Anunciante',
+            'bgcolor': 'rgba(136, 10, 10, 0.36)',
+            'color': '#000',
+            'url': '',
+            'directurl':$rootScope.simagenciaUrl,
         },
     ];
     $scope.ShortMenus = [

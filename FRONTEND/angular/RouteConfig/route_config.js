@@ -1132,6 +1132,37 @@
         routeName: "Roteiro de Merchandising",
         RouteId: 'Mercha@Roteiro'
     })
+         .when('/Permutas', {
+             templateUrl: 'view/Permutas.html',
+             authorize: true,
+             controller: 'PermutasController',
+             routeName: 'Controle de Permutas',
+             RouteId: 'Permuta@Index'
+         })
+
+        .when('/PermutasCadastro/:Action/:Id', {
+            templateUrl: 'view/PermutasCadastro.html',
+            controller: 'PermutasCadastroController',
+            authorize: true,
+            routeName: 'Controle de Permutas',
+            RouteId: 'Permuta@New'
+        })
+
+        .when('/PermutasEntregaCadastro/:Id', {
+            templateUrl: 'view/PermutasEntregaCadastro.html',
+            controller: 'PermutasEntregaCadastroController',
+            authorize: true,
+            routeName: 'Controle de Permutas',
+            RouteId: 'Permutas@Entrega'
+        })
+
+        .when('/PermutasResumo/:Id', {
+            templateUrl: 'view/PermutasResumo.html',
+            controller: 'PermutasResumoController',
+            authorize: true,
+            routeName: 'Resumo da Permutas',
+            RouteId: 'Permuta@Index'
+        })
     .otherwise({ redirectTo: "/blank" })
 });
 

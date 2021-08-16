@@ -3,6 +3,7 @@ angular.module('App').controller('IndexController', ['$scope', '$rootScope', '$c
     $rootScope.baseUrl = _config.baseUrl.toUpperCase();
     $rootScope.pageUrl = _config.pageUrl.toUpperCase();
     $rootScope.mobileUrl = _config.mobileUrl.toUpperCase();
+    $rootScope.simagenciaUrl = _config.simagenciaUrl.toUpperCase();
 
     $rootScope.AppVersion = _config.Version;
     $scope.User = {}

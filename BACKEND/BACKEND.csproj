@@ -373,6 +373,9 @@
     <Compile Include="PDF\ImpressaoProposta.cs" />
     <Compile Include="PDF\ImpressaoSimulacao.cs" />
     <Compile Include="PDF\ImpressaoMidia.cs" />
+    <Compile Include="Permutas\PermutasController.cs" />
+    <Compile Include="Permutas\PermutasModel.cs" />
+    <Compile Include="Permutas\PermutasSql.cs" />
     <Compile Include="PrevisaoVendas\PrevisaoVendasController.cs" />
     <Compile Include="PrevisaoVendas\PrevisaoVendasModel.cs" />
     <Compile Include="PrevisaoVendas\PrevisaoVendasSql.cs" />

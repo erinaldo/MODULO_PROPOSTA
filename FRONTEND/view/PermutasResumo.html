@@ -1,0 +1,529 @@
+﻿<style>
+    .inputPermutas {
+        height: 30px;
+    }
+
+    #tbPermutas td, #tbPermutas th {
+        white-space: nowrap;
+    }
+
+    #tbPermutas td {
+        padding: 5px 5px !important;
+        white-space: nowrap;
+        text-align: center;
+    }
+
+        #tbPermutas td button {
+            margin: 0 0 0 0;
+        }
+
+    #tbPermutas .input-group {
+        margin-bottom: 0px;
+    }
+
+    .td-insercoes {
+        width: 30px !important;
+        padding-left: 2px !important;
+        padding-right: 2px !important;
+        text-align: center !important;
+    }
+
+    #tbMidia td, #tbMidia th {
+        padding: 2px 2px 2px 2px !important;
+        text-align: center !important;
+        vertical-align: middle !important;
+        font-size: 11px !important;
+        white-space: nowrap;
+        height: 30px !important;
+        white-space: nowrap;
+    }
+
+        #tbMidia td .form-control {
+            height: 30px;
+        }
+
+        #tbMidia td .input-group {
+            margin: 0px;
+            padding: 0px 0px 0px 0px;
+        }
+
+        #tbMidia td input {
+            text-transform: uppercase;
+            padding: 2px 2px 2px 2px;
+        }
+
+        #tbMidia td button {
+            margin: 0px 0px 0px 0px;
+        }
+
+        #tbMidia td input[disabled] {
+            background-color: white;
+        }
+</style>
+
+<div class="container">
+
+    <form name="frmContrato" autocomplete="off">
+        
+        <div class="block">
+
+            <div class="row" id="divContratoItens">
+                <div class="alert alert-primary alert-icon-block" role="alert">
+                    <strong>Dados Controle de Permuta</strong>
+                </div>
+            </div>
+
+            <div class="row">
+                <!--==================Numero do  Contrato-->
+                <div class="col-md-1">
+                    <label for="txtNumeroContrato" class="field-x">N.Contrato</label>
+                    <div class="form-control">
+                        {{::permuta.Numero_Contrato}}
+                    </div>
+                </div>
+
+                <!--=======================================Numero Negociacao-->
+                <div class="col-md-1">
+                    <label for="txtNumeroNegociacao" class="field-x">Negociação</label>
+                    <div class="form-control" style="text-align:center">
+                        {{::permuta.Numero_Negociacao}}
+                    </div>
+                </div>
+
+                <!--=======================================valor de Verba-->
+                <div class="col-md-2">
+                    <label for="txtValorVerba" class="field-x">Valor Verba</label>
+                    <div class="form-control" style="text-align:right">
+                        {{::permuta.Valor_Verba}}
+                    </div>
+                </div>
+
+                <!--==============================================Periodo Competencia Inicio-->
+
+                <div class="col-md-1">
+                    <label for="txtCompInicial" class="field-x">Comp. Inicial</label>
+                    <div class="form-control" style="text-align:center">
+                        {{::permuta.Competencia_Inicial}}
+                    </div>
+                </div>
+
+                <!--==============================================Periodo Competencia Término-->
+
+                <div class="col-md-1">
+                    <label for="txtCompFinal" class="field-x">Comp. Inicial</label>
+                    <div class="form-control" style="text-align:center">
+                        {{::permuta.Competencia_Final}}
+                    </div>
+                </div>
+
+                <!--==============================================Data Autorizacao-->
+
+                <div class="col-md-1">
+                    <label for="txtDataAutorizacao" class="field-x">Comp. Inicial</label>
+                    <div class="form-control" style="text-align:right">
+                        {{::permuta.Data_Autorizacao}}
+                    </div>
+                </div>
+
+                <!--==================Tipo de Mídia -->
+
+                <div class="col-md-3">
+                    <label for="txtTipoMidia" class="field-x">Tipo de Mídia</label>
+                    <div class="form-control" style="text-align:left">
+                        {{::permuta.Cod_Tipo_Midia}}
+                    </div>
+                </div>
+            </div>
+
+            <div class="row">
+                <!--==================Empresa de Venda-->
+
+                <div class="col-md-1">
+                    <label for="txtCodEmpresa" class="field-x">Emp.Venda </label>
+                    <div class="form-control" style="text-align:left">
+                        {{::permuta.Cod_Empresa_Venda}}
+                    </div>
+                </div>
+
+
+                <!--==============================================Nome Empresa de Venda-->
+
+                <div class="col-md-4">
+                    <label for="txtNomeEmpresaVenda" class="field-x">Razão Social</label>
+                    <div class="form-control" style="text-align:left">
+                        {{::permuta.Nome_Empresa_Venda}}
+                    </div>
+                </div>
+
+
+                <!--==================Empresa de Faturamento-->
+                <div class="col-md-1">
+                    <label for="txtCodEmpresaFat" class="field-x">Emp.Fat</label>
+                    <div class="form-control" style="text-align:left">
+                        {{::permuta.Cod_Empresa_Faturamento}}
+                    </div>
+                </div>
+
+                <!--==============================================Nome Empresa de Faturamento-->
+                <div class="col-md-4">
+                    <label for="txtNomeEmpresaFat" class="field-x">Razão Social</label>
+                    <div class="form-control" style="text-align:left">
+                        {{::permuta.Nome_Empresa_Faturamento}}
+                    </div>
+                </div>
+            </div>
+            <div class="row">
+                <!--==============================================Cliente-->
+                <div class="col-md-1">
+                    <label for="txtCliente" class="field-x">Cliente</label>
+                    <div class="form-control" style="text-align:left">
+                        {{::permuta.Cod_Cliente}}
+                    </div>
+                </div>
+
+
+                <!--==============================================Nome Cliente-->
+                <div class="col-md-4">
+                    <label for="txtClienteRazao" class="field-x">Razão Social</label>
+                    <div class="form-control" style="text-align:left">
+                        {{::permuta.Nome_Cliente}}
+                    </div>
+                </div>
+
+
+                <!--==============================================Agencia-->
+                <div class="col-md-1">
+                    <label for="txtAgencia" class="field-x">Agência</label>
+                    <div class="form-control" style="text-align:left">
+                        {{::permuta.Cod_Agencia}}
+                    </div>
+                </div>
+
+                <!--==============================================Nome Agencia-->
+                <div class="col-md-4">
+                    <label for="txtAgenciaRazao" class="field-x">Razão Social</label>
+                    <div class="form-control" style="text-align:left">
+                        {{::permuta.Nome_Agencia}}
+                    </div>
+                </div>
+            </div>
+            <div class="row">
+                <!--==============================================Nucleo-->
+                <div class="col-md-1">
+                    <label for="txtNucleo" class="field-x">Núcleo</label>
+                    <div class="form-control" style="text-align:left">
+                        {{::permuta.Cod_Nucleo}}
+                    </div>
+                </div>
+
+
+                <!--==============================================Nome Nucleo-->
+                <div class="col-md-4">
+                    <label for="txtNucleoNome" class="field-x">Nome Núcleo</label>
+                    <div class="form-control" style="text-align:left">
+                        {{::permuta.Nome_Nucleo}}
+                    </div>
+                </div>
+
+                <!--==============================================Contato-->
+                <div class="col-md-1">
+                    <label for="txtContato" class="field-x">Contato</label>
+                    <div class="form-control" style="text-align:left">
+                        {{::permuta.Cod_Contato}}
+                    </div>
+                </div>
+
+
+                <!--==============================================Nome Contato-->
+                <div class="col-md-4">
+                    <label for="txtContatoNome" class="field-x">Nome Contato</label>
+                    <div class="form-control" style="text-align:left">
+                        {{::permuta.Nome_Contato}}
+                    </div>
+                </div>
+
+            </div>
+
+            <!--======================Dados das permutas-->
+            <div class="block  margin-top-10">
+                <div class="row" id="divItensPermutas">
+                    <div class="alert alert-primary alert-icon-block" role="alert">
+                        <strong>Itens Permutas</strong>
+                    </div>
+                </div>
+                <!--================================Grid dos Itens das Permutas-->
+                <div class="table-responsive">
+                    <table id="tbPermutas" class="table table-bordered" style="border:solid 2px #e5e5e5 !important">
+                        <thead>
+                            <tr>
+                                <th style="text-align:center">Id#</th>
+                                <!--<th>Código</th>-->
+                                <th>Descrição</th>
+                                <th>Quantidade</th>
+                                <th>Valor Unitário</th>
+                                <th>Desconto</th>
+                                <th>Vlr.Liq Unitário</th>
+                                <th>Valor Tabela</th>
+                                <th>Valor Líquido</th>
+
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr ng-repeat="item in permuta.ItensPermuta track by $index">
+                                <td style="width:100px">
+                                    {{::item.Id_Item_Permuta}}
+                                </td>
+
+                                <td style="text-align:left">
+                                    {{::item.Descricao}}
+                                </td>
+
+                                <td style="width:50px">
+                                    {{::item.Quantidade}}
+                                </td>
+
+
+
+                                <td style="width:50px;text-align:right">
+                                    {{::item.Valor_Unitario}}
+                                </td>
+
+                                <td style="width:50px;text-align:right">
+                                    {{::item.Desconto}}
+                                </td>
+
+                                <td style="width:50px;text-align:right">
+                                    {{::item.Vlr_Liq_Unit}}
+                                </td>
+
+                                <td style="width:50px;text-align:right">
+                                    {{::item.Valor_Tabela}}
+                                </td>
+
+                                <td style="width:50px;text-align:right">
+                                    {{::item.Valor_Liquido}}
+                                </td>
+                            </tr>
+                        </tbody>
+                    </table>
+
+                </div>
+            </div>
+
+            <!--================================Grid dos Produtos por Veiculos-->
+            <div class="block  margin-top-10">
+                <div class="row" id="divResumoCliente">
+                    <div class="alert alert-primary alert-icon-block" role="alert">
+                        <strong>Produtos do Veiculo</strong>
+                    </div>
+                </div>
+                <div class="table-responsive">
+                    <table id="tbPermutas" class="table table-bordered" style="border:solid 2px #e5e5e5 !important">
+                        <thead>
+                            <tr>
+                                <th>Contrato</th>
+                                <th>Negociacao</th>
+                                <th>Período Campanha</th>
+                                <th>Agência</th>
+                                <th>Cliente</th>
+                                <th>Contato</th>
+                                <th>Tipo de Mídia</th>
+
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr ng-repeat="produtoveiculo in permuta.ItensProdutosVeiculosModel track by $index">
+                                <td style="text-align:center">
+                                    {{::produtoveiculo.Contrato}}
+                                </td>
+                                <td>{{::produtoveiculo.Numero_Negociacao}}</td>
+                                <td>{{::produtoveiculo.Periodo_Campanha}} </td>
+                                <td>{{::produtoveiculo.Nome_Agencia}}</td>
+                                <td>{{::produtoveiculo.Nome_Cliente}}</td>
+                                <td>{{::produtoveiculo.Nome_Contato}}</td>
+                                <td>{{::produtoveiculo.Cod_Tipo_Midia}}</td>
+
+
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+
+            <!--================================Grid dos Resumo para Clientes-->
+            <div class="block  margin-top-10">
+                <div class="row" id="divItensPermutas">
+                    <div class="alert alert-primary alert-icon-block" role="alert">
+                        <strong>Entregas Cliente</strong>
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col-md-2">
+                        <div class="form-group">
+                            <label>Verba Negociada</label>
+                            <label class="form-control" style="text-align:center">{{permuta.ItensResumoCliente[0].Verba_Negociada | currency}}</label>
+                        </div>
+                    </div>
+                    <div class="col-md-2 pull-right">
+                        <div class="form-group">
+                            <label>Saldo Restante Cliente</label>
+                            <label class="form-control" style="text-align:center">{{permuta.ItensResumoCliente[0].Saldo_Cliente | currency}}</label>
+                        </div>
+                    </div>
+                </div>
+                <div class="table-responsive" ng-show="PermissaoEntregaCliente">
+                    <table id="tbPermutas" class="table table-bordered" style="border:solid 2px #e5e5e5 !important">
+                        <thead>
+                            <tr>
+                                <th>Id Item Permuta</th>
+                                <th>Cliente</th>
+                                <th>Descricao Item</th>
+                                <th>Valor Tabela Item</th>
+                                <th>Quantidade</th>
+                                <th>Desconto</th>
+                                <th>Valor Negociado Unitario</th>
+                                <th>Valor Tabela Total</th>
+                                <th>Valor Negociado Total</th>
+
+                            </tr>
+                        </thead>
+                        <tbody>
+
+                            <tr ng-repeat="resumocliente in permuta.ItensResumoCliente  |filter:{Tipo_Linha : 1} track by $index">
+                                <!--<tr ng-repeat="resumocliente in permuta.ItensResumoCliente  track by $index">-->
+                                <td style="text-align:center">
+                                    {{::resumocliente.Id_Item_Permuta}}
+                                </td>
+                                <td>{{::resumocliente.Nome_Cliente}}</td>
+                                <td>{{::resumocliente.Descricao_Item}} </td>
+                                <td style="text-align:right">{{::resumocliente.Valor_Tabela_Item | currency}}</td>
+                                <td>{{::resumocliente.Quantidade}}</td>
+                                <td>{{::resumocliente.Desconto |  number:4}}%</td>
+                                <td style="text-align:right">{{::resumocliente.Valor_Negociado_Unitario | currency}}</td>
+                                <td style="text-align:right">{{::resumocliente.Valor_Tabela_Total | currency}}</td>
+                                <td style="text-align:right">{{::resumocliente.Valor_Negociado_Total | currency}}</td>
+                            </tr>
+                        </tbody>
+                        <tfoot>
+                            <tr ng-repeat="resumocliente in permuta.ItensResumoCliente  |filter:{Tipo_Linha : 2} track by $index">
+
+
+                                <td style="text-align:right;font-weight:bold" colspan="3">Totais</td>
+                                <td style="text-align:right">{{resumocliente.Valor_Tabela_Item | currency}}</td>
+                                <td>{{resumocliente.Quantidade}}</td>
+                                <td style="width:50px;text-align:center">
+                                    {{resumocliente.Desconto  |  number:4}}%
+                                </td>
+                                <td style="text-align:right">{{resumocliente.Valor_Negociado_Unitario | currency}}</td>
+                                <td style="text-align:right">{{resumocliente.Valor_Tabela_Total | currency}}</td>
+                                <td style="text-align:right">{{resumocliente.Valor_Negociado_Total | currency}}</td>
+                            </tr>
+                        </tfoot>
+                    </table>
+                </div>
+            </div>
+
+            <!--================================Grid dos Resumo para Veículos-->
+            <div class="block  margin-top-10">
+                <div class="row" id="divItensPermutas">
+                    <div class="alert alert-primary alert-icon-block" role="alert">
+                        <strong>Entregas Veículo</strong>
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col-md-2">
+                        <div class="form-group">
+                            <label>Verba Negociada</label>
+                            <label class="form-control" style="text-align:center">{{permuta.ItensResumoVeiculo[0].Verba_Negociada | currency}}</label>
+                        </div>
+                    </div>
+                    <div class="col-md-2 pull-right">
+                        <div class="form-group">
+                            <label>Saldo Restante Veículo</label>
+                            <label class="form-control" style="text-align:center">{{permuta.ItensResumoVeiculo[0].Saldo_Veiculo | currency}}</label>
+                        </div>
+                    </div>
+                </div>
+                <div class="table-responsive" ng-show="PermissaoEntregaVeiculo">
+                    <table id="tbPermutas" class="table table-bordered" style="border:solid 2px #e5e5e5 !important">
+                        <thead>
+                            <tr>
+                                <th>Competência</th>
+                                <th>Cliente</th>
+                                <th>Valor Tabela Exibido</th>
+                                <th>Desconto</th>
+                                <th>Valor Negociado Exibido</th>
+                                <th>Valor Tabela Financeiro</th>
+                                <th>Valor Negociado Financeiro</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+
+                            <tr ng-repeat="resumoVeiculo in permuta.ItensResumoVeiculo  |filter:{Tipo_Linha : 1} track by $index">
+                                 <td style="text-align:center">{{::resumoVeiculo.Competencia}}</td>
+                                <td>{{::resumoVeiculo.Nome_Cliente}}</td>
+                                <td style="text-align:right">{{::resumoVeiculo.Valor_Tabela_Exibido | currency}}</td>
+                                <td>{{::resumoVeiculo.Desconto |  number:4}}%</td>
+                                <td style="text-align:right">{{::resumoVeiculo.Valor_Negociado_Exibido | currency}}</td>
+                                <td style="text-align:right">{{::resumoVeiculo.Valor_Tabela_Financeiro | currency}}</td>
+                                <td style="text-align:right">{{::resumoVeiculo.Valor_Negociado_Financeiro | currency}}</td>
+                            </tr>
+                        </tbody>
+                        <tfoot>
+                            <tr ng-repeat="resumoVeiculo in permuta.ItensResumoVeiculo  |filter:{Tipo_Linha : 2} track by $index">
+
+
+                                <td style="text-align:right;font-weight:bold" colspan="2">Totais</td>
+                                <td style="text-align:right">{{resumoVeiculo.Valor_Tabela_Exibido | currency}}</td>
+                                <td style="width:50px;text-align:center">{{resumoVeiculo.Desconto | number:4}}%</td>
+                                <td style="text-align:right">{{resumoVeiculo.Valor_Negociado_Exibido | currency}}</td>
+                                <td style="text-align:right">{{resumoVeiculo.Valor_Tabela_Financeiro | currency}}</td>
+                                <td style="text-align:right">{{resumoVeiculo.Valor_Negociado_Financeiro | currency}}</td>
+                            </tr>
+                        </tfoot>
+                    </table>
+                </div>
+            </div>
+
+
+
+        </div>
+            <!--========================botoes de acoes-->
+            <div class="row">
+                <div class="fixed-buttons-bottom">
+                    <div class="col-md-10">
+                        <button class="btn btn-warning" ng-click="CancelarPermuta()">Cancelar</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </form>
+</div>
+
+<div ng-include="'template/SelectItem.html'"></div>
+<div ng-include="'template/PesquisaTabela.html'"></div>
+<div ng-include="'template/MultiSelecaoVeiculo.html'"></div>
+<script type="text/javascript">
+    $(document).ready(function () {
+
+        GetDictionary();
+        $('.anchorscroll').click(function (e) {
+            var _target = this.getAttribute("target")
+            $('html, body').animate({
+                scrollTop: $('#' + _target).offset().top - 50
+            }, 'slow');
+        });
+        $('input[type=text]').css("text-transform", "uppercase");
+
+        $("span[control_group*='icon_group']").click(function (e) {
+            var _group = this.getAttribute("control_group");
+            _group = _group.replace('icon', 'input');
+            var el = document.querySelector('[control_group="' + _group + '"]');
+            if ($(el).is(':disabled')) {
+                event.stopPropagation();
+            };
+        });
+
+    });
+
+</script>
