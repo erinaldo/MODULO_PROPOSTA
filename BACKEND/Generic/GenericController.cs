@@ -227,7 +227,7 @@ namespace PROPOSTA
 
         [Route("api/GetParametroKey")]
         [HttpGet]
-        [ActionName("GetUrlPowerBi")]
+        [ActionName("GetParametroKey")]
         [Authorize()]
         public IHttpActionResult GetParametroKey([FromUri] Generic.ParametroGeralModel Param)
         {

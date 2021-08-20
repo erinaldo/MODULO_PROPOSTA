@@ -928,5 +928,51 @@ namespace PROPOSTA
             return dtb;
         }
 
+        public DataTable DadosComercial(RoteiroModel pParam)
+        {
+            clsConexao cnn = new clsConexao(this.Credential);
+            cnn.Open();
+            SqlDataAdapter Adp = new SqlDataAdapter();
+            DataTable dtb = new DataTable("dtb");
+            SimLib clsLib = new SimLib();
+            Int32 iOrigem = -1;
+            switch (pParam.Origem.ToUpper())
+            {   case "MIDIA":
+                case "ROTATIVO":
+                    iOrigem = 0;
+                    break;
+                case "AVULSO":
+                    iOrigem = 1;
+                    break;
+                case "ARTISTICO":
+                    iOrigem = 2;
+                    break;
+                default:
+                    break;
+            }
+            try
+            {
+                SqlCommand cmd = cnn.Procedure(cnn.Connection, "Sp_Roteiro_Afiliadas_Dados_Comercial");
+                Adp.SelectCommand = cmd;
+                Adp.SelectCommand.Parameters.AddWithValue("@Par_Cod_Veiculo", pParam.Cod_Veiculo_Origem);
+                Adp.SelectCommand.Parameters.AddWithValue("@Par_Data_Exibicao", pParam.Data_Exibicao);
+                Adp.SelectCommand.Parameters.AddWithValue("@Par_Cod_Programa", pParam.Cod_Programa_Origem);
+                Adp.SelectCommand.Parameters.AddWithValue("@Par_Chave_Acesso", pParam.Chave_Acesso);
+                Adp.SelectCommand.Parameters.AddWithValue("@Par_Fita", pParam.Numero_Fita);
+                Adp.SelectCommand.Parameters.AddWithValue("@Par_Origem", iOrigem);
+
+
+                Adp.Fill(dtb);
+            }
+            catch (Exception)
+            {
+                throw;
+            }
+            finally
+            {
+                cnn.Close();
+            }
+            return dtb;
+        }
     }
 }

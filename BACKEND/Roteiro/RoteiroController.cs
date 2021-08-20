@@ -268,6 +268,25 @@ namespace PROPOSTA
             }
         }
 
+        [Route("api/Roteiro/DadosComercial")]
+        [HttpPost]
+        [ActionName("DadosComercial")]
+        [Authorize()]
+        public IHttpActionResult DadosComercial([FromBody] Roteiro.RoteiroModel Param)
+        {
+            SimLib clsLib = new SimLib();
+            Roteiro Cls = new Roteiro(User.Identity.Name);
+            try
+            {
+                DataTable retorno = Cls.DadosComercial(Param);
+                return Ok(retorno);
+            }
+            catch (Exception Ex)
+            {
+                clsLib.EmailErrorToSuporte(User.Identity.Name, Ex.Message.ToString(), Ex.Source, Ex.StackTrace);
+                throw new Exception(Ex.Message);
+            }
+        }
 
     }
 

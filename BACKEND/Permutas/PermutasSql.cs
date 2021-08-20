@@ -662,6 +662,36 @@ namespace PROPOSTA
             return dtb;
         }
 
+        public DataTable ExcluirContratoPermuta(PermutasModel pExcluirContrato)
+        {
+
+            clsConexao cnn = new clsConexao(this.Credential);
+            cnn.Open();
+            SqlDataAdapter Adp = new SqlDataAdapter();
+            DataTable dtb = new DataTable("dtb");
+            SimLib clsLib = new SimLib();
+            try
+            {
+
+                SqlCommand cmd = cnn.Procedure(cnn.Connection, "PR_PROPOSTA_Excluir_ContratoPermuta");
+                Adp.SelectCommand = cmd;
+                Adp.SelectCommand.Parameters.AddWithValue("@Par_Id_Permuta", pExcluirContrato.Id_Permuta);
+                Adp.Fill(dtb);
+
+            }
+            catch (Exception)
+            {
+
+                throw;
+            }
+            finally
+            {
+                cnn.Close();
+            }
+            return dtb;
+        }
+
+
 
 
 

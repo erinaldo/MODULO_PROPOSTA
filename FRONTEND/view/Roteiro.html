@@ -230,12 +230,14 @@
                                         ondrop="drop(event)" ondragover="allowDrop(event)">
                                         <label id="Target_Fitax_{{item.Id_Item}}"
                                                ng-show="item.Numero_Fita"
+                                               ng-dblclick="MostraDadosFita(item,'Roteiro')"
                                                ng-class="{'label FitaLocal':item.Tipo_Break==0, 'label FitaNet':item.Tipo_Break==1,'label FitaPE':item.Tipo_Break==3}">
                                             {{item.Numero_Fita}}
 
                                         </label>
                                         <label id="Target_Fitay_{{item.Id_Item}}"
                                                ng-show="!item.Numero_Fita"
+                                               ng-dblclick="MostraDadosFita(item,'Roteiro')"
                                                ng-class="{'label FitaLocal':item.Tipo_Break==0, 'label FitaNet':item.Tipo_Break==1,'label FitaPE':item.Tipo_Break==3}">
                                             Sem Número
                                         </label>
@@ -329,8 +331,8 @@
                                            ng-class="{'label FitaNet': comercial.Origem=='Midia' && comercial.Indica_Grade==0,'label FitaLocal': comercial.Origem=='Midia' && comercial.Indica_Grade!=0,'label FitaAvulso': comercial.Origem=='Avulso','label FitaArtistica': comercial.Origem=='Artistico'}"
                                            draggable="true"
                                            ondragstart="drag(event)">
-                                        <span ng-show="comercial.Numero_Fita">{{comercial.Numero_Fita}}</span>
-                                        <span ng-show="!comercial.Numero_Fita">Sem Número</span>
+                                        <span ng-show="comercial.Numero_Fita" ng-dblclick="MostraDadosFita(comercial,'Comercial')">{{comercial.Numero_Fita}}</span>
+                                        <span ng-show="!comercial.Numero_Fita" ng-dblclick="MostraDadosFita(comercial,'Comercial')">Sem Número</span>
                                     </label>
 
                                 </td>
@@ -428,6 +430,7 @@
     </form>
 </div><div ng-include="'template/SelectItem.html'"></div>
 <div ng-include="'template/PesquisaTabela.html'"></div>
+<div ng-include="'template/Roteiro_Dados_Comercial.html'"></div>
 <script type="text/javascript">
     $(document).ready(function () {
         GetDictionary();

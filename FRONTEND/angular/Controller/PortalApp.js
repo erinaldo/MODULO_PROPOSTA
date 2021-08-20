@@ -1,11 +1,23 @@
 ﻿angular.module('App').controller('PortalAppController', ['$scope', '$rootScope', 'tokenApi', 'httpService', '$location', function ($scope, $rootScope, tokenApi, httpService, $location) {
-
+    
+    var _url = "GetParametroKey?"
+    _url += 'Cod_Parametro=16'
+    _url += "&";
+    $scope.UrlPowerBi = "";
+    httpService.Get(_url).then(function (response) {
+        if (response.data) {
+            $scope.UrlPowerBi = response.data;
+        };
+    });
+ 
+    
+    
     $scope.AppModulos = [
         {
             'Id': 1,
             'Name': 'SIM-Dashboard',
             'Text': 'Informações Gerenciais',
-            'bgcolor': '#e79500',
+            'bgcolor': 'rgba(10, 153, 99, 0.45)',
             'color': 'black',
             'url': 'indexDash.html'
         },
@@ -13,7 +25,7 @@
             'Id': 2,
             'Name': 'SIM-Administração',
             'Text': 'Gestão de Usuários,Tabelas de Apoios, Parâmetros, etc.',
-            'bgcolor': '#38b58b',
+            'bgcolor': 'rgba(85, 113, 83, 0.18)',
             'color': 'black',
             'url': 'indexAdm.html'
         },
@@ -93,7 +105,7 @@
                 { 'Title': 'Evolução de Vendas', 'Url': $rootScope.pageUrl + 'indexDash.html#/EvolucaoVendas' },
                 { 'Title': 'Funil de Vendas', 'Url': $rootScope.pageUrl + 'indexDash.html#/FunilVendas' },
                 { 'Title': 'Gráfico de Vendas', 'Url': $rootScope.pageUrl + 'indexDash.html#/GraficoVendas' },
-                { 'Title': 'Power-Bi', 'Url': 'https://app.powerbi.com/links/vh2IS6tO0r?ctid=83f7a8c8-e89b-4ca7-b107-f0765f6c7535&pbi_source=linkShare' }
+                //{ 'Title': 'Power-Bi', 'Url': $rootScope.UrlPowerBi } --- Nao funciona no short Menu
             ],
         },
         {

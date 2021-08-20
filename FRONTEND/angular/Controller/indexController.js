@@ -5,6 +5,8 @@ angular.module('App').controller('IndexController', ['$scope', '$rootScope', '$c
     $rootScope.mobileUrl = _config.mobileUrl.toUpperCase();
     $rootScope.simagenciaUrl = _config.simagenciaUrl.toUpperCase();
 
+ 
+
     $rootScope.AppVersion = _config.Version;
     $scope.User = {}
     var _token = $cookies.get('oAuth_token');
