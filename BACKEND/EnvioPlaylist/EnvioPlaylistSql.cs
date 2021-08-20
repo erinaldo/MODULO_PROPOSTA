@@ -64,10 +64,6 @@ namespace PROPOSTA
             {
                 Retorno.Cod_Veiculo = Param.Cod_Veiculo;
                 Retorno.Nome_Veiculo = Param.Nome_Veiculo;
-                //Retorno.Data_Programacao = Param.Data_Programacao;
-                //Retorno.Exibidor = Param.Exibidor;
-                //Retorno.Nome_Arquivo = Param.Nome_Arquivo;
-                //Retorno.Sistema_Exibicao_Digital = Param.Exibidor;
 
                 SqlCommand cmd = cnn.Procedure(cnn.Connection, "Pr_Proposta_Playlist_Parametros_Salvar");
                 Adp.SelectCommand = cmd;
@@ -129,33 +125,31 @@ namespace PROPOSTA
         public Boolean ExisteRoteiroEncerrado(EnvioPlayListModel Param)
         {
             Boolean Retorno = true;
-            //Descomentar abaixo quando fizer o encerramento do roteiro
-            //clsConexao cnn = new clsConexao(this.Credential);
-            //cnn.Open();
-            //DataTable dtb = new DataTable("dtb");
-            //SimLib clsLib = new SimLib();
-            //try
-            //{
-            //    String sSql = "Select * From Roteiro_Fechamento with (Nolock)";
-
-            //    sSql += " Where Cod_Veiculo = '" + Param.Cod_Veiculo + "'";
-            //    sSql += " And Data = '" + Param.Data_Programacao.ConvertToDatetime().ToString("yyyy-MM-dd") + "'";
-            //    SqlCommand cmd = cnn.Text(cnn.Connection, sSql);
-            //    SqlDataAdapter Adp = new SqlDataAdapter(cmd);
-            //    Adp.Fill(dtb);
-            //    if (dtb.Rows.Count==0)
-            //    {
-            //        Retorno = false;
-            //    }
-            //}
-            //catch (Exception)
-            //{
-            //    throw;
-            //}
-            //finally
-            //{
-            //    cnn.Close();
-            //}
+            clsConexao cnn = new clsConexao(this.Credential);
+            cnn.Open();
+            DataTable dtb = new DataTable("dtb");
+            SimLib clsLib = new SimLib();
+            try
+            {
+                String sSql = "Select * From Roteiro_Fechamento with (Nolock)";
+                sSql += " Where Cod_Veiculo = '" + Param.Cod_Veiculo + "'";
+                sSql += " And Data = '" + Param.Data_Programacao.ConvertToDatetime().ToString("yyyy-MM-dd") + "'";
+                SqlCommand cmd = cnn.Text(cnn.Connection, sSql);
+                SqlDataAdapter Adp = new SqlDataAdapter(cmd);
+                Adp.Fill(dtb);
+                if (dtb.Rows.Count == 0)
+                {
+                    Retorno = false;
+                }
+            }
+            catch (Exception)
+            {
+                throw;
+            }
+            finally
+            {
+                cnn.Close();
+            }
             return Retorno;
         }
         //--------------------------------------------------------------------------------------------------------------------------------------------------
@@ -214,7 +208,7 @@ namespace PROPOSTA
                 }
                 //----------------------------------Consulta o Roteiro Tecnico[
                 DataTable dtbRoteiro = new DataTable();
-                SqlCommand cmdRoteiro = cnn.Procedure(cnn.Connection, "Sp_RU_Carrega_Roteiro");
+                SqlCommand cmdRoteiro = cnn.Procedure(cnn.Connection, "Sp_RU_Carrega_Roteiro_V2");
                 cmdRoteiro.Parameters.AddWithValue("@Par_Cod_Veiculo", Param.Cod_Veiculo);
                 cmdRoteiro.Parameters.AddWithValue("@Par_Data_Exibicao", Param.Data_Programacao.ConvertToDatetime().ToString("yyyy-MM-dd"));
                 SqlDataAdapter adpRoteiro = new SqlDataAdapter(cmdRoteiro);
@@ -276,7 +270,6 @@ namespace PROPOSTA
             }
             catch (Exception ex)
             {
-
                 throw new Exception(ex.Message);
             }
             finally
@@ -285,7 +278,6 @@ namespace PROPOSTA
                 {
                     Retorno = "PLAYLIST/" + this.CurrentUser.ToUpper() + "/" + Param.Nome_Arquivo.ToUpper();
                 }
-                
                 PlayListFile.Close();
             }
             return Retorno;
@@ -343,7 +335,7 @@ namespace PROPOSTA
                 String iDuracao = "";
                 //----------------------------------Consulta o Roteiro Tecnico
                 DataTable dtbRoteiro = new DataTable();
-                SqlCommand cmdRoteiro = cnn.Procedure(cnn.Connection, "Sp_RU_Carrega_Roteiro");
+                SqlCommand cmdRoteiro = cnn.Procedure(cnn.Connection, "Sp_RU_Carrega_Roteiro_V2");
                 cmdRoteiro.Parameters.AddWithValue("@Par_Cod_Veiculo", Param.Cod_Veiculo);
                 cmdRoteiro.Parameters.AddWithValue("@Par_Data_Exibicao", Param.Data_Programacao.ConvertToDatetime().ToString("yyyy-MM-dd"));
                 SqlDataAdapter adpRoteiro = new SqlDataAdapter(cmdRoteiro);
@@ -480,7 +472,6 @@ namespace PROPOSTA
 
 
 
-
         //--------------------------------------------------------------------------------------------------------------------------------------------------
         //------------------------------------------------------------- GERAR ARQUIVO 4S -------------------------------------------------------------------
         //--------------------------------------------------------------------------------------------------------------------------------------------------
@@ -540,10 +531,9 @@ namespace PROPOSTA
                 Int32 iSegundo = 0;
                 String sDuracao = "";
 
-
                 //----------------------------------Consulta o Roteiro Tecnico
                 DataTable dtbRoteiro = new DataTable();
-                SqlCommand cmdRoteiro = cnn.Procedure(cnn.Connection, "Sp_RU_Carrega_Roteiro");
+                SqlCommand cmdRoteiro = cnn.Procedure(cnn.Connection, "Sp_RU_Carrega_Roteiro_V2");
                 cmdRoteiro.Parameters.AddWithValue("@Par_Cod_Veiculo", Param.Cod_Veiculo);
                 cmdRoteiro.Parameters.AddWithValue("@Par_Data_Exibicao", Param.Data_Programacao.ConvertToDatetime().ToString("yyyy-MM-dd"));
                 SqlDataAdapter adpRoteiro = new SqlDataAdapter(cmdRoteiro);
@@ -690,12 +680,7 @@ namespace PROPOSTA
                                                 nTipoPrograma = 2;
                                             }
                                         }
-
                                     }
-
-
-
-
                                 }   //--fecha bPrimeiro
                             }   //--fecha sProgramaAnterior
 
@@ -763,7 +748,6 @@ namespace PROPOSTA
                                         strLinha += "           1";    //--12
                                         writetext.WriteLine(strLinha);
                                     }
-                                    //----
                                     //--====================Linha titulo do Bloco
                                     sTitulo = drw["Titulo_Break"].ToString().Substring(0, 20);
                                     if (drw["Sequencia_Break"].ToString() == "")
@@ -787,7 +771,7 @@ namespace PROPOSTA
                                     strLinha += "        00:00:00"; //--16
                                     if (nTipoPrograma == 1)
                                     {
-                                        strLinha += aTipoPrograma1;      //--
+                                        strLinha += aTipoPrograma1;
                                     }
                                     else
                                     {
@@ -803,7 +787,21 @@ namespace PROPOSTA
                                 //----
                                 else    //--====2. Linha do Comercial
                                 {
-                                    strLinha = drw["Numero_Fita"].ToString().Substring(4, 4);   //--4
+                                    //strLinha = drw["Numero_Fita"].ToString().Substring(4, 4);   //--4
+                                    //strLinha = drw["Numero_Fita"].ToString().Trim().Right(4);   //--4
+
+                                    if (!String.IsNullOrEmpty(drw["Numero_Fita"].ToString()))
+                                    {
+                                        strLinha = drw["Numero_Fita"].ToString().Trim().Right(4);   //--4
+                                    }
+                                    else
+                                    {
+                                        strLinha = "    ";
+                                    }
+
+
+
+
                                     strLinha += "      ";   //--6
                                     strLinha += drw["Titulo_Comercial"].ToString().Substring(0, 30);    //--30
                                     strLinha += "     ";    //--5
@@ -820,12 +818,8 @@ namespace PROPOSTA
                                     bPrimeiro = false;
                                     nContComercial = nContComercial + 1;
                                 }
-
-
                             }   //--fecha bolValido 2
-
                         }   //--fecha bolValido 1
-
                     }   //--fecha loop
 
                     //--Linhas após o fim do loop
@@ -842,8 +836,7 @@ namespace PROPOSTA
                             strLinha += "1";
                             writetext.WriteLine(strLinha);
                         }
-
-                        //----
+                        //--------------------
                         if (nTipoAnterior != 1)
                         {
                             strLinha = "PGM       ";
@@ -864,8 +857,7 @@ namespace PROPOSTA
                             strLinha += "           1";    //--12
                             writetext.WriteLine(strLinha);
                         }
-
-                        //----
+                        //-----------------
                         if (nTipoAnterior != 1)
                         {
                             strLinha = "PAUSE     ";
@@ -880,10 +872,6 @@ namespace PROPOSTA
                         strLinha += "              1"; //--15
                         writetext.WriteLine(strLinha);
                     }
-
-
-
-
                     bolGerouArquivo = true;
                 }   //--fecha StreamWriter
             }   //--fecha file create
@@ -901,8 +889,6 @@ namespace PROPOSTA
             }
             return Retorno;
         }
-
-
 
 
 
@@ -947,7 +933,6 @@ namespace PROPOSTA
             var PlayListFile = File.Create(strFile);
             try
             {
-
                 Int32 iHora = 0;
                 Int32 iMinuto = 0;
                 Int32 iSegundo = 0;
@@ -956,11 +941,9 @@ namespace PROPOSTA
                 String sSubstituto = "";
                 String sCaracter = "";
 
-
                 //---------------------------Lê Parâmetro de Configuração de Fitas
                 Int32 nPosicaoFita = 1;//  default
                 Int32 nTamanhoFita = 6;  //  default
-
                 DataTable dtbParam = new DataTable();
                 String strSql = "Select Cod_Chave From Parametro_Valor Where Cod_Parametro = 76 and Cod_Veiculo = '" + Param.Cod_Veiculo + "'";
                 SqlCommand cmdParam = cnn.Text(cnn.Connection, strSql);
@@ -972,10 +955,9 @@ namespace PROPOSTA
                     nTamanhoFita = dtbParam.Rows[0]["Cod_Chave"].ToString().TrimEnd().Right(2).ConvertToInt32();
                 }
 
-
                 //----------------------------------Consulta o Roteiro Tecnico
                 DataTable dtbRoteiro = new DataTable();
-                SqlCommand cmdRoteiro = cnn.Procedure(cnn.Connection, "Sp_RU_Carrega_Roteiro");
+                SqlCommand cmdRoteiro = cnn.Procedure(cnn.Connection, "Sp_RU_Carrega_Roteiro_V2");
                 cmdRoteiro.Parameters.AddWithValue("@Par_Cod_Veiculo", Param.Cod_Veiculo);
                 cmdRoteiro.Parameters.AddWithValue("@Par_Data_Exibicao", Param.Data_Programacao.ConvertToDatetime().ToString("yyyy-MM-dd"));
                 SqlDataAdapter adpRoteiro = new SqlDataAdapter(cmdRoteiro);
@@ -986,13 +968,11 @@ namespace PROPOSTA
                     foreach (DataRow drw in dtbRoteiro.Rows)
                     {
                         bolValido = true;
-
                         //-----------------Linha titulo do intervalo nao é valido
                         if (drw["Indica_Titulo_Intervalo"].ToString() == "1")
                         {
                             bolValido = false;
                         }
-
                         //-----------------Não envia comerciais que usuario não pode ordenar
                         if (drw["Indica_Ordenacao"].ToString().ConvertToInt32() == 0 && drw["Indica_Titulo_Break"].ToString().ConvertToInt32() == 0)     //-- && = and
                         {
@@ -1002,7 +982,6 @@ namespace PROPOSTA
                         {
                             bolValido = false;
                         }
-
                         //------------------------------------  Montagem  -----------------------------------------------
                         if (bolValido)
                         {
@@ -1010,15 +989,13 @@ namespace PROPOSTA
                             if (drw["Indica_Titulo_Break"].ToString().ConvertToInt32() == 1)
                             {
                                 strLinha = "BREAK     LIVE 05 00 00 Bl" + drw["Breaks"].ToString().PadLeft(2, '0') + " - " + drw["Titulo_Programa"];
-
-
+                                //----
                                 sAcento = "ÀÁÂÃÄÅÇÈÉÊËÌÍÎÏÑÒÓÔÕÖÙÚÛÜÝàáâãäåçèéêëìíîïñòóôõöùúûü&ªº";
                                 sSubstituto = "AAAAAACEEEEIIIINOOOOOUUUUYaaaaaaceeeeiiiinooooouuuuEao";
                                 for (int iPosicaoLinha = 0; iPosicaoLinha < (strLinha.Length - 1); iPosicaoLinha += 1)
                                 {
                                     //Pega um caracter do strLinha
                                     sCaracter = strLinha.Substring(iPosicaoLinha, 1);
-
                                     //Verifica se o caracter é igual à algum do sAcento
                                     for (int iPosicaoAcento = 0; iPosicaoAcento < (54 - 1); iPosicaoAcento += 1)
                                     {
@@ -1037,15 +1014,12 @@ namespace PROPOSTA
                                             {
                                                 strLinha = strLinha.Substring(0, iPosicaoLinha) + sSubstituto.Substring(iPosicaoAcento, 1) + strLinha.Substring(iPosicaoLinha + 1, ((strLinha.Length - 1) - iPosicaoLinha));
                                             }
-
                                             //sai do loop
                                             break;
                                         }
                                     }
                                 }
-
                                 writetext.WriteLine(strLinha);
-
                             }
                             //------------------- Linha do Comercial
                             else
@@ -1056,7 +1030,6 @@ namespace PROPOSTA
                                 }
                                 else
                                 {
-                                    //strLinha = drw["Numero_Fita"].ToString().Substring(nPosicaoFita - 1, nTamanhoFita);
                                     strLinha = drw["Numero_Fita"].ToString().Substring((nPosicaoFita + 2) - 1, nTamanhoFita);
                                 }
                                 strLinha += "    ";
@@ -1075,15 +1048,13 @@ namespace PROPOSTA
                                     strLinha += "BREA";
                                 }
                                 strLinha += "          0";
-
-
+                                //----
                                 sAcento = "ÀÁÂÃÄÅÇÈÉÊËÌÍÎÏÑÒÓÔÕÖÙÚÛÜÝàáâãäåçèéêëìíîïñòóôõöùúûü&ªº";
                                 sSubstituto = "AAAAAACEEEEIIIINOOOOOUUUUYaaaaaaceeeeiiiinooooouuuuEao";
                                 for (int iPosicaoLinha = 0; iPosicaoLinha < (strLinha.Length - 1); iPosicaoLinha += 1)
                                 {
                                     //Pega um caracter do strLinha
                                     sCaracter = strLinha.Substring(iPosicaoLinha, 1);
-
                                     //Verifica se o caracter é igual à algum do sAcento
                                     for (int iPosicaoAcento = 0; iPosicaoAcento < (54 - 1); iPosicaoAcento += 1)
                                     {
@@ -1102,23 +1073,15 @@ namespace PROPOSTA
                                             {
                                                 strLinha = strLinha.Substring(0, iPosicaoLinha) + sSubstituto.Substring(iPosicaoAcento, 1) + strLinha.Substring(iPosicaoLinha + 1, ((strLinha.Length - 1) - iPosicaoLinha));
                                             }
-
                                             //sai do loop
                                             break;
                                         }
                                     }
                                 }
-
-
                                 writetext.WriteLine(strLinha);
-
                             }
-
-
                         }   //--fecha bolValido
-
                     }   //--fecha loop
-
                     bolGerouArquivo = true;
                 }   //--fecha StreamWriter
             }   //--fecha file create
@@ -1137,7 +1100,6 @@ namespace PROPOSTA
             return Retorno;
         }
         //--------------------------------- FIM ----------------------------------------------------
-
 
 
 
@@ -1182,7 +1144,6 @@ namespace PROPOSTA
             var PlayListFile = File.Create(strFile);
             try
             {
-
                 Int32 iHora = 0;
                 Int32 iMinuto = 0;
                 Int32 iSegundo = 0;
@@ -1191,12 +1152,9 @@ namespace PROPOSTA
                 String sSubstituto = "";
                 String sCaracter = "";
 
-
-
                 //---------------------------Lê Parâmetro de Configuração de Fitas
                 Int32 nPosicaoFita = 1;//  default
                 Int32 nTamanhoFita = 6;  //  default
-
                 DataTable dtbParam = new DataTable();
                 String strSql = "Select Cod_Chave From Parametro_Valor Where Cod_Parametro = 76 and Cod_Veiculo = '" + Param.Cod_Veiculo + "'";
                 SqlCommand cmdParam = cnn.Text(cnn.Connection, strSql);
@@ -1208,10 +1166,9 @@ namespace PROPOSTA
                     nTamanhoFita = dtbParam.Rows[0]["Cod_Chave"].ToString().TrimEnd().Right(2).ConvertToInt32();
                 }
 
-
                 //----------------------------------Consulta o Roteiro Tecnico
                 DataTable dtbRoteiro = new DataTable();
-                SqlCommand cmdRoteiro = cnn.Procedure(cnn.Connection, "Sp_RU_Carrega_Roteiro");
+                SqlCommand cmdRoteiro = cnn.Procedure(cnn.Connection, "Sp_RU_Carrega_Roteiro_V2");
                 cmdRoteiro.Parameters.AddWithValue("@Par_Cod_Veiculo", Param.Cod_Veiculo);
                 cmdRoteiro.Parameters.AddWithValue("@Par_Data_Exibicao", Param.Data_Programacao.ConvertToDatetime().ToString("yyyy-MM-dd"));
                 SqlDataAdapter adpRoteiro = new SqlDataAdapter(cmdRoteiro);
@@ -1222,13 +1179,11 @@ namespace PROPOSTA
                     foreach (DataRow drw in dtbRoteiro.Rows)
                     {
                         bolValido = true;
-
                         //-----------------Linha titulo do intervalo nao é valido
                         if (drw["Indica_Titulo_Intervalo"].ToString() == "1")
                         {
                             bolValido = false;
                         }
-
                         //-----------------Não envia comerciais que usuario não pode ordenar
                         if (drw["Indica_Ordenacao"].ToString().ConvertToInt32() == 0 && drw["Indica_Titulo_Break"].ToString().ConvertToInt32() == 0)     //-- && = and
                         {
@@ -1238,7 +1193,6 @@ namespace PROPOSTA
                         {
                             bolValido = false;
                         }
-
                         //------------------------------------  Montagem  -----------------------------------------------
                         if (bolValido)
                         {
@@ -1247,15 +1201,13 @@ namespace PROPOSTA
                             {
                                 strLinha = "BK| |.|00:00:00|BREAK " + drw["Breaks"].ToString().PadLeft(2, '0') + " " + drw["Cod_Programa"].ToString();
                                 strLinha += "----------------------|00:00:20";
-
-
+                                //----
                                 sAcento = "ÀÁÂÃÄÅÇÈÉÊËÌÍÎÏÑÒÓÔÕÖÙÚÛÜÝàáâãäåçèéêëìíîïñòóôõöùúûü&ªº";
                                 sSubstituto = "AAAAAACEEEEIIIINOOOOOUUUUYaaaaaaceeeeiiiinooooouuuuEao";
                                 for (int iPosicaoLinha = 0; iPosicaoLinha < (strLinha.Length - 1); iPosicaoLinha += 1)
                                 {
                                     //Pega um caracter do strLinha
                                     sCaracter = strLinha.Substring(iPosicaoLinha, 1);
-
                                     //Verifica se o caracter é igual à algum do sAcento
                                     for (int iPosicaoAcento = 0; iPosicaoAcento < (54 - 1); iPosicaoAcento += 1)
                                     {
@@ -1274,13 +1226,11 @@ namespace PROPOSTA
                                             {
                                                 strLinha = strLinha.Substring(0, iPosicaoLinha) + sSubstituto.Substring(iPosicaoAcento, 1) + strLinha.Substring(iPosicaoLinha + 1, ((strLinha.Length - 1) - iPosicaoLinha));
                                             }
-
                                             //sai do loop
                                             break;
                                         }
                                     }
                                 }
-
                                 writetext.WriteLine(strLinha);
                             }
                             //----Linha do Comercial
@@ -1303,15 +1253,13 @@ namespace PROPOSTA
                                 }
                                 strLinha += "|||||";
                                 strLinha += drw["Titulo_Comercial"].ToString();
-
-
+                                //----
                                 sAcento = "ÀÁÂÃÄÅÇÈÉÊËÌÍÎÏÑÒÓÔÕÖÙÚÛÜÝàáâãäåçèéêëìíîïñòóôõöùúûü&ªº";
                                 sSubstituto = "AAAAAACEEEEIIIINOOOOOUUUUYaaaaaaceeeeiiiinooooouuuuEao";
                                 for (int iPosicaoLinha = 0; iPosicaoLinha < (strLinha.Length - 1); iPosicaoLinha += 1)
                                 {
                                     //Pega um caracter do strLinha
                                     sCaracter = strLinha.Substring(iPosicaoLinha, 1);
-
                                     //Verifica se o caracter é igual à algum do sAcento
                                     for (int iPosicaoAcento = 0; iPosicaoAcento < (54 - 1); iPosicaoAcento += 1)
                                     {
@@ -1330,22 +1278,15 @@ namespace PROPOSTA
                                             {
                                                 strLinha = strLinha.Substring(0, iPosicaoLinha) + sSubstituto.Substring(iPosicaoAcento, 1) + strLinha.Substring(iPosicaoLinha + 1, ((strLinha.Length - 1) - iPosicaoLinha));
                                             }
-
                                             //sai do loop
                                             break;
                                         }
                                     }
                                 }
-
-
                                 writetext.WriteLine(strLinha);
                             }
-
-
                         }   //--fecha bolValido
-
                     }   //--fecha loop
-
                     bolGerouArquivo = true;
                 }   //--fecha StreamWriter
             }   //--fecha file create
@@ -1363,10 +1304,6 @@ namespace PROPOSTA
             }
             return Retorno;
         }
-        //--------------------------------- FIM ----------------------------------------------------
-
-
-
 
 
 
@@ -1708,16 +1645,169 @@ namespace PROPOSTA
                 }
             }
             return Retorno;
+        }
 
+
+
+        //--------------------------------------------------------------------------------------------------------------------------------------------------
+        //---------------------------------------------------------- GERAR ARQUIVO PLAYLISTRJC -----------------------------------------------------------------
+        //--------------------------------------------------------------------------------------------------------------------------------------------------
+        public String GerarPlaylistRJC(EnvioPlayListModel Param)
+        {
+            clsConexao cnn = new clsConexao(this.Credential);
+            cnn.Open();
+            String Retorno = "";
+            Boolean bolValido = false;
+            Boolean bolGerouArquivo = false;
+            String strLinha = "";
+            //---------------------------Cria uma pasta no servidor para gerar o arquivo
+            String sPath = HttpContext.Current.Server.MapPath("~/PLAYLIST");
+            if (sPath.Right(1) != @"\")
+            {
+                sPath += @"\";
+            }
+            sPath += this.CurrentUser;
+            sPath += @"\";
+            if (!System.IO.Directory.Exists(sPath))
+            {
+                System.IO.Directory.CreateDirectory(sPath);
+            }
+            //-----------------------Apaga todos os arquivos da pasta antes da geracao , para nao acumular arquivos.
+            var list = System.IO.Directory.GetFiles(sPath, "*.*");
+            try
+            {
+                foreach (var item in list)
+                {
+                    System.IO.File.Delete(item);
+                }
+            }
+            catch (Exception)
+            {
+            }
+            //---------------------------Criar o Arquivo Texto na pasta
+            String strFile = sPath + Param.Nome_Arquivo;
+            var PlayListFile = File.Create(strFile);
+            try
+            {
+                String sProgramaAnterior = "";
+                Int32 nBreakAnterior = 0;
+                Boolean bPrimeiraVez = true;
+                //---------------------------Le Parametro de Configruacao de Fitas
+                Int32 nPosicaoFita = 1;//  default
+                Int32 nTamanhaFita = 6;  //  default
+                DataTable dtbParam = new DataTable();
+                String strSql = "Select Cod_Chave From Parametro_Valor Where Cod_Parametro = 76 and Cod_Veiculo = '" + Param.Cod_Veiculo + "'";
+                SqlCommand cmdParam = cnn.Text(cnn.Connection, strSql);
+                SqlDataAdapter AdpParam = new SqlDataAdapter(cmdParam);
+                AdpParam.Fill(dtbParam);
+                if (dtbParam.Rows.Count > 0)
+                {
+                    nPosicaoFita = dtbParam.Rows[0]["Cod_Chave"].ToString().Left(2).ConvertToInt32();
+                    nTamanhaFita = dtbParam.Rows[0]["Cod_Chave"].ToString().TrimEnd().Right(2).ConvertToInt32();
+                }
+                //----------------------------------Consulta o Roteiro Tecnico[
+                DataTable dtbRoteiro = new DataTable();
+                SqlCommand cmdRoteiro = cnn.Procedure(cnn.Connection, "Sp_RU_Carrega_Roteiro_V2");
+                cmdRoteiro.Parameters.AddWithValue("@Par_Cod_Veiculo", Param.Cod_Veiculo);
+                cmdRoteiro.Parameters.AddWithValue("@Par_Data_Exibicao", Param.Data_Programacao.ConvertToDatetime().ToString("yyyy-MM-dd"));
+                SqlDataAdapter adpRoteiro = new SqlDataAdapter(cmdRoteiro);
+                adpRoteiro.Fill(dtbRoteiro);
+                using (StreamWriter writetext = new StreamWriter(PlayListFile))
+                {
+                    //----------------------------------Preenche o Arquivo Texto
+                    foreach (DataRow drw in dtbRoteiro.Rows)
+                    {
+                        bolValido = true;
+                        //---------------------------------Se for a primeira vez, alimenta variáveis
+                        if (bPrimeiraVez)
+                        {
+                            bPrimeiraVez = false;
+                            sProgramaAnterior = drw["Cod_Programa"].ToString().Substring(0, 4);
+                            nBreakAnterior = drw["Breaks"].ToString().ConvertToInt32();
+                        }
+                        //---------------------------------Linha titulo do intervalo nao é valido
+                        if (drw["Indica_Titulo_Intervalo"].ToString() == "1")
+                        {
+                            bolValido = false;
+                        }
+                        //------------------------Linhas cujo tipo do break o usuario nao pode ordenar
+                        if (String.IsNullOrEmpty(drw["Indica_Ordenacao"].ToString()) && String.IsNullOrEmpty(drw["Indica_Titulo_Break"].ToString()))
+                        {
+                            bolValido = false;
+                        }
+                        //-----------------------Montagem da Linha
+                        if (bolValido)
+                        {
+                            //-------------------Quebra de Programa ou Break
+                            if (sProgramaAnterior.ToString() != drw["Cod_Programa"].ToString().Substring(0, 4) || nBreakAnterior.ToString().ConvertToInt32() != drw["Breaks"].ToString().ConvertToInt32())
+                            {
+                                if (strLinha != "")
+                                {
+                                    if (strLinha.Right(1) == ",")
+                                    {
+                                        strLinha = strLinha.Substring(0, strLinha.Length - 1);
+                                    }
+                                    if (strLinha.Trim() != "")
+                                    {
+                                        writetext.WriteLine(strLinha);
+                                    }
+                                }
+                                sProgramaAnterior = drw["Cod_Programa"].ToString().Substring(0, 4);
+                                nBreakAnterior = drw["Breaks"].ToString().ConvertToInt32();
+                            }
+                            //---------------------Monta Linha de Titulo do Break
+                            if (drw["Indica_Titulo_Break"].ToString() == "1")
+                            {
+                                if (!String.IsNullOrEmpty(drw["Hora_Inicio_Break"].ToString()))
+                                {
+                                    strLinha = drw["Hora_Inicio_Break"].ToString().ConvertToDatetime().ToString("dd/MM/yyyy HH:mm").Substring(11, 5);
+                                }
+                                else
+                                {
+                                    strLinha = "     ";
+                                }
+                            }
+                            else
+                            //-----------------------Monta Linha do Comercial
+                            {
+                                if (!String.IsNullOrEmpty(drw["Numero_Fita"].ToString()))
+                                {
+                                    strLinha += " ";
+                                    strLinha += drw["Numero_Fita"].ToString().Substring(nPosicaoFita - 1, nTamanhaFita);
+                                    strLinha += ",";
+                                }
+                            }
+                        }
+                    }
+                    if (strLinha != "")
+                    {
+                        if (strLinha.Right(1) == ",")
+                        {
+                            strLinha = strLinha.Substring(0, strLinha.Length - 1);
+                        }
+                        if (strLinha.Trim() != "")
+                        {
+                            writetext.WriteLine(strLinha);
+                        }
+                    }
+                    bolGerouArquivo = true;
+                }
+            }
+            catch (Exception ex)
+            {
+                throw new Exception(ex.Message);
+            }
+            finally
+            {
+                if (bolGerouArquivo)
+                {
+                    Retorno = "PLAYLIST/" + this.CurrentUser.ToUpper() + "/" + Param.Nome_Arquivo.ToUpper();
+                }
+                PlayListFile.Close();
+            }
+            return Retorno;
         }
         //--------------------------------- FIM ----------------------------------------------------
-
-
-
-
-
-
-
 
     }
 }

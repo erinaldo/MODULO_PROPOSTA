@@ -20,7 +20,6 @@
     $scope.EnvioPlayListCarregar = function (pParam) {
         //-----Consistencias
         if (!pParam.Cod_Veiculo || !pParam.Data_Programacao) {
-            //ShowAlert("Código do Veículo e Data da Programação são Obrigatórios");
             return;
         };
         $scope.DownloadUrl = "";
@@ -103,16 +102,14 @@
                     ShowAlert(response.data.Mensagem);
                 }
                 else {
+                    ShowAlert(response.data.Mensagem);
                     $scope.DownloadUrl = $rootScope.baseUrl + response.data.Url;
-                    //var strUrl = $rootScope.baseUrl + response.data.Url;
-                    //var win = window.open(strUrl, '_blank');
-                    //win.focus();
-                    
                 }
             };
         });
     };
-    //---------Quando mudar o veiculo ou data, carrega os parametros abaixo desses campos 
+
+    //---------Quando mudar o veiculo ou data, carrega os parametros abaixo desses campos
     $scope.$watch('[Parametros.Cod_Veiculo,Parametros.Data_Programacao]', function (newValue, oldValue) {
         if (newValue != oldValue) {
             $scope.DownloadUrl = "";
