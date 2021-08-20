@@ -134,6 +134,7 @@
                             <th>Agência</th>
                             <th>Cliente</th>
                             <th>Contato</th>
+                            <th></th>
                         </tr>
                     </thead>
                     <tbody>
@@ -150,22 +151,22 @@
                             </td>
 
                             <td style="text-align:center">
-
-
                                 <a class="btn btn-default btn-sm" href="#PermutasResumo/{{permuta.Id_Permuta}}">
                                     {{permuta.Numero_Contrato}}
                                 </a>
-
-
-
-
-
                             </td>
                             <td>{{::permuta.Numero_Negociacao}}</td>
                             <td style="text-align:left;white-space:nowrap">{{permuta.Competencia_Inicial}} a {{permuta.Competencia_Final}}</td>
                             <td>{{::permuta.Nome_Agencia}}</td>
                             <td>{{::permuta.Nome_Cliente}}</td>
                             <td>{{::permuta.Nome_Contato}}</td>
+                            <td style="max-width:50px">
+                                <button class="btn btn-default btn-sm" ng-click="RemoverContratoPermuta(permuta)" ng-show="PermissaoExcluir">
+                                    <span class="fa fa-trash span-btn"></span>
+                                </button>
+                            </td>
+
+
                         </tr>
                     </tbody>
                 </table>

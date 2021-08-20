@@ -12,6 +12,7 @@
     { 'title': 'Agencia', 'visible': true, 'searchable': true, 'config': true, 'sortable': true },
     { 'title': 'Cliente', 'visible': true, 'searchable': true, 'config': true, 'sortable': true },
     { 'title': 'Contato', 'visible': true, 'searchable': true, 'config': true, 'sortable': true },
+    { 'title': 'Botao3', 'visible': true, 'searchable': true, 'config': true, 'sortable': true },
     ];
     $scope.MesAnoKeys = { 'Year': new Date().getFullYear(), 'First': '', 'Last': '' }
 
@@ -44,11 +45,15 @@
     //====================Permissoes
     $scope.PermissaoNew = 'false';
     $scope.PermissaoEditar = 'false';
+    $scope.PermissaoExcluir= 'false';
     httpService.Get("credential/" + "Permuta@New").then(function (response) {
         $scope.PermissaoEdit = response.data;
     });
     httpService.Get("credential/" + "Permuta@New").then(function (response) {
         $scope.PermissaoNew = response.data;
+    });
+    httpService.Get("credential/" + "Permuta@Destroy").then(function (response) {
+        $scope.PermissaoExcluir = response.data;
     });
 
     //====================Quando terminar carga do grid, torna view do grid visible
@@ -156,6 +161,48 @@
             }
         }
     });
+
+    //==============================Remover  Contrato Permuta 
+    $scope.RemoverContratoPermuta = function (pPermuta) {
+        swal({
+            title: "Tem certeza que deseja Excluir esse Contrato de Permuta?",
+            type: "warning",
+            showCancelButton: true,
+            confirmButtonClass: "btn-danger",
+            confirmButtonText: "Sim,Excluir",
+            cancelButtonText: "Cancelar",
+            closeOnConfirm: true
+        }, function () {
+                httpService.Post('ExcluirContratoPermuta', pPermuta).then(function (response) {
+                if (response) {
+
+                    if (response.data[0].Status) {
+
+                        ShowAlert(response.data[0].Mensagem, 'success');
+                        for (var i = 0; i < $scope.Permutas.length; i++) {
+
+                            if ($scope.Permutas[i].Id_Permuta == pPermuta.Id_Permuta) {
+                                $scope.Permutas.splice(i, 1);
+                                break;
+                            };
+                        };
+
+
+
+
+                        $location.path('/Permutas');
+                        return;
+
+                    }
+                    else {
+                        ShowAlert(response.data[0].Mensagem, 'warning');
+                    }
+                }
+            });
+        });
+    };
+
+
 
     $scope.NovaPermutas = function () {
         $location.path("/PermutaEntregaCadastro/New/0/");

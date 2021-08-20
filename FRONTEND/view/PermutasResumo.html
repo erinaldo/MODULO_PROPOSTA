@@ -384,6 +384,7 @@
                                 <th>Valor Negociado Unitario</th>
                                 <th>Valor Tabela Total</th>
                                 <th>Valor Negociado Total</th>
+                                <th></th>
 
                             </tr>
                         </thead>
@@ -402,6 +403,13 @@
                                 <td style="text-align:right">{{::resumocliente.Valor_Negociado_Unitario | currency}}</td>
                                 <td style="text-align:right">{{::resumocliente.Valor_Tabela_Total | currency}}</td>
                                 <td style="text-align:right">{{::resumocliente.Valor_Negociado_Total | currency}}</td>
+                                <td style="max-width:50px">
+                                    <button class="btn btn-default btn-sm" ng-click="RemoverContratoPermuta(permuta)">
+                                        <span class="fa fa-trash"></span>
+                                    </button>
+                                </td>
+
+
                             </tr>
                         </tbody>
                         <tfoot>

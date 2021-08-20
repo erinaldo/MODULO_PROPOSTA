@@ -43,6 +43,7 @@ function GetDictionary() {
                         { 'Id': 'Tipo_Comercializacao', 'label': 'Tipo de Comercializacao', 'icon': 'search', 'atributos': { 'maxlength': '3', 'type': 'text', 'keymode': 'text' } },
                         { 'Id': 'Motivo_Cancelamento', 'label': 'Motivo do Cancelamento', 'icon': 'search', 'atributos': { 'maxlength': '3', 'type': 'text', 'keymode': 'text' } },
                         { 'Id': 'UF_Regional', 'label': 'Regional', 'icon': 'search', 'atributos': { 'maxlength': '2', 'type': 'text', 'keymode': 'upper' } },
+                        { 'Id': 'Portador', 'label': 'Portador', 'icon': 'search', 'atributos': { 'maxlength': '3', 'type': 'text', 'keymode': 'numeric' } },
     ];
 
     //==============Config html

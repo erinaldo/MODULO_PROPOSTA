@@ -60,9 +60,10 @@ namespace PROPOSTA
             public int Indica_Log_Agencia { get; set; }
             public int Indica_Log_Cliente { get; set; }
             public String Referencia { get; set; }
+            public Int32 Id_Portador { get; set; }
+            public String Nome_Portador { get; set; }
             public String Perc_Rateio { get; set; }
             public List<DuplicataModel> Duplicatas { get; set; }
-
         }
         public class FiltroModel
         {

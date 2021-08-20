@@ -293,7 +293,30 @@ namespace PROPOSTA
             }
         }
 
+        //===========================Excluir Contrato Permuta
 
+        [Route("api/ExcluirContratoPermuta")]
+        [HttpPost]
+        [ActionName("ExcluirContratoPermuta")]
+        [Authorize()]
+
+        public IHttpActionResult ExcluirContratoPermuta([FromBody] Permutas.PermutasModel param)
+        {
+            SimLib clsLib = new SimLib();
+            Permutas Cls = new Permutas(User.Identity.Name);
+            try
+            {
+                DataTable retorno = Cls.ExcluirContratoPermuta(param);
+                return Ok(retorno);
+
+
+            }
+            catch (Exception Ex)
+            {
+                //clsLib.EmailErrorToSuporte(User.Identity.Name, Ex.Message.ToString(), Ex.Source, Ex.StackTrace);
+                throw new Exception(Ex.Message);
+            }
+        }
 
 
 

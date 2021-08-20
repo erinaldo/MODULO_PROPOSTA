@@ -17,7 +17,8 @@
     $scope.ShowGuiaProgramas = false;
     $scope.ShowFiltro = true;
     $scope.CurrentTab = 'Midia'
-    $scope.Consistencia={'Concorrencia':true,'Outros':true,'Rotativo':true};
+    $scope.Consistencia = { 'Concorrencia': true, 'Outros': true, 'Rotativo': true };
+    $scope.DadosComercial = "";
     //===========================Carregar Guia de Programas
     $scope.CarregarGuiaProgramas = function (pFiltro) {
         if (!pFiltro.Cod_Veiculo || !pFiltro.Data_Exibicao) {
@@ -65,6 +66,7 @@
                     if (responseComercial.data) {
                         $scope.Comerciais = responseComercial.data;
                         $scope.RenumeraItens($scope.Roteiro);
+                        $scope.DadosComercial = "";
                     }
                 });
             }
@@ -468,6 +470,38 @@
             if (response) {
                 $scope.Critica = response.data;
             }
+        });
+    };
+    //===========================Mostra Dados da Fita
+    $scope.MostraDadosFita = function (pItem, pTipo) {
+        console.log(pItem);
+        var _data = ""
+        if (pTipo == 'Roteiro') {
+            _data = {
+                'Cod_Veiculo_Origem': pItem.Cod_Veiculo_Origem,
+                'Data_Exibicao': pItem.Data_Exibicao,
+                'Cod_Programa_Origem': pItem.Cod_Programa_Origem,
+                'Chave_Acesso': pItem.Chave_Acesso,
+                'Numero_Fita': pItem.Numero_Fita,
+                'Origem': pItem.Origem
+            };
+        };
+        if (pTipo == 'Comercial') {
+            _data = {
+                'Cod_Veiculo_Origem': pItem.Cod_Veiculo,
+                'Data_Exibicao': pItem.Data_Exibicao,
+                'Cod_Programa_Origem': pItem.Cod_Programa,
+                'Chave_Acesso': pItem.Chave_Acesso,
+                'Numero_Fita': pItem.Numero_Fita,
+                'Origem': pItem.Origem
+            };
+        };
+
+        httpService.Post("Roteiro/DadosComercial", _data).then(function (response) {
+            if (response.data) {
+                $scope.DadosComercial = response.data[0];
+                $("#modalDadosComercial").modal(true);
+            };
         });
     };
     //===========================Imprimir Roteiro

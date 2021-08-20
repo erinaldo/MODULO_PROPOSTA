@@ -476,7 +476,7 @@
                         </div>
                         <div class="row">
                             <!--===================Origem do Rateio-->
-                            <div class="col-md-3">
+                            <div class="col-md-2">
                                 <div class="form-group">
                                     <label class="field-x">Origem do Rateio</label>
                                     <label class="form-control">{{['Antecipado','Midia','','Outras Receitas'][Parameters.Origem]}}</label>
@@ -490,7 +490,7 @@
                             </div>
                         </div>-->
                             <!--===================Perc Rateio%-->
-                            <div class="col-md-3">
+                            <div class="col-md-2">
                                 <div class="form-group">
                                     <label class="field-x">% Rateio</label>
                                     <input style="text-transform:uppercase"
@@ -514,6 +514,26 @@
                                            ng-disabled="ContratoDados.Rateios.length==1"
                                            ng-model-options="{updateOn: 'blur'}"
                                            ng-model="ContratoDados.Rateios[currentTab].Vlr_A_Faturar" maxlength="15" />
+                                </div>
+                            </div>
+                            <!--===================Portador-->
+                            <div class="col-md-2" ng-controller="dictionaryController">
+                                <div class="dictionary" dictionary="Portador" caption="Portador">
+                                    <input id="txtPortador"
+                                           name="txtPortador"
+                                           ng-model="ContratoDados.Rateios[currentTab].Id_Portador"
+                                           ng-model-options="{updateOn: 'blur'}"
+                                           ng-change="DicionaryValidate('txtPortador')"
+                                           primarybind="txtPortador"
+                                           secondarybind="txtNomePortador">
+                                </div>
+                            </div>
+                            <div class="col-md-3">
+                                <div class="form-group">
+                                    <label for="txtNomePortador" class="field-x" style="visibility:hidden">..</label>
+                                    <div class="input-group">
+                                        <input type="text" disabled="disabled" id="txtNomePortador" class="form-control " ng-model="ContratoDados.Rateios[currentTab].Nome_Portador">
+                                    </div>
                                 </div>
                             </div>
                         </div>
