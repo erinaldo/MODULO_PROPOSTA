@@ -101,6 +101,7 @@ namespace PROPOSTA
                                 Id_Break = Contador_Break,
                                 Id_Intervalo = Contador_Intervalo,
                                 Permite_Ordenacao = drw["Permite_Ordenacao"].ToString().ConvertToBoolean(),
+                                
 
                                 Show = true,
                             });
@@ -249,6 +250,9 @@ namespace PROPOSTA
                     Versao = drw["Inicio_Programa"].ToString().ConvertToInt32(),
                     Origem = strOrigem,
                     Permite_Ordenacao = drw["Permite_Ordenacao"].ToString().ConvertToBoolean(),
+                    Horario_Restricao = drw["Horario_Restricao_Dt"].ToString().ConvertToDatetime(),
+                    Cod_Produto_Root = drw["Cod_Produto_Root"].ToString().ConvertToInt32(),
+                    Nome_Produto_Root = drw["Nome_Produto_Root"].ToString(),
                     Show = true
                 });
             }
@@ -354,6 +358,9 @@ namespace PROPOSTA
                         Chave_Acesso = drw["Chave_Acesso"].ToString().ConvertToInt32(),
                         Obs_Roteiro = drw["Obs_Roteiro"].ToString(),
                         Indica_Ordenado = drw["Indica_Ordenado"].ToString().ConvertToBoolean(),
+                        Horario_Restricao = drw["Horario_Restricao"].ToString().ConvertToDatetime(),
+                        Cod_Produto_Root = drw["Cod_Produto_Root"].ToString().ConvertToInt32(),
+                        Nome_Produto_Root = drw["Nome_Produto_Root"].ToString(),
                         Pasta = strPasta,
                     });
                 }
@@ -454,6 +461,9 @@ namespace PROPOSTA
                         Obs_Roteiro = drw["Obs_Roteiro"].ToString(),
                         Indica_Ordenado = drw["Indica_Ordenado"].ToString().ConvertToBoolean(),
                         Pasta = "Rotativo",
+                        Horario_Restricao = drw["Horario_Restricao"].ToString().ConvertToDatetime(),
+                        Cod_Produto_Root = drw["Cod_Produto_Root"].ToString().ConvertToInt32(),
+                        Nome_Produto_Root = drw["Nome_Produto_Root"].ToString(),
                     });
                 }
             }
@@ -506,6 +516,9 @@ namespace PROPOSTA
                         Cod_Produto = drw["Cod_Produto"].ToString(),
                         Nome_Produto = drw["Descricao"].ToString(),
                         Pasta = "Avulso",
+                        Horario_Restricao = drw["Horario_Restricao"].ToString().ConvertToDatetime(),
+                        Cod_Produto_Root = drw["Cod_Produto_Root"].ToString().ConvertToInt32(),
+                        Nome_Produto_Root = drw["Nome_Produto_Root"].ToString(),
                     });
                 }
             }
@@ -559,6 +572,9 @@ namespace PROPOSTA
                         Nome_Produto = drw["Descricao"].ToString(),
                         Tipo_Break = null,
                         Pasta = "Artistico",
+                        Horario_Restricao = drw["Horario_Restricao"].ToString().ConvertToDatetime(),
+                        Cod_Produto_Root = drw["Cod_Produto_Root"].ToString().ConvertToInt32(),
+                        Nome_Produto_Root = drw["Nome_Produto_Root"].ToString(),
                     });
                 }
             }
@@ -914,7 +930,7 @@ namespace PROPOSTA
                 SqlCommand cmd = cnn.Procedure(cnn.Connection, "Pr_Proposta_EncerramentoRoteiro");
                 Adp.SelectCommand = cmd;
                 Adp.SelectCommand.Parameters.AddWithValue("@Par_Cod_Veiculo", pFiltro.Cod_Veiculo);
-                Adp.SelectCommand.Parameters.AddWithValue("@Par_Data_Exibicao", pFiltro.Data.ConvertToDatetime());
+                Adp.SelectCommand.Parameters.AddWithValue("@Par_Data_Exibicao", pFiltro.Data_Exibicao.ConvertToDatetime());
                 Adp.Fill(dtb);
             }
             catch (Exception)

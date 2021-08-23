@@ -70,7 +70,9 @@ namespace PROPOSTA
             public Int32 Versao{ get; set; }
             public Int32 Contador_Item { get; set; }
             public Boolean Permite_Ordenacao { get; set; }
-
+            public DateTime Horario_Restricao { get; set; }
+            public Int32 Cod_Produto_Root { get; set; }
+            public String Nome_Produto_Root { get; set; }
         }
         public class RoteiroFiltroModel
         {
@@ -116,6 +118,9 @@ namespace PROPOSTA
             public String Obs_Roteiro { get; set; }
             public String Pasta { get; set; }
             public Boolean Indica_Ordenado { get; set; }
+            public DateTime Horario_Restricao { get; set; }
+            public Int32 Cod_Produto_Root { get; set; }
+            public String Nome_Produto_Root { get; set; }
         }
         public class BreakModel
         {
@@ -173,7 +178,7 @@ namespace PROPOSTA
         public class EncerramentoRoteiroModel
         {
             public String Cod_Veiculo { get; set; }
-            public String Data { get; set; }
+            public String Data_Exibicao { get; set; }
         }
 
     }

@@ -1,6 +1,6 @@
 ﻿<div class="container">
     <form name="frmEncerramentoRoteiro" autocomplete="off">
-        <div class="block">
+        <div class="block" ng-show="ShowFilter">
             <div class="alert alert-info alert-icon-block" role="alert">
                 <div class="alert-icon">
                     <span class="fa fa-filter"></span>
@@ -29,22 +29,178 @@
                     </div>
                 </div>
                 <!----- Data ----->
-                <div class="col-md-3">
+                <div class="col-md-2">
                     <div class="dictionary" dictionary="Data" caption="Data">
-                        <input ng-model="Filtro.Data"
+                        <input ng-model="Filtro.Data_Exibicao"
                                ui-date ng-model-options="{updateOn: 'blur'}"
                                placeholder="Informe a Data">
-                        <div class="dictionary-ui-calendar" ui-calendar typdate="Filtro.Data"></div>
+                        <div class="dictionary-ui-calendar" ui-calendar typdate="Filtro.Data_Exibicao"></div>
                     </div>
                 </div>
+                <!-----------Botao carregar Roteiro-->
+                <div class="col-md-2" style="margin-top:35px">
+                    <button class="btn btn-primary" ng-click="CarregarRoteiro(Filtro)">Ok</button>
+                </div>
             </div>
-            <!--============================================== BOTÕES DO FILTRO ==========================================-->
-            <div class="fixed-buttons-bottom">
-                <div class="row">
-                    <div class="col-md-12">
-                        <button type="button" class="btn btn-success" ng-click="Encerrar(Filtro)">Encerrar Roteiro</button>
-                        <button type="button" class="btn btn-warning" ng-click="NewFilter()">Limpar Filtro</button>
-                    </div>
+        </div>
+        <!--===============================================Consistencia do Roteiro-->
+
+
+        <div class="block" ng-show="ShowCritica">
+            <!--=====================Abas-->
+            <div class="row">
+                <div class="col-md-12">
+                    <button ng-class="CurrentCheck=='checkBreak' ? 'btn btntab-Selected' : 'btn btntab'" ng-click="CurrentCheck='checkBreak'">Ocupação dos Intervalos </button>
+                    <button ng-class="CurrentCheck=='checkConcorrencia' ? 'btn btntab-Selected' : 'btn btntab'" ng-click="CurrentCheck='checkConcorrencia'">Choque de Concorrência</button>
+                    <button ng-class="CurrentCheck=='checkFita' ? 'btn btntab-Selected' : 'btn btntab'" ng-click="CurrentCheck='checkFita'">Fitas a determinar</button>
+                    <button ng-class="CurrentCheck=='checkHorario' ? 'btn btntab-Selected' : 'btn btntab'" ng-click="CurrentCheck='checkHorario'">Restrição de Horários</button>
+                    <button ng-class="CurrentCheck=='checkComercial' ? 'btn btntab-Selected' : 'btn btntab'" ng-click="CurrentCheck='checkComercial'">Comerciais não ordenados</button>
+                </div>
+            </div>
+            <!--=========================Ocupação dos Breaks-->
+            <div class="table-responsive" ng-show="CurrentCheck=='checkBreak'">
+                <table class="table table-bordered">
+                    <thead>
+                        <tr>
+                            <th>Programa</th>
+                            <th>Break</th>
+                            <th>Intervalo</th>
+                            <th>Duracao</th>
+                            <th>Encaixe</th>
+                            <th>Diferença</th>
+                            <th></th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr ng-repeat="brk in RoteiroConsistencia.Break track by $index" ng-style="{'background-color':(brk.Indica_Titulo_Programa?'#c0c0c04d':'white')}">
+                            <td>{{brk.Cod_Programa}}-{{brk.Titulo_Programa}}</td>
+                            <td colspan="2" ng-show="brk.Indica_Titulo_Programa">Total do Programa</td>
+                            <td ng-show="brk.Indica_Titulo_Intervalo">{{brk.Break}}</td>
+                            <td ng-show="brk.Indica_Titulo_Intervalo">{{brk.Nome_Tipo_Break}}</td>
+                            <td>{{brk.Duracao}}</td>
+                            <td>{{brk.Encaixe}}</td>
+                            <td>{{brk.Duracao- brk.Encaixe}}</td>
+                            <td>
+                                <span class="fa fa-check" style="color:seagreen" ng-show="brk.Encaixe==brk.Duracao"></span>
+                                <span class="fa fa-minus" style="color:red" ng-show="brk.Encaixe>brk.Duracao"></span>
+                                <span class="fa fa-plus" style="color:red" ng-show="brk.Encaixe<brk.Duracao"></span>
+                            </td>
+
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+            <!--=========================Choque de Concorrencia-->
+            <div class="table-responsive" ng-show="CurrentCheck=='checkConcorrencia'">
+                <table class="table table-bordered table-striped">
+                    <thead>
+                        <tr>
+                            <th>Programa</th>
+                            <th>Break</th>
+                            <th>Segmento</th>
+                            <th>Posições</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr ng-repeat="brk in RoteiroConsistencia.Concorrencia track by $index" ng-show="brk.Qtd>1">
+                            <td>{{brk.Cod_Programa}}-{{brk.Titulo_Programa}}</td>
+                            <td>{{brk.Break}}</td>
+                            <td>{{brk.Nome_Produto_Root}}</td>
+                            <td>{{brk.Posicao}}</td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+            <!--=========================Comerciais nao ordenados-->
+            <div class="table-responsive" ng-show="CurrentCheck=='checkComercial'">
+                <table class="table table-bordered table-striped">
+                    <thead>
+                        <tr>
+                            <th>Programa</th>
+                            <th>Contrato</th>
+                            <th>Comercial</th>
+                            <th>Tipo</th>
+                            <th>Duração</th>
+                            <th>N.Fita</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr ng-repeat="com in RoteiroConsistencia.Comerciais track by $index">
+                            <td>{{com.Cod_Programa}}</td>
+                            <td>{{com.Cod_Empresa}}-{{com.Numero_Mr}}-{{com.Sequencia_Mr}}</td>
+                            <td>{{com.Cod_Comercial}}-{{com.Titulo_Comercial}}</td>
+                            <td>{{com.Cod_Tipo_Comercial}}</td>
+                            <td>{{com.Duracao}}</td>
+                            <td>{{com.Numero_Fita}}</td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+            <!--=========================Fita Pendentes-->
+            <div class="table-responsive" ng-show="CurrentCheck=='checkFita'">
+                <table class="table table-bordered table-striped">
+                    <thead>
+                        <tr>
+                            <th>Programa</th>
+                            <th>Contrato</th>
+                            <th>Comercial</th>
+                            <th>Duração</th>
+                            <th>Break</th>
+                            <th>Posicao</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr ng-repeat="fita in RoteiroConsistencia.FitaPendente track by $index">
+                            <td>{{fita.Cod_Programa}}</td>
+                            <td>{{fita.Cod_Empresa}}-{{fita.Numero_Mr}}-{{fita.Sequencia_Mr}}</td>
+                            <td>{{fita.Cod_Comercial}}-{{fita.Titulo_Comercial}}</td>
+                            <td>{{fita.Duracao}}</td>
+                            <td>{{fita.Break}}</td>
+                            <td>{{fita.Sequencia_Intervalo}}</td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+            <!--=========================Restrição de Horarios -->
+            <div class="table-responsive" ng-show="CurrentCheck=='checkHorario'">
+                <table class="table table-bordered table-striped">
+                    <thead>
+                        <tr>
+                            <th>Programa</th>
+                            <th>Comercial</th>
+                            <th>Produto</th>
+                            <th>Duração</th>
+                            <th>Break</th>
+                            <th>Posicao</th>
+                            <th>Hor. Restrição</th>
+                            <th>Hor. Programa</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr ng-repeat="hor in RoteiroConsistencia.Restricao track by $index">
+                            <td>{{hor.Cod_Programa}}</td>
+                            <td>{{hor.Cod_Comercial}}-{{hor.Titulo_Comercial}}</td>
+                            <td>{{hor.Nome_Produto}}</td>
+                            <td>{{hor.Duracao}}</td>
+                            <td>{{hor.Break}}</td>
+                            <td>{{hor.Sequencia_Intervalo}}</td>
+                            <td>{{hor.Horario_Restricao | date:'HH:mm'}}</td>
+                            <td>{{hor.Hora_Inicio_Programa | date:'HH:mm'}}</td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+
+        </div>
+
+
+        <!--============================================== barra de botoes rodape==========================================-->
+        <div class="fixed-buttons-bottom">
+            <div class="row">
+                <div class="col-md-12">
+                    <button type="button" class="btn btn-success" ng-click="Encerrar(Filtro)" ng-show="Roteiro.length>0">Encerrar Roteiro</button>
+                    <button type="button" class="btn btn-info" ng-click="NewFilter()" ng-show="Roteiro.length>0">Novo Filtro</button>
+                    <a href="#portal" class="btn btn-warning">Cancela</a>
                 </div>
             </div>
         </div>

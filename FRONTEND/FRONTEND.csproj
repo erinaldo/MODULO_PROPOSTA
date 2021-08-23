@@ -325,6 +325,7 @@
     <Content Include="js\vendor\XTABLES\Buttons-1.5.1\css\common.scss" />
     <Content Include="js\vendor\XTABLES\Buttons-1.5.1\css\mixins.scss" />
     <Content Include="js\vendor\XTABLES\language\Pt_BR.json" />
+    <Content Include="template\RoteiroConsistencia.html" />
     <Content Include="template\Roteiro_Dados_Comercial.html" />
     <Content Include="template\SimulacaoDispo.html" />
     <Content Include="template\modalHistorico.html" />

@@ -19,6 +19,11 @@
     $scope.CurrentTab = 'Midia'
     $scope.Consistencia = { 'Concorrencia': true, 'Outros': true, 'Rotativo': true };
     $scope.DadosComercial = "";
+    
+    $scope.newRoteiroConsistencia = function () {
+        return { 'Comerciais': [], 'FitaPendente': [], 'Break': [], 'Restricao': [], 'Concorrencia': [] }
+    }
+    $scope.RoteiroConsistencia = $scope.newRoteiroConsistencia();
     //===========================Carregar Guia de Programas
     $scope.CarregarGuiaProgramas = function (pFiltro) {
         if (!pFiltro.Cod_Veiculo || !pFiltro.Data_Exibicao) {
@@ -43,7 +48,10 @@
     };
     //===========================Carregar Roteiro
     $scope.CarregarRoteiro = function (pFiltro) {
-        var Marcado = false
+        var Marcado = false;
+        $scope.Roteiro = "";
+        $scope.Comerciais = "";
+        $scope.RoteiroConsistencia = $scope.newRoteiroConsistencia();
         for (var i = 0; i < $scope.Filtro.Programas.length; i++) {
             if ($scope.Filtro.Programas[i].Selected) {
                 Marcado = true;
@@ -55,6 +63,7 @@
         };
         var _Url = 'Roteiro/CarregarRoteiro';
         httpService.Post(_Url, pFiltro).then(function (response) {
+            $scope.Comerciais = [];
             if (response.data.length == 0) {
                 ShowAlert("Não existe Roteiro para esse Veiculo/Data");
             }
@@ -65,11 +74,12 @@
                 httpService.Post("Roteiro/CarregarComerciais", pFiltro).then(function (responseComercial) {
                     if (responseComercial.data) {
                         $scope.Comerciais = responseComercial.data;
-                        $scope.RenumeraItens($scope.Roteiro);
-                        $scope.DadosComercial = "";
                     }
+                    $scope.DadosComercial = "";
+                    $scope.RoteiroConsistencia = $scope.newRoteiroConsistencia();
+                    $scope.RenumeraItens($scope.Roteiro);
                 });
-            }
+            };
         });
     };
     //===========================Mostra/Oculta Roteiro do programa
@@ -102,13 +112,21 @@
     };
     //=================Renumera Itens do Roteiro e Comercial
     $scope.RenumeraItens = function (pRoteiro) {
+        var _sequenciaIntervalo = 0;
         for (var i = 0; i < pRoteiro.length; i++) {
+            if (pRoteiro[i].Indica_Titulo_Break) {
+                _sequenciaIntervalo = 0;
+            }
+            if (pRoteiro[i].Indica_Comercial) {
+                _sequenciaIntervalo++;
+            }
             pRoteiro[i].Id_Item = i;
+            pRoteiro[i].Sequencia_Intervalo = _sequenciaIntervalo;
         }
         for (var x = 0; x < $scope.Comerciais.length; x++) {
             $scope.Comerciais[x].Id_Item = x;
         }
-
+        
         var _totalIntervalo = 0;
         var _totalBreak = 0
         var _totalArtistico = 0
@@ -124,6 +142,7 @@
                 }
                 _totalBreak += pRoteiro[i].Duracao;
                 _total_Encaixe_Programa += pRoteiro[i].Duracao;
+                
             };
             if (pRoteiro[i].Indica_Titulo_Intervalo) {
                 if (pRoteiro[i].Tipo_Break == '2') {
@@ -249,10 +268,11 @@
         newItem.Cod_Veiculo_Origem = $scope.Comerciais[Index_Origem].Cod_Veiculo;
         newItem.Cod_Data_Exibicao = $scope.Comerciais[Index_Origem].Data_Exibicao;
         newItem.Chave_Acesso = $scope.Comerciais[Index_Origem].Chave_Acesso;
+        newItem.Horario_Restricao = $scope.Comerciais[Index_Origem].Horario_Restricao;
+        newItem.Cod_Produto_Root = $scope.Comerciais[Index_Origem].Cod_Produto_Root;
+        newItem.Nome_Produto_Root = $scope.Comerciais[Index_Origem].Nome_Produto_Root;
         //----------------Insere Novo Comercial no Roteiro
-
         $scope.Roteiro.splice(Index_Destino + 1, 0, newItem);
-
         //----------------Remove Comercial do grid de comerciais
         if ($scope.Comerciais[Index_Origem].Numero_Mr) {
             $scope.Comerciais[Index_Origem].Indica_Ordenado = true;
@@ -447,7 +467,7 @@
     $scope.ExcluirRoteiro = function (pFiltro) {
         var _data = { 'Cod_Veiculo': pFiltro.Cod_Veiculo, 'Data_Exibicao': pFiltro.Data_Exibicao, 'Cod_Programa': pFiltro.Cod_Programa }
         swal({
-            title: "Essa operação excluir o Roteiro total nesse dia. Tem certeza que deseja continuar ?",
+            title: "Essa operação irá excluir o Roteiro total nesse dia. Tem certeza que deseja continuar ?",
             //type: "warning",
             showCancelButton: true,
             confirmButtonClass: "btn-danger",
@@ -474,7 +494,6 @@
     };
     //===========================Mostra Dados da Fita
     $scope.MostraDadosFita = function (pItem, pTipo) {
-        console.log(pItem);
         var _data = ""
         if (pTipo == 'Roteiro') {
             _data = {
@@ -503,6 +522,47 @@
                 $("#modalDadosComercial").modal(true);
             };
         });
+    };
+    //===========================Consistir Ordenacao
+    $scope.ConsistirOrdenacao = function (pRoteiro)
+    {
+        $scope.CurrentCheck = 'checkBreak';
+        $scope.RoteiroConsistencia.Comerciais = $scope.Comerciais.filter(elem => elem.Origem == 'Midia' && !elem.Indica_Titulo_Programa && !elem.Indica_Ordenado);
+        $scope.RoteiroConsistencia.FitaPendente = $scope.Roteiro.filter(elem => elem.Indica_Comercial && !elem.Numero_Fita && elem.Permite_Ordenacao);
+        $scope.RoteiroConsistencia.Break = $scope.Roteiro.filter(elem => elem.Indica_Titulo_Intervalo || elem.Indica_Titulo_Programa);
+        $scope.RoteiroConsistencia.Restricao = $scope.Roteiro.filter(elem => elem.Indica_Comercial && Date.parse(elem.Horario_Restricao) > Date.parse(elem.Hora_Inicio_Programa) && elem.Horario_Restricao != '0001-01-01T00:00:00');
+        $scope.RoteiroConsistencia.Concorrencia = [];
+        for (var i = 0; i < $scope.Roteiro.length; i++) {
+            if ($scope.Roteiro[i].Indica_Comercial) {
+                $scope.addMatrizProduto($scope.Roteiro[i]);
+            };
+        };
+        $("#modalRoteiroConsistencia").modal(true);
+    }
+    //===========================Adiciona Matriz de Produto para mostrar consistencia do choque de concorrencia
+    $scope.addMatrizProduto = function (pItem) {
+        var _index = -1
+        for (var i = 0; i < $scope.RoteiroConsistencia.Concorrencia.length; i++) {
+            if ($scope.RoteiroConsistencia.Concorrencia[i].Cod_Programa == pItem.Cod_Programa && $scope.RoteiroConsistencia.Concorrencia[i].Break == pItem.Break && $scope.RoteiroConsistencia.Concorrencia[i].Cod_Produto_Root == pItem.Cod_Produto_Root) {
+                $scope.RoteiroConsistencia.Concorrencia[i].Posicao = $scope.RoteiroConsistencia.Concorrencia[i].Posicao + pItem.Sequencia_Intervalo.toString() + ",";
+                $scope.RoteiroConsistencia.Concorrencia[i].Qtd++;
+                _index = i;
+                break;
+            };
+        };
+        if (_index == -1) {
+            $scope.RoteiroConsistencia.Concorrencia.push({
+                'Cod_Programa': pItem.Cod_Programa,
+                'Titulo_Programa': pItem.Titulo_Programa,
+                'Cod_Comercial': pItem.Cod_Comercial,
+                'Titulo_Comercial': pItem.Titulo_Comercial,
+                'Cod_Produto_Root': pItem.Cod_Produto_Root,
+                'Nome_Produto_Root': pItem.Nome_Produto_Root,
+                'Break': pItem.Break,
+                'Posicao': pItem.Sequencia_Intervalo.toString() + ',',
+                'Qtd': 1
+            });
+        };
     };
     //===========================Imprimir Roteiro
     $scope.ImprimirRoteiro = function (pRoteiro) {
