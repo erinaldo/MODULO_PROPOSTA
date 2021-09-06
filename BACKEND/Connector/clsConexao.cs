@@ -144,7 +144,7 @@ namespace CLASSDB
                 cmd.Connection = oConnection;
                 cmd.ExecuteNonQuery();
             }
-            catch (Exception ex)
+            catch (Exception)
             {
                 //throw new Exception( ex.Message);
                  throw new Exception("Não foi possivel autenticar conexão com o Servidor de dados.");

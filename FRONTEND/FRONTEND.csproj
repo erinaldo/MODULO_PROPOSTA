@@ -130,8 +130,11 @@
     <Content Include="angular\Controller\MateriaisFitasCadastroController.js" />
     <Content Include="angular\Controller\MateriaisFitasController.js" />
     <Content Include="angular\Controller\ConsultaVeiculacaoController.js" />
+    <Content Include="angular\Controller\MenuReportController.js" />
     <Content Include="angular\Controller\NaturezadeServicoCadastroController.js" />
     <Content Include="angular\Controller\NaturezadeServicoController.js" />
+    <Content Include="angular\Controller\NucleoCadastroController.js" />
+    <Content Include="angular\Controller\NucleoController.js" />
     <Content Include="angular\Controller\NumeracaoCadastroController.js" />
     <Content Include="angular\Controller\NumeracaoController.js" />
     <Content Include="angular\Controller\NumeracaoFitasCadastroController.js" />
@@ -163,6 +166,7 @@
     <Content Include="angular\Controller\GrupoUsuarioController.js" />
     <Content Include="css\custom - Copy.css" />
     <Content Include="Index.html" />
+    <Content Include="IndexReport.html" />
     <Content Include="IndexAdm.html" />
     <Content Include="IndexChecking.html" />
     <Content Include="IndexFaturamento.html" />
@@ -375,9 +379,12 @@
     <Content Include="view\Am_Compensacao.html" />
     <Content Include="view\MateriaisFitas.html" />
     <Content Include="view\MateriaisFitasCadastro.html" />
+    <Content Include="view\menuReport.html" />
     <Content Include="view\MenuDashboard.html" />
     <Content Include="view\NaturezadeServico.html" />
     <Content Include="view\NaturezadeServicoCadastro.html" />
+    <Content Include="view\Nucleo.html" />
+    <Content Include="view\NucleoCadastro.html" />
     <Content Include="view\Numeracao.html" />
     <Content Include="view\NumeracaoCadastro.html" />
     <Content Include="view\NumeracaoFitas.html" />
@@ -483,7 +490,6 @@
     <Content Include="view\Veiculo.Html" />
     <Content Include="img\web.config" />
     <Content Include="view\VeiculoCadastro.html" />
-    <Content Include="Z-demo\HtmlPage1.html" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="angular\angular-bin\angular-csp.css" />
@@ -677,6 +683,7 @@
   <ItemGroup>
     <Folder Include="js\vendor\bootstrap-datetimepicker\" />
     <Folder Include="js\vendor\bootstrap-tagsinput\" />
+    <Folder Include="Z-demo\" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\BACKEND\BACKEND.csproj">

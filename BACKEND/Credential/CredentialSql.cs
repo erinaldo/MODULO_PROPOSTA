@@ -1,5 +1,6 @@
 ﻿using CLASSDB;
 using System;
+using System.Configuration;
 using System.Data;
 using System.Data.SqlClient;
 
@@ -47,12 +48,17 @@ namespace PROPOSTA
             DataTable dtb = new DataTable("dtb");
             SimLib clsLib = new SimLib();
             String pUser = this.CurrentUser;
+             AppSettingsReader AppRead = new AppSettingsReader();
+             String Register = AppRead.GetValue("Register", typeof(string)).ToString();
             try
             {
                 SqlCommand cmd = cnn.Procedure(cnn.Connection, "PR_Proposta_User_Data_S");
                 Adp.SelectCommand = cmd;
                 Adp.SelectCommand.Parameters.AddWithValue("@Par_Login", pUser);
                 Adp.Fill(dtb);
+                DataColumn newColumn = new DataColumn("Register", typeof(String));
+                newColumn.DefaultValue = Register;
+                dtb.Columns.Add(newColumn);
 
             }
             catch (Exception)

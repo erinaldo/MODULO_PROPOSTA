@@ -153,7 +153,7 @@
     };
 
     //====================Configuracao do Grid
-    $scope.ConfiguraGrid = function () {
+    $scope.ConfiguraGrid = function (pReport) {
         param = {};
         param.language = fnDataTableLanguage();
         param.lengthMenu = [[7, 10, 25, 50, -1], [7, 10, 25, 50, "Todos"]];

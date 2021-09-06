@@ -242,6 +242,10 @@
     <Compile Include="ConsultaRoteiroOrdenado\ConsultaRoteiroOrdenadoController.cs" />
     <Compile Include="ConsultaRoteiroOrdenado\ConsultaRoteiroOrdenadoModel.cs" />
     <Compile Include="ConsultaRoteiroOrdenado\ConsultaRoteiroOrdenadoSql.cs" />
+    <Compile Include="Report\ReportPrint.cs" />
+    <Compile Include="Report\ReportController.cs" />
+    <Compile Include="Report\ReportModel.cs" />
+    <Compile Include="Report\ReportSql.cs" />
     <Compile Include="CriticaValoracao\CriticaValoracaoController.cs" />
     <Compile Include="CriticaValoracao\CriticaValoracaoModel.cs" />
     <Compile Include="CriticaValoracao\CriticaValoracaoSql.cs" />
@@ -342,6 +346,9 @@
     <Compile Include="NaturezadeServico\NaturezadeServicoController.cs" />
     <Compile Include="NaturezadeServico\NaturezadeServicoModel.cs" />
     <Compile Include="NaturezadeServico\NaturezadeServicoSql.cs" />
+    <Compile Include="Nucleo\NucleoController.cs" />
+    <Compile Include="Nucleo\NucleoModel.cs" />
+    <Compile Include="Nucleo\NucleoSql.cs" />
     <Compile Include="Numeracao\NumeracaoController.cs" />
     <Compile Include="Numeracao\NumeracaoModel.cs" />
     <Compile Include="Numeracao\NumeracaoSql.cs" />
@@ -473,6 +480,13 @@
   </ItemGroup>
   <ItemGroup>
     <Content Include="Web.config" />
+    <Content Include="Report\Json\R0063D_DEF.json" />
+    <Content Include="Report\Json\EXEMPLO_FILTER.json" />
+    <Content Include="Report\Json\R0063D_FILTER.json" />
+    <Content Include="Report\Json\R0063R_DEF.json" />
+    <Content Include="Report\Json\R0063R_FILTER.json" />
+    <Content Include="Report\Json\R0067_DEF.json" />
+    <Content Include="Report\Json\R0067_FILTER.json" />
     <None Include="Web.Debug.config">
       <DependentUpon>Web.config</DependentUpon>
     </None>

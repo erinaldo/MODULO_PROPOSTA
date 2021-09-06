@@ -3,6 +3,9 @@ using System.Web.Http;
 using System.Data;
 using System.Globalization;
 using System.Data.OleDb;
+using CLASSDB;
+using System.Data.SqlClient;
+using Newtonsoft.Json;
 
 namespace PROPOSTA
 {
@@ -14,18 +17,26 @@ namespace PROPOSTA
         [ActionName("TesteApi")]
         public IHttpActionResult TesteApi()
         {
+            DataTable dtb = new DataTable("dtb");
+            string json = "";
+            SimLib clsLib = new SimLib();
             try
             {
+                clsConexao cnn = new clsConexao(clsLib.Criptografa("USRSCTVWEB"), clsLib.Criptografa(" PWSSCTVWEB"));
+                cnn.Open();
+                SqlDataAdapter Adp = new SqlDataAdapter();
                 
-
-                return Ok("teste ok");
+                SqlCommand cmd = cnn.Text(cnn.Connection, "Select * from R0058");
+                Adp.SelectCommand = cmd;
+                Adp.Fill(dtb);
+                json = JsonConvert.SerializeObject(dtb, Formatting.Indented);
 
             }
             catch (Exception Ex)
             {
                 throw new Exception(Ex.Message);
             }
-
+            return Ok(json);
         }
 
 

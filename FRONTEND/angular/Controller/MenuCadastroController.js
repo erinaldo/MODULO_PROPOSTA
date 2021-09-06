@@ -24,7 +24,9 @@
         { 'Link': 'Rede', 'Title': 'Redes' },
         { 'Link': 'NaturezadeServico', 'Title': 'Natureza de Serviços' },
         { 'Link': 'TiposComercializacao', 'Title': 'Tipo de Comercialização Midia On Line' },
-         { 'Link': 'Apresentadores', 'Title': 'Apresentadores' },
+        { 'Link': 'Apresentadores', 'Title': 'Apresentadores' },
+        { 'Link': 'Nucleo', 'Title': 'Núcleo de Vendas'}
+
     ];
     //===========================fim do load da pagina
     $scope.$watch('$viewContentLoaded', function () {

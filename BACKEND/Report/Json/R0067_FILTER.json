@@ -1,0 +1,153 @@
+﻿{
+  "Title": "Valores por Programa",
+  "ProcName": "PR_PROPOSTA_R0067",
+  "RptName": "R0067",
+  "ShowGrid":true,
+  "Filters": [
+    {
+      "ParameterName": "@Par_Competencia",
+      "Type": "Month",
+      "Label": "Competencia",
+      "Search": false,
+      "BigQuery": false,
+      "Dicionary": "",
+      "Value": "",
+      "Multiple": false,
+      "Class": "col-md-2 ",
+      "Required": true,
+      "ArrayValue": [ ]
+    },
+    {
+      "ParameterName": "@Par_Cod_Empresa_Faturamento",
+      "Type": "Text",
+      "Label": "Emp.Fat",
+      "Search": true,
+      "BigQuery": false,
+      "Dictionary": "Empresa_Usuario",
+      "Value": "",
+      "Multiple": false,
+      "Class": "col-md-2",
+      "Required": true,
+      "ArrayValue": [ ]
+    },
+    {
+      "ParameterName": "@Par_Veiculos",
+      "Type": "List",
+      "Label": "Veiculo",
+      "Search": true,
+      "BigQuery": false,
+      "Dictionary": "Veiculo",
+      "Value": "",
+      "Multiple": true,
+      "Class": "col-md-2",
+      "Required": false,
+      "ArrayValue": [ ]
+    },
+    {
+      "ParameterName": "@Par_Programas",
+      "Type": "List",
+      "Label": "Programa",
+      "Search": true,
+      "BigQuery": false,
+      "Dictionary": "Programa",
+      "Value": "",
+      "Multiple": true,
+      "Class": "col-md-2",
+      "Required": false,
+      "ArrayValue": [ ]
+    },
+    {
+      "ParameterName": "@Par_Tipo_Midias",
+      "Type": "List",
+      "Label": "Tipo de Mídia",
+      "Search": true,
+      "BigQuery": false,
+      "Dictionary": "TipoMidias",
+      "Value": "",
+      "Multiple": true,
+      "Class": "col-md-2",
+      "Required": false,
+      "ArrayValue": [ ]
+    },
+    {
+      "ParameterName": "@Par_Cod_Agencia",
+      "Type": "Text",
+      "Label": "Agência",
+      "Search": true,
+      "BigQuery": true,
+      "Dictionary": "Agencia",
+      "Value": "",
+      "Multiple": false,
+      "Class": "col-md-2",
+      "Required": false,
+      "ArrayValue": [ ]
+    },
+    {
+      "ParameterName": "@Par_Cod_Cliente",
+      "Type": "Text",
+      "Label": "Cliente",
+      "Search": true,
+      "BigQuery": true,
+      "Dictionary": "Cliente",
+      "Value": "",
+      "Multiple": false,
+      "Class": "col-md-2",
+      "Required": false,
+      "ArrayValue": [ ]
+    },
+    {
+      "ParameterName": "@Par_Tipo_Relatorio",
+      "Type": "Options",
+      "Label": "Opções de Impressão",
+      "Search": false,
+      "BigQuery": false,
+      "Dictionary": "",
+      "Value": 1,
+      "Multiple": false,
+      "Required": false,
+      "Class": "col-md-2",
+      "ArrayValue": [ ],
+      "Options": [
+        {
+          "Id": 1,
+          "Descricao": "Exibido"
+        },
+        {
+          "Id": 2,
+          "Descricao": "Demanda"
+        },
+        {
+          "Id": 3,
+          "Descricao": "Compensação"
+        }
+      ]
+    },
+    {
+      "ParameterName": "@Par_Tipo_Receita",
+      "Type": "Options",
+      "Label": "Opções de Receita",
+      "Search": false,
+      "BigQuery": false,
+      "Dictionary": "",
+      "Value": 3,
+      "Multiple": false,
+      "Required": false,
+      "Class": "col-md-2",
+      "ArrayValue": [ ],
+      "Options": [
+        {
+          "Id": 1,
+          "Descricao": "Gera Receita"
+        },
+        {
+          "Id": 2,
+          "Descricao": "Não Gera Receita"
+        },
+        {
+          "Id": 3,
+          "Descricao": "Ambos"
+        }
+      ]
+    }
+  ]
+}

@@ -1,0 +1,152 @@
+﻿{
+  "Title": "Faturamento por Programa",
+  "ProcName": "Pr_Report_Teste",
+  "Filters": [
+    {
+      "ParameterName": "@Par_Dt_Inicial",
+      "Type": "Date",
+      "Label": "Data Inicio",
+      "Search": false,
+      "BigQuery": false,
+      "Dicionary": "",
+      "Value": "",
+      "Multiple": false,
+      "Class": "col-md-2",
+      "ArrayValue": [ ]
+    },
+    {
+      "ParameterName": "@Par_Dt_Final",
+      "Type": "Date",
+      "Label": "Data Término",
+      "Search": false,
+      "BigQuery": false,
+      "Dicionary": "",
+      "Value": "",
+      "Multiple": false,
+      "Class": "col-md-2",
+      "ArrayValue": [ ]
+    },
+    {
+      "ParameterName": "@Par_Competencia",
+      "Type": "Month",
+      "Label": "Competência",
+      "Search": false,
+      "BigQuery": false,
+      "Dicionary": "",
+      "Value": "",
+      "Multiple": false,
+      "Class": "col-md-2",
+      "ArrayValue": [ ]
+    },
+    {
+      "ParameterName": "@Par_Cod_Empresa_Faturamento",
+      "Type": "Text",
+      "Label": "Emp.Fat",
+      "Search": true,
+      "BigQuery": false,
+      "Dictionary": "Empresa_Usuario",
+      "Value": "",
+      "Multiple": false,
+      "Class": "col-md-2",
+      "ArrayValue": [ ]
+    },
+    {
+      "ParameterName": "@Par_Cod_Veiculo",
+      "Type": "List",
+      "Label": "Veículo",
+      "Search": true,
+      "BigQuery": false,
+      "Dictionary": "Veiculo",
+      "Value": "",
+      "Multiple": true,
+      "Class": "col-md-2",
+      "ArrayValue": [ ]
+    },
+    {
+      "ParameterName": "@Par_Cod_Programa",
+      "Type": "Text",
+      "Label": "Programa",
+      "Search": true,
+      "BigQuery": false,
+      "Dictionary": "Programa",
+      "Value": "",
+      "Multiple": false,
+      "Class": "col-md-2",
+      "ArrayValue": [ ]
+    },
+    {
+      "ParameterName": "@Par_Cod_Agencia",
+      "Type": "Text",
+      "Label": "Agencia",
+      "Search": true,
+      "BigQuery": true,
+      "Dictionary": "Agencia",
+      "Value": "",
+      "Multiple": false,
+      "Class": "col-md-2",
+      "ArrayValue": [ ]
+    },
+    {
+      "ParameterName": "@Par_Cod_Cliente",
+      "Type": "Text",
+      "Label": "Cliente",
+      "Search": true,
+      "BigQuery": true,
+      "Dictionary": "Cliente",
+      "Value": "",
+      "Multiple": false,
+      "Class": "col-md-2",
+      "ArrayValue": [ ]
+    },
+    {
+      "ParameterName": "@Par_Tipo_Relatorio",
+      "Type": "Options",
+      "Label": "Opções de Impressão",
+      "Search": false,
+      "BigQuery": false,
+      "Dictionary": "",
+      "Value": "",
+      "Multiple": false,
+      "Class": "col-md-2",
+      "ArrayValue": [ ],
+      "Options": [
+        {
+          "Id": 1,
+          "Descricao": "Exibido"
+        },
+        {
+          "Id": 2,
+          "Descricao": "Demanda"
+        },
+        {
+          "Id": 3,
+          "Descricao": "Compensação"
+        }
+      ]
+    },
+    {
+      "ParameterName": "@Par_Visualiza_Veiculo",
+      "Type": "Boolean",
+      "Label": "Visualiza Veículos",
+      "Search": true,
+      "BigQuery": false,
+      "Dictionary": "",
+      "Value": false,
+      "Multiple": false,
+      "Class": "col-md-2",
+      "ArrayValue": [ ]
+    },
+    {
+      "ParameterName": "@Par_Mostra_Outras_Receitas",
+      "Type": "Boolean",
+      "Label": "Visualiza Outras Receitas",
+      "Search": true,
+      "BigQuery": false,
+      "Dictionary": "",
+      "Value": false,
+      "Multiple": false,
+      "Class": "col-md-2",
+      "ArrayValue": [ ]
+    },
+  ]
+}

@@ -277,7 +277,8 @@ namespace PROPOSTA
             SimLib clsLib = new SimLib();
             try
             {
-                string strText = "select db_name() as DataBaseName, @@SERVERNAME  as ServerName";
+                //string strText = "select db_name() as DataBaseName, @@SERVERNAME  as ServerName"; //NÃO MOSTRAR NOME DO SERVIDOR
+                string strText = "select db_name() as DataBaseName, '' as ServerName"; 
                 SqlCommand cmd = cnn.Text(cnn.Connection, strText);
                 Adp.SelectCommand = cmd;
                 Adp.Fill(dtb);

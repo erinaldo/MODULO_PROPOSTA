@@ -1,0 +1,218 @@
+﻿{
+  "Title": "Valores Investidos Detalhado",
+  "ProcName": "PR_PROPOSTA_R0063",
+  "RptName": "R0063D",
+  "ShowGrid":true,
+  "Filters": [
+    {
+      "ParameterName": "@Par_Dt_Inicial",
+      "Type": "Date",
+      "Label": "Data Inicio",
+      "Search": false,
+      "BigQuery": false,
+      "Dicionary": "",
+      "Value": "",
+      "Multiple": false,
+      "Class": "col-md-2",
+      "Required": true,
+      "ArrayValue": [ ]
+    },
+    {
+      "ParameterName": "@Par_Dt_Final",
+      "Type": "Date",
+      "Label": "Data Término",
+      "Search": false,
+      "BigQuery": false,
+      "Dicionary": "",
+      "Value": "",
+      "Multiple": false,
+      "Required": true,
+      "Class": "col-md-2",
+      "ArrayValue": [ ]
+    },
+    {
+      "ParameterName": "@Par_Cod_Empresa_Faturamento",
+      "Type": "Text",
+      "Label": "Emp.Fat",
+      "Search": true,
+      "BigQuery": false,
+      "Dictionary": "Empresa_Usuario",
+      "Value": "",
+      "Multiple": false,
+      "Required": true,
+      "Class": "col-md-2",
+      "ArrayValue": [ ]
+    },
+        {
+      "ParameterName": "@Par_Cod_Empresa_Venda",
+      "Type": "Text",
+      "Label": "Emp.Venda",
+      "Search": true,
+      "BigQuery": false,
+      "Dictionary": "Empresa_Usuario",
+      "Value": "",
+      "Multiple": false,
+      "Class": "col-md-2",
+      "ArrayValue": [ ]
+    },
+    {
+      "ParameterName": "@Par_Cod_Nucleo",
+      "Type": "Text",
+      "Label": "Núcleo",
+      "Search": true,
+      "BigQuery": false,
+      "Dictionary": "Nucleo",
+      "Value": "",
+      "Multiple": false,
+      "Class": "col-md-2",
+      "ArrayValue": [ ]
+    },
+    {
+      "ParameterName": "@Par_Cod_Contato",
+      "Type": "Text",
+      "Label": "Contato",
+      "Search": true,
+      "BigQuery": false,
+      "Dictionary": "Contato",
+      "Value": "",
+      "Multiple": false,
+      "Class": "col-md-2",
+      "ArrayValue": [ ]
+    },
+    {
+      "ParameterName": "@Par_Cod_Agencia",
+      "Type": "Text",
+      "Label": "Agencia",
+      "Search": true,
+      "BigQuery": true,
+      "Dictionary": "Agencia",
+      "Value": "",
+      "Multiple": false,
+      "Class": "col-md-2",
+      "ArrayValue": [ ]
+    },
+    {
+      "ParameterName": "@Par_Cod_Cliente",
+      "Type": "Text",
+      "Label": "Cliente",
+      "Search": true,
+      "BigQuery": true,
+      "Dictionary": "Cliente",
+      "Value": "",
+      "Multiple": false,
+      "Class": "col-md-2",
+      "ArrayValue": [ ]
+    },
+    {
+      "ParameterName": "@Par_Cod_Tipo_Midia",
+      "Type": "Text",
+      "Label": "Tipo de Mídia",
+      "Search": true,
+      "BigQuery": false,
+      "Dictionary": "TipoMidias",
+      "Value": "",
+      "Multiple": false,
+      "Class": "col-md-2",
+      "ArrayValue": [ ]
+    },
+    {
+      "ParameterName": "@Par_Gera_Receita",
+      "Type": "Options",
+      "Label": "Opções de Contratos",
+      "Search": false,
+      "BigQuery": false,
+      "Dictionary": "",
+      "Value": "",
+      "Multiple": false,
+      "Class": "col-md-3",
+      "ArrayValue": [ ],
+      "Options": [
+        {
+          "Id": 0,
+          "Descricao": "Não Geram Receita"
+        },
+        {
+          "Id": 1,
+          "Descricao": "Geram Receita"
+        },
+        {
+          "Id": 2,
+          "Descricao": "Ambos"
+        }
+      ]
+    },
+    {
+      "ParameterName": "@Par_Visualiza_Nucleo",
+      "Type": "Boolean",
+      "Label": "Visualizar Núcleo",
+      "Search": false,
+      "BigQuery": false,
+      "Dictionary": "",
+      "Value": true,
+      "Multiple": false,
+      "Class": "col-md-2",
+      "ArrayValue": [ ]
+    },
+    {
+      "ParameterName": "@Par_Visualiza_Contato",
+      "Type": "Boolean",
+      "Label": "Visualizar Contato",
+      "Search": false,
+      "BigQuery": false,
+      "Dictionary": "",
+      "Value": true,
+      "Multiple": false,
+      "Class": "col-md-2",
+      "ArrayValue": [ ]
+    },
+    {
+      "ParameterName": "@Par_Visualiza_Agencia",
+      "Type": "Boolean",
+      "Label": "Visualizar Agência",
+      "Search": false,
+      "BigQuery": false,
+      "Dictionary": "",
+      "Value": true,
+      "Multiple": false,
+      "Class": "col-md-2",
+      "ArrayValue": [ ]
+    },
+    {
+      "ParameterName": "@Par_Visualiza_Cliente",
+      "Type": "Boolean",
+      "Label": "Visualizar Cliente",
+      "Search": false,
+      "BigQuery": false,
+      "Dictionary": "",
+      "Value": true,
+      "Multiple": false,
+      "Class": "col-md-2",
+      "ArrayValue": [ ]
+    },
+    {
+      "ParameterName": "@Par_Visualiza_Tipo_Midia",
+      "Type": "Boolean",
+      "Label": "Visualizar Tipo de Mídia",
+      "Search": false,
+      "BigQuery": false,
+      "Dictionary": "",
+      "Value": true,
+      "Multiple": false,
+      "Class": "col-md-3",
+      "ArrayValue": [ ]
+    },
+    {
+      "ParameterName": "@Par_Indica_Consolidado",
+      "Type": "Boolean",
+      "Label": "Consolidar Empresas",
+      "Search": false,
+      "BigQuery": false,
+      "Dictionary": "",
+      "Value": "",
+      "Multiple": false,
+      "Class": "col-md-3",
+      "ArrayValue": [ ]
+    }
+    
+  ]
+}

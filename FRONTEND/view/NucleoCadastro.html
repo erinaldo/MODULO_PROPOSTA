@@ -1,0 +1,112 @@
+﻿<div class="container">
+    <form name="frmNucleoCadastro" autocomplete="off">
+        <div class="block">
+            <div class="row">
+                <!--===================Codigo-->
+                <div class="col-md-1">
+                    <div class="form-group">
+                        <label class="fieldrequired">Código do Nucleo</label>
+                        <input type="text"
+                               name="txtCod_Nucleo"
+                               ng-required="true"
+                               ng-model="Filtro.Cod_Nucleo"
+                               class="form-control"
+                               ng-disabled="Parameters.Action=='Edit'"
+                               ng-model-options="{updateOn: 'blur'}"
+                               maxlength="7" />
+                    </div>
+                </div>
+                <!--===================Descrição-->
+                <div class="col-md-2">
+                    <div class="form-group">
+                        <label class="fieldrequired">Descrição</label>
+                        <input type="text" name="txtDescricao" class="form-control" ng-model="Filtro.Descricao" maxlength="30" ng-required="true" />
+                    </div>
+                </div>
+            </div>
+            <div class="row">
+                <!--===================Empresa de Venda-->
+                <div class="col-md-1  " ng-controller="dictionaryController">
+                    <div class="dictionary" dictionary="Empresa_Usuario" caption="Empresa">
+                        <input id="txtCodEmpresa"
+                               ng-model="Filtro.Cod_Empresa"
+                               ng-model-options="{updateOn: 'blur'}"
+                               ng-change="DicionaryValidate('txtCodEmpresa')"
+                               primarybind="txtCodEmpresa"
+                               secondarybind="txtNomeEmpresa">
+                    </div>
+                </div>
+                <div class="col-md-3">
+                    <div class="form-group">
+                        <label for="txtNomeEmpresa" class="field-x" style="visibility:hidden">..</label>
+                        <div class="input-group">
+                            <input type="text" disabled="disabled" id="txtNomeEmpresa" class="form-control " ng-model="Filtro.Nome_Empresa">
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-md-1  " ng-controller="dictionaryController">
+                    <div class="dictionary" dictionary="Empresa_Usuario" caption="Empresa de Faturamento">
+                        <input id="txtCodEmpresaFatura"
+                               ng-model="Filtro.Cod_Empresa_Faturamento"
+                               ng-model-options="{updateOn: 'blur'}"
+                               ng-change="DicionaryValidate('txtCodEmpresaFatura')"
+                               primarybind="txtCodEmpresaFatura"
+                               secondarybind="txtNomeEmpresaFaturamento">
+                    </div>
+                </div>
+                <div class="col-md-3">
+                    <div class="form-group">
+                        <label for="txtNomeEmpresaFaturamento" class="field-x" style="visibility:hidden">..</label>
+                        <div class="input-group">
+                            <input type="text" disabled="disabled" id="txtNomeEmpresaFaturamento" class="form-control " ng-model="Filtro.Nome_EmpresaFaturamento">
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-md-1  " ng-controller="dictionaryController">
+                    <div class="dictionary" dictionary="Centro_Custo" caption="Centro de Custo">
+                        <input id="txtCod_Centro_Custo"
+                               ng-model="Filtro.Cod_Centro_Custo"
+                               ng-model-options="{updateOn: 'blur'}"
+                               ng-change="DicionaryValidate('txtCod_Centro_Custo')"
+                               primarybind="txtCod_Centro_Custo"
+                               secondarybind="txtNomeDescricao">
+                    </div>
+                </div>
+                <div class="col-md-3">
+                    <div class="form-group">
+                        <label for="txtNomeDescricao" class="field-x" style="visibility:hidden">..</label>
+                        <div class="input-group">
+                            <input type="text" disabled="disabled" id="txtNomeDescricao" class="form-control " ng-model="Filtro.NomeDescricao">
+                        </div>
+                    </div>
+                </div>
+            </div>            
+            <div class="row">
+                <!--===================Botoes-->
+                <div class="row margin-top-20">
+                    <div class="col-md-12">
+                        <button class="btn btn-success" ng-click="SalvarNucleo(Filtro)"
+                                ng-disabled="frmNucleoCadastro.$invalid">
+                            Salvar
+                        </button>
+                        <button class="btn btn-danger" ng-click="ExcluirNucleo(Filtro)" ng-show="PermissaoExcluir">Excluir</button>
+                        <!--<button class="btn btn-danger" ng-disabled="!PermissaoDestroy" ng-click="ExcluirMercado(Mercado) ">Excluir</button>-->
+                        <!--<button class="btn btn-danger" ng-click="excluirtipomidia(TipoMidia) ">Excluir</button>-->
+                        <a href="#Nucleo" class="btn btn-warning">Cancelar</a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </form>
+</div>
+
+<div ng-include="'template/SelectItem.html'"></div>
+<script type="text/javascript">
+        $(document).ready(function () {
+            GetDictionary();
+        });
+</script>

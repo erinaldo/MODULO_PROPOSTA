@@ -1163,6 +1163,30 @@
             routeName: 'Resumo da Permutas',
             RouteId: 'Permuta@Index'
         })
+          .when('/Nucleo', {
+              templateUrl: 'view/Nucleo.html',
+              authorize: true,
+              controller: 'NucleoController',
+              routeName: 'Tabela de Núcleos de Venda',
+              RouteId: 'Nucleo@Index'
+          })
+
+        .when('/NucleoCadastro/:Action/:Id', {
+            templateUrl: 'view/NucleoCadastro.html',
+            authorize: true,
+            controller: 'NucleoCadastroController',
+            routeName: 'Edição do Nucleo',
+            RouteId: 'NucleoCadastro@New'
+        })
+    .when('/report', {
+        templateUrl: 'view/MenuReport.html',
+        authorize: true,
+        controller: 'MenuReportController',
+        routeName: 'Relatórios',
+        RouteId: 'Report@Index'
+    })
+
+
     .otherwise({ redirectTo: "/blank" })
 });
 

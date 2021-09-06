@@ -89,6 +89,13 @@
              'color': 'white',
              'url': 'IndexPermuta.html'
          },
+         {
+             'Id': 10, 'Name': 'Relatórios',
+             'Text': 'Emissão de Relatórios diversos',
+             'bgcolor': 'rgba(116, 79, 219, 0.2)',
+             'color': '#000',
+             'url': 'IndexReport.html'
+         },
         {
             'Id': 10, 'Name': 'SIM-Mercado',
             'Text': 'Módulo Mercado Anunciante',
@@ -97,6 +104,7 @@
             'url': '',
             'directurl':$rootScope.simagenciaUrl,
         },
+        
     ];
     $scope.ShortMenus = [
         {
