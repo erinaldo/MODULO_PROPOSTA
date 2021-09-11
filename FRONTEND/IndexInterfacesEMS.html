@@ -1,7 +1,7 @@
 ﻿<!DOCTYPE html>
 <html lang="en" ng-app="App" ng-controller="MainController as Mc">
 <head ng-cloak>
-    <title ng-bind="'SIM-VENDAS - '+ routeName">Administração" </title>
+    <title ng-bind="'SIM-Interfaces EMS '+ routeName">Administração" </title>
     <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1">
@@ -43,16 +43,13 @@
                         </li>
                         <li><a href="#PortalApp" class="navbar-link"><span class="fa fa-home" style="display:inline-block;font-size:20px"></span></a></li>
                         <li><a href="#portal" class="navbar-link"><span class="fa fa-newspaper-o" style="display:inline-block;font-size:20px"></span></a></li>
-                        <li><a href="">Grade da Programação</a>
-                            <ul>
-                                <li><a href="#Grade" class="navbar-link"><span class="nav-icon-hexa">Pt</span>Manutenção da Grade</a></li>
-                                <li><a href="#HorarioExibicao"><span class="nav-icon-hexa">Us</span>Confirmação Horário da Programação</a></li>
-                                <li><a href="#DeParaPeriodo"><span class="nav-icon-hexa">Us</span>De-Para da Programação(Período)</a></li>
-                                <li><a href="#DeParaData"><span class="nav-icon-hexa">Us</span>De-Para da Programação(Data)</a></li>
-                            </ul>
-                        </li>
-                        <li><a href="#ConsultaProgramacaoDiaria"><span class="nav-icon-hexa">Us</span>Consulta da Disponibilidade</a></li>
-                        
+                        <li><a href="#AssociacaoContatos">Associação de Contatos</a></li>
+                        <li><a href="#AssociacaoProgramas">Associação de Programas</a></li>
+                        <li><a href="#Portador">Cadastro de Portadores</a></li>
+                        <li><a href="#IntegrarEMS">Integrar para E.M.S</a></li>
+                        <li><a href="#RetornarEMS">Retornar do E.M.S</a></li>
+                        <li><a href="#LogLista">Log da Lista Negra </a></li>
+
                         <li ng-controller="loginController"><a href="" ng-click="app_Logout()"><span class="icon-exit"></span> Sair</a></li>
                     </ul>
                 </nav>
@@ -112,7 +109,7 @@
                         document.write(year)
                     </script>
                     Cartv. Todos os direitos reservados.
-                    <span class="pull-right">{{AppVersion}}</span>
+                    <span class="pull-right">VERSÃO 1.0.93</span>
                 </div>
             </div>
         </div>
@@ -164,14 +161,19 @@
     <script src="angular/Controller/AprovarPendentes_Controller.js?Hash=V123"></script>
     <script src="angular/Controller/PortalApp.js?Hash=V123"></script>
     <!---====================================================================================Controles desse modulo-->
-    <script src="angular/Controller/GradeCadastroController.js?Hash=V123"></script>
-    <script src="angular/Controller/GradeController.js?Hash=V123"></script>
-    <script src="angular/Controller/ConsultaProgramacaoDiariaController.js?Hash=V123"></script>
-    <script src="angular/Controller/ConsultaProgramacaoDiariaDetalheController.js?Hash=V123"></script>
-    <script src="angular/Controller/PropagacaoGradeController.js?Hash=V123"></script>
-    <script src="angular/Controller/HorarioExibicaoController.js?Hash=V123"></script>
-    <script src="angular/Controller/DeParaPeriodo.js?Hash=V123"></script>
-    <script src="angular/Controller/DeParaData.js?Hash=V123"></script>
+    <script src="angular/Controller/AssociacaoContatosController.js?Hash=V123"></script>
+    <script src="angular/Controller/AssociacaoContatosCadastroController.js?Hash=V123"></script>
+    <script src="angular/Controller/AssociacaoProgramasController.js?Hash=V123"></script>
+    <script src="angular/Controller/AssociacaoProgramasCadastroController.js?Hash=V123"></script>
+    <script src="angular/Controller/PortadorController.js?Hash=V123"></script>
+    <script src="angular/Controller/PortadorCadastroController.js?Hash=V123"></script>
+
+
+    <!--<script src="angular/Controller/AssociacaoProgramasController.js?Hash=V123"></script>
+    <script src="angular/Controller/PortadoresController.js?Hash=V123"></script>
+    <script src="angular/Controller/IntegrarEMSController.js?Hash=V123"></script>
+    <script src="angular/Controller/RetornarEMSController.js?Hash=V123"></script>
+    <script src="angular/Controller/LogListaController.js?Hash=V123"></script>-->
     <!--====================================================================================PLUGINS -->
     <script src="js/vendor/XTABLES/DataTables-1.10.16/js/jquery.dataTables.js?Hash=V123"></script>
     <script src="js/vendor/XTABLES/DataTables-1.10.16/js/dataTables.bootstrap.min.js?Hash=V123"></script>

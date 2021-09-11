@@ -1,0 +1,110 @@
+﻿{
+  "Title": "Relatório de Faturas",
+  "ProcName": "PR_PROPOSTA_R0015",
+  "RptName": "R0015",
+  "ShowGrid":true,
+  "Filters": [
+    {
+      "ParameterName": "@Par_Data_Inicial",
+      "Type": "Date",
+      "Label": "Data Inicio",
+      "Search": false,
+      "BigQuery": false,
+      "Dicionary": "",
+      "Value": "",
+      "Multiple": false,
+      "Class": "col-md-2",
+      "Required": true,
+      "ArrayValue": [ ]
+    },
+    {
+      "ParameterName": "@Par_Data_Final",
+      "Type": "Date",
+      "Label": "Data Término",
+      "Search": false,
+      "BigQuery": false,
+      "Dicionary": "",
+      "Value": "",
+      "Multiple": false,
+      "Required": true,
+      "Class": "col-md-2",
+      "ArrayValue": [ ]
+    },
+    {
+      "ParameterName": "@Par_Empresa_Faturamento",
+      "Type": "Text",
+      "Label": "Emp.Fat",
+      "Search": true,
+      "BigQuery": false,
+      "Dictionary": "Empresa_Usuario",
+      "Value": "",
+      "Multiple": false,
+      "Required": true,
+      "Class": "col-md-2",
+      "ArrayValue": [ ]
+    },
+        {
+      "ParameterName": "@Par_Empresa_Venda",
+      "Type": "Text",
+      "Label": "Emp.Venda",
+      "Search": true,
+      "BigQuery": false,
+      "Dictionary": "Empresa_Usuario",
+      "Value": "",
+      "Multiple": false,
+      "Class": "col-md-2",
+      "ArrayValue": [ ]
+    },
+    {
+      "ParameterName": "@Par_Cod_Agencia",
+      "Type": "Text",
+      "Label": "Agencia",
+      "Search": true,
+      "BigQuery": true,
+      "Dictionary": "Agencia",
+      "Value": "",
+      "Multiple": false,
+      "Class": "col-md-2",
+      "ArrayValue": [ ]
+    },
+    {
+      "ParameterName": "@Par_Cod_Cliente",
+      "Type": "Text",
+      "Label": "Cliente",
+      "Search": true,
+      "BigQuery": true,
+      "Dictionary": "Cliente",
+      "Value": "",
+      "Multiple": false,
+      "Class": "col-md-2",
+      "ArrayValue": [ ]
+    },
+    
+    {
+      "ParameterName": "@Par_Tipo",
+      "Type": "Options",
+      "Label": "Opções de Faturas",
+      "Search": false,
+      "BigQuery": false,
+      "Dictionary": "",
+      "Value": 3,
+      "Multiple": false,
+      "Class": "col-md-2",
+      "ArrayValue": [ ],
+      "Options": [
+        {
+          "Id": 1,
+          "Descricao": "Emitidas"
+        },
+        {
+          "Id": 2,
+          "Descricao": "Canceladas"
+        },
+        {
+          "Id": 3,
+          "Descricao": "Todas as Faturas"
+        },
+      ]
+    }
+  ]
+}

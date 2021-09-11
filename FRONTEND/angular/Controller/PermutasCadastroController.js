@@ -296,15 +296,9 @@
     };
     //=====================================Calcular Valor da parcela a partir do percentual por item no modo de insercao
     $scope.CalcularItensValor_Unitario = function (pPermuta, pItem) {
-        console.log(pPermuta);
-       // pItem.Valor_Tabela = pPermuta.Valor_Verba;
         var quantidade = DoubleVal(pItem.Quantidade);
-        console.log(pItem.Valor_Unitario);
         var Valor_Unitario = DoubleVal(pItem.Valor_Unitario);
         var pct = DoubleVal(pItem.Desconto);
-        console.log(pItem.Desconto);
-        console.log((1 - (pct / 100)));
-        console.log(Valor_Unitario);
         pItem.Vlr_Liq_Unit = MoneyFormat(Valor_Unitario * (1-(pct / 100)));
         pItem.Valor_Tabela = MoneyFormat(Valor_Unitario * quantidade);
         pItem.Valor_Liquido = MoneyFormat((Valor_Unitario * quantidade) * (1-(pct / 100)))

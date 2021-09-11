@@ -1,0 +1,68 @@
+﻿<div class="container">
+    <form name="frmPortadorCadastro" autocomplete="off">
+        <div class="block">
+            <div class="row">
+                <!--===================ID-->
+                <div class="col-md-1" ng-show="Parameters.Action=='Edit'">
+                    <div class="form-group">
+                        <label>Id</label>
+                        <input type="text"
+                               name="txtId"
+                               ng-required="true"
+                               ng-model="portador.Id_Portador"
+                               ng-disabled="Parameters.Action=='Edit'"
+                               class="form-control"
+                               ng-model-options="{updateOn: 'blur'}"
+                               maxlength="10" />
+                    </div>
+                </div>
+            </div>
+            <!--===================Codigo-->
+            <div class="row">
+                <div class="col-md-2">
+                    <div class="form-group">
+                        <label class="fieldrequired">Código Portador</label>
+                        <input type="text"
+                               name="txtCod_Portador"
+                               ng-required="true"
+                               ng-model="portador.Cod_Portador"
+                               class="form-control"
+                               ng-model-options="{updateOn: 'blur'}"
+                               maxlength="10" />
+                    </div>
+                </div>
+            </div>
+            <!--===================Descricao-->
+            <div class="row">
+                <div class="col-md-4">
+                    <div class="form-group">
+                        <label class="fieldrequired">Descricao</label>
+                        <input type="text" name="txtDescricao" class="form-control" ng-model="portador.Descricao_Portador" maxlength="50" ng-required="true" />
+                    </div>
+                </div>
+            </div>
+            <div class="row">
+                <!--===================Botoes-->
+                <div class="fixed-buttons-bottom">
+                    <div class="row">
+                        <div class="col-md-12">
+                            <button class="btn btn-success" ng-click="SalvarPortador(portador)"
+                                    ng-disabled="frmPortadorCadastro.$invalid">
+                                Salvar
+                            </button>
+                            <button type="button" class="btn btn-danger" ng-click="excluirPortador(portador)" ng-show="Parameters.Action=='Edit'" ng-disabled="!PermissaoDelete">Excluir</button>
+                            <a href="#Portador" class="btn btn-warning">Cancelar</a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </form>
+</div>
+
+<div ng-include="'template/SelectItem.html'"></div>
+<script type="text/javascript">
+    $(document).ready(function () {
+        GetDictionary();
+    });
+</script>

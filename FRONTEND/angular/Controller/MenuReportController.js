@@ -2,9 +2,10 @@
 
     //===================Inicializa Scopes
     $scope.Reports = [
-        { 'Id': 1, 'Key': 'R0063R', 'Title': 'Valores Investidos - Resumido' },
-        { 'Id': 2, 'Key': 'R0063D', 'Title': 'Valores Investidos - Detalhado' },
-        { 'Id': 3, 'Key': 'R0067', 'Title': 'Valores por Programa' },
+        //{ 'Id': 1, 'Key': 'R0063R', 'Title': 'Valores Investidos - Resumido' },
+        { 'Id': 2, 'Key': 'R0063D', 'Title': 'Valores Investidos' },
+        { 'Id': 3, 'Key': 'R0067', 'Title': 'Valores por Contrato' },
+        { 'Id': 3, 'Key': 'R0015', 'Title': 'Relatório de Faturas' },
 
     ];
     $scope.gridheaders = [];
@@ -162,9 +163,10 @@
     };
     //===========================Carrega os dados para exibicao na tela
     $scope.CarregaGrid = function (pFilter) {
-        $scope.QtdLoad++;
+        
         httpService.Post("Report/LoadData", pFilter).then(function (response) {
             if (response.data.length > 0) {
+                $scope.QtdLoad++;
                 $scope.ReportData = response.data;
                 if ($scope.QtdLoad == 1) {
                     angular.forEach($scope.ReportData[0], function (value, key) {

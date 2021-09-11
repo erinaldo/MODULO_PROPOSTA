@@ -70,7 +70,7 @@
         },
         {
             'Id': 7, 'Name': 'SIM-Faturamento',
-            'Text': 'Complemento de Contratos, Geração de Pedidos, Integração ERP',
+            'Text': 'Complemento de Contratos, Geração de Pedidos.',
             'bgcolor': 'rgb(199, 197, 213)',
             'color': 'black',
             'url': 'indexFaturamento.html'
@@ -96,8 +96,16 @@
              'color': '#000',
              'url': 'IndexReport.html'
          },
+          {
+              'Id': 11, 'Name': 'SIM-Interfaces',
+              'Text': 'Parâmetros da Interface, Envio e Retorno de Dados E.M.S',
+              'bgcolor': '#98FB98',
+              'color': '#000',
+              'url': 'IndexInterfacesEMS.html',
+              'Register':'Jornal_Comercio'
+          },
         {
-            'Id': 10, 'Name': 'SIM-Mercado',
+            'Id': 12, 'Name': 'SIM-Mercado',
             'Text': 'Módulo Mercado Anunciante',
             'bgcolor': 'rgba(136, 10, 10, 0.36)',
             'color': '#000',
@@ -214,6 +222,29 @@
                 { 'Title': 'Grade de Merchandising', 'Url': $rootScope.pageUrl + 'IndexMercha.html#/GradeMercha' },
                 { 'Title': 'Veiculações de Merchandising', 'Url': $rootScope.pageUrl + 'IndexMercha.html#/ConsultaVeiculacoesMercha' },
                 { 'Title': 'Roteiro de Merchandising', 'Url': $rootScope.pageUrl + 'IndexMercha.html#/RoteiroMercha' },
+
+            ],
+        },
+        {
+            'Title': 'Permutas',
+            'SubItens': [
+                { 'Title': 'Controle de Permutas', 'Url': $rootScope.pageUrl + 'IndexPermuta.html#/Permutas' },
+            ],
+        },
+        {
+            'Title': 'Relatórios',
+            'SubItens': [
+                { 'Title': 'Menu de Relatórios', 'Url': $rootScope.pageUrl + 'IndexReport.html#/report' },
+            ],
+        },
+        {
+            'Title': 'Interfaces E.M.S',
+            'Register':'Jornal_Comercio',
+            'SubItens': [
+                { 'Title': 'Associação de Contatos', 'Url': $rootScope.pageUrl + 'IndexInterfacesEms.html#/AssociacaoContatos', },
+                { 'Title': 'Associação de Programas', 'Url': $rootScope.pageUrl + 'IndexInterfacesEms.html#/AssociacaoProgramas', },
+                { 'Title': 'Cadastro de Portadores', 'Url': $rootScope.pageUrl + 'IndexInterfacesEms.html#/Portador', },
+                { 'Title': 'Log da Lista Negra', 'Url': $rootScope.pageUrl + 'IndexInterfacesEms.html#/LogLista', },
 
             ],
         },

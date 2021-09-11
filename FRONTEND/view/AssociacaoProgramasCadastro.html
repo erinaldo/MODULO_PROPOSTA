@@ -1,0 +1,143 @@
+﻿<div class="container">
+
+    <form name="frmAssociacaoProgramaCadastro" autocomplete="off">
+        <div class="block">
+
+            <div id="divDados">
+                <div class="row">
+                    <!--===================Codigo-->
+                    <div class="col-md-2">
+                        <div class="form-group">
+                            <label for="txtCodEmpresaFaturamento" class="field-x">Cod.Emp Faturamento</label>
+                            <input type="text"
+                                   style="text-transform:uppercase"
+                                   name="txtCod_Contato"
+                                   ng-model="associacaoprograma.Cod_Empresa_Faturamento"
+                                   class="form-control"
+                                   ng-disabled="Parameters.Action=='Edit'"
+                                   ng-model-options="{updateOn: 'blur'}"
+                                   maxlength="4" />
+                        </div>
+                    </div>
+                    <!--===================Nome Empresa Faturamento -->
+                    <div class="col-md-4">
+                        <div class="form-group">
+                            <label for="txtNomeEmpresaFaturamento" class="field-x">Nome Empresa Faturamento</label>
+                            <input id="txtNomeEmpresaFaturamento"
+                                   class="form-control"
+                                   ng-model="associacaoprograma.Nome_Empresa_Faturamento"
+                                   ng-model-options="{updateOn: 'blur'}"
+                                   ng-disabled="Parameters.Action=='Edit'"
+                                   maxlength="50"
+                                   style="text-transform:uppercase">
+                        </div>
+                    </div>
+                </div>
+                <div class="row">
+
+                    <!--==================Código do Programa-->
+                    <div class="col-md-2">
+                        <div class="form-group">
+                            <label for="txtCodPrograma" class="field-x">Cod. de Programa </label>
+                            <input id="txtCodPrograma"
+                                   class="form-control"
+                                   ng-model="associacaoprograma.Cod_Programa"
+                                   ng-model-options="{updateOn: 'blur'}"
+                                   ng-disabled="Parameters.Action=='Edit'"
+                                   maxlength="4"
+                                   onkeypress="return NumericOnly(event)">
+                        </div>
+                    </div>
+
+                    <!--===================Título do Programa-->
+                    <div class="col-md-4">
+                        <div class="form-group">
+                            <label for="txtTitulo" class="field-x">Título</label>
+                            <input id="txtTitulo"
+                                   class="form-control"
+                                   ng-model="associacaoprograma.Titulo"
+                                   ng-model-options="{updateOn: 'blur'}"
+                                   ng-disabled="Parameters.Action=='Edit'"
+                                   maxlength="50"
+                                   style="text-transform:uppercase">
+                        </div>
+                    </div>
+
+                </div>
+
+                <!--==================Código do Item Faturamento Normal-->
+                <div class="row">
+                    <div class="col-md-2">
+                        <div class="form-group">
+                            <label for="txtCodItem" class="field-x">Cod.Item Faturamento Normal </label>
+                            <input id="txtCodItem"
+                                   class="form-control"
+                                   ng-model="associacaoprograma.Cod_Item"
+                                   ng-model-options="{updateOn: 'blur'}"
+                                    maxlength="16" />
+                        </div>
+                    </div>
+                </div>
+
+                <!--==================Código do Item Faturamento Antecipado-->
+                <div class="row">
+                    <div class="col-md-2">
+                        <div class="form-group">
+                            <label for="txtCodItemAntecipado" class="field-x">Cod.Item Fat.Antecipado </label>
+                            <input id="txtCodItemAntecipado"
+                                   class="form-control"
+                                   ng-model="associacaoprograma.Cod_Item_Antecipado"
+                                   ng-model-options="{updateOn: 'blur'}"
+                                   maxlength="16" />
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div id="divBotoes">
+                <div class="row">
+                    <!--===================Botoes-->
+                    <div class="row">
+                        <div class="fixed-buttons-bottom">
+                            <div class="col-md-12">
+                                <button class="btn btn-success" ng-click="SalvarAssociacaoProgramas(associacaoprograma)"
+                                        ng-disabled="frmAssociacaoProgramaCadastro.$invalid">
+                                    Salvar
+                                </button>
+                                <a href="#AssociacaoProgramas" class="btn btn-warning">Cancelar</a>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </form>
+</div>
+
+<div ng-include="'template/SelectItem.html'"></div>
+<div ng-include="'template/PesquisaTabela.html'"></div>
+<div ng-include="'template/MultiSelecaoVeiculo.html'"></div>
+<script type="text/javascript">
+    $(document).ready(function () {
+
+        GetDictionary();
+        $('.anchorscroll').click(function (e) {
+            var _target = this.getAttribute("target")
+            $('html, body').animate({
+                scrollTop: $('#' + _target).offset().top - 50
+            }, 'slow');
+        });
+        $('input[type=text]').css("text-transform", "uppercase");
+
+        $("span[control_group*='icon_group']").click(function (e) {
+            var _group = this.getAttribute("control_group");
+            _group = _group.replace('icon', 'input');
+            var el = document.querySelector('[control_group="' + _group + '"]');
+            if ($(el).is(':disabled')) {
+                event.stopPropagation();
+            };
+        });
+
+    });
+
+</script>

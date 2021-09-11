@@ -96,6 +96,10 @@
   <ItemGroup>
     <Content Include="angular\Controller\ApresentadoresCadastroController.js" />
     <Content Include="angular\Controller\ApresentadoresController.js" />
+    <Content Include="angular\Controller\AssociacaoContatosCadastroController.js" />
+    <Content Include="angular\Controller\AssociacaoContatosController.js" />
+    <Content Include="angular\Controller\AssociacaoProgramasCadastroController.js" />
+    <Content Include="angular\Controller\AssociacaoProgramasController.js" />
     <Content Include="angular\Controller\BaixaVeiculacaoSiteController.js" />
     <Content Include="angular\Controller\BaixaContratoController.js" />
     <Content Include="angular\Controller\BaixaRoteiroController.js" />
@@ -145,6 +149,8 @@
     <Content Include="angular\Controller\PermutasDetalhesController.js" />
     <Content Include="angular\Controller\PermutasEntregaCadastroController.js" />
     <Content Include="angular\Controller\PermutasResumoController.js" />
+    <Content Include="angular\Controller\PortadorCadastroController.js" />
+    <Content Include="angular\Controller\PortadorController.js" />
     <Content Include="angular\Controller\PrevisaoVendasAgenciaController.js" />
     <Content Include="angular\Controller\PrevisaoVendasCadastroAgenciaController.js" />
     <Content Include="angular\Controller\PrevisaoVendasCadastroMensalController.js" />
@@ -166,6 +172,7 @@
     <Content Include="angular\Controller\GrupoUsuarioController.js" />
     <Content Include="css\custom - Copy.css" />
     <Content Include="Index.html" />
+    <Content Include="IndexInterfacesEMS.html" />
     <Content Include="IndexReport.html" />
     <Content Include="IndexAdm.html" />
     <Content Include="IndexChecking.html" />
@@ -338,6 +345,10 @@
     <Content Include="view\Am_Reencaixe.html" />
     <Content Include="view\Apresentadores.html" />
     <Content Include="view\ApresentadoresCadastro.html" />
+    <Content Include="view\AssociacaoContatos.html" />
+    <Content Include="view\AssociacaoContatosCadastro.html" />
+    <Content Include="view\AssociacaoProgramas.html" />
+    <Content Include="view\AssociacaoProgramasCadastro.html" />
     <Content Include="view\BaixaContrato.html" />
     <Content Include="view\BaixaRoteiro.html" />
     <Content Include="view\BaixaVeiculacaoSite.html" />
@@ -403,6 +414,8 @@
     <Content Include="view\PermutasCadastro.html" />
     <Content Include="view\PermutasEntregaCadastro.html" />
     <Content Include="view\PermutasResumo.html" />
+    <Content Include="view\Portador.html" />
+    <Content Include="view\PortadorCadastro.html" />
     <Content Include="view\PreOrdenacao.html" />
     <Content Include="view\PrevisaoVendas.html" />
     <Content Include="view\PrevisaoVendasAgencia.html" />

@@ -1,0 +1,98 @@
+﻿<div class="container">
+
+    <form name="frmAssociacaoContatosCadastro" autocomplete="off">
+        <div class="block">
+
+            <div id="divDados">
+                <div class="row">
+                    <!--===================Codigo-->
+                    <div class="col-md-1" >
+                        <div class="form-group">
+                            <label  for="txtCod_Contato"  class="field-x">Código</label>
+                            <input type="text"
+                                   style="text-transform:uppercase"
+                                   name="txtCod_Contato"
+                                   ng-model="associacaocontato.Cod_Contato"
+                                   class="form-control"
+                                   ng-disabled="Parameters.Action=='Edit'"
+                                   ng-model-options="{updateOn: 'blur'}"
+                                   maxlength="5" />
+                        </div>
+                    </div>
+                    <!--===================Nome-->
+                    <div class="col-md-4">
+                        <div class="form-group">
+                            <label for="txtNome" class="field-x">Nome</label>
+                            <input id="txtNome"
+                                   class="form-control"
+                                   ng-model="associacaocontato.Nome"
+                                   ng-model-options="{updateOn: 'blur'}"
+                                    ng-disabled="Parameters.Action=='Edit'"
+                                   maxlength="30"
+                                   style="text-transform:uppercase">
+                        </div>
+                    </div>
+
+
+                        <!--==================Código do Representante-->
+                    <div class="col-md-2">
+                        <div class="form-group">
+                            <label for="txtCodRepresentante" class="field-x">Cod. de Representante</label>
+                            <input id="txtCodRepresentante"
+                                   class="form-control numeric"
+                                   ng-model="associacaocontato.Cod_Representante"
+                                   ng-model-options="{updateOn: 'blur'}"
+                                   style="text-align:right"
+                                   maxlength="20"
+                                   onkeypress="return NumericOnly(event)">
+                        </div>
+                    </div>
+                    </div>
+                </div>
+            <div id="divBotoes">
+                <div class="row">
+                    <!--===================Botoes-->
+                    <div class="row">
+                        <div class="fixed-buttons-bottom">
+                            <div class="col-md-12">
+                                <button class="btn btn-success" ng-click="SalvarContato(associacaocontato)"
+                                        ng-disabled="frmAssociacaoContatosCadastro.$invalid">
+                                    Salvar
+                                </button>
+                                <a href="#AssociacaoContatos" class="btn btn-warning">Cancelar</a>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </form>
+</div>
+
+<div ng-include="'template/SelectItem.html'"></div>
+<div ng-include="'template/PesquisaTabela.html'"></div>
+<div ng-include="'template/MultiSelecaoVeiculo.html'"></div>
+<script type="text/javascript">
+    $(document).ready(function () {
+
+        GetDictionary();
+        $('.anchorscroll').click(function (e) {
+            var _target = this.getAttribute("target")
+            $('html, body').animate({
+                scrollTop: $('#' + _target).offset().top - 50
+            }, 'slow');
+        });
+        $('input[type=text]').css("text-transform", "uppercase");
+
+        $("span[control_group*='icon_group']").click(function (e) {
+            var _group = this.getAttribute("control_group");
+            _group = _group.replace('icon', 'input');
+            var el = document.querySelector('[control_group="' + _group + '"]');
+            if ($(el).is(':disabled')) {
+                event.stopPropagation();
+            };
+        });
+
+    });
+
+</script>

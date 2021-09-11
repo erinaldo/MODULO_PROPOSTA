@@ -1,0 +1,87 @@
+﻿<style>
+    td, th {
+        white-space: nowrap !important;
+    }
+</style>
+<div class="container">
+    <div class="block">
+        <form id="frmPermutas" autocomplete="off">
+            <button type="button" id="btnNovoPermutas" class="btn btn-primary" style="display:none" ng-click="NovaPermutas()">Novo Filtro</button>
+            <button type="button" id="btnNovoFiltro" class="btn btn-primary" style="display:none" ng-click="CurrentShow='Filtro'">Novo Filtro</button>
+            <!--==============================================Filtros-->
+            <div class="box" ng-show="CurrentShow=='Filtro'">
+                <div class="alert alert-info alert-icon-block" role="alert">
+                    <div class="alert-icon">
+                        <span class="fa fa-filter"></span>
+                    </div>
+                    <strong>Filtros</strong>
+                </div>
+                <div class="row">
+                    <!--==============================================Empresa de Faturamento-->
+                    <div class="col-md-1" ng-controller="dictionaryController">
+                        <div class="dictionary" dictionary="Empresa_Usuario" caption="Emp.Faturamento">
+                            <input id="txtCodEmpresaFaturamento"
+                                   ng-model="Filtro.Cod_Empresa_Faturamento"
+                                   ng-model-options="{updateOn: 'blur'}"
+                                   ng-change="DicionaryValidate('txtCodEmpresaFaturamento')"
+                                   primarybind="txtCodEmpresaFaturamento"
+                                   secondarybind="txtNomeEmpresaFauramento">
+                        </div>
+                    </div>
+
+                    <div class="col-md-5">
+                        <div class="form-group">
+                            <label for="txtNomeEmpresaFauramento" class="field-x" style="visibility:hidden">..</label>
+                            <div class="input-group">
+                                <input type="text" disabled="disabled" id="txtNomeEmpresaFauramento" class="form-control " ng-model="Filtro.Nome_Empresa_Faturamento">
+                            </div>
+                        </div>
+                    </div>
+
+
+                </div>
+                <!--========================Botoes-->
+                <div class="row margin-top-20">
+                    <div class="col-md-12">
+                        <button type="button" class="btn btn-success" ng-click="CarregarAssociacaoProgramas(Filtro)">Filtrar</button>
+                        <button type="button" class="btn btn-warning" ng-click="Filtro=NewFiltro()">Limpar Filtros</button>
+                    </div>
+                </div>
+
+            </div>
+            <!--==============================================Grid -->
+            <div class="box table-responsive " style="min-height:600px" ng-show="CurrentShow=='Grid'">
+                <table id="dataTable" class="table table-striped table-bordered " cellspacing="0">
+                    <thead>
+                        <tr>
+                            <th></th>
+                            <th>Código</th>
+                            <th>Titulo</th>
+                            <th>Item</th>
+                            <th>Conta Contábil</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr ng-repeat="associacaoprograma in AssociacaoProgramas track by $index" on-finish-render="ngRepeatFinished">
+                            <td style="width:50px;text-align:center">
+                                <a href="#AssociacaoProgramasCadastro/Edit/{{associacaoprograma.Cod_Empresa_Faturamento}}/{{associacaoprograma.Cod_Programa}}" ng-show="PermissaoEdit">
+                                    <span class="fa fa-edit fa-2x"></span>
+                                </a>
+                            </td>
+                            <td>{{::associacaoprograma.Cod_Programa}}</td>
+                            <td>{{::associacaoprograma.Titulo}}</td>
+                            <td>{{::associacaoprograma.Cod_Item}}</td>
+                            <td>{{::associacaoprograma.Cod_Item_Antecipado}}</td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+        </form>
+    </div>
+</div>
+<div ng-include="'template/SelectItem.html'"></div>
+<script type="text/javascript">
+    $(document).ready(function () {
+        GetDictionary();
+    });
+</script>

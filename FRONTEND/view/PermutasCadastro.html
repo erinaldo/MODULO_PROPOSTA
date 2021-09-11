@@ -426,7 +426,7 @@
                                                ng-model-options="{updateOn: 'blur'}"
                                                onblur="this.value = MoneyFormat(this.value)"
                                                onfocus="this.value = DecimalUnformat(this.value)"
-                                               onkeypress="return NumericOnly(event)"
+                                               onkeypress="return DecimalOnly(event)"
                                                style="text-align:right"
                                                maxlength="18">
                                     </div>

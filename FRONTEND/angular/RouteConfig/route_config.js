@@ -1186,7 +1186,53 @@
         RouteId: 'Report@Index'
     })
 
+            .when('/AssociacaoContatos', {
+                templateUrl: 'view/AssociacaoContatos.html',
+                controller: 'AssociacaoContatosController',
+                authorize: true,
+                routeName: 'Associacao de Contatos',
+                RouteId: 'EMS@CONTATO'
+            })
 
+    .when('/AssociacaoContatosCadastro/:Action/:Id', {
+        templateUrl: 'view/AssociacaoContatosCadastro.html',
+        controller: 'AssociacaoContatosCadastroController',
+        authorize: true,
+        routeName: 'Associacao de Contatos',
+        RouteId: 'AssociacaoContatos@New'
+    })
+
+    .when('/AssociacaoProgramas', {
+        templateUrl: 'view/AssociacaoProgramas.html',
+        controller: 'AssociacaoProgramasController',
+        authorize: true,
+        routeName: 'Associacao de Programas',
+        RouteId: 'EMS@PROGRAMA'
+    })
+
+    .when('/AssociacaoProgramasCadastro/:Action/:Cod_Empresa_Faturamento/:Cod_Programa', {
+        templateUrl: 'view/AssociacaoProgramasCadastro.html',
+        controller: 'AssociacaoProgramasCadastroController',
+        authorize: true,
+        routeName: 'Associacao de Programas',
+        RouteId: 'AssociacaoProgramas@New'
+    })
+
+    .when('/Portador', {
+        templateUrl: 'view/Portador.html',
+        controller: 'PortadorController',
+        authorize: true,
+        routeName: 'Cadastro de Portadores',
+        RouteId: 'EMS@PORTADOR'
+    })
+
+    .when('/PortadorCadastro/:Action/:Id', {
+        templateUrl: 'view/PortadorCadastro.html',
+        controller: 'PortadorCadastroController',
+        authorize: true,
+        routeName: 'Cadastro de Portadores',
+        RouteId: 'Portador@New'
+    })
     .otherwise({ redirectTo: "/blank" })
 });
 

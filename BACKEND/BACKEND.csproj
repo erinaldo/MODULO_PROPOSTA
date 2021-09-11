@@ -242,6 +242,15 @@
     <Compile Include="ConsultaRoteiroOrdenado\ConsultaRoteiroOrdenadoController.cs" />
     <Compile Include="ConsultaRoteiroOrdenado\ConsultaRoteiroOrdenadoModel.cs" />
     <Compile Include="ConsultaRoteiroOrdenado\ConsultaRoteiroOrdenadoSql.cs" />
+    <Compile Include="InterfacesEMS\AssociacaoContatosController.cs" />
+    <Compile Include="InterfacesEMS\AssociacaoContatosModel.cs" />
+    <Compile Include="InterfacesEMS\AssociacaoContatosSql.cs" />
+    <Compile Include="InterfacesEMS\AssociacaoProgramasController.cs" />
+    <Compile Include="InterfacesEMS\AssociacaoProgramasModel.cs" />
+    <Compile Include="InterfacesEMS\AssociacaoProgramasSql.cs" />
+    <Compile Include="InterfacesEMS\PortadorController.cs" />
+    <Compile Include="InterfacesEMS\PortadorModel.cs" />
+    <Compile Include="InterfacesEMS\PortadorSql.cs" />
     <Compile Include="Report\ReportPrint.cs" />
     <Compile Include="Report\ReportController.cs" />
     <Compile Include="Report\ReportModel.cs" />
@@ -487,6 +496,8 @@
     <Content Include="Report\Json\R0063R_FILTER.json" />
     <Content Include="Report\Json\R0067_DEF.json" />
     <Content Include="Report\Json\R0067_FILTER.json" />
+    <Content Include="Report\Json\R0015_DEF.json" />
+    <Content Include="Report\Json\R0015_FILTER.json" />
     <None Include="Web.Debug.config">
       <DependentUpon>Web.config</DependentUpon>
     </None>
