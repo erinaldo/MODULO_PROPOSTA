@@ -248,6 +248,9 @@
     <Compile Include="InterfacesEMS\AssociacaoProgramasController.cs" />
     <Compile Include="InterfacesEMS\AssociacaoProgramasModel.cs" />
     <Compile Include="InterfacesEMS\AssociacaoProgramasSql.cs" />
+    <Compile Include="InterfacesEMS\LogListaEMSController.cs" />
+    <Compile Include="InterfacesEMS\LogListaEMSModel.cs" />
+    <Compile Include="InterfacesEMS\LogListaEMSSql.cs" />
     <Compile Include="InterfacesEMS\PortadorController.cs" />
     <Compile Include="InterfacesEMS\PortadorModel.cs" />
     <Compile Include="InterfacesEMS\PortadorSql.cs" />

@@ -1,0 +1,185 @@
+﻿<div class="container">
+    <div class="block">
+        <form id="frmLogListaEMS" autocomplete="off">
+            <button type="button" id="btnNovoLogListaEMS" class="btn btn-primary" style="display:none" ng-click="NovaLogListaEMS()">Novo Filtro</button>
+            <button type="button" id="btnNovoFiltro" class="btn btn-primary" style="display:none" ng-click="CurrentShow='Filtro'">Novo Filtro</button>
+
+            <!--======================================== CAMPOS DO FILTRO ============================================-->
+            <div id="divFiltro" class="box" ng-show="CurrentShow=='Filtro'">
+
+
+                <div class="alert alert-info alert-icon-block" role="alert">
+                    <div class="alert-icon">
+                        <span class="fa fa-filter"></span>
+                    </div>
+                    <strong>Filtros</strong>
+                </div>
+                <div class="block">
+                    <div class="row">
+                        <!--====================Data Inicial-->
+                        <div class="col-md-3">
+                            <div class="dictionary" dictionary="Data" caption="Data Inicial">
+                                <input ng-model="Filtro.Data_Inicial"
+                                       ng-required="true"
+                                       ui-date ng-model-options="{updateOn: 'blur'}"
+                                       placeholder="Informe a Data Inicial">
+                                <div class="dictionary-ui-calendar" ui-calendar typdate="Filtro.Data_Inicial"></div>
+                            </div>
+                        </div>
+                        <!--====================Data Final-->
+                        <div class="col-md-3">
+                            <div class="dictionary" dictionary="Data" caption="Data Final">
+                                <input ng-model="Filtro.Data_Final"
+                                       ng-required="true"
+                                       ui-date ng-model-options="{updateOn: 'blur'}"
+                                       placeholder="Informe a Data Final">
+                                <div class="dictionary-ui-calendar" ui-calendar typdate="Filtro.Data_Final"></div>
+                            </div>
+                        </div>
+
+
+                        <div class="col-md-2">
+                            <div class="form-group">
+                                <label class="field-x">CNPJ</label>
+                                <input type="text" name="txtCNPJ" class="form-control cnpj" ng-model="Filtro.CGC_Cliente" maxlength="18" placeholder="Digite uma parte do CNPJ" />
+                            </div>
+                        </div>
+
+                    </div>
+
+                    <div class="row">
+                        <!--==============================================Cliente-->
+
+                        <div class="col-md-2" ng-controller="dictionaryController">
+                            <div class="dictionary" dictionary="Cliente">
+                                <input id="txtCodCliente"
+                                       ng-model="Filtro.Cod_Cliente"
+                                       ng-model-options="{updateOn: 'blur'}"
+                                       ng-change="DicionaryValidate('txtCodCliente')"
+                                       primarybind="txtCodCliente"
+                                       secondarybind="txtNomeCliente" />
+                            </div>
+                        </div>
+                        <div class="col-md-6">
+                            <div class="form-group">
+                                <label for="txtNomeCliente" class="field-x" style="visibility:hidden">..</label>
+                                <div class="input-group">
+                                    <input type="text" disabled="disabled" id="txtNomeCliente" class="form-control " ng-model="Filtro.Nome_Cliente">
+                                </div>
+                            </div>
+                        </div>
+
+
+                    </div>
+                    <div class="row">
+                        <div class="col-md-4">
+                            <!--====================Flags de Tipo de Programação-->
+                            <div class="form-group field-x">
+                                <label>Programação</label>
+                                <div class="input-group" style="display:flex">
+                                    <div class="app-checkbox">
+                                        <label><input type="checkbox" name="app-checkbox-1" ng-model="Filtro.chkCom_Programacao" />Com Programação<span></span></label>
+                                    </div>
+                                    <div class="app-checkbox">
+                                        <label><input type="checkbox" name="app-checkbox-1" ng-model="Filtro.chkSem_Programacao" />Sem Programação<span></span></label>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="col-md-3">
+                            <!--====================Flags de Tipo de Operação-->
+                            <div class="form-group field-x">
+                                <label>Operação</label>
+                                <div class="input-group" style="display:flex">
+                                    <div class="app-checkbox">
+                                        <label><input type="checkbox" name="app-checkbox-1" ng-model="Filtro.chkDesativacao" />Desativação<span></span></label>
+                                    </div>
+                                    <div class="app-checkbox">
+                                        <label><input type="checkbox" name="app-checkbox-1" ng-model="Filtro.chkReativacao" />Reativação<span></span></label>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+
+                    </div>
+                </div>
+  
+                <!--============================================== BOTÕES DO FILTRO ==========================================-->
+                <div class="row margin-top-20">
+                    <div class="col-12">
+                        <button type="submit" class="btn btn-success" ng-click="CarregarConsultaLogLista(Filtro)">Filtrar</button>
+                        <button type="button" class="btn btn-warning" ng-click="Filtro=NewFiltro()">Limpar Filtro</button>
+                    </div>
+                </div>
+            </div>
+            <!--============================================== GRID DA GRADE =========================================-->
+            <div class="box table-responsive " style="min-height:600px" ng-show="CurrentShow=='Grid'">
+                
+                <!--===================================Grid-->
+                <table id="dataTable" class="table table-striped table-bordered">
+                    <thead>
+                        <tr>
+                            <th>Usuário</th>
+                            <th>Data Processamento</th>
+                            <th>Operação</th>
+                            <th>Histórico</th>
+                        </tr>
+
+                    </thead>
+                    <tbody>
+                        <tr ng-repeat="LogLista in LogListas track by $index" on-finish-render="ngRepeatFinished()">
+                            <td>{{::LogLista.Cod_Usuario}}</td>
+                            <td>{{::LogLista.Data_Processamento | date: "dd/MM/yyyy"}}</td>
+
+                            <td> 
+                                <div ng-show="LogLista.Operacao=='Reativacao'" style="color:blue">{{::LogLista.Operacao}}</div>
+                                <div ng-show="LogLista.Operacao=='Desativacao'" style="color:Red">{{::LogLista.Operacao}}</div>
+                            </td>
+                            <td>
+                                <span ng-show="LogLista.Numero_Mr">
+                                    Contrato:{{::LogLista.Cod_Empresa}}-{{::LogLista.Numero_Mr}}-{{::LogLista.Sequencia_Mr}}
+                                    <br ng-show="LogLista.Numero_Mr" />
+                                </span>
+                                <span ng-show="LogLista.Razao_Social_Cliente">
+                                    Cliente:{{LogLista.Razao_Social_Cliente}}
+                                    <br ng-show="LogLista.Razao_Social_Cliente" />
+                                </span>
+
+                                <span ng-show="LogLista.CGC_Cliente">
+                                    CNPJ Cliente:{{LogLista.CGC_Cliente}}
+                                    <br ng-show="LogLista.CGC_Cliente" />
+                                </span>
+
+                                <span ng-show="LogLista.Razao_Social_Agencia">
+                                    Agência:{{LogLista.Razao_Social_Agencia}}
+                                    <br ng-show="LogLista.Razao_Social_Agencia" />
+                                </span>
+
+                                <span ng-show="LogLista.Periodo_Veiculacao">
+                                    {{LogLista.Periodo_Veiculacao}}
+                                    <br ng-show="LogLista.Periodo_Veiculacao" />
+                                </span>
+
+                                <span ng-show="LogLista.Operacao">
+                                    Qtde de Veiculação {{LogLista.Operacao}}:{{LogLista.Qtd}}
+                                    <br ng-show="LogLista.Operacao" />
+                                </span>
+                            </td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+        </form>
+    </div>
+</div>
+<div ng-include="'template/SelectItem.html'"></div>
+<div ng-include="'template/PesquisaTabela.html'"></div>
+<script type="text/javascript">
+    $(document).ready(function () {
+        GetDictionary();
+        $('#ExportReporttoExcel').on('click', function () {
+            $('.buttons-excel').click()
+        });
+    });
+</script>

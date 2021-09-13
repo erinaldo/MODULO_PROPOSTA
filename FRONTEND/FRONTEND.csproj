@@ -131,6 +131,7 @@
     <Content Include="angular\Controller\HorarioExibicaoController.js" />
     <Content Include="angular\Controller\ImpressaoCeController.js" />
     <Content Include="angular\Controller\indexController.js" />
+    <Content Include="angular\Controller\LogListaEMSController.js" />
     <Content Include="angular\Controller\MateriaisFitasCadastroController.js" />
     <Content Include="angular\Controller\MateriaisFitasController.js" />
     <Content Include="angular\Controller\ConsultaVeiculacaoController.js" />
@@ -385,6 +386,7 @@
     <Content Include="view\GradeCadastro.html" />
     <Content Include="view\HorarioExibicao.html" />
     <Content Include="view\ImpressaoComprovante.html" />
+    <Content Include="view\LogListaEMS.html" />
     <Content Include="view\MapaReserva.html" />
     <Content Include="view\MapaReservaCadastro.html" />
     <Content Include="view\Am_Compensacao.html" />

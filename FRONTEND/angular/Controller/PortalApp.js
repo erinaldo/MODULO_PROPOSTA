@@ -244,6 +244,8 @@
                 { 'Title': 'Associação de Contatos', 'Url': $rootScope.pageUrl + 'IndexInterfacesEms.html#/AssociacaoContatos', },
                 { 'Title': 'Associação de Programas', 'Url': $rootScope.pageUrl + 'IndexInterfacesEms.html#/AssociacaoProgramas', },
                 { 'Title': 'Cadastro de Portadores', 'Url': $rootScope.pageUrl + 'IndexInterfacesEms.html#/Portador', },
+                { 'Title': 'Enviar para EMS', 'Url': $rootScope.pageUrl + 'IndexInterfacesEms.html#/IntegrarEMS', },
+                { 'Title': 'Retornar do EMS', 'Url': $rootScope.pageUrl + 'IndexInterfacesEms.html#/RetornarEMS', },
                 { 'Title': 'Log da Lista Negra', 'Url': $rootScope.pageUrl + 'IndexInterfacesEms.html#/LogLista', },
 
             ],

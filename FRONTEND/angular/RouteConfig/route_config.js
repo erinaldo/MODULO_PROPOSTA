@@ -1098,11 +1098,11 @@
         RouteId: 'Apresentadores@Index'
     })
     .when('/ApresentadoresCadastro/:Action/:Id', {
-    templateUrl: 'view/ApresentadoresCadastro.html',
-    authorize: true,
-    controller: 'ApresentadoresCadastroController',
-    routeName: 'Apresentadores - Cadastro',
-    RouteId: 'Apresentadores@New'
+        templateUrl: 'view/ApresentadoresCadastro.html',
+        authorize: true,
+        controller: 'ApresentadoresCadastroController',
+        routeName: 'Apresentadores - Cadastro',
+        RouteId: 'Apresentadores@New'
     })
     .when('/GradeMercha', {
         templateUrl: 'view/GradeMercha.html',
@@ -1233,6 +1233,14 @@
         routeName: 'Cadastro de Portadores',
         RouteId: 'Portador@New'
     })
+    .when('/LogListaEMS', {
+        templateUrl: 'view/LogListaEMS.html',
+        controller: 'LogListaEMSController',
+        authorize: true,
+        routeName: 'Log da Lista',
+        RouteId: 'EMS@LogListaEMS'
+    })
+
     .otherwise({ redirectTo: "/blank" })
 });
 
