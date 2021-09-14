@@ -3,9 +3,12 @@
     //===================Inicializa Scopes
     $scope.Reports = [
         //{ 'Id': 1, 'Key': 'R0063R', 'Title': 'Valores Investidos - Resumido' },
-        { 'Id': 2, 'Key': 'R0063D', 'Title': 'Valores Investidos' },
-        { 'Id': 3, 'Key': 'R0067', 'Title': 'Valores por Contrato' },
+        { 'Id': 1, 'Key': 'R0063D', 'Title': 'Valores Investidos' },
+        { 'Id': 2, 'Key': 'R0067', 'Title': 'Valores por Contrato' },
         { 'Id': 3, 'Key': 'R0015', 'Title': 'Relatório de Faturas' },
+        { 'Id': 4, 'Key': 'R0098', 'Title': 'Listagem de Checking' },
+        { 'Id': 5, 'Key': 'R0106', 'Title': 'Desconto por Contato' },
+
 
     ];
     $scope.gridheaders = [];

@@ -1,0 +1,60 @@
+﻿{
+  "Title": "Relatório de Desconto por Contato",
+  "ProcName": "PR_PROPOSTA_R0106",
+  "RptName": "R0106",
+  "ShowGrid":true,
+  "Filters": [
+    {
+      "ParameterName": "@Par_Vigencia_Inicial",
+      "Type": "Month",
+      "Label": "Vigência Inicial",
+      "Search": false,
+      "BigQuery": false,
+      "Dicionary": "",
+      "Value": "",
+      "Multiple": false,
+      "Class": "col-md-2 ",
+      "Required": true,
+      "ArrayValue": []
+    },
+
+    {
+      "ParameterName": "@Par_Vigencia_Final",
+      "Type": "Month",
+      "Label": "Vigência Final",
+      "Search": false,
+      "BigQuery": false,
+      "Dicionary": "",
+      "Value": "",
+      "Multiple": false,
+      "Class": "col-md-2 ",
+      "Required": true,
+      "ArrayValue": []
+    },
+    {
+      "ParameterName": "@Par_Cod_Empresa_Faturamento",
+      "Type": "Text",
+      "Label": "Emp.Fat",
+      "Search": true,
+      "BigQuery": false,
+      "Dictionary": "Empresa_Usuario",
+      "Value": "",
+      "Multiple": false,
+      "Required": true,
+      "Class": "col-md-2",
+      "ArrayValue": []
+    },
+    {
+      "ParameterName": "@Par_Cod_Contato",
+      "Type": "Text",
+      "Label": "Codigo Contato",
+      "Search": true,
+      "BigQuery": false,
+      "Dictionary": "Contato",
+      "Value": "",
+      "Multiple": false,
+      "Class": "col-md-2",
+      "ArrayValue": []
+    }
+  ]
+}

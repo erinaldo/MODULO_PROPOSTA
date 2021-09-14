@@ -1,0 +1,129 @@
+﻿{
+  "Title": "Listagem de Checking",
+  "ProcName": "PR_PROPOSTA_R0098",
+  "RptName": "R0098",
+  "ShowGrid":true,
+  "Filters": [
+    {
+      "ParameterName": "@Par_Cod_Veiculo",
+      "Type": "Text",
+      "Label": "Veículo",
+      "Search": true,
+      "BigQuery": false,
+      "Dictionary": "Veiculo",
+      "Value": "",
+      "Multiple": false,
+      "Class": "col-md-2",
+      "Required": true,
+      "ArrayValue": []
+    },
+
+    {
+      "ParameterName": "@Par_Data_Exibicao",
+      "Type": "Date",
+      "Label": "Data Exibição",
+      "Search": false,
+      "BigQuery": false,
+      "Dictionary": "",
+      "Value": "",
+      "Multiple": false,
+      "Class": "col-md-2",
+      "Required": true,
+      "ArrayValue": []
+    },
+
+    {
+      "ParameterName": "@Par_Cod_Programa",
+      "Type": "Text",
+      "Label": "Código Programa",
+      "Search": true,
+      "BigQuery": false,
+      "Dictionary": "Programa",
+      "Value": "",
+      "Multiple": false,
+      "Required": false,
+      "Class": "col-md-2",
+      "ArrayValue": []
+    },
+    {
+      "ParameterName": "@Par_Cod_Qualidade",
+      "Type": "Text",
+      "Label": "Codigo Qualidade",
+      "Search": true,
+      "BigQuery": false,
+      "Dictionary": "Qualidade",
+      "Value": "",
+      "Multiple": false,
+      "Class": "col-md-2",
+      "ArrayValue": []
+    },
+    {
+      "ParameterName": "@Par_Situacao_Veiculacao",
+      "Type": "Options",
+      "Label": "Situação da Veiculação",
+      "Search": false,
+      "BigQuery": false,
+      "Dictionary": "",
+      "Value": 3,
+      "Multiple": false,
+      "Class": "col-md-2",
+      "ArrayValue": [],
+      "Options": [
+        {
+          "Id": 1,
+          "Descricao": "Veiculações com Falhas"
+        },
+        {
+          "Id": 2,
+          "Descricao": "Veiculações sem Falhas"
+        },
+        {
+          "Id": 3,
+          "Descricao": "Ambos"
+        }
+      ]
+    },
+
+    {
+      "ParameterName": "@Par_Situacao_Roteiro",
+      "Type": "Options",
+      "Label": "Situação do Roteiro",
+      "Search": false,
+      "BigQuery": false,
+      "Dictionary": "",
+      "Value": 3,
+      "Multiple": false,
+      "Class": "col-md-2",
+      "ArrayValue": [],
+      "Options": [
+        {
+          "Id": 1,
+          "Descricao": "Veiculações Ordenadas"
+        },
+        {
+          "Id": 2,
+          "Descricao": "Veiculações Desordenadas"
+        },
+        {
+          "Id": 3,
+          "Descricao": "Ambos"
+        }
+      ]
+    },
+    {
+      "ParameterName": "@Par_Indica_Canceladas",
+      "Type": "Boolean",
+      "Label": "Não Imprimir Veiculações Canceladas",
+      "Search": true,
+      "BigQuery": false,
+      "Dictionary": "",
+      "Value": "",
+      "Multiple": false,
+      "Class": "col-md-3",
+      "ArrayValue": []
+    }
+
+
+
+  ]
+}

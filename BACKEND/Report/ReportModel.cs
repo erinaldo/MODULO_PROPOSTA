@@ -31,7 +31,7 @@ namespace PROPOSTA
             public String Label { get; set; }
             public String Search { get; set; }
             public Boolean BigQuery { get; set; }
-            public String Dicionary { get; set; }
+            public String Dictionary { get; set; }
             public String Value { get; set; }
             public Boolean Multiple { get; set; }
             public String Class { get; set; }

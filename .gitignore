@@ -332,3 +332,4 @@ ASALocalRun/
 *.PDF
 BACKEND/Web.config
 BACKEND/Web.config
+BACKEND/BACKEND.csproj
