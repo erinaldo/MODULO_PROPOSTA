@@ -145,6 +145,7 @@
         param.dom = "<'row'<'col-sm-6'B><'col-sm-3'l><'col-sm-3'f>>" + "<'row'<'col-sm-12'tr>>" + "<'row'<'col-sm-5'i><'col-sm-7'p>>",
         param.buttons = [
             { text: 'Abrir no Excel<span class="fa fa-file-excel-o margin-left-10" style="color:white"></span>', type: 'excel', className: 'btn btn-warning', extend: 'excel', },
+            { text: 'Gerar PDF' + '<span class="fa fa-arrow-circle-o-left margin-left-10"></span>', className: 'btn btn-info', action: function (e, dt, button, config) { $('#btnGerarPdf').click(); } },
             { text: 'Voltar' + '<span class="fa fa-arrow-circle-o-left margin-left-10"></span>', className: 'btn btn-info', action: function (e, dt, button, config) { $('#btnNovoFiltro').click(); } },
         ];
         param.order = [];

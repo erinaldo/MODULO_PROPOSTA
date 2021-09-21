@@ -127,7 +127,7 @@
         <div class="fixed-buttons-bottom">
             <div class="row" ng-show="CurrentShow=='Filter'">
                 <div class="col-md-12">
-                    <button class="btn btn-success" ng-click="PrintReport(Filter)" ng-disabled="frmReport.$invalid">Gerar Pdf</button>
+                    <button class="btn btn-success"  id="btnGerarPdf" ng-click="PrintReport(Filter)" ng-disabled="frmReport.$invalid">Gerar Pdf</button>
                     <button class="btn btn-success" ng-show="Filter.ShowGrid" ng-click="CarregaGrid(Filter)" ng-disabled="frmReport.$invalid">Mostrar na Tela</button>
                     <button type="button" class="btn btn-info" ng-click="ReportFilter (CurrentReport)">Limpar Filtro</button>
                     <button class="btn btn-warning" ng-click="CancelarReport()">Cancela</button>
