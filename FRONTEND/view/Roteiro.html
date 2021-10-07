@@ -191,7 +191,9 @@
                                     <td colspan="6"
                                         class="LinhaPrograma"
                                         ng-show="item.Indica_Titulo_Programa">
-                                        {{item.Cod_Programa}}-{{item.Titulo_Programa}}{{item.Hora_Inicio_Programa |date:'HH:mm'}} as {{item.Hora_Fim_Programa|date:'HH:mm'}}
+                                        <span class="span-btn" ng-click="ScroolComercial(item.Cod_Programa)">
+                                            {{item.Cod_Programa}}-{{item.Titulo_Programa}}{{item.Hora_Inicio_Programa |date:'HH:mm'}} as {{item.Hora_Fim_Programa|date:'HH:mm'}}
+                                        </span>
                                         <span ng-class="item.Show?'fa fa-minus span-btn pull-right':'fa fa-plus -btn pull-right'"
                                               ng-click="fnShowHide(item.Id_Programa)">
                                         </span>
@@ -319,7 +321,7 @@
                             </tr>
                         </thead>
                         <tbody>
-                            <tr ng-repeat="comercial in Comerciais |filter:{Pasta:CurrentTab,Indica_Ordenado:false}">
+                            <tr ng-repeat="comercial in Comerciais |filter:{Pasta:CurrentTab,Indica_Ordenado:false}" id="row_{{comercial.Cod_Programa}}">
                                 <!-------------------------Linha Titulo do Programa-->
                                 <td colspan="5" class="LinhaPrograma"
                                     ng-show="comercial.Indica_Titulo_Programa">
@@ -428,10 +430,10 @@
             </div>
         </div>
     </form>
-</div><div ng-include="'template/SelectItem.html'"></div>
-<div ng-include="'template/PesquisaTabela.html'"></div>
-<div ng-include="'template/Roteiro_Dados_Comercial.html'"></div>
-<div ng-include="'template/RoteiroConsistencia.html'"></div>
+    </div><div ng-include="'template/SelectItem.html'"></div>
+    <div ng-include="'template/PesquisaTabela.html'"></div>
+    <div ng-include="'template/Roteiro_Dados_Comercial.html'"></div>
+    <div ng-include="'template/RoteiroConsistencia.html'"></div>
 <script type="text/javascript">
     $(document).ready(function () {
         GetDictionary();

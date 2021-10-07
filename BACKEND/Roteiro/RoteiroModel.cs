@@ -73,6 +73,8 @@ namespace PROPOSTA
             public DateTime Horario_Restricao { get; set; }
             public Int32 Cod_Produto_Root { get; set; }
             public String Nome_Produto_Root { get; set; }
+            public Boolean Indica_Rejeitar_Rotativo{ get; set; }
+
         }
         public class RoteiroFiltroModel
         {
@@ -180,7 +182,14 @@ namespace PROPOSTA
             public String Cod_Veiculo { get; set; }
             public String Data_Exibicao { get; set; }
         }
-
+        
+        public class FiltroAgrupamentoPatrocinioModel
+        {
+            public String Cod_Empresa { get; set; }
+            public Int32 Numero_Mr{ get; set; }
+            public Int32 Sequencia_Mr{ get; set; }
+            public string Numero_Fita{ get; set; }
+        }
     }
-
+    
 }

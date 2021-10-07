@@ -389,13 +389,14 @@
                             <table class="table table-striped table-bordered">
                                 <thead>
                                     <tr>
-                                        <th colspan="6" style="text-align:center;background-color:#f5f5f5">Contratos</th>
+                                        <th colspan="7" style="text-align:center;background-color:#f5f5f5">Contratos</th>
                                     </tr>
                                     <tr>
                                         <th>Tipo Comercial</th>
                                         <th>Contrato</th>
                                         <th>Cliente</th>
                                         <th>Comercial</th>
+                                        <th>N.Fita</th>
                                         <th>Duracao</th>
                                         <th>Periodo Exib.</th>
                                     </tr>
@@ -406,6 +407,7 @@
                                         <td>{{contrato.Cod_Empresa}}-{{contrato.Numero_Mr}}-{{contrato.Sequencia_Mr}}</td>
                                         <td>{{contrato.Cod_Cliente}}-{{contrato.Nome_Cliente}}</td>
                                         <td>{{contrato.Cod_Comercial}}-{{contrato.Titulo_Comercial}}</td>
+                                        <td>{{contrato.Numero_Fita}}</td>
                                         <td>{{contrato.Duracao}}</td>
                                         <td>{{contrato.Data_Inicio |date:"dd/MM/yyyy"}} a {{contrato.Data_Fim |date:"dd/MM/yyyy"}}</td>
                                     </tr>

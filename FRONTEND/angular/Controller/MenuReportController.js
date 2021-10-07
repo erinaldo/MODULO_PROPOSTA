@@ -7,8 +7,7 @@
         { 'Id': 2, 'Key': 'R0067', 'Title': 'Valores por Contrato' },
         { 'Id': 3, 'Key': 'R0015', 'Title': 'Relatório de Faturas' },
         { 'Id': 4, 'Key': 'R0098', 'Title': 'Listagem de Checking' },
-        { 'Id': 5, 'Key': 'R0106', 'Title': 'Desconto por Contato' },
-
+        { 'Id': 5, 'Key': 'R0106', 'Title': 'Desconto por Contato' }
 
     ];
     $scope.gridheaders = [];
@@ -167,7 +166,6 @@
     };
     //===========================Carrega os dados para exibicao na tela
     $scope.CarregaGrid = function (pFilter) {
-        
         httpService.Post("Report/LoadData", pFilter).then(function (response) {
             if (response.data.length > 0) {
                 $scope.QtdLoad++;

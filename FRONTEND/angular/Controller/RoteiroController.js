@@ -19,7 +19,9 @@
     $scope.CurrentTab = 'Midia'
     $scope.Consistencia = { 'Concorrencia': true, 'Outros': true, 'Rotativo': true };
     $scope.DadosComercial = "";
-    
+    $scope.ShowDadosComercial = true;
+    $scope.AgrupamentoPatrocinio = "";
+    $scope.ShowAgrupamento = false;
     $scope.newRoteiroConsistencia = function () {
         return { 'Comerciais': [], 'FitaPendente': [], 'Break': [], 'Restricao': [], 'Concorrencia': [] }
     }
@@ -217,7 +219,11 @@
         }
         //---------------------Horarios de Rotativos
         if ($scope.Comerciais[Index_Origem].Pasta == 'Rotativo') {
-            var _valido = true;
+            if ($scope.Roteiro[Index_Destino].Indica_Rejeitar_Rotativo) {
+                if ($scope.Consistencia.Rotativo) {
+                    _Mensagem += "\n Esse Programa não permite encaixar Rotativos."
+                }
+            };
             if ($scope.Comerciais[Index_Origem].Hora_Fim_Programa < $scope.Roteiro[Index_Destino].Hora_Inicio_Programa
                 || $scope.Comerciais[Index_Origem].Hora_Inicio_Programa > $scope.Roteiro[Index_Destino].Hora_Fim_Programa) {
                 if ($scope.Consistencia.Rotativo) {
@@ -515,7 +521,8 @@
                 'Origem': pItem.Origem
             };
         };
-
+        $scope.MostraDados = true;
+        $scope.MostraGrupo = false;
         httpService.Post("Roteiro/DadosComercial", _data).then(function (response) {
             if (response.data) {
                 $scope.DadosComercial = response.data[0];
@@ -586,6 +593,28 @@
                 ShowAlert("Não existe Roteiro a ser Impresso", "warning")
             }
         });
+    };
+    //===========================Scrol Grid Comerciais
+    $scope.ScroolComercial = function (pCodPrograma) {
+        var _id = 'row_' + pCodPrograma;
+        var elm = document.getElementById(_id);
+        if (elm) {
+            elm.scrollIntoView(true);
+        };
+    };
+    //===========================Carrega Agrupamento de Fitas patrocinio
+    $scope.MostrarAgrupamento = function (pComercial) {
+        $scope.MostraGrupo = true;
+        $scope.MostraDados = false;
+        httpService.Post("Roteiro/AgrupamentoPatrocinio", pComercial).then(function (response) {
+            if (response.data) {
+                $scope.AgrupamentoPatrocinio = response.data;
+            }
+        });
+    };
+    $scope.RetornaDadosComercial = function () {
+        $scope.MostraGrupo = false;
+        $scope.MostraDados = true;
     };
     //===========================fim do load da pagina
     $scope.$watch('$viewContentLoaded', function () {

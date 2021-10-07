@@ -505,6 +505,7 @@
     <Content Include="Report\Json\R0098_DEF.json" />
     <Content Include="Report\Json\R0106_FILTER.json" />
     <Content Include="Report\Json\R0106_DEF.json" />
+    <Content Include="Report\Json\R0183_FILTER.json" />
     <None Include="Web.Debug.config">
       <DependentUpon>Web.config</DependentUpon>
     </None>

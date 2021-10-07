@@ -1,0 +1,61 @@
+﻿{
+  "Title": "Valor Médio por Programa",
+  "ProcName": "PR_PROPOSTA_R0183",
+  "RptName": "R0183",
+  "ShowGrid": true,
+  "Custom": true,
+  "Filters": [
+    {
+      "ParameterName": "@Par_Data_Inicio",
+      "Type": "Date",
+      "Label": "Período Inicio",
+      "Search": false,
+      "BigQuery": false,
+      "Dictionary": "",
+      "Value": "",
+      "Multiple": false,
+      "Class": "col-md-2 ",
+      "Required": true,
+      "ArrayValue": []
+    },
+    {
+      "ParameterName": "@Par_Data_Fim",
+      "Type": "Date",
+      "Label": "Período Término",
+      "Search": false,
+      "BigQuery": false,
+      "Dictionary": "",
+      "Value": "",
+      "Multiple": false,
+      "Class": "col-md-2 ",
+      "Required": true,
+      "ArrayValue": [ ]
+    },
+      {
+      "ParameterName": "@Par_Cod_Veiculo",
+      "Type": "Text",
+      "Label": "Veiculo",
+      "Search": true,
+      "BigQuery": false,
+      "Dictionary": "Veiculo",
+      "Value": "",
+      "Multiple": false,
+      "Class": "col-md-2 ",
+      "Required": true,
+      "ArrayValue": []
+    },
+      {
+      "ParameterName": "@Par_Cod_Programa",
+      "Type": "Text",
+      "Label": "Programa",
+      "Search": true,
+      "BigQuery": false,
+      "Dictionary": "Programa",
+      "Value": "",
+      "Multiple": false,
+      "Class": "col-md-2 ",
+      "Required": false,
+      "ArrayValue": []
+    }
+  ]
+}

@@ -288,6 +288,27 @@ namespace PROPOSTA
             }
         }
 
+        [Route("api/Roteiro/AgrupamentoPatrocinio")]
+        [HttpPost]
+        [ActionName("DadosComercial")]
+        [Authorize()]
+        public IHttpActionResult AgrupamentoPatrocinio([FromBody] Roteiro.FiltroAgrupamentoPatrocinioModel Param)
+        {
+            SimLib clsLib = new SimLib();
+            Roteiro Cls = new Roteiro(User.Identity.Name);
+            try
+            {
+                DataTable retorno = Cls.AgrupamentoPatrocinio(Param);
+                return Ok(retorno);
+            }
+            catch (Exception Ex)
+            {
+                clsLib.EmailErrorToSuporte(User.Identity.Name, Ex.Message.ToString(), Ex.Source, Ex.StackTrace);
+                throw new Exception(Ex.Message);
+            }
+        }
+
+
     }
 
 }

@@ -33,6 +33,7 @@ namespace PROPOSTA
             public Boolean Indica_Internet { get; set; }
             public Boolean Indica_Faixa { get; set; }
             public Boolean Indica_Merchandising{ get; set; }
+            public Boolean Indica_Rejeitar_Rotativo{ get; set; }
             public Int32   Qtd_Cotas { get; set; }
             public String Horario_Exibicao { get; set; }
             public Boolean Indica_Patrocinio { get; set; }

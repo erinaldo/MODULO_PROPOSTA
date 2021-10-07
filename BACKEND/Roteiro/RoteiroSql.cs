@@ -101,8 +101,7 @@ namespace PROPOSTA
                                 Id_Break = Contador_Break,
                                 Id_Intervalo = Contador_Intervalo,
                                 Permite_Ordenacao = drw["Permite_Ordenacao"].ToString().ConvertToBoolean(),
-                                
-
+                                Indica_Rejeitar_Rotativo = drw["Indica_Rejeitar_Rotativo"].ToString().ConvertToBoolean(),
                                 Show = true,
                             });
                             Cod_Programa_Ant = drw["Cod_Programa"].ToString();
@@ -253,6 +252,7 @@ namespace PROPOSTA
                     Horario_Restricao = drw["Horario_Restricao_Dt"].ToString().ConvertToDatetime(),
                     Cod_Produto_Root = drw["Cod_Produto_Root"].ToString().ConvertToInt32(),
                     Nome_Produto_Root = drw["Nome_Produto_Root"].ToString(),
+                    Indica_Rejeitar_Rotativo = drw["Indica_Rejeitar_Rotativo"].ToString().ConvertToBoolean(),
                     Show = true
                 });
             }
@@ -978,6 +978,33 @@ namespace PROPOSTA
                 Adp.SelectCommand.Parameters.AddWithValue("@Par_Origem", iOrigem);
 
 
+                Adp.Fill(dtb);
+            }
+            catch (Exception)
+            {
+                throw;
+            }
+            finally
+            {
+                cnn.Close();
+            }
+            return dtb;
+        }
+        public DataTable AgrupamentoPatrocinio(FiltroAgrupamentoPatrocinioModel pParam)
+        {
+            clsConexao cnn = new clsConexao(this.Credential);
+            cnn.Open();
+            SqlDataAdapter Adp = new SqlDataAdapter();
+            DataTable dtb = new DataTable("dtb");
+            SimLib clsLib = new SimLib();
+            try
+            {
+                SqlCommand cmd = cnn.Procedure(cnn.Connection, "Pr_Fita_Patrocinio_Consulta_Agrupamento_Contrato");
+                Adp.SelectCommand = cmd;
+                Adp.SelectCommand.Parameters.AddWithValue("@Par_Cod_Empresa", pParam.Cod_Empresa);
+                Adp.SelectCommand.Parameters.AddWithValue("@Par_Numero_Mr", pParam.Numero_Mr);
+                Adp.SelectCommand.Parameters.AddWithValue("@Par_Sequencia_Mr", pParam.Sequencia_Mr);
+                Adp.SelectCommand.Parameters.AddWithValue("@Par_Numero_Fita", pParam.Numero_Fita);
                 Adp.Fill(dtb);
             }
             catch (Exception)

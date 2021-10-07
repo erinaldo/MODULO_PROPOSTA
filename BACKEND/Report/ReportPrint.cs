@@ -50,7 +50,7 @@ namespace PROPOSTA
                 catch (Exception)
                 {
                 }
-                //=========================Gera pdf para cada mapa da simulacao
+                //=========================Gera pdf  
 
                 if (GerarPdf(Rpt, sPath, strFilePdf))
                 {

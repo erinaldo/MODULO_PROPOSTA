@@ -185,6 +185,7 @@ namespace PROPOSTA
                 Adp.SelectCommand.Parameters.AddWithValue("@Par_Data_Inicio", Param.Inicio_Validade.ConvertToDatetime());
                 Adp.SelectCommand.Parameters.AddWithValue("@Par_Data_Fim", Param.Fim_Validade.ConvertToDatetime());
                 Adp.SelectCommand.Parameters.AddWithValue("@Par_Cod_Programa", Param.Cod_Programa);
+                Adp.SelectCommand.Parameters.AddWithValue("@Par_Numero_Fita", Param.Numero_Fita);
                 Adp.Fill(dtb);
             }
             catch (Exception)
