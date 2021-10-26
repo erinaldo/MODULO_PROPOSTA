@@ -31,14 +31,24 @@ namespace webapi
                 var password = context.Password;
                 var cartv_token = "";
                 var validar_token = false;
-                if (context.Request.Headers.Keys.Contains("Cartv-Token"))
+                var data = await context.Request.ReadFormAsync(); // implementado em 21/10 para obter parametros adicionais
+
+                //if (context.Request.Headers.Keys.Contains("Cartv-Token"))
+                //{
+                //     cartv_token = context.Request.Headers["Cartv-Token"].ToString();
+                //}
+
+                if ( !String.IsNullOrEmpty(data["Cartv-Token"]))
                 {
-                     cartv_token = context.Request.Headers["Cartv-Token"].ToString();
+                    cartv_token = context.Request.Headers["Cartv-Token"].ToString();
                 }
 
-                if (context.Request.Headers.Keys.Contains("CallFrom"))
+
+                //if (context.Request.Headers.Keys.Contains("CallFrom"))
+                if (!String.IsNullOrEmpty(data["CallFrom"]))
                 {
-                    if (context.Request.Headers["CallFrom"].ToString()=="Browser")
+                    //if (context.Request.Headers["CallFrom"].ToString()=="Browser")
+                    if (data["CallFrom"].ToString() == "Browser")
                     {
                         validar_token = true;
                     }

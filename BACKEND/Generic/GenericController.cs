@@ -17,26 +17,9 @@ namespace PROPOSTA
         [ActionName("TesteApi")]
         public IHttpActionResult TesteApi()
         {
-            DataTable dtb = new DataTable("dtb");
-            string json = "";
-            SimLib clsLib = new SimLib();
-            try
-            {
-                clsConexao cnn = new clsConexao(clsLib.Criptografa("USRSCTVWEB"), clsLib.Criptografa(" PWSSCTVWEB"));
-                cnn.Open();
-                SqlDataAdapter Adp = new SqlDataAdapter();
-                
-                SqlCommand cmd = cnn.Text(cnn.Connection, "Select * from R0058");
-                Adp.SelectCommand = cmd;
-                Adp.Fill(dtb);
-                json = JsonConvert.SerializeObject(dtb, Formatting.Indented);
+            
 
-            }
-            catch (Exception Ex)
-            {
-                throw new Exception(Ex.Message);
-            }
-            return Ok(json);
+            return Ok("A Api Respondeu com Sucesso");
         }
 
 
