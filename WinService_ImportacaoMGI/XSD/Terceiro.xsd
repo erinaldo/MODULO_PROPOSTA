@@ -1,0 +1,147 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<xs:schema id="Terceiro" targetNamespace="http://tempuri.org/Terceiro.xsd" elementFormDefault="qualified"
+	attributeFormDefault="qualified" xmlns="http://tempuri.org/Terceiro.xsd" xmlns:mstns="http://tempuri.org/Terceiro.xsd"
+	xmlns:xs="http://www.w3.org/2001/XMLSchema" xmlns:msdata="urn:schemas-microsoft-com:xml-msdata">
+	<xs:element name="Terceiro" msdata:IsDataSet="true">
+		<xs:complexType>
+			<xs:choice maxOccurs="unbounded">
+				<xs:element name="dtbTerceiro">
+					<xs:complexType>
+						<xs:sequence>
+							<xs:element name="Cod_Terceiro" type="xs:string" />
+							<xs:element name="Razao_Social" type="xs:string" minOccurs="0" />
+							<xs:element name="Nome_Fantasia" type="xs:string" minOccurs="0" />
+							<xs:element name="Cod_Funcao" type="xs:int" minOccurs="0" />
+							<xs:element name="CPF_CNPJ" type="xs:string" minOccurs="0" />
+							<xs:element name="Inscricao_Estadual" type="xs:string" minOccurs="0" />
+							<xs:element name="Inscricao_Municipal" type="xs:string" minOccurs="0" />
+						</xs:sequence>
+					</xs:complexType>
+				</xs:element>
+				<xs:element name="dtbTerceiro_Endereco">
+					<xs:complexType>
+						<xs:sequence>
+							<xs:element name="Cod_Terceiro" type="xs:string" />
+							<xs:element name="Tipo_Endereco" type="xs:string" minOccurs="0" />
+							<xs:element name="Endereco" type="xs:string" minOccurs="0" />
+							<xs:element name="Bairro" type="xs:string" minOccurs="0" />
+							<xs:element name="Municipio" type="xs:string" minOccurs="0" />
+							<xs:element name="UF" type="xs:string" minOccurs="0" />
+							<xs:element name="Cep" type="xs:string" minOccurs="0" />
+							<xs:element name="Telefone" type="xs:string" minOccurs="0" />
+							<xs:element name="Fax" type="xs:string" minOccurs="0" />
+							<xs:element name="EMail" type="xs:string" minOccurs="0" />
+							<xs:element name="Numero" type="xs:string" minOccurs="0"></xs:element>
+							<xs:element name="Complemento" type="xs:string" minOccurs="0"></xs:element>
+						</xs:sequence>
+					</xs:complexType>
+				</xs:element>
+				<xs:element name="dtbTerceiro_Funcao">
+					<xs:complexType>
+						<xs:sequence>
+							<xs:element name="Cod_Funcao" type="xs:int" />
+							<xs:element name="Descricao" type="xs:string" minOccurs="0" />
+							<xs:element name="Cod_Root" type="xs:int" minOccurs="0" />
+						</xs:sequence>
+					</xs:complexType>
+				</xs:element>
+				<xs:element name="dtbMGI_Terceiro_Funcao">
+					<xs:complexType>
+						<xs:sequence>
+							<xs:element name="Origem" type="xs:int" />
+							<xs:element name="Cod_Funcao" type="xs:int" />
+							<xs:element name="Descricao" type="xs:string" minOccurs="0" />
+						</xs:sequence>
+					</xs:complexType>
+				</xs:element>
+				<xs:element name="dtbMGI_Terceiro">
+					<xs:complexType>
+						<xs:sequence>
+							<xs:element name="Origem" type="xs:int" />
+							<xs:element name="Cod_Terceiro" type="xs:string" />
+							<xs:element name="Razao_Social" type="xs:string" minOccurs="0" />
+							<xs:element name="Cod_Funcao" type="xs:int" minOccurs="0" />
+							<xs:element name="Nome_Fantasia" type="xs:string" minOccurs="0" />
+							<xs:element name="CPF_CNPJ" type="xs:string" minOccurs="0" />
+							<xs:element name="Inscricao_Estadual" type="xs:string" minOccurs="0" />
+							<xs:element name="Inscricao_Municipal" type="xs:string" minOccurs="0" />
+						</xs:sequence>
+					</xs:complexType>
+				</xs:element>
+				<xs:element name="dtbMGI_Terceiro_Endereco">
+					<xs:complexType>
+						<xs:sequence>
+							<xs:element name="Origem" type="xs:int" />
+							<xs:element name="Cod_Terceiro" type="xs:string" />
+							<xs:element name="Tipo_Endereco" type="xs:string" />
+							<xs:element name="Endereco" type="xs:string" minOccurs="0" />
+							<xs:element name="Bairro" type="xs:string" minOccurs="0" />
+							<xs:element name="Municipio" type="xs:string" minOccurs="0" />
+							<xs:element name="Uf" type="xs:string" minOccurs="0" />
+							<xs:element name="Cep" type="xs:string" minOccurs="0" />
+							<xs:element name="Telefone" type="xs:string" minOccurs="0" />
+							<xs:element name="Fax" type="xs:string" minOccurs="0" />
+							<xs:element name="EMail" type="xs:string" minOccurs="0" />
+							<xs:element name="Numero" type="xs:string" minOccurs="0"></xs:element>
+							<xs:element name="Complemento" type="xs:string" minOccurs="0" />
+						</xs:sequence>
+					</xs:complexType>
+				</xs:element>
+			</xs:choice>
+		</xs:complexType>
+		<xs:key name="TerceiroKey">
+			<xs:selector xpath=".//mstns:dtbTerceiro" />
+			<xs:field xpath="mstns:Cod_Terceiro" />
+		</xs:key>
+		<xs:keyref name="dtbTerceirodtbTerceiro_Endereco" refer="TerceiroKey" msdata:ConstraintOnly="true"
+			msdata:DeleteRule="Cascade" msdata:UpdateRule="Cascade">
+			<xs:selector xpath=".//mstns:dtbTerceiro_Endereco" />
+			<xs:field xpath="mstns:Cod_Terceiro" />
+		</xs:keyref>
+		<xs:unique name="TerceiroKey1" msdata:PrimaryKey="true">
+			<xs:selector xpath=".//mstns:dtbTerceiro_Funcao" />
+			<xs:field xpath="mstns:Cod_Funcao" />
+		</xs:unique>
+		<xs:keyref name="dtbTerceiro_FuncaodtbTerceiro" refer="TerceiroKey1" msdata:ConstraintOnly="true"
+			msdata:DeleteRule="Cascade" msdata:UpdateRule="Cascade">
+			<xs:selector xpath=".//mstns:dtbTerceiro" />
+			<xs:field xpath="mstns:Cod_Funcao" />
+		</xs:keyref>
+		<xs:unique name="TerceiroKey2" msdata:PrimaryKey="true">
+			<xs:selector xpath=".//mstns:dtbMGI_Terceiro_Funcao" />
+			<xs:field xpath="mstns:Origem" />
+			<xs:field xpath="mstns:Cod_Funcao" />
+		</xs:unique>
+		<xs:unique name="TerceiroKey3" msdata:PrimaryKey="true">
+			<xs:selector xpath=".//mstns:dtbMGI_Terceiro" />
+			<xs:field xpath="mstns:Origem" />
+			<xs:field xpath="mstns:Cod_Terceiro" />
+		</xs:unique>
+		<xs:unique name="TerceiroKey4" msdata:PrimaryKey="true">
+			<xs:selector xpath=".//mstns:dtbMGI_Terceiro_Endereco" />
+			<xs:field xpath="mstns:Origem" />
+			<xs:field xpath="mstns:Cod_Terceiro" />
+			<xs:field xpath="mstns:Tipo_Endereco" />
+		</xs:unique>
+		<xs:keyref name="dtbMGI_TerceirodtbMGI_Terceiro_Endereco" refer="TerceiroKey3" msdata:ConstraintOnly="true"
+			msdata:DeleteRule="Cascade" msdata:UpdateRule="Cascade">
+			<xs:selector xpath=".//mstns:dtbMGI_Terceiro_Endereco" />
+			<xs:field xpath="mstns:Origem" />
+			<xs:field xpath="mstns:Cod_Terceiro" />
+		</xs:keyref>
+		<xs:key name="dtbMGITerceiroKey2">
+			<xs:selector xpath=".//mstns:dtbMGI_Terceiro" />
+			<xs:field xpath="mstns:Cod_Terceiro" />
+		</xs:key>
+		<xs:key name="dtbMGITerceiro_EnderecoKey2">
+			<xs:selector xpath=".//mstns:dtbMGI_Terceiro_Endereco" />
+			<xs:field xpath="mstns:Cod_Terceiro" />
+			<xs:field xpath="mstns:Tipo_Endereco" />
+		</xs:key>
+		<xs:key name="TerceiroKey5">
+			<xs:selector xpath=".//mstns:dtbTerceiro_Endereco" />
+			<xs:field xpath="mstns:Cod_Terceiro" />
+			<xs:field xpath="mstns:Tipo_Endereco" />
+		</xs:key>
+	</xs:element>
+</xs:schema>

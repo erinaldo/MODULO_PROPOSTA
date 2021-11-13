@@ -17,7 +17,8 @@
     <AssemblyName>webapi</AssemblyName>
     <TargetFrameworkVersion>v4.5.2</TargetFrameworkVersion>
     <UseIISExpress>true</UseIISExpress>
-    <IISExpressSSLPort />
+    <IISExpressSSLPort>
+    </IISExpressSSLPort>
     <IISExpressAnonymousAuthentication />
     <IISExpressWindowsAuthentication />
     <IISExpressUseClassicPipelineMode />
@@ -506,6 +507,22 @@
     <Content Include="Report\Json\R0106_FILTER.json" />
     <Content Include="Report\Json\R0106_DEF.json" />
     <Content Include="Report\Json\R0183_FILTER.json" />
+    <Content Include="Report\Json\R0010_DEF.json" />
+    <Content Include="Report\Json\R0010_FILTER.json" />
+    <Content Include="Report\Json\R0021_DEF.json" />
+    <Content Include="Report\Json\R0021_FILTER.json" />
+    <Content Include="Report\Json\R0027_DEF.json" />
+    <Content Include="Report\Json\R0027_FILTER.json" />
+    <Content Include="Report\Json\R0052_DEF.json" />
+    <Content Include="Report\Json\R0052_FILTER.json" />
+    <Content Include="Report\Json\R0054_DEF.json" />
+    <Content Include="Report\Json\R0054_FILTER.json" />
+    <Content Include="Report\Json\R0085_DEF.json" />
+    <Content Include="Report\Json\R0085_FILTER.json" />
+    <Content Include="Report\Json\R0161_DEF.json" />
+    <Content Include="Report\Json\R0161_FILTER.json" />
+    <Content Include="Report\Json\R0179_DEF.json" />
+    <Content Include="Report\Json\R0179_FILTER.json" />
     <None Include="Web.Debug.config">
       <DependentUpon>Web.config</DependentUpon>
     </None>

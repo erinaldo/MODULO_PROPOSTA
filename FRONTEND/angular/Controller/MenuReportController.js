@@ -7,7 +7,16 @@
         { 'Id': 2, 'Key': 'R0067', 'Title': 'Valores por Contrato' },
         { 'Id': 3, 'Key': 'R0015', 'Title': 'Relatório de Faturas' },
         { 'Id': 4, 'Key': 'R0098', 'Title': 'Listagem de Checking' },
-        { 'Id': 5, 'Key': 'R0106', 'Title': 'Desconto por Contato' }
+        { 'Id': 5, 'Key': 'R0106', 'Title': 'Desconto por Contato' },
+        { 'Id': 6, 'Key': 'R0052', 'Title': 'Demonstrativo Agência Cliente' },
+        { 'Id': 7, 'Key': 'R0054', 'Title': 'Demonstrativo Programa Produto' },
+        { 'Id': 8, 'Key': 'R0027', 'Title': 'Comissões Extra-Faturamento' },
+        { 'Id': 9, 'Key': 'R0179', 'Title': 'TRE' },
+        { 'Id': 10, 'Key': 'R0085', 'Title': 'Vendas por Contato' },
+        { 'Id': 11, 'Key': 'R0010', 'Title': 'Veiculacoes Sem Faturamento' },
+        { 'Id': 12, 'Key': 'R0021', 'Title': 'Resumo das Disponibilidades' },
+        { 'Id': 13, 'Key': 'R0161', 'Title': 'Veiculacoes' },
+
 
     ];
     $scope.gridheaders = [];
@@ -144,7 +153,6 @@
         param.dom = "<'row'<'col-sm-6'B><'col-sm-3'l><'col-sm-3'f>>" + "<'row'<'col-sm-12'tr>>" + "<'row'<'col-sm-5'i><'col-sm-7'p>>",
         param.buttons = [
             { text: 'Abrir no Excel<span class="fa fa-file-excel-o margin-left-10" style="color:white"></span>', type: 'excel', className: 'btn btn-warning', extend: 'excel', },
-            { text: 'Gerar PDF' + '<span class="fa fa-arrow-circle-o-left margin-left-10"></span>', className: 'btn btn-info', action: function (e, dt, button, config) { $('#btnGerarPdf').click(); } },
             { text: 'Voltar' + '<span class="fa fa-arrow-circle-o-left margin-left-10"></span>', className: 'btn btn-info', action: function (e, dt, button, config) { $('#btnNovoFiltro').click(); } },
         ];
         param.order = [];
@@ -166,6 +174,7 @@
     };
     //===========================Carrega os dados para exibicao na tela
     $scope.CarregaGrid = function (pFilter) {
+        
         httpService.Post("Report/LoadData", pFilter).then(function (response) {
             if (response.data.length > 0) {
                 $scope.QtdLoad++;

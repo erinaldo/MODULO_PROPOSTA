@@ -1,0 +1,215 @@
+﻿{
+  "Title": "Veiculacoes",
+  "ProcName": "PR_PROPOSTA_R0161",
+  "RptName": "R0161",
+  "ShowGrid": true,
+  "Filters": [
+    {
+      "ParameterName": "@Par_Perido_Inicial",
+      "Type": "Date",
+      "Label": "Data Inicial",
+      "Search": false,
+      "BigQuery": false,
+      "Dictionary": "",
+      "Value": "",
+      "Multiple": false,
+      "Class": "col-md-2",
+      "Required": true,
+      "ArrayValue": []
+    },
+    {
+      "ParameterName": "@Par_Periodo_Final",
+      "Type": "Date",
+      "Label": "Data Final",
+      "Search": false,
+      "BigQuery": false,
+      "Dictionary": "",
+      "Value": "",
+      "Multiple": false,
+      "Class": "col-md-2",
+      "Required": true,
+      "ArrayValue": []
+    },
+    {
+      "ParameterName": "@Par_Cod_Veiculo",
+      "Type": "Text",
+      "Label": "Cod Veiculo",
+      "Search": true,
+      "BigQuery": false,
+      "Dictionary": "Veiculo",
+      "Value": "",
+      "Multiple": false,
+      "Required": true,
+      "Class": "col-md-2",
+      "ArrayValue": []
+    },
+    {
+      "ParameterName": "@Par_Cod_Empresa_Venda",
+      "Type": "Text",
+      "Label": "Emp.Venda",
+      "Search": true,
+      "BigQuery": false,
+      "Dictionary": "Empresa_Usuario",
+      "Value": "",
+      "Multiple": false,
+      "Class": "col-md-2",
+      //"Required": true,
+      "ArrayValue": []
+    },
+    {
+      "ParameterName": "@Par_Cod_Qualidade",
+      "Type": "Text",
+      "Label": "Codigo Qualidade",
+      "Search": true,
+      "BigQuery": false,
+      "Dictionary": "Qualidade",
+      "Value": "",
+      "Multiple": false,
+      "Class": "col-md-2",
+      "ArrayValue": []
+    },
+    {
+      "ParameterName": "@Par_Numero_Mr",
+      "Type": "Text",
+      "Label": "Numero_Mr",
+      "Search": false,
+      "BigQuery": false,
+      "Dictionary": "",
+      "Value": "",
+      "Multiple": false,
+      "Class": "col-md-2",
+      "ArrayValue": []
+    },
+    {
+      "ParameterName": "@Par_Sequencia_Mr",
+      "Type": "Text",
+      "Label": "Sequencia_Mr",
+      "Search":false,
+      "BigQuery": false,
+      "Dictionary": "",
+      "Value": "",
+      "Multiple": false,
+      "Class": "col-md-2",
+      "ArrayValue": []
+    },
+    {
+      "ParameterName": "@Par_Cod_Programa",
+      "Type": "Text",
+      "Label": "Codigo Programa",
+      "Search": true,
+      "BigQuery": false,
+      "Dictionary": "Programa",
+      "Value": "",
+      "Multiple": false,
+      "Required": false,
+      "Class": "col-md-2",
+      "ArrayValue": []
+    },
+    {
+      "ParameterName": "@Par_Net",
+      "Type": "Boolean",
+      "Label": "Net",
+      "Search": true,
+      "BigQuery": false,
+      "Dictionary": "",
+      "Value": true,
+      "Multiple": false,
+      "Class": "col-md-3",
+      "ArrayValue": []
+    },
+    {
+      "ParameterName": "@Par_Rede",
+      "Type": "Boolean",
+      "Label": "Rede",
+      "Search": true,
+      "BigQuery": false,
+      "Dictionary": "",
+      "Value": true,
+      "Multiple": false,
+      "Class": "col-md-2",
+      "ArrayValue": []
+    },
+    {
+      "ParameterName": "@Par_Local",
+      "Type": "Boolean",
+      "Label": "Local",
+      "Search": true,
+      "BigQuery": false,
+      "Dictionary": "",
+      "Value": true,
+      "Multiple": false,
+      "Class": "col-md-2",
+      "ArrayValue": []
+    },
+    {
+      "ParameterName": "@Par_Baixados",
+      "Type": "Options",
+      "Label": "Baixados",
+      "Search": false,
+      "BigQuery": false,
+      "Dictionary": "",
+      "Value": 2,
+      "Multiple": false,
+      "Required": false,
+      "Class": "col-md-2",
+      "ArrayValue": [],
+      "Options": [
+        {
+          "Id": 0,
+          "Descricao": "Baixados"
+        },
+        {
+          "Id": 1,
+          "Descricao": "Não Baixados"
+        }
+      ]
+    },
+    {
+      "ParameterName": "@Par_Ordenados",
+      "Type": "Options",
+      "Label": "Ordenados",
+      "Search": false,
+      "BigQuery": false,
+      "Dictionary": "",
+      "Value": 2,
+      "Multiple": false,
+      "Required": false,
+      "Class": "col-md-2",
+      "ArrayValue": [],
+      "Options": [
+        {
+          "Id": 0,
+          "Descricao": "Ordenados"
+        },
+        {
+          "Id": 1,
+          "Descricao": "Não Ordenados"
+        }
+      ]
+    },
+    {
+      "ParameterName": "@Par_TQP",
+      "Type": "Boolean",
+      "Label": "TQP",
+      "Search": true,
+      "BigQuery": false,
+      "Dictionary": "",
+      "Value": true,
+      "Multiple": false,
+      "Class": "col-md-2",
+      "ArrayValue": []
+    },
+    {
+      "ParameterName": "@Par_Absorve_Dispo",
+      "Type": "Boolean",
+      "Label": "Absorve_Dispo",
+      "Search": true,
+      "BigQuery": false,
+      "Dictionary": "",
+      "Value": true,
+      "Multiple": false,
+      "Class": "col-md-2",
+      "ArrayValue": []
+    }
+  ]
+}

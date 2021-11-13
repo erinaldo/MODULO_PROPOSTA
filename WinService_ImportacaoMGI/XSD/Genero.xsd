@@ -1,0 +1,37 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<xs:schema id="Genero" targetNamespace="http://tempuri.org/Genero.xsd" elementFormDefault="qualified"
+	attributeFormDefault="qualified" xmlns="http://tempuri.org/Genero.xsd" xmlns:mstns="http://tempuri.org/Genero.xsd"
+	xmlns:xs="http://www.w3.org/2001/XMLSchema" xmlns:msdata="urn:schemas-microsoft-com:xml-msdata">
+	<xs:element name="Genero" msdata:IsDataSet="true">
+		<xs:complexType>
+			<xs:choice maxOccurs="unbounded">
+				<xs:element name="dtbGenero">
+					<xs:complexType>
+						<xs:sequence>
+							<xs:element name="Cod_Genero" type="xs:string" />
+							<xs:element name="Descricao" type="xs:string" />
+						</xs:sequence>
+					</xs:complexType>
+				</xs:element>
+				<xs:element name="dtbMGI_Genero">
+					<xs:complexType>
+						<xs:sequence>
+							<xs:element name="Origem" type="xs:int" />
+							<xs:element name="Cod_Genero" type="xs:string" />
+							<xs:element name="Descricao" type="xs:string" />
+						</xs:sequence>
+					</xs:complexType>
+				</xs:element>
+			</xs:choice>
+		</xs:complexType>
+		<xs:unique name="GeneroKey1" msdata:PrimaryKey="true">
+			<xs:selector xpath=".//mstns:dtbGenero" />
+			<xs:field xpath="mstns:Cod_Genero" />
+		</xs:unique>
+		<xs:unique name="GeneroKey2" msdata:PrimaryKey="true">
+			<xs:selector xpath=".//mstns:dtbMGI_Genero" />
+			<xs:field xpath="mstns:Origem" />
+			<xs:field xpath="mstns:Cod_Genero" />
+		</xs:unique>
+	</xs:element>
+</xs:schema>

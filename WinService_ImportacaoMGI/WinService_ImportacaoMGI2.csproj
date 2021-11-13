@@ -1,0 +1,560 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="4.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003" DefaultTargets="Build">
+  <PropertyGroup>
+    <ProjectType>Local</ProjectType>
+    <ProductVersion>7.10.3077</ProductVersion>
+    <SchemaVersion>2.0</SchemaVersion>
+    <ProjectGuid>{002C3E8F-3DD1-44CB-AF71-929D042F9739}</ProjectGuid>
+    <SccProjectName>
+    </SccProjectName>
+    <SccLocalPath>
+    </SccLocalPath>
+    <SccAuxPath>
+    </SccAuxPath>
+    <SccProvider>
+    </SccProvider>
+    <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
+    <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
+    <ApplicationIcon />
+    <AssemblyKeyContainerName />
+    <AssemblyName>WinService_ImportacaoMGI2</AssemblyName>
+    <AssemblyOriginatorKeyFile />
+    <DefaultClientScript>JScript</DefaultClientScript>
+    <DefaultHTMLPageLayout>Grid</DefaultHTMLPageLayout>
+    <DefaultTargetSchema>IE50</DefaultTargetSchema>
+    <DelaySign>false</DelaySign>
+    <OutputType>WinExe</OutputType>
+    <RootNamespace>WinService_ImportacaoMGI2</RootNamespace>
+    <RunPostBuildEvent>OnBuildSuccess</RunPostBuildEvent>
+    <StartupObject />
+    <FileUpgradeFlags>
+    </FileUpgradeFlags>
+    <TargetFrameworkVersion>v4.0</TargetFrameworkVersion>
+    <OldToolsVersion>0.0</OldToolsVersion>
+    <UpgradeBackupLocation />
+    <TargetFrameworkProfile />
+    <PublishUrl>publish\</PublishUrl>
+    <Install>true</Install>
+    <InstallFrom>Disk</InstallFrom>
+    <UpdateEnabled>false</UpdateEnabled>
+    <UpdateMode>Foreground</UpdateMode>
+    <UpdateInterval>7</UpdateInterval>
+    <UpdateIntervalUnits>Days</UpdateIntervalUnits>
+    <UpdatePeriodically>false</UpdatePeriodically>
+    <UpdateRequired>false</UpdateRequired>
+    <MapFileExtensions>true</MapFileExtensions>
+    <ApplicationRevision>0</ApplicationRevision>
+    <ApplicationVersion>1.0.0.%2a</ApplicationVersion>
+    <IsWebBootstrapper>false</IsWebBootstrapper>
+    <UseApplicationTrust>false</UseApplicationTrust>
+    <BootstrapperEnabled>true</BootstrapperEnabled>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
+    <OutputPath>bin\Debug\</OutputPath>
+    <AllowUnsafeBlocks>false</AllowUnsafeBlocks>
+    <BaseAddress>285212672</BaseAddress>
+    <CheckForOverflowUnderflow>false</CheckForOverflowUnderflow>
+    <ConfigurationOverrideFile />
+    <DefineConstants>DEBUG;TRACE</DefineConstants>
+    <DocumentationFile />
+    <DebugSymbols>true</DebugSymbols>
+    <FileAlignment>4096</FileAlignment>
+    <NoStdLib>false</NoStdLib>
+    <NoWarn />
+    <Optimize>false</Optimize>
+    <RegisterForComInterop>false</RegisterForComInterop>
+    <RemoveIntegerChecks>false</RemoveIntegerChecks>
+    <TreatWarningsAsErrors>false</TreatWarningsAsErrors>
+    <WarningLevel>4</WarningLevel>
+    <DebugType>full</DebugType>
+    <ErrorReport>prompt</ErrorReport>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
+    <OutputPath>bin\Release\</OutputPath>
+    <AllowUnsafeBlocks>false</AllowUnsafeBlocks>
+    <BaseAddress>285212672</BaseAddress>
+    <CheckForOverflowUnderflow>false</CheckForOverflowUnderflow>
+    <ConfigurationOverrideFile />
+    <DefineConstants>TRACE</DefineConstants>
+    <DocumentationFile />
+    <DebugSymbols>false</DebugSymbols>
+    <FileAlignment>4096</FileAlignment>
+    <NoStdLib>false</NoStdLib>
+    <NoWarn />
+    <Optimize>true</Optimize>
+    <RegisterForComInterop>false</RegisterForComInterop>
+    <RemoveIntegerChecks>false</RemoveIntegerChecks>
+    <TreatWarningsAsErrors>false</TreatWarningsAsErrors>
+    <WarningLevel>4</WarningLevel>
+    <DebugType>none</DebugType>
+    <ErrorReport>prompt</ErrorReport>
+  </PropertyGroup>
+  <ItemGroup>
+    <Reference Include="System">
+      <Name>System</Name>
+    </Reference>
+    <Reference Include="System.configuration" />
+    <Reference Include="System.Configuration.Install">
+      <Name>System.Configuration.Install</Name>
+    </Reference>
+    <Reference Include="System.Data">
+      <Name>System.Data</Name>
+    </Reference>
+    <Reference Include="System.Data.DataSetExtensions" />
+    <Reference Include="System.Management">
+      <Name>System.Management</Name>
+    </Reference>
+    <Reference Include="System.ServiceProcess">
+      <Name>System.ServiceProcess</Name>
+    </Reference>
+    <Reference Include="System.Web">
+      <Name>System.Web</Name>
+    </Reference>
+    <Reference Include="System.Xml">
+      <Name>System.XML</Name>
+    </Reference>
+  </ItemGroup>
+  <ItemGroup>
+    <Compile Include="AssemblyInfo.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="clsImportacao.cs" />
+    <Compile Include="clsLOG.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="clsSendMail.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="CLS\clsCarac_Veiculacao.cs" />
+    <Compile Include="CLS\clsConexao.cs" />
+    <Compile Include="CLS\clsContato.cs" />
+    <Compile Include="CLS\clsContrato.cs" />
+    <Compile Include="CLS\clsContrato_Duplicata.cs" />
+    <Compile Include="CLS\clsDuplicata.cs" />
+    <Compile Include="CLS\clsEmpresa.cs" />
+    <Compile Include="CLS\clsGenero.cs" />
+    <Compile Include="CLS\clsGrade.cs" />
+    <Compile Include="CLS\clsLog.cs" />
+    <Compile Include="CLS\clsMercado.cs" />
+    <Compile Include="CLS\clsMotivo_Cancelamento.cs" />
+    <Compile Include="CLS\clsMotivo_Falha.cs" />
+    <Compile Include="CLS\clsNatureza_Servico.cs" />
+    <Compile Include="CLS\clsNucleo.cs" />
+    <Compile Include="CLS\clsParametro.cs" />
+    <Compile Include="CLS\clsProduto.cs" />
+    <Compile Include="CLS\clsPrograma.cs" />
+    <Compile Include="CLS\clsRoteiro.cs" />
+    <Compile Include="CLS\clsTabela_Preco.cs" />
+    <Compile Include="CLS\clsTerceiro.cs" />
+    <Compile Include="CLS\clsTipo_Comercial.cs" />
+    <Compile Include="CLS\clsTipo_Midia.cs" />
+    <Compile Include="CLS\clsVeiculacao.cs" />
+    <Compile Include="CLS\clsVeiculo.cs" />
+    <Compile Include="ProjectInstaller.cs">
+      <SubType>Component</SubType>
+    </Compile>
+    <Compile Include="WinService_ImportacaoMGI.cs">
+      <SubType>Component</SubType>
+    </Compile>
+    <Compile Include="XSD\Carac_Veiculacao.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>Carac_Veiculacao.xsd</DependentUpon>
+    </Compile>
+    <Compile Include="XSD\Contato.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>Contato.xsd</DependentUpon>
+    </Compile>
+    <Compile Include="XSD\Contrato.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>Contrato.xsd</DependentUpon>
+    </Compile>
+    <Compile Include="XSD\Contrato_Duplicata.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>Contrato_Duplicata.xsd</DependentUpon>
+    </Compile>
+    <Compile Include="XSD\Duplicata.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>Duplicata.xsd</DependentUpon>
+    </Compile>
+    <Compile Include="XSD\Empresa.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>Empresa.xsd</DependentUpon>
+    </Compile>
+    <Compile Include="XSD\Genero.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>Genero.xsd</DependentUpon>
+    </Compile>
+    <Compile Include="XSD\Grade.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>Grade.xsd</DependentUpon>
+    </Compile>
+    <Compile Include="XSD\Mercado.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>Mercado.xsd</DependentUpon>
+    </Compile>
+    <Compile Include="XSD\MGIContrato.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>MGIContrato.xsd</DependentUpon>
+    </Compile>
+    <Compile Include="XSD\Motivo_Cancelamento.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>Motivo_Cancelamento.xsd</DependentUpon>
+    </Compile>
+    <Compile Include="XSD\Motivo_Falha.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>Motivo_Falha.xsd</DependentUpon>
+    </Compile>
+    <Compile Include="XSD\Natureza_Servico.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>Natureza_Servico.xsd</DependentUpon>
+    </Compile>
+    <Compile Include="XSD\Nucleo.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>Nucleo.xsd</DependentUpon>
+    </Compile>
+    <Compile Include="XSD\Produto.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>Produto.xsd</DependentUpon>
+    </Compile>
+    <Compile Include="XSD\Programa.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>Programa.xsd</DependentUpon>
+    </Compile>
+    <Compile Include="XSD\Roteiro.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>Roteiro.xsd</DependentUpon>
+    </Compile>
+    <Compile Include="XSD\Tabela_Preco.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>Tabela_Preco.xsd</DependentUpon>
+    </Compile>
+    <Compile Include="XSD\Terceiro.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>Terceiro.xsd</DependentUpon>
+    </Compile>
+    <Compile Include="XSD\Tipo_Comercial.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>Tipo_Comercial.xsd</DependentUpon>
+    </Compile>
+    <Compile Include="XSD\Tipo_Midia.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>Tipo_Midia.xsd</DependentUpon>
+    </Compile>
+    <Compile Include="XSD\Veiculacao.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>Veiculacao.xsd</DependentUpon>
+    </Compile>
+    <Compile Include="XSD\Veiculo.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>Veiculo.xsd</DependentUpon>
+    </Compile>
+    <EmbeddedResource Include="ProjectInstaller.resx">
+      <DependentUpon>ProjectInstaller.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="WinService_ImportacaoMGI.resx">
+      <DependentUpon>WinService_ImportacaoMGI.cs</DependentUpon>
+    </EmbeddedResource>
+    <None Include="App.config">
+      <SubType>Designer</SubType>
+    </None>
+    <None Include="XSD\Carac_Veiculacao.xsc">
+      <DependentUpon>Carac_Veiculacao.xsd</DependentUpon>
+    </None>
+    <None Include="XSD\Carac_Veiculacao.xsd">
+      <Generator>MSDataSetGenerator</Generator>
+      <LastGenOutput>Carac_Veiculacao.Designer.cs</LastGenOutput>
+      <SubType>Designer</SubType>
+    </None>
+    <None Include="XSD\Carac_Veiculacao.xss">
+      <DependentUpon>Carac_Veiculacao.xsd</DependentUpon>
+    </None>
+    <None Include="XSD\Contato.xsc">
+      <DependentUpon>Contato.xsd</DependentUpon>
+    </None>
+    <None Include="XSD\Contato.xsd">
+      <Generator>MSDataSetGenerator</Generator>
+      <LastGenOutput>Contato.Designer.cs</LastGenOutput>
+      <SubType>Designer</SubType>
+    </None>
+    <None Include="XSD\Contato.xss">
+      <DependentUpon>Contato.xsd</DependentUpon>
+    </None>
+    <None Include="XSD\Contrato.xsc">
+      <DependentUpon>Contrato.xsd</DependentUpon>
+    </None>
+    <None Include="XSD\Contrato.xsd">
+      <Generator>MSDataSetGenerator</Generator>
+      <LastGenOutput>Contrato.Designer.cs</LastGenOutput>
+      <SubType>Designer</SubType>
+    </None>
+    <None Include="XSD\Contrato.xss">
+      <DependentUpon>Contrato.xsd</DependentUpon>
+    </None>
+    <None Include="XSD\Contrato_Duplicata.xsc">
+      <DependentUpon>Contrato_Duplicata.xsd</DependentUpon>
+    </None>
+    <None Include="XSD\Contrato_Duplicata.xsd">
+      <Generator>MSDataSetGenerator</Generator>
+      <LastGenOutput>Contrato_Duplicata.Designer.cs</LastGenOutput>
+      <SubType>Designer</SubType>
+    </None>
+    <None Include="XSD\Contrato_Duplicata.xss">
+      <DependentUpon>Contrato_Duplicata.xsd</DependentUpon>
+    </None>
+    <None Include="XSD\Duplicata.xsc">
+      <DependentUpon>Duplicata.xsd</DependentUpon>
+    </None>
+    <None Include="XSD\Duplicata.xsd">
+      <Generator>MSDataSetGenerator</Generator>
+      <LastGenOutput>Duplicata.Designer.cs</LastGenOutput>
+      <SubType>Designer</SubType>
+    </None>
+    <None Include="XSD\Duplicata.xss">
+      <DependentUpon>Duplicata.xsd</DependentUpon>
+    </None>
+    <None Include="XSD\Empresa.xsc">
+      <DependentUpon>Empresa.xsd</DependentUpon>
+    </None>
+    <None Include="XSD\Empresa.xsd">
+      <Generator>MSDataSetGenerator</Generator>
+      <LastGenOutput>Empresa.Designer.cs</LastGenOutput>
+      <SubType>Designer</SubType>
+    </None>
+    <None Include="XSD\Empresa.xss">
+      <DependentUpon>Empresa.xsd</DependentUpon>
+    </None>
+    <None Include="XSD\Genero.xsc">
+      <DependentUpon>Genero.xsd</DependentUpon>
+    </None>
+    <None Include="XSD\Genero.xsd">
+      <Generator>MSDataSetGenerator</Generator>
+      <LastGenOutput>Genero.Designer.cs</LastGenOutput>
+      <SubType>Designer</SubType>
+    </None>
+    <None Include="XSD\Genero.xss">
+      <DependentUpon>Genero.xsd</DependentUpon>
+    </None>
+    <None Include="XSD\Grade.xsc">
+      <DependentUpon>Grade.xsd</DependentUpon>
+    </None>
+    <None Include="XSD\Grade.xsd">
+      <Generator>MSDataSetGenerator</Generator>
+      <LastGenOutput>Grade.Designer.cs</LastGenOutput>
+      <SubType>Designer</SubType>
+    </None>
+    <None Include="XSD\Grade.xss">
+      <DependentUpon>Grade.xsd</DependentUpon>
+    </None>
+    <None Include="XSD\Mercado.xsc">
+      <DependentUpon>Mercado.xsd</DependentUpon>
+    </None>
+    <None Include="XSD\Mercado.xsd">
+      <Generator>MSDataSetGenerator</Generator>
+      <LastGenOutput>Mercado.Designer.cs</LastGenOutput>
+      <SubType>Designer</SubType>
+    </None>
+    <None Include="XSD\Mercado.xss">
+      <DependentUpon>Mercado.xsd</DependentUpon>
+    </None>
+    <None Include="XSD\MGIContrato.xsc">
+      <DependentUpon>MGIContrato.xsd</DependentUpon>
+    </None>
+    <None Include="XSD\MGIContrato.xsd">
+      <Generator>MSDataSetGenerator</Generator>
+      <LastGenOutput>MGIContrato.Designer.cs</LastGenOutput>
+      <SubType>Designer</SubType>
+    </None>
+    <None Include="XSD\MGIContrato.xss">
+      <DependentUpon>MGIContrato.xsd</DependentUpon>
+    </None>
+    <None Include="XSD\Motivo_Cancelamento.xsc">
+      <DependentUpon>Motivo_Cancelamento.xsd</DependentUpon>
+    </None>
+    <None Include="XSD\Motivo_Cancelamento.xsd">
+      <Generator>MSDataSetGenerator</Generator>
+      <LastGenOutput>Motivo_Cancelamento.Designer.cs</LastGenOutput>
+      <SubType>Designer</SubType>
+    </None>
+    <None Include="XSD\Motivo_Cancelamento.xss">
+      <DependentUpon>Motivo_Cancelamento.xsd</DependentUpon>
+    </None>
+    <None Include="XSD\Motivo_Falha.xsc">
+      <DependentUpon>Motivo_Falha.xsd</DependentUpon>
+    </None>
+    <None Include="XSD\Motivo_Falha.xsd">
+      <Generator>MSDataSetGenerator</Generator>
+      <LastGenOutput>Motivo_Falha.Designer.cs</LastGenOutput>
+      <SubType>Designer</SubType>
+    </None>
+    <None Include="XSD\Motivo_Falha.xss">
+      <DependentUpon>Motivo_Falha.xsd</DependentUpon>
+    </None>
+    <None Include="XSD\Natureza_Servico.xsc">
+      <DependentUpon>Natureza_Servico.xsd</DependentUpon>
+    </None>
+    <None Include="XSD\Natureza_Servico.xsd">
+      <Generator>MSDataSetGenerator</Generator>
+      <LastGenOutput>Natureza_Servico.Designer.cs</LastGenOutput>
+      <SubType>Designer</SubType>
+    </None>
+    <None Include="XSD\Natureza_Servico.xss">
+      <DependentUpon>Natureza_Servico.xsd</DependentUpon>
+    </None>
+    <None Include="XSD\Nucleo.xsc">
+      <DependentUpon>Nucleo.xsd</DependentUpon>
+    </None>
+    <None Include="XSD\Nucleo.xsd">
+      <Generator>MSDataSetGenerator</Generator>
+      <LastGenOutput>Nucleo.Designer.cs</LastGenOutput>
+      <SubType>Designer</SubType>
+    </None>
+    <None Include="XSD\Nucleo.xss">
+      <DependentUpon>Nucleo.xsd</DependentUpon>
+    </None>
+    <None Include="XSD\Produto.xsc">
+      <DependentUpon>Produto.xsd</DependentUpon>
+    </None>
+    <None Include="XSD\Produto.xsd">
+      <Generator>MSDataSetGenerator</Generator>
+      <LastGenOutput>Produto.Designer.cs</LastGenOutput>
+      <SubType>Designer</SubType>
+    </None>
+    <None Include="XSD\Produto.xss">
+      <DependentUpon>Produto.xsd</DependentUpon>
+    </None>
+    <None Include="XSD\Programa.xsc">
+      <DependentUpon>Programa.xsd</DependentUpon>
+    </None>
+    <None Include="XSD\Programa.xsd">
+      <Generator>MSDataSetGenerator</Generator>
+      <LastGenOutput>Programa.Designer.cs</LastGenOutput>
+      <SubType>Designer</SubType>
+    </None>
+    <None Include="XSD\Programa.xss">
+      <DependentUpon>Programa.xsd</DependentUpon>
+    </None>
+    <None Include="XSD\Roteiro.xsc">
+      <DependentUpon>Roteiro.xsd</DependentUpon>
+    </None>
+    <None Include="XSD\Roteiro.xsd">
+      <Generator>MSDataSetGenerator</Generator>
+      <LastGenOutput>Roteiro.Designer.cs</LastGenOutput>
+      <SubType>Designer</SubType>
+    </None>
+    <None Include="XSD\Roteiro.xss">
+      <DependentUpon>Roteiro.xsd</DependentUpon>
+    </None>
+    <None Include="XSD\Tabela_Preco.xsc">
+      <DependentUpon>Tabela_Preco.xsd</DependentUpon>
+    </None>
+    <None Include="XSD\Tabela_Preco.xsd">
+      <Generator>MSDataSetGenerator</Generator>
+      <LastGenOutput>Tabela_Preco.Designer.cs</LastGenOutput>
+      <SubType>Designer</SubType>
+    </None>
+    <None Include="XSD\Tabela_Preco.xss">
+      <DependentUpon>Tabela_Preco.xsd</DependentUpon>
+    </None>
+    <None Include="XSD\Terceiro.xsc">
+      <DependentUpon>Terceiro.xsd</DependentUpon>
+    </None>
+    <None Include="XSD\Terceiro.xsd">
+      <Generator>MSDataSetGenerator</Generator>
+      <LastGenOutput>Terceiro.Designer.cs</LastGenOutput>
+      <SubType>Designer</SubType>
+    </None>
+    <None Include="XSD\Terceiro.xss">
+      <DependentUpon>Terceiro.xsd</DependentUpon>
+    </None>
+    <None Include="XSD\Tipo_Comercial.xsc">
+      <DependentUpon>Tipo_Comercial.xsd</DependentUpon>
+    </None>
+    <None Include="XSD\Tipo_Comercial.xsd">
+      <Generator>MSDataSetGenerator</Generator>
+      <LastGenOutput>Tipo_Comercial.Designer.cs</LastGenOutput>
+      <SubType>Designer</SubType>
+    </None>
+    <None Include="XSD\Tipo_Comercial.xss">
+      <DependentUpon>Tipo_Comercial.xsd</DependentUpon>
+    </None>
+    <None Include="XSD\Tipo_Midia.xsc">
+      <DependentUpon>Tipo_Midia.xsd</DependentUpon>
+    </None>
+    <None Include="XSD\Tipo_Midia.xsd">
+      <Generator>MSDataSetGenerator</Generator>
+      <LastGenOutput>Tipo_Midia.Designer.cs</LastGenOutput>
+      <SubType>Designer</SubType>
+    </None>
+    <None Include="XSD\Tipo_Midia.xss">
+      <DependentUpon>Tipo_Midia.xsd</DependentUpon>
+    </None>
+    <None Include="XSD\Veiculacao.xsc">
+      <DependentUpon>Veiculacao.xsd</DependentUpon>
+    </None>
+    <None Include="XSD\Veiculacao.xsd">
+      <Generator>MSDataSetGenerator</Generator>
+      <LastGenOutput>Veiculacao.Designer.cs</LastGenOutput>
+      <SubType>Designer</SubType>
+    </None>
+    <None Include="XSD\Veiculacao.xss">
+      <DependentUpon>Veiculacao.xsd</DependentUpon>
+    </None>
+    <None Include="XSD\Veiculo.xsc">
+      <DependentUpon>Veiculo.xsd</DependentUpon>
+    </None>
+    <None Include="XSD\Veiculo.xsd">
+      <Generator>MSDataSetGenerator</Generator>
+      <LastGenOutput>Veiculo.Designer.cs</LastGenOutput>
+      <SubType>Designer</SubType>
+    </None>
+    <None Include="XSD\Veiculo.xss">
+      <DependentUpon>Veiculo.xsd</DependentUpon>
+    </None>
+  </ItemGroup>
+  <ItemGroup>
+    <BootstrapperPackage Include="Microsoft.Net.Client.3.5">
+      <Visible>False</Visible>
+      <ProductName>.NET Framework 3.5 SP1 Client Profile</ProductName>
+      <Install>false</Install>
+    </BootstrapperPackage>
+    <BootstrapperPackage Include="Microsoft.Net.Framework.3.5.SP1">
+      <Visible>False</Visible>
+      <ProductName>.NET Framework 3.5 SP1</ProductName>
+      <Install>true</Install>
+    </BootstrapperPackage>
+    <BootstrapperPackage Include="Microsoft.Windows.Installer.3.1">
+      <Visible>False</Visible>
+      <ProductName>Windows Installer 3.1</ProductName>
+      <Install>true</Install>
+    </BootstrapperPackage>
+  </ItemGroup>
+  <ItemGroup />
+  <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
+  <PropertyGroup>
+    <PreBuildEvent />
+    <PostBuildEvent />
+  </PropertyGroup>
+</Project>

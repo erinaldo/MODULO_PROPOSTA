@@ -1,0 +1,73 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<xs:schema id="Veiculacao" targetNamespace="http://tempuri.org/Veiculacao.xsd" elementFormDefault="qualified"
+	attributeFormDefault="qualified" xmlns="http://tempuri.org/Veiculacao.xsd" xmlns:mstns="http://tempuri.org/Veiculacao.xsd"
+	xmlns:xs="http://www.w3.org/2001/XMLSchema" xmlns:msdata="urn:schemas-microsoft-com:xml-msdata"
+	xmlns:msprop="urn:schemas-microsoft-com:xml-msprop">
+	<xs:element name="Veiculacao" msdata:IsDataSet="true">
+		<xs:complexType>
+			<xs:choice maxOccurs="unbounded">
+				<xs:element name="dtbVeiculacao">
+					<xs:complexType>
+						<xs:sequence>
+							<xs:element name="ID_Contrato" msdata:ReadOnly="true" msdata:AutoIncrement="true" type="xs:int" />
+							<xs:element name="Cod_Veiculo" type="xs:string" />
+							<xs:element name="Data_Exibicao" msdata:ReadOnly="true" type="xs:date" />
+							<xs:element name="Cod_Programa" type="xs:string" />
+							<xs:element name="Chave_Acesso" type="xs:short" />
+							<xs:element name="Competencia" msdata:ReadOnly="true" type="xs:int" />
+							<xs:element name="Cod_Tipo_Comercial" type="xs:string" />
+							<xs:element name="Duracao" type="xs:short" />
+							<xs:element name="Cod_Motivo_Falha" type="xs:string" minOccurs="0" />
+							<xs:element name="Cod_Red_Produto1" type="xs:int" />
+							<xs:element name="Cod_Red_Produto2" type="xs:int" />
+							<xs:element name="Cod_Red_Produto3" type="xs:int" />
+							<xs:element name="Indica_Exibido" msdata:ReadOnly="true" type="xs:unsignedByte" />
+							<xs:element name="Indica_Origem" msdata:ReadOnly="true" type="xs:unsignedByte" />
+							<xs:element name="Indica_Venda" msdata:ReadOnly="true" type="xs:unsignedByte" />
+							<xs:element name="Indica_Financeiro" msdata:ReadOnly="true" type="xs:unsignedByte" />
+							<xs:element name="Vlr_Tabela" msdata:ReadOnly="true" type="xs:decimal" />
+							<xs:element name="Vlr_Negociado" msdata:ReadOnly="true" type="xs:decimal" />
+							<xs:element name="Vlr_Gerencial" msdata:ReadOnly="true" type="xs:decimal" />
+							<xs:element name="Vlr_Correcao" msdata:ReadOnly="true" type="xs:decimal" />
+							<xs:element name="Vlr_Varejo" msdata:ReadOnly="true" type="xs:decimal" />
+							<xs:element name="Documento_De" type="xs:string" minOccurs="0" msprop:nullValue="_empty" />
+							<xs:element name="Documento_Para" type="xs:string" minOccurs="0" msprop:nullValue="_empty" />
+						</xs:sequence>
+					</xs:complexType>
+				</xs:element>
+				<xs:element name="dtbMGI_Veiculacao">
+					<xs:complexType>
+						<xs:sequence>
+							<xs:element name="Origem" type="xs:int" />
+							<xs:element name="ID_Veiculacao" msdata:ReadOnly="true" msdata:AutoIncrement="true" type="xs:long"
+								msdata:AutoIncrementStep="-1" />
+							<xs:element name="Cod_Veiculo" type="xs:string" />
+							<xs:element name="Data_Exibicao" type="xs:date" />
+							<xs:element name="Cod_Programa" type="xs:string" />
+							<xs:element name="Chave_Acesso" type="xs:short" />
+							<xs:element name="ID_Contrato" type="xs:int" />
+							<xs:element name="Competencia" type="xs:int" />
+							<xs:element name="Cod_Tipo_Comercial" type="xs:string" />
+							<xs:element name="Duracao" type="xs:short" />
+							<xs:element name="Cod_Motivo_Falha" type="xs:string" minOccurs="0" />
+							<xs:element name="Cod_Red_Produto1" type="xs:int" />
+							<xs:element name="Cod_Red_Produto2" type="xs:int" />
+							<xs:element name="Cod_Red_Produto3" type="xs:int" />
+							<xs:element name="Indica_Exibido" type="xs:unsignedByte" />
+							<xs:element name="Indica_Origem" type="xs:unsignedByte" />
+							<xs:element name="Indica_Venda" type="xs:unsignedByte" />
+							<xs:element name="Indica_Financeiro" type="xs:unsignedByte" />
+							<xs:element name="Vlr_Tabela" type="xs:decimal" />
+							<xs:element name="Vlr_Negociado" type="xs:decimal" />
+							<xs:element name="Vlr_Gerencial" type="xs:decimal" />
+							<xs:element name="Vlr_Correcao" type="xs:decimal" />
+							<xs:element name="Vlr_Varejo" type="xs:decimal" />
+							<xs:element name="Documento_De" type="xs:string" minOccurs="0" msprop:nullValue="_empty" />
+							<xs:element name="Documento_Para" type="xs:string" minOccurs="0" msprop:nullValue="_empty" />
+						</xs:sequence>
+					</xs:complexType>
+				</xs:element>
+			</xs:choice>
+		</xs:complexType>
+	</xs:element>
+</xs:schema>

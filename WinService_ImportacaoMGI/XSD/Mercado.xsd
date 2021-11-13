@@ -1,0 +1,80 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<xs:schema id="Mercado" targetNamespace="http://tempuri.org/Mercado.xsd" elementFormDefault="qualified"
+	attributeFormDefault="qualified" xmlns="http://tempuri.org/Mercado.xsd" xmlns:mstns="http://tempuri.org/Mercado.xsd"
+	xmlns:xs="http://www.w3.org/2001/XMLSchema" xmlns:msdata="urn:schemas-microsoft-com:xml-msdata">
+	<xs:element name="Mercado" msdata:IsDataSet="true">
+		<xs:complexType>
+			<xs:choice maxOccurs="unbounded">
+				<xs:element name="dtbMercado">
+					<xs:complexType>
+						<xs:sequence>
+							<xs:element name="Cod_Mercado" type="xs:string" />
+							<xs:element name="Nome" type="xs:string" minOccurs="0" />
+						</xs:sequence>
+					</xs:complexType>
+				</xs:element>
+				<xs:element name="dtbMercado_Composicao">
+					<xs:complexType>
+						<xs:sequence>
+							<xs:element name="Cod_Mercado" type="xs:string" />
+							<xs:element name="Cod_Veiculo" type="xs:string" />
+						</xs:sequence>
+					</xs:complexType>
+				</xs:element>
+				<xs:element name="dtbMGI_Mercado">
+					<xs:complexType>
+						<xs:sequence>
+							<xs:element name="Origem" type="xs:int" />
+							<xs:element name="Cod_Mercado" type="xs:string" />
+							<xs:element name="Nome" type="xs:string" minOccurs="0" />
+						</xs:sequence>
+					</xs:complexType>
+				</xs:element>
+				<xs:element name="dtbMGI_Mercado_Composicao">
+					<xs:complexType>
+						<xs:sequence>
+							<xs:element name="Origem" type="xs:int" />
+							<xs:element name="Cod_Mercado" type="xs:string" />
+							<xs:element name="Cod_Veiculo" type="xs:string" />
+						</xs:sequence>
+					</xs:complexType>
+				</xs:element>
+			</xs:choice>
+		</xs:complexType>
+		<xs:unique name="MercadoKey1" msdata:PrimaryKey="true">
+			<xs:selector xpath=".//mstns:dtbMercado" />
+			<xs:field xpath="mstns:Cod_Mercado" />
+		</xs:unique>
+		<xs:unique name="MercadoKey2" msdata:PrimaryKey="true">
+			<xs:selector xpath=".//mstns:dtbMercado_Composicao" />
+			<xs:field xpath="mstns:Cod_Mercado" />
+			<xs:field xpath="mstns:Cod_Veiculo" />
+		</xs:unique>
+		<xs:unique name="MercadoKey3" msdata:PrimaryKey="true">
+			<xs:selector xpath=".//mstns:dtbVeiculo" />
+			<xs:field xpath="mstns:Cod_Veiculo" />
+		</xs:unique>
+		<xs:unique name="MercadoKey4" msdata:PrimaryKey="true">
+			<xs:selector xpath=".//mstns:dtbMGI_Mercado" />
+			<xs:field xpath="mstns:Origem" />
+			<xs:field xpath="mstns:Cod_Mercado" />
+		</xs:unique>
+		<xs:unique name="MercadoKey5" msdata:PrimaryKey="true">
+			<xs:selector xpath=".//mstns:dtbMGI_Mercado_Composicao" />
+			<xs:field xpath="mstns:Origem" />
+			<xs:field xpath="mstns:Cod_Mercado" />
+			<xs:field xpath="mstns:Cod_Veiculo" />
+		</xs:unique>
+		<xs:keyref name="dtbMGI_MercadodtbMGI_Mercado_Composicao" refer="MercadoKey4" msdata:ConstraintOnly="true"
+			msdata:DeleteRule="Cascade" msdata:UpdateRule="Cascade">
+			<xs:selector xpath=".//mstns:dtbMGI_Mercado_Composicao" />
+			<xs:field xpath="mstns:Origem" />
+			<xs:field xpath="mstns:Cod_Mercado" />
+		</xs:keyref>
+		<xs:keyref name="dtbMercadodtbMercado_Composicao" refer="MercadoKey1" msdata:ConstraintOnly="true"
+			msdata:DeleteRule="Cascade" msdata:UpdateRule="Cascade">
+			<xs:selector xpath=".//mstns:dtbMercado_Composicao" />
+			<xs:field xpath="mstns:Cod_Mercado" />
+		</xs:keyref>
+	</xs:element>
+</xs:schema>

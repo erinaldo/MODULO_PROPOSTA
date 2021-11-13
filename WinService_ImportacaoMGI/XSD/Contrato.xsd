@@ -1,0 +1,40 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<xs:schema id="Contrato" targetNamespace="http://tempuri.org/Contrato.xsd" elementFormDefault="qualified"
+	attributeFormDefault="qualified" xmlns="http://tempuri.org/Contrato.xsd" xmlns:mstns="http://tempuri.org/Contrato.xsd"
+	xmlns:xs="http://www.w3.org/2001/XMLSchema" xmlns:msdata="urn:schemas-microsoft-com:xml-msdata">
+	<xs:element name="Contrato" msdata:IsDataSet="true">
+		<xs:complexType>
+			<xs:choice maxOccurs="unbounded">
+				<xs:element name="dtbContrato">
+					<xs:complexType>
+						<xs:sequence>
+							<xs:element name="ID_Contrato" msdata:ReadOnly="true" msdata:AutoIncrement="true" type="xs:int" />
+							<xs:element name="Cod_Empresa_Faturamento" type="xs:string" />
+							<xs:element name="Numero_Negociacao" type="xs:decimal" />
+							<xs:element name="Cod_Empresa" type="xs:string" />
+							<xs:element name="Numero_Mr" type="xs:int" />
+							<xs:element name="Sequencia_Mr" type="xs:short" />
+							<xs:element name="Competencia" type="xs:int" />
+							<xs:element name="Cod_Tipo_Midia" type="xs:string" />
+							<xs:element name="Cod_Agencia" type="xs:string" />
+							<xs:element name="Cod_Cliente" type="xs:string" />
+							<xs:element name="Cod_Intermediario" type="xs:string" minOccurs="0" />
+							<xs:element name="Cod_Nucleo" type="xs:string" />
+							<xs:element name="Cod_Contato" type="xs:string" />
+							<xs:element name="Indica_Grade" type="xs:unsignedByte" />
+							<xs:element name="Indica_Midia" type="xs:unsignedByte" />
+							<xs:element name="Indica_Desvinculado" type="xs:unsignedByte" />
+							<xs:element name="Indica_Cancelado" type="xs:unsignedByte" />
+							<xs:element name="Motivo_Cancelamento" type="xs:string" />
+							<xs:element name="Cod_Programa_Patrocinado" type="xs:string" minOccurs="0" />
+							<xs:element name="Comissao_Agencia" type="xs:decimal" />
+							<xs:element name="Comissao_Intermediario" type="xs:decimal" />
+							<xs:element name="Data_Cadastramento" type="xs:dateTime" />
+							<xs:element name="Numero_PI" type="xs:string" />
+						</xs:sequence>
+					</xs:complexType>
+				</xs:element>
+			</xs:choice>
+		</xs:complexType>
+	</xs:element>
+</xs:schema>

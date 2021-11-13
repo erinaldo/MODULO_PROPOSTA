@@ -25,6 +25,11 @@ angular.module('App').controller('loginController', ['$scope', '$rootScope', 'to
             //var cuser = user.login;
             //var cpassword = user.password;
             $rootScope.App_Erro = "";
+            
+            if (user.Token == undefined) {
+                user.Token = 0
+            };
+            
             var _data = "username=" + cuser + "&password=" + cpassword + "&grant_type=password" + "&Cartv-Token=" + user.Token + "&CallFrom=Browser";
             
             httpService.GetToken('security/token', _data, user.Token).then(function (response) {

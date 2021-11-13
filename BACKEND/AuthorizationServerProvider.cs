@@ -38,14 +38,16 @@ namespace webapi
                 //     cartv_token = context.Request.Headers["Cartv-Token"].ToString();
                 //}
 
-                if ( !String.IsNullOrEmpty(data["Cartv-Token"]))
+                //if ( !String.IsNullOrEmpty(data["Cartv-Token"].ToString()))
+                if (data.GetValues("Cartv-Token")!=null)
                 {
-                    cartv_token = context.Request.Headers["Cartv-Token"].ToString();
+                    cartv_token =data["Cartv-Token"].ToString();
                 }
 
 
                 //if (context.Request.Headers.Keys.Contains("CallFrom"))
-                if (!String.IsNullOrEmpty(data["CallFrom"]))
+                //if (!String.IsNullOrEmpty(data["CallFrom"]))
+                if (data.GetValues("CallFrom")!=null)
                 {
                     //if (context.Request.Headers["CallFrom"].ToString()=="Browser")
                     if (data["CallFrom"].ToString() == "Browser")

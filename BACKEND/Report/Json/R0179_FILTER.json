@@ -1,0 +1,33 @@
+﻿{
+  "Title": "Valores por Contrato",
+  "ProcName": "PR_PROPOSTA_R0179",
+  "RptName": "R0179",
+  "ShowGrid": true,
+  "Filters": [
+    {
+      "ParameterName": "@Par_Competencia",
+      "Type": "Month",
+      "Label": "Competencia",
+      "Search": false,
+      "BigQuery": false,
+      "Dicionary": "",
+      "Value": "",
+      "Multiple": false,
+      "Class": "col-md-2 ",
+      "Required": true,
+      "ArrayValue": []
+    },
+    {
+      "ParameterName": "@Par_Empresa",
+      "Type": "List",
+      "Label": "Emp.Venda",
+      "Search": true,
+      "BigQuery": false,
+      "Dictionary": "Empresa_Usuario",
+      "Value": "",
+      "Multiple": true,
+      "Class": "col-md-2",
+      "ArrayValue": []
+    }
+  ]
+}

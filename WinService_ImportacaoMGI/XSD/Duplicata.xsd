@@ -1,0 +1,88 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<xs:schema id="Duplicata" targetNamespace="http://tempuri.org/Duplicata.xsd" elementFormDefault="qualified"
+	attributeFormDefault="qualified" xmlns="http://tempuri.org/Duplicata.xsd" xmlns:mstns="http://tempuri.org/Duplicata.xsd"
+	xmlns:xs="http://www.w3.org/2001/XMLSchema" xmlns:msdata="urn:schemas-microsoft-com:xml-msdata">
+	<xs:element name="Duplicata" msdata:IsDataSet="true">
+		<xs:complexType>
+			<xs:choice maxOccurs="unbounded">
+				<xs:element name="dtbDuplicata">
+					<xs:complexType>
+						<xs:sequence>
+							<xs:element name="Numero_Fatura" type="xs:int" />
+							<xs:element name="Serie" msdata:ReadOnly="true" type="xs:string" minOccurs="0" />
+							<xs:element name="Numero_Ordem" type="xs:string" />
+							<xs:element name="Competencia" msdata:ReadOnly="true" type="xs:int" minOccurs="0" />
+							<xs:element name="Cod_Natureza" type="xs:string" />
+							<xs:element name="Cod_Empresa" type="xs:string" />
+							<xs:element name="Cod_Empresa_Faturamento" type="xs:string" minOccurs="0" />
+							<xs:element name="Cod_Agencia" type="xs:string" />
+							<xs:element name="Cod_Cliente" type="xs:string" />
+							<xs:element name="Cod_Nucleo" type="xs:string" minOccurs="0" />
+							<xs:element name="Cod_Contato" type="xs:string" minOccurs="0" />
+							<xs:element name="Intermediario" type="xs:string" minOccurs="0" />
+							<xs:element name="Cod_Veiculo" type="xs:string" minOccurs="0" />
+							<xs:element name="Indica_Fatura" msdata:ReadOnly="true" type="xs:int" minOccurs="0" />
+							<xs:element name="Indica_Cancelado" msdata:ReadOnly="true" type="xs:int" minOccurs="0" />
+							<xs:element name="Cod_Cancelamento" msdata:ReadOnly="true" type="xs:string" minOccurs="0" />
+							<xs:element name="Indica_Forma_Pgto" msdata:ReadOnly="true" type="xs:int" minOccurs="0" />
+							<xs:element name="Tipo_Vencimento" type="xs:string" minOccurs="0" />
+							<xs:element name="Condicao_NF" type="xs:short" minOccurs="0" />
+							<xs:element name="Emissao_NF" msdata:ReadOnly="true" type="xs:string" minOccurs="0" />
+							<xs:element name="Vencimento_Duplicata" msdata:ReadOnly="true" type="xs:string" minOccurs="0" />
+							<xs:element name="Data_Cancelamento" msdata:ReadOnly="true" type="xs:string" minOccurs="0" />
+							<xs:element name="Data_Pagamento" msdata:ReadOnly="true" type="xs:string" minOccurs="0" />
+							<xs:element name="Vlr_Liquido" msdata:ReadOnly="true" type="xs:decimal" minOccurs="0" />
+							<xs:element name="Vlr_Comissao" msdata:ReadOnly="true" type="xs:decimal" minOccurs="0" />
+							<xs:element name="Vlr_Intermediario" msdata:ReadOnly="true" type="xs:decimal" minOccurs="0" />
+							<xs:element name="Vlr_BV" msdata:ReadOnly="true" type="xs:decimal" minOccurs="0" />
+							<xs:element name="Vlr_Pago" msdata:ReadOnly="true" type="xs:decimal" minOccurs="0" />
+							<xs:element name="Valor" msdata:ReadOnly="true" type="xs:decimal" minOccurs="0" />
+						</xs:sequence>
+					</xs:complexType>
+				</xs:element>
+				<xs:element name="dtbMGI_Duplicata">
+					<xs:complexType>
+						<xs:sequence>
+							<xs:element name="Origem" type="xs:int" />
+							<xs:element name="ID_Duplicata" msdata:ReadOnly="true" msdata:AutoIncrement="true" type="xs:int" />
+							<xs:element name="Numero_Fatura" type="xs:int" />
+							<xs:element name="Serie" type="xs:string" />
+							<xs:element name="Numero_Ordem" type="xs:string" />
+							<xs:element name="Competencia" type="xs:int" />
+							<xs:element name="Cod_Natureza" type="xs:string" />
+							<xs:element name="Cod_Empresa" type="xs:string" />
+							<xs:element name="Cod_Empresa_Faturamento" type="xs:string" />
+							<xs:element name="Cod_Agencia_Duplicata" type="xs:string" />
+							<xs:element name="Cod_Cliente_Duplicata" type="xs:string" />
+							<xs:element name="Cod_Nucleo_Duplicata" type="xs:string" />
+							<xs:element name="Cod_Contato_Duplicata" type="xs:string" />
+							<xs:element name="Cod_Intermediario" type="xs:string" />
+							<xs:element name="Cod_Veiculo_Duplicata" type="xs:string" />
+							<xs:element name="Indica_Fatura" type="xs:unsignedByte" />
+							<xs:element name="Indica_Cancelado" type="xs:unsignedByte" />
+							<xs:element name="Cod_Cancelamento" type="xs:string" minOccurs="0" />
+							<xs:element name="Indica_Forma_Pgto" type="xs:unsignedByte" />
+							<xs:element name="Tipo_Vencimento" type="xs:string" />
+							<xs:element name="Condicao_Vencimento" type="xs:int" />
+							<xs:element name="Data_Emissao" type="xs:dateTime" />
+							<xs:element name="Data_Vencimento" type="xs:dateTime" />
+							<xs:element name="Data_Cancelamento" type="xs:dateTime" minOccurs="0" />
+							<xs:element name="Data_Recebimento" type="xs:dateTime" minOccurs="0" />
+							<xs:element name="Vlr_Duplicata" type="xs:decimal" minOccurs="0" />
+							<xs:element name="Vlr_Comissao" type="xs:decimal" minOccurs="0" />
+							<xs:element name="Vlr_Intermediario" type="xs:decimal" minOccurs="0" />
+							<xs:element name="Vlr_BV" type="xs:decimal" minOccurs="0" />
+							<xs:element name="Vlr_Recebido" type="xs:decimal" minOccurs="0" />
+							<xs:element name="Vlr_Complemento" type="xs:decimal" minOccurs="0" />
+						</xs:sequence>
+					</xs:complexType>
+				</xs:element>
+			</xs:choice>
+		</xs:complexType>
+		<xs:unique name="DuplicataKey1" msdata:PrimaryKey="true">
+			<xs:selector xpath=".//mstns:dtbMGI_Duplicata" />
+			<xs:field xpath="mstns:Origem" />
+			<xs:field xpath="mstns:ID_Duplicata" />
+		</xs:unique>
+	</xs:element>
+</xs:schema>

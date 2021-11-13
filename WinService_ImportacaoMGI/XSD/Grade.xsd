@@ -1,0 +1,38 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<xs:schema id="Grade" targetNamespace="http://tempuri.org/Grade.xsd" elementFormDefault="qualified"
+	attributeFormDefault="qualified" xmlns="http://tempuri.org/Grade.xsd" xmlns:mstns="http://tempuri.org/Grade.xsd"
+	xmlns:xs="http://www.w3.org/2001/XMLSchema" xmlns:msdata="urn:schemas-microsoft-com:xml-msdata">
+	<xs:element name="Grade" msdata:IsDataSet="true">
+		<xs:complexType>
+			<xs:choice maxOccurs="unbounded">
+				<xs:element name="dtbGrade">
+					<xs:complexType>
+						<xs:sequence>
+							<xs:element name="Cod_Veiculo" type="xs:string" />
+							<xs:element name="Data_Exibicao" msdata:ReadOnly="true" type="xs:date" minOccurs="0" />
+							<xs:element name="Cod_Programa" type="xs:string" />
+							<xs:element name="Indica_Grade" msdata:ReadOnly="true" type="xs:unsignedByte" minOccurs="0" />
+							<xs:element name="Indica_Desativado" msdata:ReadOnly="true" type="xs:boolean" minOccurs="0" />
+							<xs:element name="Disponibilidade" type="xs:short" />
+							<xs:element name="Absorvido" type="xs:short" minOccurs="0" />
+						</xs:sequence>
+					</xs:complexType>
+				</xs:element>
+				<xs:element name="dtbMGI_Grade">
+					<xs:complexType>
+						<xs:sequence>
+							<xs:element name="Origem" type="xs:int" />
+							<xs:element name="Cod_Veiculo" type="xs:string" />
+							<xs:element name="Data_Exibicao" type="xs:date" />
+							<xs:element name="Cod_Programa" type="xs:string" />
+							<xs:element name="Indica_Grade" type="xs:unsignedByte" />
+							<xs:element name="Indica_Desativado" type="xs:boolean" />
+							<xs:element name="Disponibilidade" type="xs:short" />
+							<xs:element name="Absorvido" type="xs:short" />
+						</xs:sequence>
+					</xs:complexType>
+				</xs:element>
+			</xs:choice>
+		</xs:complexType>
+	</xs:element>
+</xs:schema>

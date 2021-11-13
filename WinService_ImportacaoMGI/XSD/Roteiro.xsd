@@ -1,0 +1,40 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<xs:schema id="Roteiro" targetNamespace="http://tempuri.org/Roteiro.xsd" elementFormDefault="qualified"
+	attributeFormDefault="qualified" xmlns="http://tempuri.org/Roteiro.xsd" xmlns:mstns="http://tempuri.org/Roteiro.xsd"
+	xmlns:xs="http://www.w3.org/2001/XMLSchema" xmlns:msdata="urn:schemas-microsoft-com:xml-msdata">
+	<xs:element name="Roteiro" msdata:IsDataSet="true">
+		<xs:complexType>
+			<xs:choice maxOccurs="unbounded">
+				<xs:element name="dtbRoteiro">
+					<xs:complexType>
+						<xs:sequence>
+							<xs:element name="Cod_Veiculo" type="xs:string" />
+							<xs:element name="Data_Exibicao" type="xs:dateTime" />
+							<xs:element name="Cod_Programa" type="xs:string" />
+							<xs:element name="Breaks" type="xs:unsignedByte" />
+							<xs:element name="Tipo_Breaks" type="xs:unsignedByte" />
+							<xs:element name="Horario_Exibicao" type="xs:dateTime" minOccurs="0" />
+							<xs:element name="Cod_Tipo_Comercial" type="xs:string" />
+							<xs:element name="Duracao" type="xs:int" />
+							<xs:element name="Titulo_Comercial" type="xs:string" />
+							<xs:element name="Cod_Cliente" type="xs:string" minOccurs="0" />
+							<xs:element name="Razao_Social_Cliente" type="xs:string" minOccurs="0" />
+							<xs:element name="Nome_Fantasia_Cliente" type="xs:string" minOccurs="0" />
+							<xs:element name="Cod_Red_Produto1" type="xs:int" minOccurs="0" />
+							<xs:element name="Cod_Red_Produto2" type="xs:int" minOccurs="0" />
+							<xs:element name="Cod_Red_Produto3" type="xs:int" minOccurs="0" />
+						</xs:sequence>
+					</xs:complexType>
+				</xs:element>
+				<xs:element name="dtbRoteiroExclusao">
+					<xs:complexType>
+						<xs:sequence>
+							<xs:element name="Cod_Veiculo" type="xs:string" minOccurs="0" />
+							<xs:element name="Data_Exibicao" type="xs:dateTime" minOccurs="0" />
+						</xs:sequence>
+					</xs:complexType>
+				</xs:element>
+			</xs:choice>
+		</xs:complexType>
+	</xs:element>
+</xs:schema>

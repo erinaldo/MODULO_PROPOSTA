@@ -1,0 +1,46 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<xs:schema id="Produto" targetNamespace="http://tempuri.org/Produto.xsd" elementFormDefault="qualified"
+	attributeFormDefault="qualified" xmlns="http://tempuri.org/Produto.xsd" xmlns:mstns="http://tempuri.org/Produto.xsd"
+	xmlns:xs="http://www.w3.org/2001/XMLSchema" xmlns:msdata="urn:schemas-microsoft-com:xml-msdata">
+	<xs:element name="Produto" msdata:IsDataSet="true">
+		<xs:complexType>
+			<xs:choice maxOccurs="unbounded">
+				<xs:element name="dtbProduto">
+					<xs:complexType>
+						<xs:sequence>
+							<xs:element name="Cod_Red_Produto" type="xs:int" />
+							<xs:element name="Cod_Root" type="xs:int" minOccurs="0" />
+							<xs:element name="Descricao" type="xs:string" />
+							<xs:element name="Horario_Restricao" type="xs:dateTime" minOccurs="0" />
+							<xs:element name="Nivel" type="xs:unsignedByte" />
+						</xs:sequence>
+					</xs:complexType>
+				</xs:element>
+				<xs:element name="dtbMGI_Produto">
+					<xs:complexType>
+						<xs:sequence>
+							<xs:element name="Origem" type="xs:int" />
+							<xs:element name="Cod_Red_Produto" type="xs:int" />
+							<xs:element name="Descricao" type="xs:string" />
+							<xs:element name="Cod_Root" type="xs:int" minOccurs="0" />
+							<xs:element name="Nivel" type="xs:unsignedByte" minOccurs="0" />
+						</xs:sequence>
+					</xs:complexType>
+				</xs:element>
+			</xs:choice>
+		</xs:complexType>
+		<xs:unique name="ProdutoKey1" msdata:PrimaryKey="true">
+			<xs:selector xpath=".//mstns:dtbProduto" />
+			<xs:field xpath="mstns:Cod_Red_Produto" />
+		</xs:unique>
+		<xs:unique name="MGIProdutoKey1" msdata:PrimaryKey="true">
+			<xs:selector xpath=".//mstns:dtbMGI_Produto" />
+			<xs:field xpath="mstns:Origem" />
+			<xs:field xpath="mstns:Cod_Red_Produto" />
+		</xs:unique>
+		<xs:key name="MGIProdutoKey2">
+			<xs:selector xpath=".//mstns:dtbMGI_Produto" />
+			<xs:field xpath="mstns:Cod_Red_Produto" />
+		</xs:key>
+	</xs:element>
+</xs:schema>

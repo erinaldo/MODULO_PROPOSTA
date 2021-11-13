@@ -1,0 +1,95 @@
+{
+  "Title": "Resumo das Disponibilidades",
+  "ProcName": "PR_PROPOSTA_R0021",
+  "RptName": "R0021",
+  "ShowGrid": true,
+  "Filters": [
+    {
+      "ParameterName": "@Par_Cod_Veiculo",
+      "Type": "List",
+      "Label": "Veiculo",
+      "Search": true,
+      "BigQuery": false,
+      "Dictionary": "Veiculo",
+      "Value": "",
+      "Multiple": true,
+      "Class": "col-md-2",
+      "Required": false,
+      "ArrayValue": []
+    },
+    {
+      "ParameterName": "@Par_Data_Inicio",
+      "Type": "Date",
+      "Label": "Data Inicial",
+      "Search": false,
+      "BigQuery": false,
+      "Dictionary": "",
+      "Value": "",
+      "Multiple": false,
+      "Class": "col-md-2",
+      "Required": true,
+      "ArrayValue": []
+    },
+    {
+      "ParameterName": "@Par_Data_Fim",
+      "Type": "Date",
+      "Label": "Data Final",
+      "Search": false,
+      "BigQuery": false,
+      "Dictionary": "",
+      "Value": "",
+      "Multiple": false,
+      "Class": "col-md-2",
+      "Required": true,
+      "ArrayValue": []
+    },
+    {
+      "ParameterName": "@Par_Indica_Net",
+      "Type": "Boolean",
+      "Label": "Indica_Net",
+      "Search": true,
+      "BigQuery": false,
+      "Dictionary": "",
+      "Value": true,
+      "Multiple": false,
+      "Class": "col-md-3",
+      "ArrayValue": []
+    },
+    {
+      "ParameterName": "@Par_Indica_Programa",
+      "Type": "Boolean",
+      "Label": "Indica_Programa",
+      "Search": true,
+      "BigQuery": false,
+      "Dictionary": "",
+      "Value": true,
+      "Multiple": false,
+      "Class": "col-md-3",
+      "ArrayValue": []
+    },
+    {
+      "ParameterName": "@Par_Indica_Local",
+      "Type": "Boolean",
+      "Label": "Indica_Local",
+      "Search": true,
+      "BigQuery": false,
+      "Dictionary": "",
+      "Value": true,
+      "Multiple": false,
+      "Class": "col-md-3",
+      "ArrayValue": []
+    },
+    {
+      "ParameterName": "@Par_Saida",
+      "Type": "Boolean",
+      "Label": "Saida",
+      "Search": true,
+      "BigQuery": false,
+      "Dictionary": "",
+      "Value": true,
+      "Multiple": false,
+      "Class": "col-md-3",
+      "ArrayValue": []
+    }
+  ]
+}

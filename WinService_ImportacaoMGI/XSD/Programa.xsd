@@ -1,0 +1,51 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<xs:schema id="Programa" targetNamespace="http://tempuri.org/Programa.xsd" elementFormDefault="qualified"
+	attributeFormDefault="qualified" xmlns="http://tempuri.org/Programa.xsd" xmlns:mstns="http://tempuri.org/Programa.xsd"
+	xmlns:xs="http://www.w3.org/2001/XMLSchema" xmlns:msdata="urn:schemas-microsoft-com:xml-msdata">
+	<xs:element name="Programa" msdata:IsDataSet="true">
+		<xs:complexType>
+			<xs:choice maxOccurs="unbounded">
+				<xs:element name="dtbPrograma">
+					<xs:complexType>
+						<xs:sequence>
+							<xs:element name="Cod_Programa" type="xs:string" />
+							<xs:element name="Titulo" type="xs:string" />
+							<xs:element name="Cod_Genero" type="xs:string" />
+							<xs:element name="Indica_Desativado" type="xs:boolean" />
+							<xs:element name="Indica_Evento" type="xs:boolean" />
+							<xs:element name="Indica_Rotativo" type="xs:boolean" />
+							<xs:element name="Indica_Local" type="xs:boolean" minOccurs="0" />
+						</xs:sequence>
+					</xs:complexType>
+				</xs:element>
+				<xs:element name="dtbMGI_Programa">
+					<xs:complexType>
+						<xs:sequence>
+							<xs:element name="Origem" type="xs:int" />
+							<xs:element name="Cod_Programa" type="xs:string" />
+							<xs:element name="Cod_Genero" type="xs:string" />
+							<xs:element name="Titulo" type="xs:string" />
+							<xs:element name="Indica_Desativado" type="xs:boolean" />
+							<xs:element name="Indica_Programa_Evento" type="xs:boolean" />
+							<xs:element name="Indica_Programa_Rotativo" type="xs:boolean" />
+							<xs:element name="Indica_Programa_Local" type="xs:boolean" />
+						</xs:sequence>
+					</xs:complexType>
+				</xs:element>
+			</xs:choice>
+		</xs:complexType>
+		<xs:unique name="ProgramaKey1" msdata:PrimaryKey="true">
+			<xs:selector xpath=".//mstns:dtbPrograma" />
+			<xs:field xpath="mstns:Cod_Programa" />
+		</xs:unique>
+		<xs:unique name="MGIProgramaKey1" msdata:PrimaryKey="true">
+			<xs:selector xpath=".//mstns:dtbMGI_Programa" />
+			<xs:field xpath="mstns:Origem" />
+			<xs:field xpath="mstns:Cod_Programa" />
+		</xs:unique>
+		<xs:key name="MGIProgramaKey2">
+			<xs:selector xpath=".//mstns:dtbMGI_Programa" />
+			<xs:field xpath="mstns:Cod_Programa" />
+		</xs:key>
+	</xs:element>
+</xs:schema>

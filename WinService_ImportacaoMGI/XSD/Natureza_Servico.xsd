@@ -1,0 +1,36 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<xs:schema id="Natureza_Servico" targetNamespace="http://tempuri.org/Natureza_Servico.xsd"
+	elementFormDefault="qualified" attributeFormDefault="qualified" xmlns="http://tempuri.org/Natureza_Servico.xsd"
+	xmlns:mstns="http://tempuri.org/Natureza_Servico.xsd" xmlns:xs="http://www.w3.org/2001/XMLSchema"
+	xmlns:msdata="urn:schemas-microsoft-com:xml-msdata">
+	<xs:element name="Natureza_Servico" msdata:IsDataSet="true">
+		<xs:complexType>
+			<xs:choice maxOccurs="unbounded">
+				<xs:element name="dtbNatureza_Servico">
+					<xs:complexType>
+						<xs:sequence>
+							<xs:element name="Cod_Empresa" type="xs:string" />
+							<xs:element name="Cod_Natureza" type="xs:string" />
+							<xs:element name="Descricao" type="xs:string" minOccurs="0" />
+						</xs:sequence>
+					</xs:complexType>
+				</xs:element>
+				<xs:element name="dtbMGI_Natureza_Servico">
+					<xs:complexType>
+						<xs:sequence>
+							<xs:element name="Origem" type="xs:int" />
+							<xs:element name="Cod_Empresa" type="xs:string" />
+							<xs:element name="Cod_Natureza" type="xs:string" />
+							<xs:element name="Descricao" type="xs:string" minOccurs="0" />
+						</xs:sequence>
+					</xs:complexType>
+				</xs:element>
+			</xs:choice>
+		</xs:complexType>
+		<xs:unique name="Natureza_ServicoKey1" msdata:PrimaryKey="true">
+			<xs:selector xpath=".//mstns:dtbNatureza_Servico" />
+			<xs:field xpath="mstns:Cod_Empresa" />
+			<xs:field xpath="mstns:Cod_Natureza" />
+		</xs:unique>
+	</xs:element>
+</xs:schema>

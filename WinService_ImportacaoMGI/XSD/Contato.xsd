@@ -1,0 +1,69 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<xs:schema id="Contato" targetNamespace="http://tempuri.org/Contato.xsd" elementFormDefault="qualified"
+	attributeFormDefault="qualified" xmlns="http://tempuri.org/Contato.xsd" xmlns:mstns="http://tempuri.org/Contato.xsd"
+	xmlns:xs="http://www.w3.org/2001/XMLSchema" xmlns:msdata="urn:schemas-microsoft-com:xml-msdata">
+	<xs:element name="Contato" msdata:IsDataSet="true">
+		<xs:complexType>
+			<xs:choice maxOccurs="unbounded">
+				<xs:element name="dtbContato">
+					<xs:complexType>
+						<xs:sequence>
+							<xs:element name="Cod_Contato" type="xs:string" />
+							<xs:element name="Nome" type="xs:string" />
+							<xs:element name="CGC" type="xs:string" minOccurs="0" />
+							<xs:element name="Data_Desativacao" type="xs:dateTime" minOccurs="0" />
+						</xs:sequence>
+					</xs:complexType>
+				</xs:element>
+				<xs:element name="dtbMGI_Contato">
+					<xs:complexType>
+						<xs:sequence>
+							<xs:element name="Origem" type="xs:int" />
+							<xs:element name="Cod_Contato" type="xs:string" />
+							<xs:element name="Nome" type="xs:string" />
+							<xs:element name="CPF_CNPJ" type="xs:string" minOccurs="0" />
+							<xs:element name="Indica_Desativado" type="xs:boolean" minOccurs="0" />
+						</xs:sequence>
+					</xs:complexType>
+				</xs:element>
+				<xs:element name="dtbMGI_Contato_Empresa">
+					<xs:complexType>
+						<xs:sequence>
+							<xs:element name="Origem" type="xs:int" />
+							<xs:element name="Cod_Contato" type="xs:string" />
+							<xs:element name="Cod_Empresa" type="xs:string" />
+						</xs:sequence>
+					</xs:complexType>
+				</xs:element>
+				<xs:element name="dtbContato_Empresa">
+					<xs:complexType>
+						<xs:sequence>
+							<xs:element name="Cod_Contato" type="xs:string" />
+							<xs:element name="Cod_Empresa" type="xs:string" />
+						</xs:sequence>
+					</xs:complexType>
+				</xs:element>
+			</xs:choice>
+		</xs:complexType>
+		<xs:unique name="ContatoKey1" msdata:PrimaryKey="true">
+			<xs:selector xpath=".//mstns:dtbContato" />
+			<xs:field xpath="mstns:Cod_Contato" />
+		</xs:unique>
+		<xs:unique name="ContatoKey2" msdata:PrimaryKey="true">
+			<xs:selector xpath=".//mstns:dtbMGI_Contato" />
+			<xs:field xpath="mstns:Origem" />
+			<xs:field xpath="mstns:Cod_Contato" />
+		</xs:unique>
+		<xs:unique name="ContatoKey3" msdata:PrimaryKey="true">
+			<xs:selector xpath=".//mstns:dtbMGI_Contato_Empresa" />
+			<xs:field xpath="mstns:Origem" />
+			<xs:field xpath="mstns:Cod_Contato" />
+			<xs:field xpath="mstns:Cod_Empresa" />
+		</xs:unique>
+		<xs:unique name="ContatoKey4" msdata:PrimaryKey="true">
+			<xs:selector xpath=".//mstns:dtbContato_Empresa" />
+			<xs:field xpath="mstns:Cod_Contato" />
+			<xs:field xpath="mstns:Cod_Empresa" />
+		</xs:unique>
+	</xs:element>
+</xs:schema>

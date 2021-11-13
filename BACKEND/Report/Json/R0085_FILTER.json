@@ -1,0 +1,85 @@
+{
+  "Title": "Vendas por Contato",
+  "ProcName": "PR_PROPOSTA_R0085",
+  "RptName": "R0085",
+  "ShowGrid": true,
+  "Filters": [
+    {
+      "ParameterName": "@Par_Cod_Empresa",
+      "Type": "Text",
+      "Label": "Empresa",
+      "Search": true,
+      "BigQuery": false,
+      "Dictionary": "Empresa_Pertence",
+      "Value": "",
+      "Multiple": false,
+      "Required": true,
+      "Class": "col-md-2",
+      "ArrayValue": []
+    },
+    {
+      "ParameterName": "@Par_Competencia",
+      "Type": "Month",
+      "Label": "Competencia",
+      "Search": false,
+      "BigQuery": false,
+      "Dicionary": "",
+      "Value": "",
+      "Multiple": false,
+      "Class": "col-md-2 ",
+      "Required": true,
+      "ArrayValue": []
+    },
+    {
+      "ParameterName": "@Par_Cod_Veiculo",
+      "Type": "Text",
+      "Label": "Veiculo",
+      "Search": true,
+      "BigQuery": false,
+      "Dictionary": "Veiculo",
+      "Value": "",
+      "Multiple": false,
+      "Class": "col-md-2",
+      "Required": false,
+      "ArrayValue": []
+    },
+    {
+      "ParameterName": "@Par_Cod_Contato",
+      "Type": "Text",
+      "Label": "Codigo Contato",
+      "Search": true,
+      "BigQuery": false,
+      "Dictionary": "Contato",
+      "Value": "",
+      "Multiple": false,
+      "Class": "col-md-2",
+      "ArrayValue": []
+    },
+    {
+      "ParameterName": "@Par_Cod_Usuario",
+      "Type": "Text",
+      "Label": "Codigo Usuario",
+      "Search": false,
+      "BigQuery": false,
+      "Dictionary": "",
+      "Value": "",
+      "Multiple": false,
+      "Class": "col-md-2",
+      "Required": false,
+      "ArrayValue": []
+    },
+    {
+      "ParameterName": "@Par_TipoMidia",
+      "Type": "Text",
+      "Label": "Tipo de Midia",
+      "Search": true,
+      "BigQuery": false,
+      "Dictionary": "TipoMidias",
+      "Value": "",
+      "Multiple": false,
+      "Class": "col-md-2",
+      "Required": false,
+      "ArrayValue": []
+    }
+  ]
+}

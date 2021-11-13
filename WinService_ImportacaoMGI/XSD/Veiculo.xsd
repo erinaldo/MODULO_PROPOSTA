@@ -1,0 +1,36 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<xs:schema id="Veiculo" targetNamespace="http://tempuri.org/Veiculo.xsd" elementFormDefault="qualified"
+	attributeFormDefault="qualified" xmlns="http://tempuri.org/Veiculo.xsd" xmlns:mstns="http://tempuri.org/Veiculo.xsd"
+	xmlns:xs="http://www.w3.org/2001/XMLSchema" xmlns:msdata="urn:schemas-microsoft-com:xml-msdata">
+	<xs:element name="Veiculo" msdata:IsDataSet="true">
+		<xs:complexType>
+			<xs:choice maxOccurs="unbounded">
+				<xs:element name="dtbVeiculo">
+					<xs:complexType>
+						<xs:sequence>
+							<xs:element name="Cod_Veiculo" type="xs:string" />
+							<xs:element name="Cod_Empresa" type="xs:string" minOccurs="0" />
+							<xs:element name="Nome_Veiculo" type="xs:string" minOccurs="0" />
+							<xs:element name="Sigla_Veiculo" type="xs:string" minOccurs="0" />
+						</xs:sequence>
+					</xs:complexType>
+				</xs:element>
+				<xs:element name="dtbMGI_Veiculo">
+					<xs:complexType>
+						<xs:sequence>
+							<xs:element name="Origem" type="xs:int" />
+							<xs:element name="Cod_Veiculo" type="xs:string" />
+							<xs:element name="Cod_Empresa" type="xs:string" minOccurs="0" />
+							<xs:element name="Nome_Veiculo" type="xs:string" minOccurs="0" />
+						</xs:sequence>
+					</xs:complexType>
+				</xs:element>
+			</xs:choice>
+		</xs:complexType>
+		<xs:unique name="VeiculoKey1" msdata:PrimaryKey="true">
+			<xs:selector xpath=".//mstns:dtbMGI_Veiculo" />
+			<xs:field xpath="mstns:Origem" />
+			<xs:field xpath="mstns:Cod_Veiculo" />
+		</xs:unique>
+	</xs:element>
+</xs:schema>

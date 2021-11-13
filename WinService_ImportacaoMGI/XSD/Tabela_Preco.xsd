@@ -1,0 +1,53 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<xs:schema id="Tabela_Preco" targetNamespace="http://tempuri.org/Tabela_Preco.xsd" elementFormDefault="qualified"
+	attributeFormDefault="qualified" xmlns="http://tempuri.org/Tabela_Preco.xsd" xmlns:mstns="http://tempuri.org/Tabela_Preco.xsd"
+	xmlns:xs="http://www.w3.org/2001/XMLSchema" xmlns:msdata="urn:schemas-microsoft-com:xml-msdata">
+	<xs:element name="Tabela_Preco" msdata:IsDataSet="true">
+		<xs:complexType>
+			<xs:choice maxOccurs="unbounded">
+				<xs:element name="dtbTabela_Preco">
+					<xs:complexType>
+						<xs:sequence>
+							<xs:element name="Competencia" type="xs:int" />
+							<xs:element name="Sequencia" type="xs:unsignedByte" />
+							<xs:element name="Indica_Tipo_Preco" msdata:ReadOnly="true" type="xs:unsignedByte" minOccurs="0" />
+							<xs:element name="Cod_Programa" type="xs:string" />
+							<xs:element name="Cod_Veiculo_Mercado" type="xs:string" />
+							<xs:element name="Valor" type="xs:decimal" minOccurs="0" />
+						</xs:sequence>
+					</xs:complexType>
+				</xs:element>
+				<xs:element name="dtbMGI_Tabela_Preco">
+					<xs:complexType>
+						<xs:sequence>
+							<xs:element name="Origem" type="xs:int" />
+							<xs:element name="Competencia" type="xs:int" />
+							<xs:element name="Sequencia" type="xs:unsignedByte" />
+							<xs:element name="Indica_Tipo_Preco" type="xs:unsignedByte" />
+							<xs:element name="Cod_Programa" type="xs:string" />
+							<xs:element name="Cod_Veiculo_Mercado" type="xs:string" />
+							<xs:element name="Valor" type="xs:decimal" />
+						</xs:sequence>
+					</xs:complexType>
+				</xs:element>
+			</xs:choice>
+		</xs:complexType>
+		<xs:unique name="MGITabela_PrecoKey1" msdata:PrimaryKey="true">
+			<xs:selector xpath=".//mstns:dtbMGI_Tabela_Preco" />
+			<xs:field xpath="mstns:Origem" />
+			<xs:field xpath="mstns:Competencia" />
+			<xs:field xpath="mstns:Sequencia" />
+			<xs:field xpath="mstns:Indica_Tipo_Preco" />
+			<xs:field xpath="mstns:Cod_Programa" />
+			<xs:field xpath="mstns:Cod_Veiculo_Mercado" />
+		</xs:unique>
+		<xs:key name="MGITabela_PrecoKey2">
+			<xs:selector xpath=".//mstns:dtbMGI_Tabela_Preco" />
+			<xs:field xpath="mstns:Competencia" />
+			<xs:field xpath="mstns:Sequencia" />
+			<xs:field xpath="mstns:Indica_Tipo_Preco" />
+			<xs:field xpath="mstns:Cod_Programa" />
+			<xs:field xpath="mstns:Cod_Veiculo_Mercado" />
+		</xs:key>
+	</xs:element>
+</xs:schema>

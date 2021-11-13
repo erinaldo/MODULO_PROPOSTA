@@ -1,0 +1,37 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<xs:schema id="Tipo_Comercial" targetNamespace="http://tempuri.org/Tipo_Comercial.xsd" elementFormDefault="qualified"
+	attributeFormDefault="qualified" xmlns="http://tempuri.org/Tipo_Comercial.xsd" xmlns:mstns="http://tempuri.org/Tipo_Comercial.xsd"
+	xmlns:xs="http://www.w3.org/2001/XMLSchema" xmlns:msdata="urn:schemas-microsoft-com:xml-msdata">
+	<xs:element name="Tipo_Comercial" msdata:IsDataSet="true">
+		<xs:complexType>
+			<xs:choice maxOccurs="unbounded">
+				<xs:element name="dtbTipo_Comercial">
+					<xs:complexType>
+						<xs:sequence>
+							<xs:element name="Cod_Tipo_Comercial" type="xs:string" />
+							<xs:element name="Descricao" type="xs:string" />
+						</xs:sequence>
+					</xs:complexType>
+				</xs:element>
+				<xs:element name="dtbMGI_Tipo_Comercial">
+					<xs:complexType>
+						<xs:sequence>
+							<xs:element name="Origem" type="xs:int" />
+							<xs:element name="Cod_Tipo_Comercial" type="xs:string" />
+							<xs:element name="Descricao" type="xs:string" />
+						</xs:sequence>
+					</xs:complexType>
+				</xs:element>
+			</xs:choice>
+		</xs:complexType>
+		<xs:unique name="Tipo_ComercialKey1" msdata:PrimaryKey="true">
+			<xs:selector xpath=".//mstns:dtbTipo_Comercial" />
+			<xs:field xpath="mstns:Cod_Tipo_Comercial" />
+		</xs:unique>
+		<xs:unique name="Tipo_ComercialKey2" msdata:PrimaryKey="true">
+			<xs:selector xpath=".//mstns:dtbMGI_Tipo_Comercial" />
+			<xs:field xpath="mstns:Origem" />
+			<xs:field xpath="mstns:Cod_Tipo_Comercial" />
+		</xs:unique>
+	</xs:element>
+</xs:schema>

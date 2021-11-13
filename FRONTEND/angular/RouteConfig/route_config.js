@@ -851,7 +851,7 @@
         templateUrl: 'view/RetornoPlayList.html',
         authorize: true,
         controller: 'RetornoPlayListController',
-        routeName: 'Parametrização do Retorno da PlayList',
+        routeName: 'Retorno da PlayList',
         RouteId: 'Retorno@PlayList'
     })
          .when('/BaixaContrato', {
