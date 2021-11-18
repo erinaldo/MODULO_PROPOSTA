@@ -94,7 +94,7 @@
              'Text': 'Emissão de Relatórios diversos',
              'bgcolor': 'rgba(116, 79, 219, 0.2)',
              'color': '#000',
-             'url': 'IndexReport.html'
+             'url': 'IndexReport.html#/report'
          },
           {
               'Id': 11, 'Name': 'SIM-Interfaces',
@@ -121,7 +121,6 @@
                 { 'Title': 'Evolução de Vendas', 'Url': $rootScope.pageUrl + 'indexDash.html#/EvolucaoVendas' },
                 { 'Title': 'Funil de Vendas', 'Url': $rootScope.pageUrl + 'indexDash.html#/FunilVendas' },
                 { 'Title': 'Gráfico de Vendas', 'Url': $rootScope.pageUrl + 'indexDash.html#/GraficoVendas' },
-                //{ 'Title': 'Power-Bi', 'Url': $rootScope.UrlPowerBi } --- Nao funciona no short Menu
             ],
         },
         {

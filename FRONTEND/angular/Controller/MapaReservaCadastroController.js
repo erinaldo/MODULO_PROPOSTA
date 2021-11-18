@@ -785,13 +785,15 @@
 
     //===================================Preencher linha das insercoes
     $scope.PreencherLinha = function (pVeiculacao,pQtd) {
-        //var _qtd = pQtd
-        //if (pVeiculacao.Qtd_Replicar) {
-            //_qtd = pVeiculacao.Qtd_Replicar + pQtd;
-        //};
+        var _qtdIns = 0;
         for (var i = 0; i < pVeiculacao.Insercoes.length; i++) {
             if (pVeiculacao.Insercoes[i].Tem_Grade && pVeiculacao.Insercoes[i].Valido) {
-                pVeiculacao.Insercoes[i].Qtd = pVeiculacao.Insercoes[i].Qtd + parseInt(pQtd);
+                _qtdIns = pVeiculacao.Insercoes[i].Qtd
+                if (pVeiculacao.Insercoes[i].Qtd) {
+                    _qtdIns = parseInt( pVeiculacao.Insercoes[i].Qtd);
+                };
+                //pVeiculacao.Insercoes[i].Qtd = pVeiculacao.Insercoes[i].Qtd + parseInt(pQtd);
+                pVeiculacao.Insercoes[i].Qtd = _qtdIns + parseInt(pQtd);
                 if (pVeiculacao.Insercoes[i].Qtd < 1) {
                     pVeiculacao.Insercoes[i].Qtd = null;
                 };
@@ -799,8 +801,26 @@
         };
 
         $scope.fnTotalizaVeiculacao(pVeiculacao);
-        //pVeiculacao.Qtd_Replicar = _qtd;
     };
+    //===================================Repetir qtd no Periodo
+    $scope.RepetirPeriodo = function (pVeiculacao) {
+        var _qtdIns = 0;
+        for (var i = 0; i < pVeiculacao.Insercoes.length; i++) {
+            if (pVeiculacao.Insercoes[i].Qtd) {
+                _qtdIns = parseInt(pVeiculacao.Insercoes[i].Qtd);
+                break;
+            };
+        };
+        if (_qtdIns) {
+            for (var i = 0; i < pVeiculacao.Insercoes.length; i++) {
+                if (pVeiculacao.Insercoes[i].Tem_Grade && pVeiculacao.Insercoes[i].Valido) {
+                    pVeiculacao.Insercoes[i].Qtd = _qtdIns
+                };
+            };
+        };
+        $scope.fnTotalizaVeiculacao(pVeiculacao);
+    };
+
 
     //===================================Change Periodo campanha
     $scope.PeriodoCampanhaChange = function (pContrato) {

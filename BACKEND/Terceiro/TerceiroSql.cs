@@ -125,6 +125,7 @@ namespace PROPOSTA
                     Adp.SelectCommand.Parameters.AddWithValue("@Par_Praca_Pgto", pTerceiro.Enderecos[IBaseEndereco].Praca_Pgto);
                     Adp.SelectCommand.Parameters.AddWithValue("@Par_Cod_Municipio", pTerceiro.Enderecos[IBaseEndereco].Cod_Municipio);
                     Adp.SelectCommand.Parameters.AddWithValue("@Par_Cod_Municipio1", pTerceiro.Enderecos[IBaseEndereco].Cod_Municipio1);
+
                 }
                 if (IBaseComplementar > -1)
                 {
@@ -137,6 +138,10 @@ namespace PROPOSTA
                     Adp.SelectCommand.Parameters.AddWithValue("@Par_Telefone_Contato_Compl_2", pTerceiro.Complementar[IBaseComplementar].Telefone_Contato_Compl_2);
                     Adp.SelectCommand.Parameters.AddWithValue("@Par_Email_Contato_Compl", pTerceiro.Complementar[IBaseComplementar].Email_Contato_Compl);
                     Adp.SelectCommand.Parameters.AddWithValue("@Par_Comissao_Padrao", pTerceiro.Complementar[IBaseComplementar].Comissao_Padrao);
+                    Adp.SelectCommand.Parameters.AddWithValue("@Par_Cod_Representante", pTerceiro.Complementar[IBaseComplementar].Cod_Representante);
+                    Adp.SelectCommand.Parameters.AddWithValue("@Par_Cod_Banco", pTerceiro.Complementar[IBaseComplementar].Cod_Banco);
+                    Adp.SelectCommand.Parameters.AddWithValue("@Par_Cod_Grupo_Cliente", pTerceiro.Complementar[IBaseComplementar].Cod_Grupo_Cliente);
+
                 }
                 Adp.SelectCommand.Parameters.AddWithValue("@Par_Empresas", xmlEmpresas);
                 Adp.Fill(dtb);
@@ -305,8 +310,8 @@ namespace PROPOSTA
                         Indica_Desativado = drw["indica_desativado"].ToString().ConvertToByte(),
                         Motivo_Desativacao = drw["Motivo_Desativacao"].ToString().TrimEnd(),
                         Indica_Merchandising = drw["Indica_Merchandising"].ToString().ConvertToByte(),
-                        Cod_Grupo_Cliente = drw["Cod_Grupo_Cliente"].ToString().ConvertToInt32(),
-                        Cod_Representante = drw["Cod_Representante"].ToString().ConvertToInt32(),
+                        Cod_Grupo_Cliente = drw["Cod_Grupo_Cliente"].ToString(),
+                        Cod_Representante = drw["Cod_Representante"].ToString(),
                         Cod_Banco = drw["Cod_Banco"].ToString().TrimEnd(),
                         Indica_IN480 = drw["Indica_IN480"].ToString().ConvertToBoolean(),
                         Bco_Agencia = drw["Bco_Agencia"].ToString().TrimEnd(),
@@ -475,6 +480,32 @@ namespace PROPOSTA
                 Adp.SelectCommand = cmd;
                 Adp.SelectCommand.Parameters.AddWithValue("@Par_Login", this.CurrentUser);
                 Adp.SelectCommand.Parameters.AddWithValue("@Par_Cod_Municipio", pCod_Municipio);
+                Adp.Fill(dtb);
+            }
+            catch (Exception)
+            {
+                throw;
+            }
+            finally
+            {
+                cnn.Close();
+            }
+            return dtb;
+        }
+
+        public DataTable MostrarProduto(String pCod_Terceiro)
+        {
+            clsConexao cnn = new clsConexao(this.Credential);
+            cnn.Open();
+            SqlDataAdapter Adp = new SqlDataAdapter();
+            DataTable dtb = new DataTable("dtb");
+            SimLib clsLib = new SimLib();
+            try
+            {
+                SqlCommand cmd = cnn.Procedure(cnn.Connection, "[pr_Assoc_Produto_Terceiro_S]");
+                Adp.SelectCommand = cmd;
+                Adp.SelectCommand.Parameters.AddWithValue("@COD_RED_PRODUTO", DBNull.Value);
+                Adp.SelectCommand.Parameters.AddWithValue("@COD_TERCEIRO", pCod_Terceiro);
                 Adp.Fill(dtb);
             }
             catch (Exception)

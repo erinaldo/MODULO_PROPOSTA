@@ -131,6 +131,7 @@
     <Content Include="angular\Controller\HorarioExibicaoController.js" />
     <Content Include="angular\Controller\ImpressaoCeController.js" />
     <Content Include="angular\Controller\indexController.js" />
+    <Content Include="angular\Controller\IntegrarEMSController.js" />
     <Content Include="angular\Controller\LogListaEMSController.js" />
     <Content Include="angular\Controller\MateriaisFitasCadastroController.js" />
     <Content Include="angular\Controller\MateriaisFitasController.js" />
@@ -163,6 +164,7 @@
     <Content Include="angular\Controller\PropagacaoGradeMerchaController.js" />
     <Content Include="angular\Controller\PropagacaoMapaController.js" />
     <Content Include="angular\Controller\ReabreCEController.js" />
+    <Content Include="angular\Controller\RetornarEMSController.js" />
     <Content Include="angular\Controller\RetornoPlaylistController.js" />
     <Content Include="angular\Controller\RoteiroMerchaController.js" />
     <Content Include="angular\Controller\TabelaPrecoImportacaoController.js" />
@@ -386,6 +388,7 @@
     <Content Include="view\GradeCadastro.html" />
     <Content Include="view\HorarioExibicao.html" />
     <Content Include="view\ImpressaoComprovante.html" />
+    <Content Include="view\IntegrarEMS.html" />
     <Content Include="view\LogListaEMS.html" />
     <Content Include="view\MapaReserva.html" />
     <Content Include="view\MapaReservaCadastro.html" />
@@ -477,6 +480,7 @@
     <Content Include="view\PacoteDesconto_List.html" />
     <Content Include="view\RegraAprovacao.html" />
     <Content Include="view\Composicao_Break.html" />
+    <Content Include="view\RetornarEMS.html" />
     <Content Include="view\RetornoPlayList.html" />
     <Content Include="view\RoteiroMercha.html" />
     <Content Include="view\Roteiro.html" />

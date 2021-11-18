@@ -1240,7 +1240,21 @@
         routeName: 'Log da Lista',
         RouteId: 'EMS@LogListaEMS'
     })
+    .when('/IntegrarEMS', {
+        templateUrl: 'view/IntegrarEMS.html',
+        controller: 'IntegrarEMSController',
+        authorize: true,
+        routeName: 'Enviar para EMS',
+        RouteId: 'EMS@ENVIAR'
+    })
 
+    .when('/RetornarEMS', {
+        templateUrl: 'view/RetornarEMS.html',
+        controller: 'RetornarEMSController',
+        authorize: true,
+        routeName: 'Retornar do EMS',
+        RouteId: 'EMS@RETORNAR'
+    })
     .otherwise({ redirectTo: "/blank" })
 });
 

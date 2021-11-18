@@ -1,0 +1,99 @@
+﻿<div class="container">
+    <form name="frmRetornarEMS" autocomplete="off">
+        <div class="block">
+            <!----Cabeçalho-->
+            <div class="alert alert-info alert-icon-block" role="alert">
+                <div class="alert-icon">
+                    <span class="fa fa-filter"></span>
+                </div>
+                <strong>Filtros</strong>
+            </div>
+            <!----Campos-->
+            <div class="row">
+                <div class="col-md-2" ng-controller="dictionaryController">
+                    <div class="dictionary" dictionary="Empresa_Usuario" caption="Emp.Faturamento">
+                        <input id="txtCodEmpresaFaturamento"
+                               ng-model="Filtro.Cod_Empresa_Faturamento"
+                               ng-model-options="{updateOn: 'blur'}"
+                               ng-change="DicionaryValidate('txtCodEmpresaFaturamento')"
+                               primarybind="txtCodEmpresaFaturamento"
+                               secondarybind="txtNomeEmpresaFaturamento">
+                    </div>
+                </div>
+                <div class="col-md-5">
+                    <div class="form-group">
+                        <label for="txtNomeEmpresaFaturamento" class="field-x" style="visibility:hidden">..</label>
+                        <div class="input-group">
+                            <input type="text" disabled="disabled" id="txtNomeEmpresaFaturamento" class="form-control " ng-model="Filtro.Nome_Empresa_Faturamento">
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="row" style="margin-top:40px">
+                <div class="col-md-3">
+                    <div class="form-group field-x">
+                        <div class="input-group" style="display:flex">
+                            <div class="app-checkbox">
+                                <label><input type="checkbox" name="app-checkbox-1" ng-model="Filtro.Indica_Lista_Negra" />Lista Negra<span></span></label>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="col-md-3">
+                    <div class="form-group field-x">
+                        <div class="input-group" style="display:flex">
+                            <div class="app-checkbox">
+                                <label><input type="checkbox" name="app-checkbox-1" ng-model="Filtro.Indica_Baixa_Duplicata" />Baixa de Duplicatas<span></span></label>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="col-md-2">
+                    <div class="form-group field-x">
+                        <label></label>
+                        <div class="input-group" style="display:flex">
+                            <div class="app-checkbox">
+                                <label><input type="checkbox" name="app-checkbox-1" ng-model="Filtro.Indica_Numeracao_Fatura" />Numeração de Faturas<span></span></label>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-md-2" ng-show="Filtro.Indica_Numeracao_Fatura">
+                    <div class="dictionary" dictionary="Data" caption="Data Inicial">
+                        <input ng-model="Filtro.Data_Inicial"
+                               ui-date ng-model-options="{updateOn: 'blur'}">
+                        <div class="dictionary-ui-calendar" ui-calendar typdate="Filtro.Data_Inicial"></div>
+                    </div>
+                </div>
+                <div class="col-md-2" ng-show="Filtro.Indica_Numeracao_Fatura">
+                    <div class="dictionary" dictionary="Data" caption="Data Final">
+                        <input ng-model="Filtro.Data_Final"
+                               ui-date ng-model-options="{updateOn: 'blur'}">
+                        <div class="dictionary-ui-calendar" ui-calendar typdate="Filtro.Data_Final"></div>
+                    </div>
+                </div>
+            </div>
+            <!----Botões-->
+            <div class="fixed-buttons-bottom">
+                <div class="row">
+                    <div class="col-md-12">
+                        <button type="button" class="btn btn-warning" ng-click="NovoFiltro()">Limpar Filtros</button>
+                        <button type="submit" class="btn btn-success" ng-click="ProcessarRetornoEMS(Filtro)">Processar</button>
+                    </div>
+                </div>
+            </div>
+
+        </div>
+    </form>
+</div>
+<div ng-include="'template/SelectItem.html'"></div>
+<div ng-include="'template/PesquisaTabela.html'"></div>
+<script type="text/javascript">
+    $(document).ready(function () {
+        GetDictionary();
+    });
+</script>
+

@@ -19,6 +19,7 @@
     { 'title': 'CNPJ', 'visible': true, 'searchable': true, 'sortable': true },
     { 'title': 'Função', 'visible': true, 'searchable': true, 'sortable': true },
     { 'title': 'Emp. Princ.', 'visible': true, 'searchable': true, 'sortable': true },
+    { 'title': 'Produtos', 'visible': true, 'searchable': false, 'sortable': false},
     ];
 
     $scope.NewFiltro = function()
@@ -95,6 +96,23 @@
         $scope.Filtro = { 'Codigo': '', 'RazaoSocial': '', 'CNPJ': '' }
     }
 
+    //===========================Mostrar Produtos
+    $scope.MostrarProdutos = function (pTerceiro) {
+        var _data = { "Codigo": pTerceiro.Cod_Terceiro.trim() };
+        httpService.Post("Terceiro/MostrarProduto",_data).then(function(response){
+            if (response.data) {
+                var _text = [];
+                for (var i = 0; i < response.data.length; i++) {
+                    _text.push(response.data[i].Cod_Red_Produto + " - " + response.data[i].Descricao);
+                }
+                $scope.Info = {
+                    'Title': 'Produtos do Cliente',
+                    'Text': _text
+                };
+                $("#modalInfo").modal(true);
+            }
+        });
+    };
     //===========================Evento chamado ao fim do ngrepeat ao carregar grid 
     $scope.$on('ngRepeatFinished', function (ngRepeatFinishedEvent) {
         $scope.RepeatFinished();

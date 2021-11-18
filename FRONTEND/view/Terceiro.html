@@ -46,6 +46,7 @@
                             <th>CNPJ</th>
                             <th>Função</th>
                             <th>Emp. Principal</th>
+                            <td></td>
                         </tr>
                     </thead>
                     <tbody>
@@ -64,11 +65,9 @@
                             <td>{{::Terceiro.CGC}}</td>
                             <td>{{::Terceiro.Funcao}} - {{::Terceiro.Descricao_Funcao_Terceiro}}</td>
                             <td>{{::Terceiro.Cod_Empresa_Principal}}</td>
-                            <!--<td style="text-align:left">
-                                <label ng-class="Terceiro.Status ? 'label label-danger' : 'label label-success'" style="width:10px ">
-                                    {{::Terceiro.Descricao_Status}}
-                                </label>
-                            </td>-->
+                            <td>
+                                <button type="button" class="btn btn-default" ng-click="MostrarProdutos(Terceiro)">Produtos</button>
+                            </td>
                         </tr>
                     </tbody>
                 </table>
@@ -76,6 +75,7 @@
         </div>
     </div>
 </div>
+<div ng-include="'template/modalinfo.html'"></div>
 <script type="text/javascript">
     $(document).ready(function () {
         $('#ExportReporttoExcel').on('click', function () {

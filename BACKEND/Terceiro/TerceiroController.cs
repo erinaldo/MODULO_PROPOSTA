@@ -169,6 +169,26 @@ namespace PROPOSTA
             }
         }
 
+        [Route("api/Terceiro/MostrarProduto")]
+        [HttpPost]
+        [ActionName("MostrarProduto")]
+        [Authorize()]
+        public IHttpActionResult MostrarProduto(Terceiro.TerceiroFiltroModel pTerceiro)
+        {
+            SimLib clsLib = new SimLib();
+            Terceiro Cls = new Terceiro(User.Identity.Name);
+            try
+            {
+                DataTable dtb = Cls.MostrarProduto(pTerceiro.Codigo);
+                return Ok(dtb);
+            }
+            catch (Exception Ex)
+            {
+                clsLib.EmailErrorToSuporte(User.Identity.Name, Ex.Message.ToString(), Ex.Source, Ex.StackTrace);
+                throw new Exception(Ex.Message);
+            }
+        }
+
     }
 
 }
