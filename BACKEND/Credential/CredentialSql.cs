@@ -1,5 +1,6 @@
 ﻿using CLASSDB;
 using System;
+using System.Collections.Generic;
 using System.Configuration;
 using System.Data;
 using System.Data.SqlClient;
@@ -40,7 +41,7 @@ namespace PROPOSTA
             }
             return dtb;
         }
-        public DataTable GetUserData()
+        public UserDataModel GetUserData()
         {
             clsConexao cnn = new clsConexao(this.Credential);
             cnn.Open();
@@ -50,16 +51,27 @@ namespace PROPOSTA
             String pUser = this.CurrentUser;
              AppSettingsReader AppRead = new AppSettingsReader();
              String Register = AppRead.GetValue("Register", typeof(string)).ToString();
+            UserDataModel Userdata = new UserDataModel();
             try
             {
                 SqlCommand cmd = cnn.Procedure(cnn.Connection, "PR_Proposta_User_Data_S");
                 Adp.SelectCommand = cmd;
                 Adp.SelectCommand.Parameters.AddWithValue("@Par_Login", pUser);
                 Adp.Fill(dtb);
-                DataColumn newColumn = new DataColumn("Register", typeof(String));
-                newColumn.DefaultValue = Register;
-                dtb.Columns.Add(newColumn);
-
+                if (dtb.Rows.Count>0)
+                {
+                    Userdata.Login = dtb.Rows[0]["Login"].ToString();
+                    Userdata.Nome = dtb.Rows[0]["Nome"].ToString();
+                    Userdata.Email = dtb.Rows[0]["Email"].ToString();
+                    Userdata.Usuario_Id = dtb.Rows[0]["Usuario_Id"].ToString().ConvertToInt32();
+                    Userdata.Cod_Empresa = dtb.Rows[0]["Cod_Empresa"].ToString();
+                    Userdata.Nome_Empresa = dtb.Rows[0]["Nome_Empresa"].ToString();
+                    Userdata.Register = Register;
+                    Userdata.Modulos = AddUserModulos(pUser);
+                }
+                //DataColumn newColumn = new DataColumn("Register", typeof(String));
+                //newColumn.DefaultValue = Register;
+                //dtb.Columns.Add(newColumn);
             }
             catch (Exception)
             {
@@ -69,8 +81,45 @@ namespace PROPOSTA
             {
                 cnn.Close();
             }
-            return dtb;
+            return Userdata;
         }
+
+        public  List<UserModulosModel> AddUserModulos(String pLogin)
+        {
+            DataTable dtb = new DataTable("dtb");
+            clsConexao cnn = new clsConexao(this.Credential);
+            cnn.Open();
+            SqlDataAdapter Adp = new SqlDataAdapter();
+            SimLib clsLib = new SimLib();
+            List<UserModulosModel> Modulos = new List<UserModulosModel>();
+            try
+            {
+                SqlCommand cmd = cnn.Procedure(cnn.Connection, "PR_PROPOSTA_Get_User_Modulos");
+                Adp.SelectCommand = cmd;
+                Adp.SelectCommand.Parameters.AddWithValue("@Par_Login", this.CurrentUser);
+                Adp.SelectCommand = cmd;
+                Adp.Fill(dtb);
+                foreach (DataRow drw in dtb.Rows)
+                {
+                    Modulos.Add(new UserModulosModel()
+                    {
+                        Id_Modulo = drw["Id_Modulo"].ToString().ConvertToInt32(),
+                        Descricao = drw["Descricao"].ToString(),
+                        Chave = drw["Chave"].ToString(),
+                    });
+                }
+            }
+            catch (Exception)
+            {
+                throw;
+            }
+            finally
+            {
+                cnn.Close();
+            }
+            return Modulos;
+        }
+
         public Boolean Permissao(String pRota)
         {
             DataTable dtb = new DataTable("dtb");
@@ -321,6 +370,38 @@ namespace PROPOSTA
                 cnn.Close();
             }
             return dtb;
+        }
+
+        public Byte CheckModulo(String pModulo)
+        {
+            SimLib clsLib = new SimLib();
+            Byte Retorno = 0;
+            DataTable dtb = new DataTable("dtb");
+            clsConexao cnn = new clsConexao(this.Credential);
+            cnn.Open();
+            SqlDataAdapter Adp = new SqlDataAdapter();
+            try
+            {
+                SqlCommand cmd = cnn.Procedure(cnn.Connection, "Pr_Proposta_CheckModulo");
+                Adp.SelectCommand = cmd;
+                Adp.SelectCommand.Parameters.AddWithValue("@Par_Login", this.CurrentUser);
+                Adp.SelectCommand.Parameters.AddWithValue("@Par_Modulo", pModulo);
+                Adp.SelectCommand = cmd;
+                Adp.Fill(dtb);
+                if (dtb.Rows[0]["Valido"].ToString().ConvertToBoolean())
+                {
+                    Retorno = 1;
+                }
+            }
+            catch (Exception)
+            {
+                throw;
+            }
+            finally
+            {
+                cnn.Close();
+            }
+            return Retorno;
         }
 
 

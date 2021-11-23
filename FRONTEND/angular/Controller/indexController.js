@@ -18,7 +18,7 @@ angular.module('App').controller('IndexController', ['$scope', '$rootScope', '$c
         $rootScope.Islogged = true;
         httpService.Get('GetUserData').then(function (response) {
             if (response) {
-                $rootScope.UserData = response.data[0];
+                $rootScope.UserData = response.data;
             }
             $location.path("/PortalApp");
         });

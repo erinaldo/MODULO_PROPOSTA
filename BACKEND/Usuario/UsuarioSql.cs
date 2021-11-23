@@ -69,6 +69,7 @@ namespace PROPOSTA
                     Usuario.Perfil = this.addPerfil(pIdUsuario);
                     Usuario.Empresas = this.addEmpresas(pIdUsuario);
                     Usuario.Grupos = this.addGrupos(pIdUsuario);
+                    Usuario.Modulos = this.addModulos(pIdUsuario);
 
                 }
             }
@@ -230,6 +231,42 @@ namespace PROPOSTA
 
             return Grupos;
         }
+        public List<ModuloModel> addModulos(Int32 pIdUsuario)
+        {
+            clsConexao cnn = new clsConexao(this.Credential);
+            cnn.Open();
+            List<ModuloModel> Modulos = new List<ModuloModel>();
+            try
+            {
+                SqlDataAdapter Adp = new SqlDataAdapter();
+                DataTable dtb = new DataTable("dtb");
+                SqlCommand cmd = cnn.Procedure(cnn.Connection, "Pr_Proposta_Usuario_Modulo_List");
+                Adp.SelectCommand = cmd;   
+                Adp.SelectCommand.Parameters.AddWithValue("@Par_Id_Usuario", pIdUsuario);
+                Adp.Fill(dtb);
+                foreach (DataRow drw in dtb.Rows)
+                {
+                    Modulos.Add(new ModuloModel()
+                    {
+                        Id_Modulo = drw["Id_Modulo"].ToString(),
+                        Descricao = drw["Descricao"].ToString(),
+                        Selected = drw["Selected"].ToString().ConvertToBoolean(),
+                    }
+                    );
+                }
+            }
+            catch (Exception)
+            {
+
+                throw;
+            }
+            finally
+            {
+                cnn.Close();
+            }
+
+            return Modulos;
+        }
         public DataTable SalvarUsuario(UsuarioModel Usuario)
         {
             clsConexao cnn = new clsConexao(this.Credential);
@@ -262,6 +299,11 @@ namespace PROPOSTA
             {
                 xmlGrupos = clsLib.SerializeToString(Usuario.Grupos);
             }
+            String xmlModulos = null;
+            if (Usuario.Modulos.Count > 0)
+            {
+                xmlModulos = clsLib.SerializeToString(Usuario.Modulos);
+            }
             try
             {
                 SqlCommand cmd = cnn.Procedure(cnn.Connection, "PR_PROPOSTA_Usuario_Salvar");
@@ -280,6 +322,8 @@ namespace PROPOSTA
                 Adp.SelectCommand.Parameters.AddWithValue("@Par_Hierarquia_Pai", xmlNivelSuperior);
                 Adp.SelectCommand.Parameters.AddWithValue("@Par_Hierarquia_Filho", xmlNivelInferior);
                 Adp.SelectCommand.Parameters.AddWithValue("@Par_Grupos", xmlGrupos);
+                Adp.SelectCommand.Parameters.AddWithValue("@Par_Modulos", xmlModulos);
+
                 Adp.Fill(dtb);
             }
             catch (Exception)

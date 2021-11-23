@@ -69,11 +69,45 @@
                                secondarybind="">
                     </div>
                 </div>
-
-                <!--==============================================Agencia-->
+                <!--==============================================Cod Agencia-->
+                <div class="col-md-2" ng-controller="dictionaryController">
+                    <div class="form-group">
+                        <label class="field-x" for=" txtCodAgencia">Cod. Agência</label>
+                        <input id="txtCodAgencia"
+                               class="form-control"
+                               maxlength="6"
+                               ng-model="Filtro.Cod_Agencia"
+                               ng-model-options="{updateOn: 'blur'}" />
+                    </div>
+                </div>
+                <!--==============================================Cod Cliente-->
+                <div class="col-md-2" ng-controller="dictionaryController">
+                    <div class="form-group">
+                        <label class="field-x" for=" txtCodCliente">Cod. Cliente</label>
+                        <input id="txtCodCliente"
+                               class="form-control"
+                               maxlength="6"
+                               ng-model="Filtro.Cod_Cliente"
+                               ng-model-options="{updateOn: 'blur'}" />
+                    </div>
+                </div>
+                <!--==============================================Cod Contato-->
+                <div class="col-md-2" ng-controller="dictionaryController">
+                    <div class="form-group">
+                        <label class="field-x" for=" txtCodContato">Cod. Contato</label>
+                        <input id="txtCodContato"
+                               class="form-control"
+                               maxlength="6"
+                               ng-model="Filtro.Cod_Contato"
+                               ng-model-options="{updateOn: 'blur'}" />
+                    </div>
+                </div>
+            </div>
+            <div class="row">
+                <!--==============================================Nome Agencia-->
                 <div class="col-md-4" ng-controller="dictionaryController">
                     <div class="form-group">
-                        <label class="field-x" for=" txtAgencia">Agência</label>
+                        <label class="field-x" for=" txtAgencia">Nome Agência</label>
                         <input id="txtAgencia"
                                class="form-control"
                                ng-model="Filtro.Agencia"
@@ -81,9 +115,8 @@
                                ng-model-options="{updateOn: 'blur'}" />
                     </div>
                 </div>
-            </div>
-            <div class="row">
-                <!--==============================================Cliente-->
+            
+                <!--==============================================Nome Cliente-->
                 <div class="col-md-4" ng-controller="dictionaryController">
                     <div class="form-group">
                         <label class="field-x" for="txtCliente">Cliente</label>
@@ -101,7 +134,7 @@
                         <input id="txtContato"
                                class="form-control"
                                ng-model="Filtro.Contato"
-                               placeholder="Digite parte do nome do Contato"
+                               placeholder="Digite parte do nome ou código do Contato"
                                ng-model-options="{updateOn: 'blur'}" />
                     </div>
                 </div>
@@ -126,6 +159,9 @@
                         <th>Emp.Venda</th>
                         <th>Emp.Fat</th>
                         <th>Período</th>
+                        <th>Cliente</th>
+                        <th>Agência</th>
+                        <th>Contato</th>
                         <th>Tipo de Mídia</th>
                         <th>Tabela de Preços</th>
                         <th>Verba Negociada</th>
@@ -156,6 +192,18 @@
                             {{::Negociacao.Cod_Empresa_Faturamento}}
                         </td>
                         <td style="text-align:left;white-space:nowrap">{{Negociacao.Competencia_Inicial}} a {{Negociacao.Competencia_Final}}</td>
+                        <td style="text-align:left;white-space:nowrap">
+                            <span>{{::Negociacao.Cod_Cliente}}</span>
+                            <span ng-show="Negociacao.Qtd_Cliente>1"> <button  class="btn btn-sm"style="font-size:10px" type="button" ng-click="ShowTerceiro(Negociacao.Numero_Negociacao,'Cliente')">Mais {{Negociacao.Qtd_Cliente-1}}</button></span>
+                        </td>
+                        <td style="text-align:left;white-space:nowrap">
+                            <span>{{::Negociacao.Cod_Agencia}}</span>
+                            <span ng-show="Negociacao.Qtd_Agencia>1"> <button class="btn btn-sm" style="font-size:10px" type="button" ng-click="ShowTerceiro(Negociacao.Numero_Negociacao,'Agencia')">Mais {{Negociacao.Qtd_Agencia-1}}</button></span>
+                        </td>
+                        <td style="text-align:left;white-space:nowrap">
+                            <span>{{::Negociacao.Cod_Contato}}</span>
+                            <span ng-show="Negociacao.Qtd_Contato>1"> <button class="btn btn-sm" style="font-size:10px" type="button" ng-click="ShowTerceiro(Negociacao.Numero_Negociacao,'Contato')">Mais {{Negociacao.Qtd_Contato-1}}</button></span>
+                        </td>
                         <td style="text-align:left">{{::Negociacao.Cod_Tipo_Midia}}</td>
                         <td style="text-align:left">{{::Negociacao.Tabela_Preco}}</td>
                         <td style="text-align:right;white-space:nowrap">{{::Negociacao.Verba_Negociada| currency:"R$ ":2}}</td>
@@ -175,6 +223,7 @@
     </div>
 </div>
 <div ng-include="'template/SelectItem.html'"></div>
+<div ng-include="'template/modalinfo.html'"></div>
 <script type="text/javascript">
     $(document).ready(function () {
         GetDictionary();

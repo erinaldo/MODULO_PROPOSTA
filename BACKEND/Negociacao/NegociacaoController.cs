@@ -184,6 +184,26 @@ namespace PROPOSTA
             }
         }
 
+        [Route("api/Negociacao/TerceiroGet")]
+        [HttpGet]
+        [ActionName("TerceiroGet")]
+        [Authorize()]
+        public IHttpActionResult TerceiroGet([FromUri]Negociacao.NegociacaoTerceiroGetModel Param)
+        {
+            SimLib clsLib = new SimLib();
+            Negociacao Cls = new Negociacao(User.Identity.Name);
+            try
+            {
+                List<Negociacao.NegociacaoTerceiroModel> retorno = Cls.TerceiroGet(Param);
+                return Ok(retorno);
+            }
+            catch (Exception Ex)
+            {
+                clsLib.EmailErrorToSuporte(User.Identity.Name, Ex.Message.ToString(), Ex.Source, Ex.StackTrace);
+                throw new Exception(Ex.Message);
+            }
+        }
+
     }
 }
 

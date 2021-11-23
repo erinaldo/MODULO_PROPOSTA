@@ -45,6 +45,8 @@ namespace PROPOSTA
                     Usuario.Perfil = Cls.addPerfil(0);
                     Usuario.Empresas = Cls.addEmpresas(0);
                     Usuario.Grupos= Cls.addGrupos(0);
+                    Usuario.Modulos = Cls.addModulos(0);
+
                 }
                 else
                 {

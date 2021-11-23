@@ -122,13 +122,29 @@
 
         <div class="row margin-top-10">
             <div class="col-md-12">
+                <button ng-class="CurrentTab=='Modulo' ? 'btn btntab-Selected' : 'btn btntab'" ng-click="CurrentTab='Modulo'">Módulos</button>
                 <button ng-class="CurrentTab=='Perfil' ? 'btn btntab-Selected' : 'btn btntab'" ng-click="CurrentTab='Perfil'">Perfil de Acesso</button>
                 <button ng-class="CurrentTab=='Empresa' ? 'btn btntab-Selected' : 'btn btntab'" ng-click="CurrentTab='Empresa'">Empresas Validas</button>
                 <button ng-class="CurrentTab=='Hierarquia' ? 'btn btntab-Selected' : 'btn btntab'" ng-click="CurrentTab='Hierarquia'" ng-disabled="!Ctrl.Login">Hierarquia</button>
                 <button ng-class="CurrentTab=='Grupo' ? 'btn btntab-Selected' : 'btn btntab'" ng-click="CurrentTab='Grupo'" ng-disabled="!Ctrl.Login">Associar a Grupos</button>
             </div>
         </div>
-
+        <div class="block" ng-show="CurrentTab=='Modulo'">
+            <div class="form-group">
+                <div class="input-group">
+                    <div class="app-checkbox">
+                        <label><input type="checkbox" name="app-checkbox-1" ng-model="checkBoxModulo" ng-click="MarcarModulo()" /> Marcar/Desmarcar Todos<span></span></label>
+                    </div>
+                </div>
+            </div>
+            <div style="max-height:400px;overflow-y:auto;overflow-x:hidden;border:solid 1px silver">
+                <div class="col-md-12" ng-repeat="modulo in Ctrl.Modulos">
+                    <div class="app-checkbox" style="width:auto;margin-top:5px">
+                        <label><input type="checkbox" name="app-checkbox-1" ng-model="modulo.Selected" />  {{modulo.Descricao}}<span></span></label>
+                    </div>
+                </div>
+            </div>
+        </div>
         <div class="block" ng-show="CurrentTab=='Perfil'">
             <div class="form-group">
                 <div class="input-group">
@@ -145,6 +161,7 @@
                 </div>
             </div>
         </div>
+
         <div class="block" ng-show="CurrentTab=='Empresa'">
             <div class="form-group">
                 <div class="input-group">
@@ -156,7 +173,7 @@
             <div style="max-height:400px;overflow-y:auto;overflow-x:hidden;border:solid 1px silver">
                 <div class="col-md-12" ng-repeat="empresa in Ctrl.Empresas">
                     <div class="app-checkbox" style="width:auto;margin-top:5px">
-                        <label><input type="checkbox" name="app-checkbox-1" ng-model="empresa.Selected" ng-click="CheckEmpresa(empresa)" />  {{empresa.Cod_Empresa}}-{{empresa.Nome_Empresa}} <span></span></label>
+                        <label><input type="checkbox" name="app-checkbox-1" ng-model="empresa.Selected"/>  {{empresa.Cod_Empresa}}-{{empresa.Nome_Empresa}} <span></span></label>
                     </div>
                 </div>
             </div>

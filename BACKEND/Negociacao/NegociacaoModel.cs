@@ -138,7 +138,10 @@ namespace PROPOSTA
             public String Competencia_Fim { get; set; }
             public String Agencia { get; set; }
             public String Cliente { get; set; }
-            public String Contato { get; set; }
+            public String Contato { get; set; } 
+            public String Cod_Agencia { get; set; }
+            public String Cod_Cliente { get; set; }
+            public String Cod_Contato { get; set; }
         }
         public class NegociacaoCountModel
         {
@@ -187,6 +190,15 @@ namespace PROPOSTA
             public String Operacao { get; set; }
             public String Motivo_Desativacao { get; set; }
         }
-
+        public class NegociacaoTerceiroGetModel
+        {
+            public Int32 Numero_Negociacao { get; set; }
+            public String Tipo { get; set; }
+        }
+        public class NegociacaoTerceiroModel
+        {
+            public String Codigo { get; set; }
+            public String Nome { get; set; }
+        }
     }
 }

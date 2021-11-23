@@ -34,6 +34,10 @@ namespace PROPOSTA
                 Adp.SelectCommand.Parameters.AddWithValue("@Par_Agencia", Param.Agencia);
                 Adp.SelectCommand.Parameters.AddWithValue("@Par_Cliente", Param.Cliente);
                 Adp.SelectCommand.Parameters.AddWithValue("@Par_Contato", Param.Contato);
+                Adp.SelectCommand.Parameters.AddWithValue("@Par_Cod_Agencia", Param.Cod_Agencia);
+                Adp.SelectCommand.Parameters.AddWithValue("@Par_Cod_Cliente", Param.Cod_Cliente);
+                Adp.SelectCommand.Parameters.AddWithValue("@Par_Cod_Contato", Param.Cod_Contato);
+
                 Adp.Fill(dtb);
             }
             catch (Exception)
@@ -885,6 +889,82 @@ namespace PROPOSTA
                 cnn.Close();
             }
             return Critica;
+        }
+        public List<NegociacaoTerceiroModel> TerceiroGet(NegociacaoTerceiroGetModel Param)
+        {
+            clsConexao cnn = new clsConexao(this.Credential);
+            cnn.Open();
+            SqlDataAdapter Adp = new SqlDataAdapter();
+            DataTable dtb = new DataTable("dtb");
+            SimLib clsLib = new SimLib();
+            List<NegociacaoTerceiroModel> NegociacaoTerceiro = new List<NegociacaoTerceiroModel>();
+            String ProcName = "";
+            try
+            {
+                switch (Param.Tipo.ToUpper())
+                {
+                    case "AGENCIA":
+                        ProcName = "Pr_Proposta_Negociacao_Agencia_List";
+                        break;
+                    case "CLIENTE":
+                        ProcName = "Pr_Proposta_Negociacao_Cliente_List";
+                        break;
+                    case "CONTATO":
+                        ProcName = "Pr_Proposta_Negociacao_Contato_List";
+                        break;
+                    default:
+                        break;
+                }
+                SqlCommand cmd = cnn.Procedure(cnn.Connection, ProcName);
+                Adp.SelectCommand = cmd;
+                clsLib.NewParameter(Adp, "@Par_Numero_Negociacao", Param.Numero_Negociacao);
+                Adp.Fill(dtb);
+                foreach (DataRow drw in dtb.Rows)
+                {
+                    switch (Param.Tipo.ToUpper())
+                    {
+                        case "AGENCIA":
+                            {
+                                NegociacaoTerceiro.Add(new NegociacaoTerceiroModel()
+                                {
+                                    Codigo = drw["Cod_Agencia"].ToString(),
+                                    Nome = drw["Nome_Agencia"].ToString(),
+                                });
+                                break;
+                            }
+                        case "CLIENTE":
+                            {
+                                NegociacaoTerceiro.Add(new NegociacaoTerceiroModel()
+                                {
+                                    Codigo = drw["Cod_Cliente"].ToString(),
+                                    Nome = drw["Nome_Cliente"].ToString(),
+                                });
+                                break;
+                            }
+                            
+                        case "CONTATO":
+                            {
+                                NegociacaoTerceiro.Add(new NegociacaoTerceiroModel()
+                                {
+                                    Codigo = drw["Cod_Contato"].ToString(),
+                                    Nome = drw["Nome_Contato"].ToString(),
+                                });
+                                break;
+                            }
+                        default:
+                            break;
+                    }
+                }
+            }
+            catch (Exception)
+            {
+                throw;
+            }
+            finally
+            {
+                cnn.Close();
+            }
+            return NegociacaoTerceiro;
         }
     }
 }

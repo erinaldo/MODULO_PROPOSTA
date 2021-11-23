@@ -9,9 +9,7 @@
             $scope.UrlPowerBi = response.data;
         };
     });
- 
-    
-    
+   
     $scope.AppModulos = [
         {
             'Id': 1,
@@ -19,7 +17,9 @@
             'Text': 'Informações Gerenciais',
             'bgcolor': 'rgba(10, 153, 99, 0.45)',
             'color': 'black',
-            'url': 'indexDash.html'
+            'url': 'indexDash.html',
+            'Chave': "DASH"
+
         },
         {
             'Id': 2,
@@ -27,14 +27,16 @@
             'Text': 'Gestão de Usuários,Tabelas de Apoios, Parâmetros, etc.',
             'bgcolor': 'rgba(85, 113, 83, 0.18)',
             'color': 'black',
-            'url': 'indexAdm.html'
+            'url': 'indexAdm.html',
+            'Chave': 'ADM'
         },
         {
             'Id': 2, 'Name': 'SIM-Opec',
             'Text': 'Entrada de Mapas, Determinação de Títulos, etc.',
             'bgcolor': 'antiquewhite',
             'color': 'black',
-            'url': 'indexOpec.html'
+            'url': 'indexOpec.html',
+            'Chave': 'OPEC'
         },
         {
             'Id': 3,
@@ -42,7 +44,8 @@
             'Text': 'Simulação de Vendas, Elaboração de Propostas, Negociações, Compensações.',
             'bgcolor': '#9091e1',
             'color': 'white',
-            'url': 'indexVendas.html'
+            'url': 'indexVendas.html',
+            'Chave': 'VEND'
         },
         {
             'Id': 4,
@@ -50,7 +53,8 @@
             'Text': 'Gestão da Disponibilidade, Manutenção da Grade.',
             'bgcolor': '#f78595',
             'color': 'black',
-            'url': 'indexProg.html'
+            'url': 'indexProg.html',
+            'Chave': 'PROG'
         },
         {
             'Id': 5,
@@ -58,7 +62,8 @@
             'Text': 'Elaboração do Roteiro,Envio e Retorno de Play-Lists',
             'bgcolor': '#d9cd6c',
             'color': 'black',
-            'url': 'indexRoteiro.html'
+            'url': 'indexRoteiro.html',
+            'Chave': 'ROTE'
         },
         {
             'Id': 6,
@@ -66,35 +71,40 @@
             'Text': 'Apontamento de Falhas,Horários, Conciliação da Play-List',
             'bgcolor': 'rgb(208, 16, 57)',
             'color': 'white',
-            'url': 'indexChecking.html'
+            'url': 'indexChecking.html',
+            'Chave': 'CHECK'
         },
         {
             'Id': 7, 'Name': 'SIM-Faturamento',
             'Text': 'Complemento de Contratos, Geração de Pedidos.',
             'bgcolor': 'rgb(199, 197, 213)',
             'color': 'black',
-            'url': 'indexFaturamento.html'
+            'url': 'indexFaturamento.html',
+            'Chave': 'FAT'
         },
         {
             'Id': 8, 'Name': 'SIM-Merchandising',
             'Text': 'Controle de Merchandising',
             'bgcolor': 'rgb(153, 49, 142)',
             'color': 'white',
-            'url': 'indexMercha.html'
+            'url': 'indexMercha.html',
+            'Chave': 'MERCH'
         },
          {
              'Id': 9, 'Name': 'SIM-Permutas',
              'Text': 'Gestão de Permutas',
              'bgcolor': '#5b42d4',
              'color': 'white',
-             'url': 'IndexPermuta.html'
+             'url': 'IndexPermuta.html',
+             'Chave': 'PERMU'
          },
          {
              'Id': 10, 'Name': 'Relatórios',
              'Text': 'Emissão de Relatórios diversos',
              'bgcolor': 'rgba(116, 79, 219, 0.2)',
              'color': '#000',
-             'url': 'IndexReport.html#/report'
+             'url': 'IndexReport.html#/report',
+             'Chave': 'RELAT'
          },
           {
               'Id': 11, 'Name': 'SIM-Interfaces',
@@ -102,7 +112,8 @@
               'bgcolor': '#98FB98',
               'color': '#000',
               'url': 'IndexInterfacesEMS.html',
-              'Register':'Jornal_Comercio'
+              'Register': 'Jornal_Comercio',
+              'Chave': 'INTERF'
           },
         {
             'Id': 12, 'Name': 'SIM-Mercado',
@@ -110,7 +121,8 @@
             'bgcolor': 'rgba(136, 10, 10, 0.36)',
             'color': '#000',
             'url': '',
-            'directurl':$rootScope.simagenciaUrl,
+            'Chave': 'MERC',
+            'directurl':$rootScope.simagenciaUrl
         },
         
     ];

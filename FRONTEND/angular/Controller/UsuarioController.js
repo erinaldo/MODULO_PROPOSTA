@@ -2,8 +2,9 @@
 
     //====================Inicializa scopes
     $scope.CurrentShow = "Grid";
-    $scope.CurrentTab = "Perfil";
+    $scope.CurrentTab = "Modulo";
     $scope.checkBoxEmpresa = false;
+    $scope.checkBoxModulo= false;
     $scope.checkBoxPerfil = false;
     $scope.checkBoxAssociar = false
     
@@ -25,10 +26,10 @@
     ];
 
     //====================Permissoes
-    $scope.PermissaoNew = 'false';
-    $scope.PermissaoEdit = 'false';
-    $scope.PermissaoDesativar = 'false';
-    $scope.PermissaoExcluir= 'false';
+    $scope.PermissaoNew = false;
+    $scope.PermissaoEdit = false;
+    $scope.PermissaoDesativar = false;
+    $scope.PermissaoExcluir= false;
     httpService.Get("credential/Usuario@New").then(function (response) {
         $scope.PermissaoNew = response.data;
     });
@@ -136,13 +137,20 @@
             $scope.Ctrl.Empresas[i].Selected = $scope.checkBoxEmpresa;
         }
     }
+    //=====================Marcar / Desmarcar Modulos
+    $scope.MarcarModulo = function () {
+        for (var i = 0; i < $scope.Ctrl.Modulos.length; i++) {
+            $scope.Ctrl.Modulos[i].Selected = $scope.checkBoxModulo;
+        }
+    }
     //===========================Cancela Edicao
     $scope.CancelaEdicao = function () {
         $scope.CurrentShow = 'Grid';
-        $scope.CurrentTab = 'Perfil';
+        $scope.CurrentTab = 'Modulo';
         $scope.Ctrl = $scope.NewUsuario();
         $scope.checkBoxEmpresa = false;
         $scope.checkBoxPerfil = false;
+        $scope.checkBoxModulo= false;
     }
     //===========================Salvar o Usuario
     $scope.SalvarUsuario = function () {

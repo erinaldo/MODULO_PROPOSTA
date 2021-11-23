@@ -67,7 +67,7 @@
 
         for (var i = 0; i < pParam.Anexos.length; i++) {
             for (var z = 1; z < pParam.Anexos.length; z++) {
-                if (pParam.Anexos[i].AnexoName == pParam.Anexos[z].AnexoName) {
+                if (pParam.Anexos[i].AnexoName == pParam.Anexos[z].AnexoName && i!=z) {
                     ShowAlert('O Arquivo ' + pParam.Anexos[i].AnexoName + ' foi selecionado mais de uma vez.');
                     return;
                 };

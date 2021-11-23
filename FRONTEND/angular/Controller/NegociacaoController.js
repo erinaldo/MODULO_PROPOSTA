@@ -8,6 +8,9 @@
                             { 'title': 'Emp.Venda', 'visible': true, 'searchable': true, 'config': true, 'sortable': true },
                             { 'title': 'Emp.Faturamento', 'visible': true, 'searchable': true, 'config': true, 'sortable': true },
                             { 'title': 'Período', 'visible': true, 'searchable': true, 'config': true, 'sortable': true },
+                            { 'title': 'Cliente', 'visible': true, 'searchable': true, 'config': true, 'sortable': true },
+                            { 'title': 'Agência', 'visible': true, 'searchable': true, 'config': true, 'sortable': true },
+                            { 'title': 'Contato', 'visible': true, 'searchable': true, 'config': true, 'sortable': true },
                             { 'title': 'Tipo de Mídia', 'visible': true, 'searchable': true, 'config': true, 'sortable': true },
                             { 'title': 'Tabela de Preços', 'visible': true, 'searchable': true, 'config': true, 'sortable': true },
                             { 'title': 'Verba Negociada', 'visible': true, 'searchable': true, 'config': true, 'sortable': true },
@@ -33,12 +36,34 @@
             'Agencia': '',
             'Cliente': '',
             'Contato': '',
-            'Cod_Tipo_Midia':''
+            'Cod_Tipo_Midia': '',
+            'Cod_Agencia': '',
+            'Cod_Cliente': '',
+            'Cod_Contato': '',
         }
+    }
+    //===========================Mostra Terceiros
+    $scope.ShowTerceiro = function (pNumeroNegociacao,pTipo) {
+        var _url = "Negociacao/TerceiroGet";
+        _url+="?Numero_Negociacao="+ pNumeroNegociacao;
+        _url += "&Tipo=" + pTipo;
+        _url += "&";
+        httpService.Get(_url).then(function (response) {
+            if (response) {
+                var _text = [];
+                for (var i = 0; i < response.data.length; i++) {
+                    _text.push(response.data[i].Codigo + " - " + response.data[i].Nome);
+                }
+                $scope.Info = {
+                    'Title': pTipo + 's da Negociaçao ' + pNumeroNegociacao,
+                    'Text': _text
+                };
+                $("#modalInfo").modal(true);
+            }
+        });
     }
     //===========================Se ja tiver filtro anterior gravado
         var _Filter = JSON.parse(localStorage.getItem('NegociacaoFilter'));
-
     if (_Filter) {
         $scope.Filtro = _Filter;
     }
@@ -82,6 +107,9 @@
         _url += '&Cliente=' + pFiltro.Cliente;
         _url += '&Contato=' + pFiltro.Contato;
         _url += '&Cod_Tipo_Midia=' + pFiltro.Cod_Tipo_Midia;
+        _url += '&Cod_Agencia=' + pFiltro.Cod_Agencia;
+        _url += '&Cod_Cliente=' + pFiltro.Cod_Cliente;
+        _url += '&Cod_Contato=' + pFiltro.Cod_Contato;
         _url += '&';
         httpService.Get(_url).then(function (response) {
             if (response) {

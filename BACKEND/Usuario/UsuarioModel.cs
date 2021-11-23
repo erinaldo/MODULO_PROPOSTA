@@ -32,6 +32,8 @@ namespace PROPOSTA
             public List<HierarquiaModel> Nivel_Superior { get; set; }
             public List<HierarquiaModel> Nivel_Inferior { get; set; }
             public List<GrupoModel> Grupos { get; set; }
+            public List<ModuloModel> Modulos { get; set; }
+
         }
         public class PerfilModel
         {
@@ -58,6 +60,13 @@ namespace PROPOSTA
             public String Id_Grupo { get; set; }
             public String Cod_Grupo{ get; set; }
             public String Descricao{ get; set; }
+            public Boolean Selected { get; set; }
+
+        }
+        public class ModuloModel
+        {
+            public String Id_Modulo{ get; set; }
+            public String Descricao { get; set; }
             public Boolean Selected { get; set; }
 
         }

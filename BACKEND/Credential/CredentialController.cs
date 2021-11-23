@@ -41,8 +41,9 @@ namespace PROPOSTA
             SimLib clsLib = new SimLib();
             try
             {
-                DataTable dtbRetorno = Cls.GetUserData();
-                return Ok(dtbRetorno);
+                apiCredential.UserDataModel Retorno = Cls.GetUserData();
+                //DataTable dtbRetorno = Cls.GetUserData();
+                return Ok(Retorno);
             }
             catch (Exception Ex)
             {
@@ -149,6 +150,25 @@ namespace PROPOSTA
                     Token.Token= Retorno.Rows[0]["Token"].ToString();
                 }
                 return Ok(Token);
+            }
+            catch (Exception Ex)
+            {
+                throw new Exception(Ex.Message);
+            }
+        }
+        [Route("api/credential/CheckModulo/{Modulo}")]
+        [HttpGet]
+        [ActionName("CheckModulo")]
+        //[Authorize()]
+        public IHttpActionResult CheckModulo(String Modulo)
+        {
+
+            apiCredential Cls = new apiCredential(User.Identity.Name);
+            try
+            {
+                Byte Retorno = Cls.CheckModulo(Modulo);
+
+                return Ok(Retorno);
             }
             catch (Exception Ex)
             {

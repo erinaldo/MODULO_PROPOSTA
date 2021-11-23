@@ -481,6 +481,7 @@
     <Content Include="view\RegraAprovacao.html" />
     <Content Include="view\Composicao_Break.html" />
     <Content Include="view\RetornarEMS.html" />
+    <Content Include="view\RetornoPlayList - Copy.html" />
     <Content Include="view\RetornoPlayList.html" />
     <Content Include="view\RoteiroMercha.html" />
     <Content Include="view\Roteiro.html" />

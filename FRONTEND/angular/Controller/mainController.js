@@ -17,7 +17,7 @@ angular.module('App').controller('MainController', ['$scope', '$rootScope', '$co
         $rootScope.Islogged = true;
         httpService.Get('GetUserData').then(function (response) {
             if (response) {
-                $rootScope.UserData = response.data[0];
+                $rootScope.UserData = response.data;
             }
         });
     };
