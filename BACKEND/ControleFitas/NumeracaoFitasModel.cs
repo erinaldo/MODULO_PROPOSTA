@@ -67,6 +67,7 @@ namespace PROPOSTA
             public String Cod_Veiculo { get; set; }
             public String Cod_Comercial { get; set; }
             public String Cod_Tipo_Comercial { get; set; }
+            public String Titulo_Comercial{ get; set; }
             public String Cod_Tipo_Midia { get; set; }
             public String Tipo_Fita { get; set; }
             public String Numero_Fita { get; set; }

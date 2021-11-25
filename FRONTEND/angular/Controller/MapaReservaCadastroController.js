@@ -52,7 +52,9 @@
                     $scope.Contrato.Cod_Empresa_Faturamento= $scope.FnSetEmpresaDefault('Codigo');
                     $scope.Contrato.Nome_Empresa_Faturamento= $scope.FnSetEmpresaDefault('Nome');
                 }
-                
+                if ($scope.Contrato.Numero_Mr== 0) {
+                    $scope.Contrato.Numero_Mr = ""
+                };
                 if ($scope.Contrato.Versao_Projeto == 0) {
                     $scope.Contrato.Versao_Projeto = ""
                 };
@@ -71,6 +73,22 @@
             };
         });
     };
+    $scope.NovaSequencia = function (pNumeroMr) {
+        if (!pNumeroMr) {
+            ShowAlert("Informe o Numero do Contrato.")
+            return;
+        }
+        httpService.Get('MapaReserva/GetNovaSequencia/' + pNumeroMr).then(function (response) {
+            if (!response.data.Id_Contrato) {
+                ShowAlert("Numero de Contrato não encontrado.")
+                return
+            }
+            else {
+                $scope.Contrato = response.data;
+                $scope.Contrato.Operacao = $scope.Parameters.Action;
+            }
+        });
+    }
     //===========================Criar Negociacao Automatica
     $scope.CriarNegociacaoAutomatica = function (pValue) {
         $scope.Contrato.Editar_Negociacao = !pValue;
@@ -805,18 +823,22 @@
     //===================================Repetir qtd no Periodo
     $scope.RepetirPeriodo = function (pVeiculacao) {
         var _qtdIns = 0;
+        var _dia_Inicio = 0;
         for (var i = 0; i < pVeiculacao.Insercoes.length; i++) {
             if (pVeiculacao.Insercoes[i].Qtd) {
                 _qtdIns = parseInt(pVeiculacao.Insercoes[i].Qtd);
+                _dia_Inicio = pVeiculacao.Insercoes[i].Dia;
                 break;
             };
         };
         if (_qtdIns) {
             for (var i = 0; i < pVeiculacao.Insercoes.length; i++) {
-                if (pVeiculacao.Insercoes[i].Tem_Grade && pVeiculacao.Insercoes[i].Valido) {
-                    pVeiculacao.Insercoes[i].Qtd = _qtdIns
+                if (pVeiculacao.Insercoes[i].Dia >= _dia_Inicio) {
+                    if (pVeiculacao.Insercoes[i].Tem_Grade && pVeiculacao.Insercoes[i].Valido) {
+                        pVeiculacao.Insercoes[i].Qtd = _qtdIns
+                    };
                 };
-            };
+              };
         };
         $scope.fnTotalizaVeiculacao(pVeiculacao);
     };
@@ -862,6 +884,9 @@
     //===========================Salvar Contrato
     $scope.SalvarMapaReserva = function (pContrato) {
         httpService.Post('MapaReserva/Salvar', pContrato).then(function (response) {
+            if ($scope.Parameters.Action == 'New' && !$scope.NovaSequencia)   {
+                pcontrato.Numero_Mr = "";
+            }
             if (response.data[0].Status == 1) {
                 ShowAlert(response.data[0].Mensagem, 'success');
                 if ($scope.Parameters.Action == 'Import') {

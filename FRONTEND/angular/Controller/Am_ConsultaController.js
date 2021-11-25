@@ -39,7 +39,7 @@
             'Cod_Veiculo': '',
             'Cod_Programa': '',
             'Cod_Red_Produto': '',
-            'Cod_Empresa_Venda': '',
+            'Cod_Empresa': '',
             'Numero_Mr': '',
             'Sequencia': '',
             'Numero_Negociacao': '',
@@ -90,16 +90,16 @@
         $('#dataTable').dataTable().fnDestroy();
         var _url = 'AM/List';
         _url += '?Competencia=' + pFiltro.Competencia;
-        _url += '&Nucleo=' + pFiltro.Cod_Nucleo;
-        _url += '&Contato=' + pFiltro.Cod_Contato;
+        _url += '&Cod_Nucleo=' + pFiltro.Cod_Nucleo;
+        _url += '&Cod_Contato=' + pFiltro.Cod_Contato;
         _url += '&Cliente=' + pFiltro.Cliente;
         _url += '&Agencia=' + pFiltro.Agencia;
-        _url += '&Veiculo=' + pFiltro.Cod_Veiculo;
-        _url += '&Programa=' + pFiltro.Cod_Programa;
-        _url += '&Produto=' + pFiltro.Cod_Red_Produto;
-        _url += '&Cod_Empresa_Venda=' + pFiltro.Cod_Empresa;
+        _url += '&Cod_Veiculo=' + pFiltro.Cod_Veiculo;
+        _url += '&Cod_Programa=' + pFiltro.Cod_Programa;
+        _url += '&Cod_Red_Produto=' + pFiltro.Cod_Red_Produto;
+        _url += '&Cod_Empresa=' + pFiltro.Cod_Empresa;
         _url += '&Numero_Mr=' + pFiltro.Numero_Mr;
-        _url += '&Sequencia=' + pFiltro.Sequencia;
+        _url += '&Sequencia_Mr=' + pFiltro.Sequencia;
         _url += '&Numero_Negociacao=' + pFiltro.Numero_Negociacao;
         _url += '&Situacao=' + pFiltro.Situacao;
         _url += '&';

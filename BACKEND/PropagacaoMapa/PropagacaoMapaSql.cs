@@ -28,6 +28,14 @@ namespace PROPOSTA
                 Adp.SelectCommand.Parameters.AddWithValue("@Par_Competencia_Origem", clsLib.CompetenciaInt(pFiltro.Competencia));
                 Adp.SelectCommand.Parameters.AddWithValue("@Par_Competencia_Destino_De", clsLib.CompetenciaInt(pFiltro.Competencia_Inicial));
                 Adp.SelectCommand.Parameters.AddWithValue("@Par_Competencia_Destino_Ate", clsLib.CompetenciaInt(pFiltro.Competencia_Final));
+                if (pFiltro.Indica_Tqp)
+                {
+                    Adp.SelectCommand.Parameters.AddWithValue("@Par_TQP", 1);
+                }
+                else
+                {
+                    Adp.SelectCommand.Parameters.AddWithValue("@Par_TQP", 0);
+                }
                 Adp.Fill(dtb);
             }
             catch (Exception)

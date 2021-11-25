@@ -435,6 +435,38 @@ namespace PROPOSTA
                 throw new Exception(Ex.Message);
             }
         }
+
+
+        [Route("api/MapaReserva/GetNovaSequencia/{Numero_Contrato}")]
+        [HttpGet]
+        [ActionName("MapaReservaGetNovaSequencia")]
+        [Authorize()]
+        public IHttpActionResult MapaReservaGetNovaSequencia(Int32 Numero_Contrato)
+        {
+            SimLib clsLib = new SimLib();
+            MapaReserva Cls = new MapaReserva(User.Identity.Name);
+            try
+            {
+                Int32 Id_Contrato = Cls.GetIdContrato(Numero_Contrato);
+                MapaReserva.ContratoModel Retorno = new MapaReserva.ContratoModel();
+                Retorno = Cls.MapaReservaGetContrato(Id_Contrato);
+                Retorno.Tem_Fatura = false;
+                Retorno.Comprovado = false;
+                Retorno.Veiculacoes = new List<MapaReserva.VeiculacacaoModel>();
+                Retorno.VeiculacoesOnLine = new List<MapaReserva.VeiculacaoOnLineModel>();
+                Retorno.Editar_Negociacao = false;
+                Retorno.Editar_Empresa_Venda = false;
+                Retorno.Editar_Tipo_Midia = false;
+                Retorno.Editar_Abrangencia = true;
+                Retorno.Editar_Periodo_Campanha = true;
+                return Ok(Retorno);
+            }
+            catch (Exception Ex)
+            {
+                clsLib.EmailErrorToSuporte(User.Identity.Name, Ex.Message.ToString(), Ex.Source, Ex.StackTrace);
+                throw new Exception(Ex.Message);
+            }
+        }
     }
 }
 

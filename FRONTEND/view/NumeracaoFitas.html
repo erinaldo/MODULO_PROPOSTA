@@ -189,7 +189,7 @@
                             </td>
                             <td>{{fita.Cod_Empresa}}-{{fita.Numero_MR}}-{{fita.Sequencia_MR}}</td>
                             <td>{{fita.Cod_Tipo_Comercial}}</td>
-                            <td>{{fita.Cod_Comercial}}-{{fita.Titulo_Comercial}}</td>
+                            <td>{{fita.Titulo_Comercial}}</td>
                             <td>{{fita.Nome_Produto}}</td>
                             <td>{{fita.Duracao}}</td>
                             <td>{{fita.Numero_Fita}}</td>
@@ -222,6 +222,7 @@
                     <div class="col-md-12">
                         <strong>Contrato:</strong>{{NumeracaoFitas[0].Cod_Empresa}}-{{NumeracaoFitas[0].Numero_Mr}}-{{NumeracaoFitas[0].Sequencia_Mr}}
                         <strong style="margin-left:30px">Cod. Comercial:</strong>{{NumeracaoFitas[0].Cod_Comercial}}
+                        <strong style="margin-left:30px">Titulo:</strong>{{NumeracaoFitas[0].Titulo_Comercial}}
                         <strong style="margin-left:30px">Duração:</strong>{{NumeracaoFitas[0].Duracao}}
                     </div>
                 </div>
@@ -288,14 +289,11 @@
                         <div class="col-md-12">
                             <button type="button" class="btn btn-success" ng-click="SalvarFitasNumeradas(NumeracaoFitas)">Salvar</button>
                             <button class="btn btn-warning" ng-click="NumeracaoFitas='';CurrentShow='Grid'">Voltar</button>
-
                         </div>
                     </div>
                 </div>
-
             </div>
         </div>
-
     </form>
 </div>
 <div ng-include="'template/SelectItem.html'"></div>
@@ -305,5 +303,4 @@
         GetDictionary();
         $("input[type='text']").css('text-transform', 'uppercase')
     });
-
 </script>

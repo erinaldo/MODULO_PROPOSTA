@@ -119,6 +119,7 @@
             $scope.ListaBreaks.push(1);
         }
         $scope.Temp_Break = {};
+        $scope.Temp_Break.Tipo_Break = $scope.Intervalo[0];
         $scope.Operacao= "Inclusao"
         $scope.ShowGrid = false;
         $scope.ShowEdit = true;

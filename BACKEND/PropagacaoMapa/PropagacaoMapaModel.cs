@@ -35,7 +35,8 @@ namespace PROPOSTA
             public String Competencia         { get; set; }
             public String Competencia_Inicial { get; set; }
             public String Competencia_Final   { get; set; }
-           
+            public Boolean Indica_Tqp { get; set; }
+
 
         }
 

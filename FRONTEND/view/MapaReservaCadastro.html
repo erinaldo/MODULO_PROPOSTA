@@ -68,11 +68,37 @@
                 <div class="alert alert-primary alert-icon-block" role="alert">
                     <strong>
                         1-Dados do Contrato
-                        <span ng-show="Contrato.Numero_Mr" style="margin-left:30px">({{Contrato.Cod_Empresa_Venda}}-{{Contrato.Numero_Mr}}-{{Contrato.Sequencia_Mr}})</span>
+                        <span ng-show="Parameters.Action=='Edit'" style="margin-left:30px">({{Contrato.Cod_Empresa_Venda}}-{{Contrato.Numero_Mr}}-{{Contrato.Sequencia_Mr}})</span>
                         <label class="label label-success pull-right margin-left-10 margin-right-10" ng-show="Contrato.Tem_Fatura">Faturado</label>
                         <label class="label label-info pull-right margin-left-10 margin-right-10" ng-show="Contrato.Comprovado ">Comprovado</label>
                     </strong>
                 </div>
+            </div>
+            <!--========================Criar Nova Sequencia-->
+            <div class="row"  ng-show="Parameters.Action!='Edit'">
+                <div class="col-md-3 margin-top-30">
+                    <div class="app-checkbox" style="width:auto;margin-top:5px">
+                        <label>
+                            <input type="checkbox"
+                                   tabindex="-1 "
+                                   name="app-checkbox-1"
+                                   ng-model="Nova_Sequencia"> &nbsp;&nbsp;Criar nova Sequencia de Contrato<span></span>
+                        </label>
+                    </div>
+                </div>
+                <div class="col-md-2" ng-show="Nova_Sequencia">
+                    <div class="form-group">
+                        <label for="txtNumeroMr" class="field-x">Numero do Contrato</label>
+                        <input type="text" id="txtNumeroMr" class="form-control"
+                               ng-model="Contrato.Numero_Mr"
+                               ng-model-options="{updateOn: 'blur'}"
+                               maxlength="10" />
+                    </div>
+                </div>
+                <div class="col-md-2" style="margin-top:35px" ng-show="Nova_Sequencia">
+                    <button class="btn btn-default" ng-click="NovaSequencia(Contrato.Numero_Mr)">Carregar Dados</button>
+                </div>
+
             </div>
             <div class="row">
                 <!--=======================================Numero Negociacao-->
@@ -708,7 +734,6 @@
                         <label>
                             <input type="checkbox"
                                    name="app-checkbox-1"
-                                   ng-change="ContaCreditoChange(Contrato.Indica_Por_Credito)"
                                    ng-model="Contrato.Indica_Tqp"> &nbsp;&nbsp;Estourar saldo quando não houver espaço (Tqp)<span></span>
                         </label>
                     </div>
@@ -796,8 +821,8 @@
                                 </div>
                             </td>
                             <td style="min-width:30px">
-                                <div class="AppToolTip" ng-show="veiculacao.Permite_Editar" >
-                                    <button class="btn btn-default btn-sm"  ng-click="PreencherLinha(veiculacao,1)">
+                                <div class="AppToolTip" ng-show="veiculacao.Permite_Editar">
+                                    <button class="btn btn-default btn-sm" ng-click="PreencherLinha(veiculacao,1)">
                                         <span class="fa fa-plus"></span>
                                     </button>
                                     <span class="AppToolTipText AppToolTipTop">Somar 1</span>
@@ -814,7 +839,7 @@
                                 <!--<span class="fa fa-minus span-btn" ng-show="veiculacao.Permite_Editar" ng-click="PreencherLinha(veiculacao,-1)"></span>-->
                             </td>
                             <td style="min-width:30px">
-                                <div class="AppToolTip" ng-show="veiculacao.Permite_Editar" >
+                                <div class="AppToolTip" ng-show="veiculacao.Permite_Editar">
                                     <button class="btn btn-default btn-sm" ng-click="RepetirPeriodo(veiculacao)">
                                         <span class="fa fa-times"></span>
                                     </button>
@@ -856,7 +881,7 @@
                     </thead>
                     <tbody>
                         <tr ng-repeat="veiculacaomol in Contrato.VeiculacoesOnLine track by $index">
-                            <td> 
+                            <td>
                                 <button class="btn btn-default btn-sm" ng-click="RemoverMidia(Contrato,veiculacaomol)" style="min-width:30px">
                                     <span class="fa fa-trash"></span>
                                 </button>
@@ -865,7 +890,7 @@
                                 <div class="input-group">
                                     <div class="input-group-addon">
                                         <span class="fa fa-calendar dropdown-toggle" data-toggle="dropdown"></span>
-                                        <ul id="calendar"ui-calendar="" typdate="veiculacaomol.Data_Inicio"></ul>
+                                        <ul id="calendar" ui-calendar="" typdate="veiculacaomol.Data_Inicio"></ul>
                                     </div>
                                     <input class="form-control" ng-model="veiculacaomol.Data_Inicio" ui-date="" ng-model-options="{updateOn: 'blur'}" />
                                 </div>

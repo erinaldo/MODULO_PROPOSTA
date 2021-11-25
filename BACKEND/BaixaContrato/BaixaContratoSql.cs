@@ -190,7 +190,7 @@ namespace PROPOSTA
                 }
                 else
                 {
-                    Adp.SelectCommand.Parameters.AddWithValue("@Par_Indica_Cancelamento", true);
+                    Adp.SelectCommand.Parameters.AddWithValue("@Par_Indica_Cancelamento", false);
                 }
                 
                 Adp.SelectCommand.Parameters.AddWithValue("@Par_Indica_Cancelar_Am", pContrato.Indica_Cancelar_Am).ToString().ConvertToBoolean();

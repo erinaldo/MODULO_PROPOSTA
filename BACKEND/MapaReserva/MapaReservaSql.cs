@@ -1178,6 +1178,36 @@ namespace PROPOSTA
             }
             return dtb;
         }
+        public Int32 GetIdContrato(Int32 pNumeroMr)
+        {
+            clsConexao cnn = new clsConexao(this.Credential);
+            cnn.Open();
+            SqlDataAdapter Adp = new SqlDataAdapter();
+            DataTable dtb = new DataTable("dtb");
+            SimLib clsLib = new SimLib();
+            Int32 Retorno = 0;
+            try
+            {
+                SqlCommand cmd = cnn.Procedure(cnn.Connection, "Pr_Get_Id_Contrato");
+                Adp.SelectCommand = cmd;
+                clsLib.NewParameter(Adp, "@Par_Numero_Mr", pNumeroMr);
+                Adp.Fill(dtb);
+                if (dtb.Rows.Count>0)
+                {
+                    Retorno = dtb.Rows[0]["Id_Contrato"].ToString().ConvertToInt32();
+                }
+
+            }
+            catch (Exception)
+            {
+                throw;
+            }
+            finally
+            {
+                cnn.Close();
+            }
+            return Retorno;
+        }
 
     }
 }

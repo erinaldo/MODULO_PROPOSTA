@@ -248,7 +248,8 @@
                                     <td id="Target_Comercial_Titulo_{{item.Id_Item}}"
                                         ondrop="drop(event)" ondragover="allowDrop(event)"
                                         ng-show="item.Indica_Comercial && item.Show">
-                                        <span id="Target_Comercial_Produto_{{item.Id_Item}}" ng-show="item.Nome_Produto">{{item.Nome_Produto}} / </span> {{item.Titulo_Comercial}}
+                                        {{item.Titulo_Comercial}}
+                                        <span id="Target_Comercial_Produto_{{item.Id_Item}}" ng-show="item.Nome_Produto">/{{item.Nome_Produto}} </span> 
                                     </td>
                                     <td id="Target_Comercial_Dur_{{item.Id_Item}}"
                                         ondrop="drop(event)" ondragover="allowDrop(event)"
@@ -339,7 +340,8 @@
                                 </td>
                                 <!-----------------------------Titulo do Comercial-->
                                 <td Id="Comercial_Source_{{comercial.Id_Item}}" ng-hide="comercial.Indica_Titulo_Programa">
-                                        <span ng-show="comercial.Nome_Produto">{{comercial.Nome_Produto}}/</span>{{comercial.Titulo_Comercial}}
+                                        {{comercial.Titulo_Comercial}}
+                                        <span ng-show="comercial.Nome_Produto">/{{comercial.Nome_Produto}}</span>
                                 </td>
                                 <!-----------------------------Duracao-->
                                 <td Id="Comercial_Source_{{comercial.Id_Item}}"

@@ -15,7 +15,6 @@
     $scope.ShowGrid = false;
     $scope.NewFiltro = function () {
 
-        localStorage.removeItem('PropagacaoMapa');
         return {
             'Empresa': '',
             'Nome_Empresa': '',
@@ -23,7 +22,8 @@
             'Sequencia_Mr': '',
             'Competencia': '',
             'Competencia_Inicial': '',
-            'Competencia_Final': ''
+            'Competencia_Final': '',
+            'Indica_Tqp': false
         }
     }
     $scope.Filtro = $scope.NewFiltro();
@@ -60,48 +60,29 @@
             ShowAlert("Competência Final  é filtro Obrigatório.");
             return;
         }
-
-        //if (pFiltro.Competencia_Inicial > pFiltro.Competencia_Final) {
-        //    ShowAlert("Competência Inicial  é  maior que a Competência Final");
-        //    return;
-        //}
-
-        //if (pFiltro.Competencia_Inicial < pFiltro.Competencia) {
-        //    ShowAlert("Competência destino inicial não pode ser menor que mês atual. Não é permitido importar mapa a passado");
-        //    return;
-        //}
-
         $rootScope.routeloading = true;
-
         $scope.Propagacao_Mapa = [];
         
+
         httpService.Post("CarregarPropagacaoMapa", pFiltro).then(function (response) {
             if (response) {
                 $scope.Propagacao_Mapa = response.data;
+                for (var i = 0; i < response.data.length; i++) {
+                    $scope.Propagacao_Mapa[i].Competencia = response.data[i].Competencia;
+                    $scope.Propagacao_Mapa[i].Mensagem_Status = response.data[i].Mensagem_Status;
 
-                //if (response.data[0].Indica_Erro == 1) {
-                //    ShowAlert(response.data[0].Mensagem_Status);
-                //    return;
-                //}
-
-                //if (response.data[0].Indica_Erro == 0) {
-
-                    for (var i = 0; i < response.data.length; i++) {
-                        $scope.Propagacao_Mapa[i].Competencia = response.data[i].Competencia;
-                        $scope.Propagacao_Mapa[i].Mensagem_Status = response.data[i].Mensagem_Status;
-
-                    }
-                    $scope.ShowGrid = true;
+                }
+                $scope.ShowGrid = true;
+                if (response.data[0].Indica_Erro != 1) {
                     $scope.Filtro = $scope.NewFiltro();
-                //}
-            }
-
+                };
+            };
         });
-        //===========================fim do load da pagina
-        $scope.$watch('$viewContentLoaded', function () {
-            $rootScope.routeloading = false;
-        });
+        
     };
- 
+    //===========================fim do load da pagina
+    $scope.$watch('$viewContentLoaded', function () {
+        $rootScope.routeloading = false;
+    });
 }]);
 

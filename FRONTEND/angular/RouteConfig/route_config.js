@@ -927,7 +927,7 @@
         authorize: true,
         controller: 'ConsultaRoteiroOrdenadoController',
         routeName: 'Consulta de Roteiro Ordenado',
-        RouteId: 'ConsultaRoteiroOrdenado@Fitas'
+        RouteId: 'Roteiro@Consulta'
     })
          .when('/numeracao', {
              templateUrl: 'view/Numeracao.html',

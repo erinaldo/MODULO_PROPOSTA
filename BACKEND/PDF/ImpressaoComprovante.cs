@@ -317,11 +317,11 @@ namespace PROPOSTA
             addCell(tbCliente, drw["Nome_Produto"].ToString(), 1, true, new int[] { 0, 0, 0, 0 }, PdfPCell.ALIGN_LEFT, 8);
             addCell(tbCliente, "Número PV", 1, true, new int[] { 0, 0, 0, 0 }, PdfPCell.ALIGN_LEFT, 8);
             addCell(tbCliente, drw["Numero_Fatura"].ToString(), 1, true, new int[] { 0, 0, 0, 0 }, PdfPCell.ALIGN_LEFT, 8);
-            addCell(tbCliente, "", 1, true, new int[] { 0, 0, 0, 0 }, PdfPCell.ALIGN_LEFT, 8);
-            addCell(tbCliente, "", 1, true, new int[] { 0, 0, 0, 0 }, PdfPCell.ALIGN_LEFT, 8);
+            //addCell(tbCliente, "", 1, true, new int[] { 0, 0, 0, 0 }, PdfPCell.ALIGN_LEFT, 8);
+            //addCell(tbCliente, "", 1, true, new int[] { 0, 0, 0, 0 }, PdfPCell.ALIGN_LEFT, 8);
 
-            addCell(tbCliente, "Abrangência", 1, true, new int[] { 0, 0, 0, 0 }, PdfPCell.ALIGN_LEFT, 8);
-            addCell(tbCliente, drw["Abrangencia"].ToString(), 1, true, new int[] { 0, 0, 0, 0 }, PdfPCell.ALIGN_LEFT, 8);
+            addCell(tbCliente, "Campanha", 1, true, new int[] { 0, 0, 0, 0 }, PdfPCell.ALIGN_LEFT, 8);
+            addCell(tbCliente, drw["Campanha"].ToString(), 1, true, new int[] { 0, 0, 0, 0 }, PdfPCell.ALIGN_LEFT, 8);
             addCell(tbCliente, "Número do PI", 1, true, new int[] { 0, 0, 0, 0 }, PdfPCell.ALIGN_LEFT, 8);
             addCell(tbCliente, drw["Numero_Pi"].ToString(), 1, true, new int[] { 0, 0, 0, 0 }, PdfPCell.ALIGN_LEFT, 8);
 

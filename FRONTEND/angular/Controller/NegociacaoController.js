@@ -99,8 +99,8 @@
         $('#dataTable').dataTable().fnDestroy();
         var _url = 'Negociacao/Select';
         _url += '?Numero_Negociacao=' + pFiltro.Id_Negociacao;
-        _url += '&Validade_Inicio=' + pFiltro.Validade_Inicio;
-        _url += '&Validade_Termino=' + pFiltro.Validade_Termino;
+        _url += '&Competencia_Inicio=' + pFiltro.Validade_Inicio;
+        _url += '&Competencia_Fim=' + pFiltro.Validade_Termino;
         _url += '&Cod_Empresa_Venda=' + pFiltro.Cod_Empresa_Venda;
         _url += '&Cod_Empresa_Faturamento=' + pFiltro.Cod_Empresa_Faturamento;
         _url += '&Agencia=' + pFiltro.Agencia;

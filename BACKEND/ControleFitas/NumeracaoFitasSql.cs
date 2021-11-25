@@ -84,7 +84,6 @@ namespace PROPOSTA
                 {
                     NumeracaoFitas.Add(new FiltroExibirVeiculoModel()
                     {
-
                         Cod_Veiculo = drw["Cod_Veiculo"].ToString(),
                         Cod_Empresa = drw["Cod_Empresa"].ToString(),
                         Numero_Mr = drw["Numero_Mr"].ToString().ConvertToInt32(),
@@ -95,8 +94,8 @@ namespace PROPOSTA
                         Duracao = drw["Duracao"].ToString().ConvertToInt32(),
                         Numero_Fita = drw["Numero_Fita"].ToString(),
                         Cod_Apresentador = drw["Cod_Apresentador"].ToString(),
-                        Id_Numeracao = pFiltro.Id_Numeracao
-
+                        Id_Numeracao = pFiltro.Id_Numeracao,
+                        Titulo_Comercial = drw["Titulo_Comercial"].ToString(),
                     });
                 }
             }

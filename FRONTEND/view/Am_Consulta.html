@@ -25,6 +25,17 @@
                             <input type="text" id="txtIdNegociacao" class="form-control" ng-model="Filtro.Numero_Negociacao" maxlength="10" onkeypress="return NumericOnly(event)" ng-model-options="{updateOn: 'blur'}" />
                         </div>
                     </div>
+                    <!--==================Empresa-->
+                    <div class="col-md-2" ng-controller="dictionaryController">
+                    <div class="dictionary" dictionary="Empresa_Usuario" caption="Empresa">
+                        <input id="txtCodEmpresa"
+                               ng-model="Filtro.Cod_Empresa"
+                               ng-model-options="{updateOn: 'blur'}"
+                               ng-change="DicionaryValidate('txtCodEmpresa')"
+                               primarybind="txtCodEmpresa"
+                               secondarybind="">
+                    </div>
+                </div>
                     <!--==================Numero Contrato-->
                     <div class="col-md-2">
                         <div class="form-group">
