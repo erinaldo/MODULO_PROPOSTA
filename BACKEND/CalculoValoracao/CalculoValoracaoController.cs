@@ -105,6 +105,46 @@ namespace PROPOSTA
         }
 
 
+        [Route("api/ValorInformadoProgramaGet")]
+        [HttpPost]
+        [ActionName("ValorInformadoProgramaGet")]
+        [Authorize()]
+
+        public IHttpActionResult ValorInformadoProgramaGet([FromBody]CalculoValoracao.InfoValorProgramaFiltroModel param)
+        {
+            SimLib clsLib = new SimLib();
+            CalculoValoracao Cls = new CalculoValoracao(User.Identity.Name);
+            try
+            {
+                DataTable retorno = Cls.ValorInformadoProgramaGet(param);
+                return Ok(retorno);
+            }
+            catch (Exception Ex)
+            {
+                clsLib.EmailErrorToSuporte(User.Identity.Name, Ex.Message.ToString(), Ex.Source, Ex.StackTrace);
+                throw new Exception(Ex.Message);
+            }
+        }
+        [Route("api/ValorInformadoProgramaSalvar")]
+        [HttpPost]
+        [ActionName("ValorInformadoProgramaSalvar")]
+        [Authorize()]
+
+        public IHttpActionResult ValorInformadoProgramaSalvar([FromBody] List<CalculoValoracao.InfoValorProgramaModel> param)
+        {
+            SimLib clsLib = new SimLib();
+            CalculoValoracao Cls = new CalculoValoracao(User.Identity.Name);
+            try
+            {
+                Boolean retorno = Cls.ValorInformadoProgramaSalvar(param);
+                return Ok(retorno);
+            }
+            catch (Exception Ex)
+            {
+                clsLib.EmailErrorToSuporte(User.Identity.Name, Ex.Message.ToString(), Ex.Source, Ex.StackTrace);
+                throw new Exception(Ex.Message);
+            }
+        }
 
 
     }

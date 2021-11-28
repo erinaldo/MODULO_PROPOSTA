@@ -25,6 +25,19 @@ namespace PROPOSTA
             public String Critica { get; set; }
 
         }
-
+        public class InfoValorProgramaFiltroModel
+        {
+            public String Cod_Empresa { get; set; }
+            public Int32 Numero_Mr { get; set; }
+            public Int32 Sequencia_Mr { get; set; }
+        }
+        public class InfoValorProgramaModel
+        {
+            public String Cod_Empresa { get; set; }
+            public Int32 Numero_Mr { get; set; }
+            public Int32 Sequencia_Mr { get; set; }
+            public String Cod_Programa { get; set; }
+            public String Valor_Informado { get; set; }
+        }
     }
 }

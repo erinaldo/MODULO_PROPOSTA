@@ -104,7 +104,7 @@
                 </div>
                 <div class="row">
                     <!--==============================================Cliente-->
-                    <div class="col-md-6" ng-controller="dictionaryController">
+                    <div class="col-md-4" ng-controller="dictionaryController">
                         <div class="form-group">
                             <label class="field-x" for="txtCliente">Cliente</label>
                             <input id="txtCliente"
@@ -115,7 +115,7 @@
                         </div>
                     </div>
                     <!--==============================================Contato-->
-                    <div class="col-md-6" ng-controller="dictionaryController">
+                    <div class="col-md-4" ng-controller="dictionaryController">
                         <div class="form-group">
                             <label class="field-x" for="txtContato">Contato</label>
                             <input id="txtContato"
@@ -123,6 +123,28 @@
                                    ng-model="Filtro.Contato"
                                    placeholder="Digite parte do nome do Contato"
                                    ng-model-options="{updateOn: 'blur'}" />
+                        </div>
+                    </div>
+                    <!--==============================================Veiculo-->
+                    <div class="col-md-2" ng-controller="dictionaryController">
+                        <div class="dictionary" dictionary="Veiculo" caption="Veículo">
+                            <input id="txtCodVeiculo"
+                                   ng-model="Filtro.Cod_Veiculo"
+                                   ng-model-options="{updateOn: 'blur'}"
+                                   ng-change="DicionaryValidate('txtCodEmpresa')"
+                                   primarybind="txtCodVeiculo"
+                                   secondarybind="">
+                        </div>
+                    </div>
+                    <!--==============================================Programa-->
+                    <div class="col-md-2" ng-controller="dictionaryController">
+                        <div class="dictionary" dictionary="Programa" caption="Programa">
+                            <input id="txtCodPrograma"
+                                   ng-model="Filtro.Cod_Programa"
+                                   ng-model-options="{updateOn: 'blur'}"
+                                   ng-change="DicionaryValidate('txtCodEmpresa')"
+                                   primarybind="txtCodPrograma"
+                                   secondarybind="">
                         </div>
                     </div>
                 </div>
@@ -143,7 +165,8 @@
                         <tr>
                             <th></th>
                             <th>Contrato</th>
-                            <th>Tipo    </th>
+                            <th></th>
+                            <th>Tipo</th>
                             <th>Negociação</th>
                             <th>Período Campanha</th>
                             <th>Agência</th>
@@ -172,6 +195,9 @@
                                     <!--{{::contrato.Cod_Empresa}}-{{::contrato.Numero_Mr}}-{{::contrato.Sequencia_Mr}}-->
                                     {{::contrato.Contrato}}
                                 </a>
+                            </td>
+                            <td>
+                                <a class="label label-danger" href="#CriticaValoracao/{{contrato.Cod_Empresa}}/{{contrato.Numero_Mr}}/{{contrato.Sequencia_Mr}}" target="_blank"  ng-show="contrato.Indica_Critica"><span ng-class="span-btn" ng-click="VerCritica(contrato)">C</span></a>
                             </td>
                             <td>
                                 <label class="label label-warning" ng-show="contrato.Indica_Midia_OnLine">On-Line</label>

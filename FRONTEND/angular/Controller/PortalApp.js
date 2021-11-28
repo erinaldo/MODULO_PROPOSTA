@@ -154,6 +154,8 @@
                 { 'Title': 'Importar Propostas', 'Url': $rootScope.pageUrl + 'IndexOpec.html#/MapaReservaImport' },
                 { 'Title': 'Propagação de Mapa Reserva', 'Url': $rootScope.pageUrl + 'IndexOpec.html#/PropagacaoMapa' },
                 { 'Title': 'Consulta de Veiculações', 'Url': $rootScope.pageUrl + 'IndexOpec.html#/ConsultaVeiculacoes' },
+                { 'Title': 'De-Para de Contatos', 'Url': $rootScope.pageUrl + 'IndexOpec.html#/AlteraContato' },
+                { 'Title': 'De-Para de Negociação', 'Url': $rootScope.pageUrl + 'IndexOpec.html#/DeParaNegociacao' },
             ],
         },
         {
@@ -224,6 +226,7 @@
                 { 'Title': 'Pesquisa de Faturas', 'Url': $rootScope.pageUrl + 'IndexFaturamento.html#/FaturasPesquisa' },
                 { 'Title': 'Valoração de Contratos', 'Url': $rootScope.pageUrl + 'IndexFaturamento.html#/CalculoValoracao' },
                 { 'Title': 'Crítica da Valoração', 'Url': $rootScope.pageUrl + 'IndexFaturamento.html#/CriticaValoracao' },
+                { 'Title': 'Informação de Valores por Programa', 'Url': $rootScope.pageUrl + 'IndexFaturamento.html#/InfoValorPrograma' },
 
             ],
         },

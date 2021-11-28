@@ -1,0 +1,85 @@
+﻿<style>
+    input{text-transform:uppercase}
+</style>
+<div class="container">
+    <form name="frmDeParaNegociacao" autocomplete="off">
+        <div class="block">
+            <div class="row">
+                <!--===================Empresa-->
+                <div class="col-md-2" ng-controller="dictionaryController">
+                    <div class="dictionary" dictionary="Empresa_Usuario">
+                        <input id="txtCodEmpresa"
+                               ng-model="Filtro.Cod_Empresa"
+                               ng-model-options="{updateOn: 'blur'}"
+                               ng-change="DicionaryValidate('txtCodEmpresa')"
+                               primarybind="txtCodEmpresa"
+                               style="text-transform:uppercase" />
+                    </div>
+                </div>
+                <!--===================Contrato.-->
+                <div class="col-md-2">
+                    <div class="form-group">
+                        <label class="field-x">Contrato</label>
+                        <input id="txtContrato" type="text" name="txtContrato" class="form-control numeric" ng-model="Filtro.Numero_Mr" ng-model-options="{updateOn: 'blur'}" maxlength="6" />
+                    </div>
+                </div>
+                <!--===================Sequência-->
+                <div class="col-md-1">
+                    <div class="form-group">
+                        <label class="field-x">Seq.</label>
+                        <input id="txtSequencia" type="text" name="txtSequencia" class="form-control numeric" ng-model="Filtro.Sequencia_Mr" ng-model-options="{updateOn: 'blur'}" maxlength="3" />
+                    </div>
+                </div>
+                <!--===================botão Carregar-->
+                <!--<div class="col-md-2">
+                    <button class="btn btn-primary row margin-left-10 margin-top-30" ng-click="CarregarContratoBaixa(Filtro)">Carregar Dados</button>
+                </div>-->
+            </div>
+            <div class="row">
+                <div class="col-md-5">
+                    <div class="form-group">
+                        <label class="field-x">Agência</label>
+                        <label class="form-control">{{Filtro.Nome_Agencia}}</label>
+                    </div>
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-md-5">
+                    <div class="form-group">
+                        <label class="field-x">Cliente</label>
+                        <label class="form-control">{{Filtro.Nome_Cliente}}</label>
+                    </div>
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-md-2">
+                    <div class="form-group">
+                        <label class="field-x">Negociação-De</label>
+                        <label class="form-control">{{Filtro.Negociacao_De}}</label>
+                    </div>
+                </div>
+                <div class="col-md-2">
+                    <div class="form-group">
+                        <label class="field-x">Negociação-Para</label>
+                        <input id="txtSequencia" type="text" name="txtSequencia" class="form-control numeric" ng-model="Filtro.Negociacao_Para" maxlength="10" />
+                    </div>
+                </div>
+            </div>
+            <!--=======================Botoes-->
+            <div class="row margin-top-20">
+                <div class="col-md-12">
+                    <button type ="submit" class="btn btn-success" ng-disabled="!Filtro.Negociacao_De || !Filtro.Negociacao_Para" ng-click="ProcessaDeParaNegociacao(Filtro)">Ok</button>
+                    <button type="button" class="btn btn-warning" ng-click="NewFilter()">Cancela</button>
+                </div>
+            </div>
+        </div>
+        
+    </form>
+</div>
+
+<div ng-include="'template/SelectItem.html'"></div>
+<script type="text/javascript">
+    $(document).ready(function () {
+        GetDictionary();
+    });
+</script>

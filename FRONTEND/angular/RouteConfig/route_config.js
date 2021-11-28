@@ -677,6 +677,13 @@
         routeName: "Consulta de Veiculaçoes",
         RouteId: 'Veiculacao@Consulta'
     })
+    .when('/AlteraContato', {
+        templateUrl: 'view/AlteraContato.html',
+        controller: 'AlteraContatoController',
+        authorize: true,
+        routeName: "Alteração de Contatos",
+        RouteId: 'MapaAlteracao@Contato'
+    })
     .when('/ConsultaAM', {
         templateUrl: 'view/Am_Consulta.html',
         controller: 'Am_ConsultaController',
@@ -1253,6 +1260,20 @@
         controller: 'RetornarEMSController',
         authorize: true,
         routeName: 'Retornar do EMS',
+        RouteId: 'EMS@RETORNAR'
+    })
+    .when('/InfoValorPrograma', {
+    templateUrl: 'view/InfoValorPrograma.html',
+    controller: 'InfoValorProgramaController',
+    authorize: true,
+    routeName: 'Informação de Valor por Programa',
+    RouteId: 'EMS@RETORNAR'
+    })
+    .when('/DeParaNegociacao', {
+        templateUrl: 'view/DeParaNegociacao.html',
+        controller: 'DeParaNegociacaoController',
+        authorize: true,
+        routeName: 'De-Para de Negociação',
         RouteId: 'EMS@RETORNAR'
     })
     .otherwise({ redirectTo: "/blank" })

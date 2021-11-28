@@ -459,6 +459,69 @@ namespace PROPOSTA
                 Retorno.Editar_Tipo_Midia = false;
                 Retorno.Editar_Abrangencia = true;
                 Retorno.Editar_Periodo_Campanha = true;
+                Retorno.Periodo_Campanha_Inicio = "";
+                Retorno.Periodo_Campanha_Termino = "";
+                Retorno.Id_Contrato = 0;
+                return Ok(Retorno);
+            }
+            catch (Exception Ex)
+            {
+                clsLib.EmailErrorToSuporte(User.Identity.Name, Ex.Message.ToString(), Ex.Source, Ex.StackTrace);
+                throw new Exception(Ex.Message);
+            }
+        }
+
+        [Route("api/MapaReserva/DeParaContato")]
+        [HttpPost]
+        [ActionName("DeParaContato")]
+        [Authorize()]
+        public IHttpActionResult DeParaContato([FromBody] MapaReserva.DeParaContatoModel param)
+        {
+            SimLib clsLib = new SimLib();
+            MapaReserva Cls = new MapaReserva(User.Identity.Name);
+            try
+            {
+                DataTable Retorno = Cls.DeParaContato(param);
+                return Ok(Retorno);
+            }
+            catch (Exception Ex)
+            {
+                clsLib.EmailErrorToSuporte(User.Identity.Name, Ex.Message.ToString(), Ex.Source, Ex.StackTrace);
+                throw new Exception(Ex.Message);
+            }
+        }
+
+        [Route("api/MapaReserva/GetContratoDeParaNegociacao")]
+        [HttpPost]
+        [ActionName("DeParaContato")]
+        [Authorize()]
+        public IHttpActionResult GetContratoDeParaNegociacao([FromBody] MapaReserva.DeParaNegociacaooModel param)
+        {
+            SimLib clsLib = new SimLib();
+            MapaReserva Cls = new MapaReserva(User.Identity.Name);
+            try
+            {
+                MapaReserva.DeParaNegociacaooModel Retorno = Cls.GetContratoDeParaNegociacao(param);
+                return Ok(Retorno);
+            }
+            catch (Exception Ex)
+            {
+                clsLib.EmailErrorToSuporte(User.Identity.Name, Ex.Message.ToString(), Ex.Source, Ex.StackTrace);
+                throw new Exception(Ex.Message);
+            }
+        }
+
+        [Route("api/MapaReserva/ProcessaDeParaNegociacao")]
+        [HttpPost]
+        [ActionName("DeParaContato")]
+        [Authorize()]
+        public IHttpActionResult ProcessaDeParaNegociacao([FromBody] MapaReserva.DeParaNegociacaooModel param)
+        {
+            SimLib clsLib = new SimLib();
+            MapaReserva Cls = new MapaReserva(User.Identity.Name);
+            try
+            {
+                DataTable Retorno = Cls.ProcessaDeParaNegociacao(param);
                 return Ok(Retorno);
             }
             catch (Exception Ex)

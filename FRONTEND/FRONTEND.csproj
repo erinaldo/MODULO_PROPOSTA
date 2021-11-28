@@ -94,6 +94,8 @@
     <Reference Include="System.EnterpriseServices" />
   </ItemGroup>
   <ItemGroup>
+    <Content Include="angular\Controller\DeParaNegociacaoController.js" />
+    <Content Include="angular\Controller\AlteraContato.js" />
     <Content Include="angular\Controller\ApresentadoresCadastroController.js" />
     <Content Include="angular\Controller\ApresentadoresController.js" />
     <Content Include="angular\Controller\AssociacaoContatosCadastroController.js" />
@@ -131,6 +133,7 @@
     <Content Include="angular\Controller\HorarioExibicaoController.js" />
     <Content Include="angular\Controller\ImpressaoCeController.js" />
     <Content Include="angular\Controller\indexController.js" />
+    <Content Include="angular\Controller\InfoValorPrograma.js" />
     <Content Include="angular\Controller\IntegrarEMSController.js" />
     <Content Include="angular\Controller\LogListaEMSController.js" />
     <Content Include="angular\Controller\MateriaisFitasCadastroController.js" />
@@ -344,6 +347,8 @@
     <Content Include="template\SimulacaoDispo.html" />
     <Content Include="template\modalHistorico.html" />
     <Content Include="template\PesquisaGradeCompensacao.html" />
+    <Content Include="view\DeParaNegociacao.html" />
+    <Content Include="view\AlteraContato.html" />
     <Content Include="view\Am_Consulta.html" />
     <Content Include="view\Am_Reencaixe.html" />
     <Content Include="view\Apresentadores.html" />
@@ -388,6 +393,7 @@
     <Content Include="view\GradeCadastro.html" />
     <Content Include="view\HorarioExibicao.html" />
     <Content Include="view\ImpressaoComprovante.html" />
+    <Content Include="view\InfoValorPrograma.html" />
     <Content Include="view\IntegrarEMS.html" />
     <Content Include="view\LogListaEMS.html" />
     <Content Include="view\MapaReserva.html" />

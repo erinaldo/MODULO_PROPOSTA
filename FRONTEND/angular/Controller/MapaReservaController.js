@@ -5,6 +5,7 @@
 
     $scope.gridheaders = [{ 'title': 'Edit', 'visible': true, 'searchable': false, 'config': false, 'sortable': false },
         { 'title': 'Contrato', 'visible': true, 'searchable': true, 'config': true, 'sortable': true },
+        { 'title': 'Critica', 'visible': true, 'searchable': false, 'config': true, 'sortable': false},
         { 'title': 'Tipo', 'visible': true, 'searchable': true, 'config': true, 'sortable': true },
         { 'title': 'Negociação', 'visible': true, 'searchable': true, 'config': true, 'sortable': true },
         { 'title': 'Período Campanha', 'visible': true, 'searchable': true, 'config': true, 'sortable': true },
@@ -37,7 +38,9 @@
             'Agencia': '',
             'Cliente': '',
             'Contato': '',
-            'TipoVenda':'',
+            'TipoVenda': '',
+            'Cod_Veiculo': '',
+            'Cod_Programa': '',
         }
     }
     //===========================Se ja tiver filtro anterior gravado

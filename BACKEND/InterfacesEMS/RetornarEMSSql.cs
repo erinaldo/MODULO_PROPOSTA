@@ -70,11 +70,12 @@ namespace PROPOSTA
             SimLib clsLib = new SimLib();
             try
             {
-                SqlCommand cmd = cnn.Procedure(cnn.Connection, "Sp_Delete");
-                Adp.SelectCommand = cmd;
-                Adp.SelectCommand.Parameters.AddWithValue("@TABELA", "RETORNO_EMS");
-                Adp.SelectCommand.Parameters.AddWithValue("@QUERY", "");
-                Adp.Fill(dtb);
+                SqlCommand cmd = cnn.Text(cnn.Connection, "Delete From RETORNO_EMS");
+                //Adp.SelectCommand = cmd;
+                //Adp.SelectCommand.Parameters.AddWithValue("@TABELA", "RETORNO_EMS");
+                //Adp.SelectCommand.Parameters.AddWithValue("@QUERY", "");
+                //Adp.Fill(dtb);
+                cmd.ExecuteNonQuery();
             }
             catch (Exception)
             {

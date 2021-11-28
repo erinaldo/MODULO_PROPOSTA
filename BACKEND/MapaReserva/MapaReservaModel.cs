@@ -157,6 +157,8 @@ namespace PROPOSTA
             public String Cod_Empresa_Faturamento { get; set; }
             public String Contato { get; set; }
             public Byte TipoVenda{ get; set; }
+            public String Cod_Veiculo { get; set; }
+            public String Cod_Programa { get; set; }
         }
         public class MapaReservaMidiaFiltroModel
         {
@@ -201,5 +203,28 @@ namespace PROPOSTA
             public Boolean Indica_Midia_Online { get; set; }
             public List<VeiculoModel> Veiculos { get; set; }
         }
+        public class DeParaContatoModel
+        {
+            public String Competencia { get; set; }
+            public String Cod_Agencia { get; set; }
+            public String Cod_Contato_De { get; set; }
+            public String Cod_Contato_Para { get; set; }
+        }
+        public class DeParaNegociacaooModel
+        {
+            public String Cod_Empresa{ get; set; }
+            public Int32 Numero_Mr{ get; set; }
+            public Int32 Sequencia_Mr{ get; set; }
+            public String Cod_Agencia { get; set; }
+            public String Nome_Agencia { get; set; }
+            public String Cod_Cliente{ get; set; }
+            public String Nome_Cliente { get; set; }
+            public Int32 Negociacao_De{ get; set; }
+            public Int32 Negociacao_Para { get; set; }
+            public Boolean Indica_Faturadp { get; set; }
+            public Boolean Indica_Comprovado { get; set; }
+
+        }
     }
+    
 }

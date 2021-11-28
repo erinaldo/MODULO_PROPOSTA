@@ -33,6 +33,8 @@ namespace PROPOSTA
                 Adp.SelectCommand.Parameters.AddWithValue("@Par_Cliente", Param.Cliente);
                 Adp.SelectCommand.Parameters.AddWithValue("@Par_Contato", Param.Contato);
                 Adp.SelectCommand.Parameters.AddWithValue("@Par_TipoVenda", Param.TipoVenda);
+                Adp.SelectCommand.Parameters.AddWithValue("@Par_Cod_Veiculo", Param.Cod_Veiculo);
+                Adp.SelectCommand.Parameters.AddWithValue("@Par_Cod_Programa", Param.Cod_Programa);
                 Adp.Fill(dtb);
             }
             catch (Exception)
@@ -1208,6 +1210,107 @@ namespace PROPOSTA
             }
             return Retorno;
         }
+
+        public DataTable DeParaContato(DeParaContatoModel param)
+        {
+            clsConexao cnn = new clsConexao(this.Credential);
+            cnn.Open();
+            SqlDataAdapter Adp = new SqlDataAdapter();
+            DataTable dtb = new DataTable("dtb");
+            SimLib clsLib = new SimLib();
+            try
+            {
+                SqlCommand cmd = cnn.Procedure(cnn.Connection, "Pr_Proposta_De_Para_Contato");
+                Adp.SelectCommand = cmd;
+                clsLib.NewParameter(Adp, "@Par_Login", this.CurrentUser);
+                clsLib.NewParameter(Adp, "@Par_Competencia", clsLib.CompetenciaInt(param.Competencia));
+                clsLib.NewParameter(Adp, "@Par_Cod_Agencia", param.Cod_Agencia);
+                clsLib.NewParameter(Adp, "@Par_Cod_Contato_De", param.Cod_Contato_De);
+                clsLib.NewParameter(Adp, "@Par_Cod_Contato_Para", param.Cod_Contato_Para);
+                Adp.Fill(dtb);
+            }
+            catch (Exception)
+            {
+                throw;
+            }
+            finally
+            {
+                cnn.Close();
+            }
+            return dtb;
+        }
+
+        public DeParaNegociacaooModel GetContratoDeParaNegociacao(DeParaNegociacaooModel param)
+        {
+            clsConexao cnn = new clsConexao(this.Credential);
+            cnn.Open();
+            SqlDataAdapter Adp = new SqlDataAdapter();
+            DataTable dtb = new DataTable("dtb");
+            SimLib clsLib = new SimLib();
+            DeParaNegociacaooModel Retorno = new DeParaNegociacaooModel();
+            try
+            {
+                SqlCommand cmd = cnn.Procedure(cnn.Connection, "Pr_Proposta_MapaReserva_Get_Contrato");
+                Adp.SelectCommand = cmd;
+                Adp.SelectCommand.Parameters.AddWithValue("@Par_Login", this.CurrentUser);
+                Adp.SelectCommand.Parameters.AddWithValue("@Par_Id_Contrato", DBNull.Value);
+                Adp.SelectCommand.Parameters.AddWithValue("@Par_Cod_Empresa", param.Cod_Empresa);
+                Adp.SelectCommand.Parameters.AddWithValue("@Par_Numero_Mr", param.Numero_Mr);
+                Adp.SelectCommand.Parameters.AddWithValue("@Par_Sequencia_Mr", param.Sequencia_Mr);
+                Adp.Fill(dtb);
+                if (dtb.Rows.Count>0)
+                {
+                   Retorno.Cod_Empresa = dtb.Rows[0]["Cod_Empresa"].ToString();
+                    Retorno.Numero_Mr = dtb.Rows[0]["Numero_Mr"].ToString().ConvertToInt32();
+                    Retorno.Sequencia_Mr = dtb.Rows[0]["Sequencia_Mr"].ToString().ConvertToInt32();
+                    Retorno.Cod_Agencia= dtb.Rows[0]["Cod_Agencia"].ToString();
+                    Retorno.Nome_Agencia = dtb.Rows[0]["Nome_Agencia"].ToString();
+                    Retorno.Cod_Cliente= dtb.Rows[0]["Cod_Cliente"].ToString();
+                    Retorno.Nome_Cliente= dtb.Rows[0]["Nome_Cliente"].ToString();
+                    Retorno.Negociacao_De = dtb.Rows[0]["Numero_Negociacao"].ToString().ConvertToInt32();
+                }
+            }
+            catch (Exception)
+            {
+                throw;
+            }
+            finally
+            {
+                cnn.Close();
+            }
+            return Retorno;
+        }
+
+        public DataTable ProcessaDeParaNegociacao(DeParaNegociacaooModel param)
+        {
+            clsConexao cnn = new clsConexao(this.Credential);
+            cnn.Open();
+            SqlDataAdapter Adp = new SqlDataAdapter();
+            DataTable dtb = new DataTable("dtb");
+            SimLib clsLib = new SimLib();
+            
+            try
+            {
+                SqlCommand cmd = cnn.Procedure(cnn.Connection, "sp_Troca_Negociacao");
+                Adp.SelectCommand = cmd;
+                Adp.SelectCommand.Parameters.AddWithValue("@Negociacao", param.Negociacao_Para);
+                Adp.SelectCommand.Parameters.AddWithValue("@Cod_Empresa", param.Cod_Empresa);
+                Adp.SelectCommand.Parameters.AddWithValue("@Numero_Mr", param.Numero_Mr);
+                Adp.SelectCommand.Parameters.AddWithValue("@Sequencia_Mr", param.Sequencia_Mr);
+                Adp.SelectCommand.Parameters.AddWithValue("@Cod_Usuario", this.CurrentUser);
+                Adp.Fill(dtb);
+            }
+            catch (Exception)
+            {
+                throw;
+            }
+            finally
+            {
+                cnn.Close();
+            }
+            return dtb;
+        }
+
 
     }
 }

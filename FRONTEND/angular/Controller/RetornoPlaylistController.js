@@ -8,6 +8,22 @@
     $scope.Parametros = "";
     $scope.Veiculacoes = [];
     $scope.DownloadUrl = $rootScope.baseUrl + 'ANEXOS\\RETORNO_PLAYLIST\\';
+    $scope.gridheaders = [{ 'title': '', 'visible': true, 'searchable': false, 'sortable': false },
+   { 'title': 'Veiculo', 'visible': true, 'searchable': true, 'sortable': true },
+   { 'title': 'Data', 'visible': true, 'searchable': true, 'sortable': true },
+   { 'title': 'Programa Falha', 'visible': true, 'searchable': true, 'sortable': true },
+   { 'title': 'Ch.Acesso', 'visible': true, 'searchable': true, 'sortable': true },
+   { 'title': 'Fita', 'visible': true, 'searchable': true, 'sortable': true },
+   { 'title': 'Título', 'visible': true, 'searchable': true, 'sortable': true },
+   { 'title': 'Qual', 'visible': true, 'searchable': true, 'sortable': true },
+   { 'title': 'Horário', 'visible': true, 'searchable': true, 'sortable': true },
+   { 'title': 'C.E', 'visible': true, 'searchable': true, 'sortable': true },
+   { 'title': 'Baixado', 'visible': true, 'searchable': true, 'sortable': true },
+    { 'title': 'Dur.Sctv', 'visible': true, 'searchable': true, 'sortable': true },
+    { 'title': 'Dur.Exibidor', 'visible': true, 'searchable': true, 'sortable': true },
+    { 'title': 'Dif', 'visible': true, 'searchable': true, 'sortable': true },
+    { 'Perc': 'Perc', 'visible': true, 'searchable': true, 'sortable': true },
+    ];
     //------------------- Novo Filtro ------------------------
     $scope.NewFilter = function () {
         $scope.Parametros = {
@@ -27,10 +43,17 @@
             'Nome_Tabela': '',
             'Anexos': [],
         };
-        //document.getElementById("txtArquivo").value = '';
     };
     $scope.NewFilter();
 
+    //====================Quando terminar carga do grid, torna view do grid visible
+    $scope.RepeatFinished = function () {
+        $rootScope.routeloading = false;
+        $scope.ConfiguraGrid();
+        setTimeout(function () {
+            $("#dataTable").dataTable().fnAdjustColumnSizing();
+        }, 10)
+    };
     //------------------- Carrega os Dados ------------------------
     $scope.RetornoPlayListCarregaDados = function (pParam) {
         //-----Só carrega os dados após digitação de Veiculo e Data Exibição
@@ -67,21 +90,25 @@
 
         for (var i = 0; i < pParam.Anexos.length; i++) {
             for (var z = 1; z < pParam.Anexos.length; z++) {
-                if (pParam.Anexos[i].AnexoName == pParam.Anexos[z].AnexoName && i!=z) {
+                if (pParam.Anexos[i].AnexoName == pParam.Anexos[z].AnexoName && i != z) {
                     ShowAlert('O Arquivo ' + pParam.Anexos[i].AnexoName + ' foi selecionado mais de uma vez.');
                     return;
                 };
             };
         };
-        
+
         httpService.Post("RetornoPlayListConsiste", pParam).then(function (response) {
             if (response) {
                 if (response.data[0].Status == 0) {
                     ShowAlert(response.data[0].Mensagem);
                 }
                 else {
+                    $('#dataTable').dataTable().fnDestroy();
                     httpService.Post("RetornoPlayListProcessa", pParam).then(function (response) {
                         $scope.Veiculacoes = response.data;
+                        if ($scope.Veiculacoes.length == 0) {
+                            $scope.RepeatFinished();
+                        }
                         $scope.Parametros.Anexos = [];
                         if ($scope.Veiculacoes.length == 0) {
                             $scope.ShowAviso = true;
@@ -94,6 +121,31 @@
                 };
             };
         });
+    };
+    //====================Funcao para configurar o Grid
+    $scope.ConfiguraGrid = function () {
+        param = {};
+        param.language = fnDataTableLanguage();
+        param.lengthMenu = [[7, 10, 25, 50, -1], [7, 10, 25, 50, "Todos"]];
+        param.pageLength = 7;
+        param.scrollCollapse = true;
+        param.paging = true;
+
+        param.dom = "<'row'<'col-sm-3'l><'col-sm-5'B>>" + "<'row'<'col-sm-12'tr>>" + "<'row'<'col-sm-5'i><'col-sm-7'p>>",
+            param.buttons = [
+                {
+                    text: 'Exportar<span class="fa fa-file-excel-o margin-left-10" style="color:white"></span>', type: 'excel', className: 'btn btn-warning HideButton', extend: 'excel', exportOptions: {
+                        columns: ':visible:not(:first-child)'
+                    }
+                }
+            ];
+        param.order = [[0, 'asc']];
+        param.autoWidth = false;
+        param.columns = [];
+        for (var i = 0; i < $scope.gridheaders.length; i++) {
+            param.columns.push({ "visible": $scope.gridheaders[i].visible, "searchable": $scope.gridheaders[i].searchable, "sortable": $scope.gridheaders[i].sortable });
+        }
+        $('#dataTable').DataTable(param);
     };
     //-------------Processar Baixar------------------------------
     $scope.ProcessarBaixa = function (pVeiculacoes) {
@@ -132,7 +184,7 @@
             for (var i = 0; i < $scope.Parametros.Anexos.length; i++) {
                 if ($scope.Parametros.Anexos[i] === file) {
                     $scope.Parametros.Anexos.splice(i, 1);
-                    httpService.Post("RetornoPlayListRemoveAnexo",file).then(function (response) {
+                    httpService.Post("RetornoPlayListRemoveAnexo", file).then(function (response) {
                     });
                 }
             }
@@ -183,8 +235,8 @@
             return;
         };
         var hora = parseInt(Left(pVeiculacao.Horario_Exibicao, 2));
-        var minuto= parseInt( Right(pVeiculacao.Horario_Exibicao, 2))
-        if (hora <0 || hora> 23 || minuto<0 || minuto>59) {
+        var minuto = parseInt(Right(pVeiculacao.Horario_Exibicao, 2))
+        if (hora < 0 || hora > 23 || minuto < 0 || minuto > 59) {
             ShowAlert("Horário Inválido")
             pVeiculacao.Horario_Exibicao = ""
         }
@@ -192,6 +244,37 @@
             pVeiculacao.Horario_Exibicao = Left(pVeiculacao.Horario_Exibicao, 2) + ':' + Right(pVeiculacao.Horario_Exibicao, 2);
         }
     };
+
+    //===========================Imprimir retorno pdf
+    $scope.GerarPdf = function (pVeiculacao, pStatus) {
+        //var _data = [];
+        //for (var i = 0; i < pVeiculacao.length; i++) {
+        //    if (pVeiculacao[i].Status == pStatus) {
+        //        _data.push(pVeiculacao[i]);
+        //    };
+        //};
+        if (pVeiculacao.length == 0) {
+            ShowAlert("Não ha dados a ser Impresso.")
+            return;
+        }
+        
+        httpService.Post("RetornoPlayGerarPdf/", pVeiculacao).then(function (response) {
+            if (response.data) {
+                url = $rootScope.baseUrl + "PDFFILES/RETORNOPLAYLIST/" + $rootScope.UserData.Login.trim() + "/" + response.data;
+                var win = window.open(url, '_blank');
+                win.focus();
+            }
+        });
+    };
+
+    //===========================Evento chamado ao fim do ngrepeat ao carregar grid 
+    $scope.$on('ngRepeatFinished', function (ngRepeatFinishedEvent) {
+        $scope.RepeatFinished();
+    });
+    //===========================fim do load da pagina
+    //$scope.$watch('$viewContentLoaded', function () {
+    //    $scope.ConfiguraGrid();
+    //});
 }]);
 
 

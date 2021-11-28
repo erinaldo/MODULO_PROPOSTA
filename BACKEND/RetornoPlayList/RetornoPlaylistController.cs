@@ -144,6 +144,24 @@ namespace PROPOSTA
                 throw new Exception(Ex.Message);
             }
         }
+        [Route("api/RetornoPlayGerarPdf")]
+        [HttpPost]
+        [ActionName("RetornoPlayGerarPdf")]
+        [Authorize()]
+        public IHttpActionResult RetornoPlayGerarPdf([FromBody] List<RetornoPlayList.RetornoPlayListBaixaModel> Param)
+        {
+            SimLib clsLib = new SimLib();
+            try
+            {
+                impressaoRetornoPlayList Cls = new impressaoRetornoPlayList(User.Identity.Name);
+                return Ok(Cls.ImprimirRetornoPlayList(Param));
+            }
+            catch (Exception Ex)
+            {
+                clsLib.EmailErrorToSuporte(User.Identity.Name, Ex.Message.ToString(), Ex.Source, Ex.StackTrace);
+                throw new Exception(Ex.Message);
+            }
+        }
     }
 }
 

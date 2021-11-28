@@ -79,7 +79,7 @@
             return;
         }
         httpService.Get('MapaReserva/GetNovaSequencia/' + pNumeroMr).then(function (response) {
-            if (!response.data.Id_Contrato) {
+            if (!response.data.Numero_Mr) {
                 ShowAlert("Numero de Contrato não encontrado.")
                 return
             }

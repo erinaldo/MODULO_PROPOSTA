@@ -1,0 +1,105 @@
+﻿<div class="container">
+    <form name="InfoValorPrograma" autocomplete="off" class="form">
+        <div class="block" ng-show="ShowFilter">
+            <div class="alert alert-info alert-icon-block" role="alert">
+                <div class="alert-icon">
+                    <span class="fa fa-filter"></span>
+                </div>
+                <strong>Filtros</strong>
+            </div>
+            <div class="row">
+                <!--===================Empresa-->
+                <div class="col-md-2" ng-controller="dictionaryController">
+                    <div class="dictionary" dictionary="Empresa_Usuario">
+                        <input id="txtCodEmpresa"
+                               ng-model="Filtro.Cod_Empresa"
+                               ng-model-options="{updateOn: 'blur'}"
+                               ng-change="DicionaryValidate('txtCodEmpresa')"
+                               primarybind="txtCodEmpresa"
+                               style="text-transform:uppercase" />
+                    </div>
+                </div>
+                <!--===================Contrato.-->
+                <div class="col-md-2">
+                    <div class="form-group">
+                        <label class="field-x">Contrato</label>
+                        <input id="txtContrato" type="text" name="txtContrato" class="form-control numeric" ng-model="Filtro.Numero_Mr" maxlength="6" />
+                    </div>
+                </div>
+                <!--===================Sequência-->
+                <div class="col-md-1">
+                    <div class="form-group">
+                        <label class="field-x">Seq.</label>
+                        <input id="txtSequencia" type="text" name="txtSequencia" class="form-control numeric" ng-model="Filtro.Sequencia_Mr" maxlength="3" />
+                    </div>
+                </div>
+                <!--===================botão Carregar-->
+                <div class="col-md-2" style="margin-top:5px">
+                    <button class="btn btn-primary row margin-left-10 margin-top-30" ng-click="CarregarInfoValor(Filtro)">Carregar Dados</button>
+                </div>
+            </div>
+            
+            
+        </div>
+        <div class="block" ng-show="ShowGrid">
+            <div class="row margin-top-20" ng-show="InfoValor.length >0">
+                <div class="col-md-12">
+                    <div class="table-responsive">
+                        <table class="table table-bordered table-striped">
+                            <thead>
+                                <tr>
+                                    <th>Contrato</th>
+                                    <th>Programa</th>
+                                    <th>Valor Tabela</th>
+                                    <th>Valor Negociado</th>
+                                    <th>Qtd Ins Demanda</th>
+                                    <th>Valor Informado</th>
+                                    <th>Data Informação</th>
+                                    <th>Informado Por</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+
+                                <tr ng-repeat="info in InfoValor track by $index">
+                                    <td>{{info.Cod_Empresa}}-{{info.Numero_Mr}}-{{info.Sequencia_Mr}}</td>
+                                    <td>{{info.Cod_Programa}}-{{info.Nome_Programa}}</td>
+                                    <td style="text-align:right">{{info.Valor_Tabela| currency}}</td>
+                                    <td style="text-align:right">{{info.Valor_Negociado| currency}}</td>
+                                    <td style="text-align:right">{{info.Qtd_Insercoes}}</td>
+                                    <td>
+                                        <input class="form-control"
+                                                type="text"  
+                                               ng-model-options="{updateOn: 'blur'}" 
+                                               ng-model="info.Valor_Informado" 
+                                                onblur="this.value = MoneyFormat(this.value)"
+                                                onfocus="this.value = DecimalUnformat(this.value)"
+                                               onkeypress="return DecimalOnly(event)"/>
+                                    </td>
+                                    <td>{{info.Data_Informacao |date:'dd/MM/yyyy hh:mm:ss'}}</td>
+                                    <td>{{info.Login}}</td>
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <!--==================botoes-->
+        <div class="fixed-buttons-bottom">
+            <div class="row">
+                <div class="col-md-12">
+                    <button type="submit" class="btn btn-success" ng-show="ShowGrid" ng-click="SalvarInfo(InfoValor)">Salvar Informacao de Valores</button>
+                    <button type="submit" class="btn btn-warning" ng-show="ShowGrid" ng-click="CancelarInfo()">Cancelar</button>
+                </div>
+            </div>
+        </div>
+
+    </form>
+</div>
+<div ng-include="'template/SelectItem.html'"></div>
+<div ng-include="'template/PesquisaTabela.html'"></div>
+<script type="text/javascript">
+    $(document).ready(function () {
+        GetDictionary();
+    });
+</script>

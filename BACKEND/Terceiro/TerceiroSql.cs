@@ -140,6 +140,7 @@ namespace PROPOSTA
                     Adp.SelectCommand.Parameters.AddWithValue("@Par_Comissao_Padrao", pTerceiro.Complementar[IBaseComplementar].Comissao_Padrao);
                     Adp.SelectCommand.Parameters.AddWithValue("@Par_Cod_Representante", pTerceiro.Complementar[IBaseComplementar].Cod_Representante);
                     Adp.SelectCommand.Parameters.AddWithValue("@Par_Cod_Banco", pTerceiro.Complementar[IBaseComplementar].Cod_Banco);
+                    Adp.SelectCommand.Parameters.AddWithValue("@Par_Grupo_Cliente", pTerceiro.Complementar[IBaseComplementar].Grupo_Cliente);
                     Adp.SelectCommand.Parameters.AddWithValue("@Par_Cod_Grupo_Cliente", pTerceiro.Complementar[IBaseComplementar].Cod_Grupo_Cliente);
 
                 }
@@ -310,7 +311,7 @@ namespace PROPOSTA
                         Indica_Desativado = drw["indica_desativado"].ToString().ConvertToByte(),
                         Motivo_Desativacao = drw["Motivo_Desativacao"].ToString().TrimEnd(),
                         Indica_Merchandising = drw["Indica_Merchandising"].ToString().ConvertToByte(),
-                        Cod_Grupo_Cliente = drw["Cod_Grupo_Cliente"].ToString(),
+                        Grupo_Cliente = drw["Grupo_Cliente"].ToString(),
                         Cod_Representante = drw["Cod_Representante"].ToString(),
                         Cod_Banco = drw["Cod_Banco"].ToString().TrimEnd(),
                         Indica_IN480 = drw["Indica_IN480"].ToString().ConvertToBoolean(),

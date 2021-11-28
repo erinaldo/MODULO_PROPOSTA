@@ -115,6 +115,7 @@ namespace PROPOSTA
             public Byte Indica_Integracao { get; set; }
             public Byte Indica_IntegracaoIq { get; set; }
             public Byte Indica_Merchandising { get; set; }
+            public String Grupo_Cliente { get; set; }
             public String Cod_Grupo_Cliente { get; set; }
             public String Cod_Representante { get; set; }
             public String Cod_Banco { get; set; }

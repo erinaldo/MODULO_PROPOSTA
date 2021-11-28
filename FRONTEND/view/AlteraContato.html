@@ -1,0 +1,140 @@
+﻿<style>
+    input{text-transform:uppercase}
+</style>
+<div class="container">
+    <form name="frmAlteraContato" autocomplete="off">
+        <div class="block" ng-show="ShowFilter">
+            <div class="row">
+                <!--===================Competência-->
+                <div class="col-md-2">
+                    <div class="dictionary" dictionary="Competencia" caption="Competência">
+                        <input ng-model="Filtro.Competencia"
+                               ui-MesAno ng-model-options="{updateOn: 'blur'}"
+                               placeholder="Informe a Competência">
+                        <div class="dictionary-ui-competencia" ui-Competencia typmesano="Filtro.Competencia" params="CompetenciaKeys"></div>
+                    </div>
+                </div>
+                <!--==============================================Agencia-->
+                <div class="col-md-2" ng-controller="dictionaryController">
+                    <div class="dictionary" dictionary="Agencia" caption="Agência(Opcional)">
+                        <input id="txtCodAgencia"
+                               ng-model="Filtro.Cod_Agencia"
+                               ng-model-options="{updateOn: 'blur'}"
+
+                               ng-change="DicionaryValidate('txtCodAgencia')"
+                               primarybind="txtCodAgencia"
+                               secondarybind="txtNomeAgencia" />
+                    </div>
+                </div>
+                <div class="col-md-4">
+                    <div class="form-group">
+                        <label for="txtNomeAgencia" class="field-x" style="visibility:hidden">..</label>
+                        <div class="input-group">
+                            <input type="text" disabled="disabled" id="txtNomeAgencia" class="form-control " ng-model="Filtro.Nome_Agencia">
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="row">
+                <!--==============================================Contato De-->
+                <div class="col-md-2" ng-controller="dictionaryController">
+                    <div class="dictionary" dictionary="Contato" caption="Contato-De">
+                        <input id="txtCodContatoDe"
+                               ng-model="Filtro.Cod_Contato_De"
+                               ng-model-options="{updateOn: 'blur'}"
+                               ng-change="DicionaryValidate('txtCodContatoDe')"
+                               primarybind="txtCodContatoDe"
+                               secondarybind="txtNomeContatoDe" />
+                    </div>
+                </div>
+                <div class="col-md-6">
+                    <div class="form-group">
+                        <label for="txtNomeContatoDe" class="field-x no-visible">Nome Contato</label>
+                        <div class="input-group">
+                            <input type="text"
+                                   ng-disabled="true"
+                                   id="txtNomeContatoDe"
+                                   class="form-control "
+                                   ng-model="Filtro.Nome_Contato_De">
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="row">
+                <!--==============================================Contato De-->
+                <div class="col-md-2" ng-controller="dictionaryController">
+                    <div class="dictionary" dictionary="Contato" caption="Contato-Para">
+                        <input id="txtCodContatoPara"
+                               ng-model="Filtro.Cod_Contato_Para"
+                               ng-model-options="{updateOn: 'blur'}"
+                               ng-change="DicionaryValidate('txtCodContatoPara')"
+                               primarybind="txtCodContatoPara"
+                               secondarybind="txtNomeContatoPara" />
+                    </div>
+                </div>
+                <div class="col-md-6">
+                    <div class="form-group">
+                        <label for="txtNomeContatoPara" class="field-x no-visible">Nome Contato</label>
+                        <div class="input-group">
+                            <input type="text" 
+                                   ng-disabled="true"
+                                   id="txtNomeContatoPara"
+                                   class="form-control "
+                                   ng-model="Filtro.Nome_Contato_Para">
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <!--=======================Botoes-->
+            <div class="row margin-top-20">
+                <div class="col-md-12">
+                    <button type ="submit" class="btn btn-success" ng-click="ProcessaDeParaContato(Filtro)">Ok</button>
+                    <button type="button" class="btn btn-warning" ng-click="NewFilter()">Cancela</button>
+                </div>
+            </div>
+        </div>
+        <div class="block" ng-show="ShowGrid">
+            <div class="row">
+                <div class="col-md-8 col-md-offset-2">
+                    <div class="table-responsive" style="max-height:500px">
+                        <table class="table table-striped table-bordered">
+                            <thead>
+                                <tr>
+                                    <td colspan="4" style="text-align:center;background-color:#ededed">
+                                        Contratos Alterados do Contato {{Filtro.Cod_Contato_De}} para {{Filtro.Cod_Contato_Para}}
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <th>Contrato</th>
+                                    <th>Negociação</th>
+                                    <th>Agência</th>
+                                    <th>Cliente</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr ng-repeat="DP in DePara track by $index">
+                                    <td>{{DP.Cod_Empresa}}-{{DP.Numero_Mr}}{{DP.Sequencia_Mr}}</td>
+                                    <td>{{DP.Numero_Negociacao}}</td>
+                                    <td>{{DP.Cod_Agencia}}</td>
+                                    <td>{{DP.Cod_Cliente}}</td>
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
+                    <div class="row margin-top-20">
+                        <div class="col-md-12">
+                            <button type="button" class="btn btn-warning" ng-click="CancelaStatus()">Cancela</button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </form>
+</div>
+
+<div ng-include="'template/SelectItem.html'"></div>
+<script type="text/javascript">
+    $(document).ready(function () {
+        GetDictionary();
+    });
+</script>

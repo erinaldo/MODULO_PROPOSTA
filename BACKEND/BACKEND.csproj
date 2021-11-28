@@ -264,6 +264,7 @@
     <Compile Include="InterfacesEMS\RetornarEMSController.cs" />
     <Compile Include="InterfacesEMS\RetornarEMSModel.cs" />
     <Compile Include="InterfacesEMS\RetornarEMSSql.cs" />
+    <Compile Include="PDF\ImpressoRetornoPlayList.cs" />
     <Compile Include="Report\ReportPrint.cs" />
     <Compile Include="Report\ReportController.cs" />
     <Compile Include="Report\ReportModel.cs" />
