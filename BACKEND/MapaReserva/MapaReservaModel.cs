@@ -148,6 +148,7 @@ namespace PROPOSTA
         {
             public Int32 Numero_Negociacao { get; set; }
             public Int32 Numero_Mr { get; set; }
+            public Int32 Sequencia_Mr { get; set; }
             public String Numero_Pi { get; set; }
             public String Competencia_Inicio { get; set; }
             public String Competencia_Fim { get; set; }
@@ -159,6 +160,8 @@ namespace PROPOSTA
             public Byte TipoVenda{ get; set; }
             public String Cod_Veiculo { get; set; }
             public String Cod_Programa { get; set; }
+            public String Cod_Agencia{ get; set; }
+            public String Cod_Cliente{ get; set; }
         }
         public class MapaReservaMidiaFiltroModel
         {

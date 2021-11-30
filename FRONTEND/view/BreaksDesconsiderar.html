@@ -1,0 +1,266 @@
+﻿
+<style>
+    .TipoArtistico {
+        background-color: seagreen;
+        display: inline-block;
+        width: 100px;
+    }
+
+    .TipoLocal {
+        background-color: dodgerblue;
+        display: inline-block;
+        width: 100px;
+    }
+
+    .TipoAvulso {
+        background-color: dodgerblue;
+        display: inline-block;
+        width: 100px;
+    }
+
+    .TipoPE {
+        background-color: purple;
+        display: inline-block;
+        width: 100px;
+    }
+
+    .TipoNet {
+        background-color: deeppink;
+        display: inline-block;
+        width: 100px;
+    }
+</style>
+<div class="container" id="divContainer">
+    <form name="frmBreakDesconsiderar" autocomplete="off">
+        <!--=======================Filtro-->
+        <div class="block" id="divFiltro" ng-show="ShowFilter">
+            <div class="row">
+                <!--=======================Veiculo-->
+                <div class="col-md-2  " ng-controller="dictionaryController">
+                    <div class="dictionary" dictionary="Veiculo">
+                        <input id="txtCodVeiculo" class="form-control"
+                               ng-model="Filtro.Cod_Veiculo"
+                               ng-model-options="{updateOn: 'blur'}"
+                               ng-change="DicionaryValidate('txtCodVeiculo')"
+                               primarybind="txtCodVeiculo"
+                               ng-required="true"
+                               secondarybind="txtNomeVeiculo">
+                    </div>
+                </div>
+                <div class="col-md-3 hidden-mobile">
+                    <div class="form-group">
+                        <label for="txtNomeVeiculo" class="field-x" style="visibility:hidden">..</label>
+                        <div class="input-group">
+                            <input type="text" disabled="disabled" id="txtNomeVeiculo" class="form-control " ng-model="Filtro.Nome_Veiculo">
+                        </div>
+                    </div>
+                </div>
+                <!--==============================================Data Exibicao-->
+                <div class="col-md-2">
+                    <div class="dictionary" dictionary="Data" caption="Data Exibicao">
+                        <input ng-model="Filtro.Data_Exibicao" ng-required="true"
+                               ui-date ng-model-options="{updateOn: 'blur'}">
+                        <div class="dictionary-ui-calendar" ui-calendar typdate="Filtro.Data_Exibicao"></div>
+                    </div>
+                </div>
+                <!--=======================Programa-->
+                <div class="col-md-2" ng-controller="dictionaryController">
+                    <div class="form-group">
+                        <label for="txtCodPrograma" class="field-x">Programa</label>
+                        <div class="input-group">
+                            <div class="input-group-addon">
+                                <span class="fa fa-search span-btn" ng-click="SelecionarPrograma(Filtro)"></span>
+                            </div>
+                            <input ng-model="Filtro.Cod_Programa"
+                                   class="form-control"
+                                   ng-model-options="{updateOn: 'blur'}"
+                                   style="text-transform:uppercase"
+                                   ng-change="ProgramaChange(Filtro)"
+                                   ng-required="true"
+                                   maxlength="4">
+                        </div>
+                    </div>
+                </div>
+                <div class="col-md-3 hidden-mobile">
+                    <div class="form-group">
+                        <label for="txtNomePrograma" class="field-x" style="visibility:hidden">..</label>
+                        <div class="input-group">
+                            <input type="text" disabled="disabled" id="txtNomePrograma" class="form-control " ng-model="Filtro.Nome_Programa">
+                        </div>
+                    </div>
+                </div>
+                <!---==============================================Carregar Breaks-->
+                <div class="col-md-4" style="margin-top:33px">
+                    <button type="submit" class="btn btn-success" ng-click="CarregarListaBreaks(Filtro)" ng-disabled="frmBreakDesconsiderar.$invalid">Carregar Breaks</button>
+                </div>
+            </div>
+        </div>
+        <!--=========================Table-->
+        <div class="block" ng-show="ShowGrid">
+            <div class="row">
+                <strong class="margin-left-20">Veículo:</strong>{{Breaks.Cod_Veiculo}}
+                <strong class="margin-left-20">Data:</strong>{{Breaks.Data_Exibicao | date:'dd/MM/yyyy'}}
+                <strong class="margin-left-20">Programa:</strong>{{Breaks.Cod_Programa}}-{{Filtro.Nome_Programa}}
+             </div>
+
+            <div class="row">
+                <div class="col-md-12">
+                    <div class="table-responsive">
+                        <table class="table table-bordered table-striped">
+                            <thead>
+                                <tr>
+                                    <th></th>
+                                    <th style="text-align:center">Break</th>
+                                    <th style="text-align:center">Seq</th>
+                                    <th style="text-align:center">Horario</th>
+                                    <th>Título</th>
+                                    <th style="text-align:center">Intervalo</th>
+                                    <th style="text-align:center">Duração</th>
+                                    <th style="text-align:center">Observação</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr ng-repeat="b in Breaks.Composicao | orderBy:['Id_Composicao']">
+                                    <td style="width:50px">
+                                        <div class="app-checkbox">
+                                            <label><input type="checkbox" ng-model="b.Indica_Desconsiderado" name="app-checkbox-1" style="position:relative"><span></span></label>
+                                        </div>
+                                    </td>
+                                    <td style="text-align:center">{{b.Breaks}}</td>
+                                    <td style="text-align:center">{{b.Sequencia}}</td>
+                                    <td style="text-align:center">{{b.Hora_Inicio | hhmm}}</td>
+                                    <td>{{b.Titulo_Break}}</td>
+                                    <td style="text-align:center">
+                                        <label ng-class="{'label TipoLocal':b.Tipo_Break.Codigo==0,'label TipoNet':b.Tipo_Break.Codigo==1,'label TipoArtistico':b.Tipo_Break.Codigo==2,'label TipoPE':b.Tipo_Break.Codigo==3}">
+                                            {{b.Tipo_Break.Descricao}}
+                                        </label>
+                                    </td>
+                                    <td style="text-align:center">{{b.Duracao}}</td>
+                                    <td>{{b.Observacao}}</td>
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+            </div>
+            <!--========================botoes de acoes-->
+            <div class="fixed-buttons-bottom">
+                <div class="row">
+                    <div class="col-md-12">
+                        <button type="button" class="btn btn-success" ng-click="MostraData()">Salvar Alterações</button>
+                        <button type="button" class="btn btn-warning" ng-click="CancelaBreak()">Cancela</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <!--=========================Informa Periodo para Gravacao-->
+        <div class="row" ng-show="ShowGravacao">
+            <div class="col-md-6 col-lg-offset-3">
+                <div class="block">
+                    <div class="row">
+                        <!--==============================================Data Inicio Propagacao-->
+                        <div class="col-md-5">
+                            <div class="dictionary" dictionary="Data" caption="Propagar no Período: De ">
+                                <input ng-model="Breaks.Data_Inicio_Propagacao"
+                                       ui-date ng-model-options="{updateOn: 'blur'}">
+                                <div class="dictionary-ui-calendar" ui-calendar typdate="Breaks.Data_Inicio_Propagacao"></div>
+                            </div>
+                        </div>
+                        <!--==============================================Data Fim Propagacao-->
+                        <div class="col-md-5">
+                            <div class="dictionary" dictionary="Data" caption="Até">
+                                <input ng-model="Breaks.Data_Fim_Propagacao"
+                                       ui-date ng-model-options="{updateOn: 'blur'}">
+                                <div class="dictionary-ui-calendar" ui-calendar typdate="Breaks.Data_Fim_Propagacao"></div>
+                            </div>
+                        </div>
+                        <div class="col-md-2" style="margin-top:35px">
+                            <button  type="button" class="btn btn-default" data-toggle="tooltip" data-placement="top" title="Ultimo dia de Break" ng-click="RefreshData(Breaks)"><span class="fa fa-refresh"></span></button>
+                        </div>
+                    </div>
+                        <!--=============================Dias da Semana-->
+                    <div class="row">
+                        <div class="col-md-12">
+                            <label for="txtDiaSemana" class="field-x">Dias da Semana</label>
+                            <div class="form-control" name="txtDiaSemana">
+                                <div class="app-checkbox" style="width:70px;margin-top:5px;">
+                                    <label><input type="checkbox" ng-model="Breaks.Grade_Domingo" name="app-checkbox-1">DOM<span></span></label>
+                                </div>
+                                <div class="app-checkbox" style="width:70px;margin-top:5px;">
+                                    <label><input type="checkbox" ng-model="Breaks.Grade_Segunda" name="app-checkbox-1">SEG<span></span></label>
+                                </div>
+                                <div class="app-checkbox" style="width:70px;margin-top:5px;">
+                                    <label><input type="checkbox" ng-model="Breaks.Grade_Terca" name="app-checkbox-1">TER<span></span></label>
+                                </div>
+                                <div class="app-checkbox" style="width:70px;margin-top:5px;">
+                                    <label><input type="checkbox" ng-model="Breaks.Grade_Quarta" name="app-checkbox-1">QUA<span></span></label>
+                                </div>
+                                <div class="app-checkbox" style="width:70px;margin-top:5px;">
+                                    <label><input type="checkbox" ng-model="Breaks.Grade_Quinta" name="app-checkbox-1">QUI<span></span></label>
+                                </div>
+                                <div class="app-checkbox" style="width:70px;margin-top:5px;">
+                                    <label><input type="checkbox" ng-model="Breaks.Grade_Sexta" name="app-checkbox-1">SEX<span></span></label>
+                                </div>
+                                <div class="app-checkbox" style="width:70px;margin-top:5px;">
+                                    <label><input type="checkbox" ng-model="Breaks.Grade_Sabado" name="app-checkbox-1">SAB<span></span></label>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <!--==============================================Botao confirma gravacao-->
+                    <div class="row margin-top-20">
+                        <div class="col-md-12">
+                            <button  type="button" class="btn btn-success" ng-click="GravarBreak(Breaks)" ng-disabled="!Breaks.Data_Inicio_Propagacao || !Breaks.Data_Fim_Propagacao">Confirmar Gravação</button>
+                            <button  type="button" class="btn btn-warning" ng-click="ShowGrid=true;ShowGravacao=false">Cancela</button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <!--========================Status da Gravacao-->
+        <div class="row" ng-show="ShowStatus>0">
+            <div class="col-md-8 col-md-offset-2">
+                <div class="block">
+                    <div class="table-responsive" style="max-height:400px">
+                        <table class="table table-bordered table table-striped">
+                            <thead>
+                                <tr>
+                                    <th colspan="6" style="background-color:#ededed;text-align:center">
+                                        Status da gravação
+                                    </th>
+                                </tr>
+                                <tr>
+                                    <th>Veículo</th>
+                                    <th>Data</th>
+                                    <th>Programa</th>
+                                    <th>Break</th>
+                                    <th>Crítica</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr ng-repeat="critica in Critica track by $index">
+                                    <td>{{critica.Cod_Veiculo}}</td>
+                                    <td>{{critica.Data_Exibicao | date: "dd/MM/yyyy"}}</td>
+                                    <td>{{critica.Cod_Programa}}</td>
+                                    <td>{{critica.Breaks}}</td>
+                                    <td>{{critica.Critica}}</td>
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
+                    <button  type="button" class="btn btn-warning margin-top-20" ng-click="CriticaOk()">Voltar</button>
+                </div>
+            </div>
+        </div>
+    </form>
+</div>
+<div ng-include="'template/SelectItem.html'"></div>
+<div ng-include="'template/PesquisaTabela.html'"></div>
+<script type="text/javascript">
+    $(document).ready(function () {
+        GetDictionary();
+        $("[type='number']").keypress(function (evt) {
+            evt.preventDefault();
+        });
+    });
+</script>

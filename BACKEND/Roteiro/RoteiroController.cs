@@ -290,7 +290,7 @@ namespace PROPOSTA
 
         [Route("api/Roteiro/AgrupamentoPatrocinio")]
         [HttpPost]
-        [ActionName("DadosComercial")]
+        [ActionName("AgrupamentoPatrocinio")]
         [Authorize()]
         public IHttpActionResult AgrupamentoPatrocinio([FromBody] Roteiro.FiltroAgrupamentoPatrocinioModel Param)
         {
@@ -308,6 +308,25 @@ namespace PROPOSTA
             }
         }
 
+        [Route("api/Roteiro/GravarBreakDesconsiserado")]
+        [HttpPost]
+        [ActionName("GravarBreakDesconsiserado")]
+        [Authorize()]
+        public IHttpActionResult GravarBreakDesconsiserado([FromBody] Roteiro.BreakModel Param)
+        {
+            SimLib clsLib = new SimLib();
+            Roteiro Cls = new Roteiro(User.Identity.Name);
+            try
+            {
+                DataTable retorno = Cls.GravarBreakDesconsiserado(Param);
+                return Ok(retorno);
+            }
+            catch (Exception Ex)
+            {
+                clsLib.EmailErrorToSuporte(User.Identity.Name, Ex.Message.ToString(), Ex.Source, Ex.StackTrace);
+                throw new Exception(Ex.Message);
+            }
+        }
 
     }
 

@@ -130,14 +130,21 @@
             </div>
         </div>
         <div class="block" ng-show="CurrentTab=='Modulo'">
-            <div class="form-group">
-                <div class="input-group">
-                    <div class="app-checkbox">
-                        <label><input type="checkbox" name="app-checkbox-1" ng-model="checkBoxModulo" ng-click="MarcarModulo()" /> Marcar/Desmarcar Todos<span></span></label>
+            <div class="row">
+                <div class="col-md-2">
+                    <div class="form-group">
+                        <div class="input-group">
+                            <div class="app-checkbox">
+                                <label><input type="checkbox" name="app-checkbox-1" ng-model="checkBoxModulo" ng-click="MarcarModulo()" /> Marcar/Desmarcar Todos<span></span></label>
+                            </div>
+                        </div>
                     </div>
                 </div>
+                <div class="col-md-2">
+                    <button class="btn btn-default" ng-click="ImportarPerfil()">Importar Perfil</button>
+                </div>
             </div>
-            <div style="max-height:400px;overflow-y:auto;overflow-x:hidden;border:solid 1px silver">
+            <div style="max-height:400px;margin-top:10px;overflow-y:auto;overflow-x:hidden;border:solid 1px silver">
                 <div class="col-md-12" ng-repeat="modulo in Ctrl.Modulos">
                     <div class="app-checkbox" style="width:auto;margin-top:5px">
                         <label><input type="checkbox" name="app-checkbox-1" ng-model="modulo.Selected" />  {{modulo.Descricao}}<span></span></label>
@@ -146,14 +153,21 @@
             </div>
         </div>
         <div class="block" ng-show="CurrentTab=='Perfil'">
-            <div class="form-group">
-                <div class="input-group">
-                    <div class="app-checkbox">
-                        <label><input type="checkbox" name="app-checkbox-1" ng-model="checkBoxPerfil" ng-click="MarcarPerfil()" /> Marcar/Desmarcar Todos<span></span></label>
+            <div class="row">
+                <div class="col-md-2">
+                    <div class="form-group">
+                        <div class="input-group">
+                            <div class="app-checkbox">
+                                <label><input type="checkbox" name="app-checkbox-1" ng-model="checkBoxPerfil" ng-click="MarcarPerfil()" /> Marcar/Desmarcar Todos<span></span></label>
+                            </div>
+                        </div>
                     </div>
                 </div>
+                <div class="col-md-2">
+                    <button class="btn btn-default" ng-click="ImportarPerfil()">Importar Perfil</button>
+                </div>
             </div>
-            <div style="max-height:400px;overflow-y:auto;overflow-x:hidden;border:solid 1px silver">
+            <div style="max-height:400px;margin-top:10px;overflow-y:auto;overflow-x:hidden;border:solid 1px silver">
                 <div class="col-md-12" ng-repeat="perfil in Ctrl.Perfil">
                     <div class="app-checkbox" style="width:auto;margin-top:5px" ng-style="{'margin-left':((perfil.Nivel-1)*60)}">
                         <label><input type="checkbox" name="app-checkbox-1" ng-model="perfil.Selected" ng-click="CheckPerfil(perfil)" />  {{perfil.Descricao_Funcao}} <span></span></label>
@@ -242,6 +256,7 @@
 <div ng-include="'template/PesquisaTabela.html'"></div>
 <script type="text/javascript">
     $(document).ready(function () {
+        GetDictionary();
         $('#ExportReporttoExcel').on('click', function () {
             $('.buttons-excel').click()
         });

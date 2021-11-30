@@ -199,6 +199,41 @@
             }
         });
     };
+
+    //============================================Carregar Perfil para Importacao
+    $scope.CarregarPerfil = function(pUsuario)
+    {
+        httpService.Get("Usuario/ImportarPerfil/" + pUsuario).then(function (response) {
+            if (response.data) {
+                $scope.Ctrl.Perfil = response.data.Perfil;
+                $scope.Ctrl.Modulos = response.data.Modulos;
+            }
+        });
+    }
+    //============================================Importar Perfil
+    $scope.ImportarPerfil= function()
+    {
+        $scope.PesquisaTabelas = NewPesquisaTabela();
+        httpService.Get('ListarTabela/Login').then(function (response) {
+            if (response.data) {
+                $scope.PesquisaTabelas.Items = response.data
+                $scope.PesquisaTabelas.FiltroTexto = ""
+                $scope.PesquisaTabelas.Titulo = "Selecione o Usuário para Importar Perfil"
+                $scope.PesquisaTabelas.MultiSelect = false;
+                for (var i = 0; i < $scope.PesquisaTabelas.Items.length; i++) {
+                    if ($scope.PesquisaTabelas.Items[i].Codigo.trim() == $scope.Ctrl.Login.trim()) {
+                        $scope.PesquisaTabelas.Items.splice(i, 1);
+                        break;
+                    }
+                }
+                $scope.PesquisaTabelas.ClickCallBack = function (value) {
+                    $scope.CarregarPerfil(value.Codigo);
+                };
+                $("#modalTabela").modal(true);
+            }
+        });
+    }
+
     //============================================Selecionar Usuario Nivel Inferior
     $scope.SelecionarNivelInferior = function () {
         $scope.PesquisaTabelas = NewPesquisaTabela();
@@ -206,7 +241,7 @@
             if (response.data) {
                 $scope.PesquisaTabelas.Items = response.data
                 $scope.PesquisaTabelas.FiltroTexto = ""
-                $scope.PesquisaTabelas.Titulo = "Seleção de Programas"
+                $scope.PesquisaTabelas.Titulo = "Seleção de Usuário"
                 $scope.PesquisaTabelas.MultiSelect = true;
                 for (var x = 0; x < $scope.PesquisaTabelas.Items.length; x++) {
                     for (var y = 0; y < $scope.Ctrl.Nivel_Inferior.length; y++) {
@@ -257,7 +292,7 @@
                 }
             }
         ];
-        param.order = [[0, 'asc']];
+        param.order = [[1, 'asc']];
         param.autoWidth = false;
 
         param.columns = [];

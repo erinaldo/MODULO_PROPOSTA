@@ -29,6 +29,7 @@
         return {
             'Numero_Negociacao': '',
             'Numero_Mr': '',
+            'Sequencia_Mr': '',
             'Numero_Pi': '',
             'Competencia_Inicio': '',
             'Competencia_Fim': '',
@@ -41,6 +42,8 @@
             'TipoVenda': '',
             'Cod_Veiculo': '',
             'Cod_Programa': '',
+            'Cod_Agencia': '',
+            'Cod_Cliente':''
         }
     }
     //===========================Se ja tiver filtro anterior gravado

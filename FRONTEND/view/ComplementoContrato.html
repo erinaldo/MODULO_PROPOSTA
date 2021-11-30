@@ -1,6 +1,7 @@
 ﻿<style>
     td, th {
         white-space: nowrap;
+
     }
 </style>
 <div class="container">
@@ -16,7 +17,7 @@
                 </div>
                 <div class="row">
                     <!--===================Negociação-->
-                    <div class="col-md-1">
+                    <div class="col-md-2">
                         <div class="form-group">
                             <label class="field-x">Negociação</label>
                             <input id="TxtNegociacao"
@@ -61,7 +62,7 @@
                     </div>
 
                     <!--===================Contrato-->
-                    <div class="col-md-1">
+                    <div class="col-md-2">
                         <div class="form-group">
                             <label class="field-x">Contrato</label>
                             <input id="txtContrato" type="text" name="txtContrato" class="form-control" ng-model="Filtro.Contrato" size='6' value='' onkeypress='return NumericOnly(event)' maxlength="6" />
@@ -123,8 +124,6 @@
                     </div>
                 </div>
             </div>
-
-
         </div>
         <!--Div do grid-->
         <div id="divGrid" class="block table-responsive" ng-show="ShowGrid">
@@ -565,7 +564,23 @@
                                         <tbody>
                                             <tr ng-repeat="duplicata in ContratoDados.Rateios[currentTab].Duplicatas track by $index">
                                                 <td>{{duplicata.Parcela}}/{{ContratoDados.Rateios[currentTab].Duplicatas.length}} </td>
-                                                <td>{{duplicata.Vencimento}}</td>
+                                                <td style="padding-top:5px;padding-bottom:5px">
+                                                    <div class="input-group" style="margin-bottom:0px">
+                                                        <input ng-model="duplicata.Vencimento"
+                                                               ui-date=""
+                                                               style="min-width:100px;height:30px"
+                                                               ng-model-options="{updateOn: 'blur'}"
+                                                               class="form-control"
+                                                               onkeypress="return DicionarioKeyPress(this,event)"
+                                                               onkeyup="DicionarioKeyUp(this)"
+                                                               maxlength="10"
+                                                               type="text"
+                                                               keymode="numeric"
+                                                               placeholder="ddmmyyyy">
+                                                    </div>
+                                                    
+                                                    <!--{{duplicata.Vencimento}}-->
+                                                </td>
                                                 <td>{{['Dom','Seg','Ter','Qua','Qui','Sex','Sab'][duplicata.Dia_Semana]}}</td>
                                                 <td>{{duplicata.Valor}}</td>
                                                 <td><span class="fa fa-trash span-btn" style="font-size:15px" ng-click="RemoverParcela(ContratoDados.Rateios[currentTab].Duplicatas,duplicata.Id_Parcela)"></span></td>

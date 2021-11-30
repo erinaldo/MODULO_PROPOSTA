@@ -525,6 +525,7 @@
         $scope.MostraGrupo = false;
         httpService.Post("Roteiro/DadosComercial", _data).then(function (response) {
             if (response.data) {
+                
                 $scope.DadosComercial = response.data[0];
                 $("#modalDadosComercial").modal(true);
             };

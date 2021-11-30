@@ -700,6 +700,7 @@ namespace PROPOSTA
                     Breaks.Hora_Inicio_Programa = dtb.Rows[0]["Hora_Inicio_Programa"].ToString().ConvertToDatetime().ToString("HH:mm");
                     Breaks.Dispo_Net = dtb.Rows[0]["Dispo_Net"].ToString().ConvertToInt32();
                     Breaks.Dispo_Local= dtb.Rows[0]["Dispo_Local"].ToString().ConvertToInt32();
+                    
                     foreach (DataRow drw in dtb.Rows)
                     {
                         Id_Composicao++;
@@ -717,6 +718,7 @@ namespace PROPOSTA
                                 Sequencia_Break = drw["Sequencia_Break"].ToString().ConvertToInt32(),
                                 Observacao = drw["Observacao"].ToString().Trim(),
                                 Hora_Inicio = drw["Hora_Inicio"].ToString(),
+                                Indica_Desconsiderado = drw["Indica_Desconsiderado"].ToString().ConvertToBoolean(),
                             });
                         };
                     }
@@ -1005,6 +1007,56 @@ namespace PROPOSTA
                 Adp.SelectCommand.Parameters.AddWithValue("@Par_Numero_Mr", pParam.Numero_Mr);
                 Adp.SelectCommand.Parameters.AddWithValue("@Par_Sequencia_Mr", pParam.Sequencia_Mr);
                 Adp.SelectCommand.Parameters.AddWithValue("@Par_Numero_Fita", pParam.Numero_Fita);
+                Adp.Fill(dtb);
+            }
+            catch (Exception)
+            {
+                throw;
+            }
+            finally
+            {
+                cnn.Close();
+            }
+            return dtb;
+        }
+        public DataTable GravarBreakDesconsiserado(BreakModel pParam)
+        {
+            clsConexao cnn = new clsConexao(this.Credential);
+            cnn.Open();
+            SqlDataAdapter Adp = new SqlDataAdapter();
+            DataTable dtb = new DataTable("dtb");
+            SimLib clsLib = new SimLib();
+            try
+            {
+                String strDiaSemana = "";
+                strDiaSemana += pParam.Grade_Domingo ? "S" : "N";
+                strDiaSemana += pParam.Grade_Segunda? "S" : "N";
+                strDiaSemana += pParam.Grade_Terca? "S" : "N";
+                strDiaSemana += pParam.Grade_Quarta? "S" : "N";
+                strDiaSemana += pParam.Grade_Quinta? "S" : "N";
+                strDiaSemana += pParam.Grade_Sexta? "S" : "N";
+                strDiaSemana += pParam.Grade_Sabado? "S" : "N";
+
+                String strBreaks = "";
+                for (int i = 0; i < pParam.Composicao.Count; i++)
+                {
+                    if (pParam.Composicao[i].Indica_Desconsiderado)
+                    {
+                        strBreaks += pParam.Composicao[i].Breaks.ToString() + "^";
+                    }
+                }
+                SqlCommand cmd = cnn.Procedure(cnn.Connection, "Sp_Roteiro_Afiliadas_Grava_Break_Desconsiderado");
+                Adp.SelectCommand = cmd;
+                Adp.SelectCommand.Parameters.AddWithValue("@Par_Cod_Veiculo", pParam.Cod_Veiculo + "^");
+                Adp.SelectCommand.Parameters.AddWithValue("@Par_Data_Exibicao", pParam.Data_Exibicao.ConvertToDatetime());
+                Adp.SelectCommand.Parameters.AddWithValue("@Par_Cod_Programa", pParam.Cod_Programa);
+                Adp.SelectCommand.Parameters.AddWithValue("@Par_Dia_Semana", strDiaSemana);
+                Adp.SelectCommand.Parameters.AddWithValue("@Par_Break", strBreaks);
+                Adp.SelectCommand.Parameters.AddWithValue("@Par_Data_Inicio", pParam.Data_Fim_Propagacao.ConvertToDatetime());
+                Adp.SelectCommand.Parameters.AddWithValue("@Par_Data_Final", pParam.Data_Fim_Propagacao.ConvertToDatetime());
+                Adp.SelectCommand.Parameters.AddWithValue("@Par_Login", this.CurrentUser);
+
+
                 Adp.Fill(dtb);
             }
             catch (Exception)

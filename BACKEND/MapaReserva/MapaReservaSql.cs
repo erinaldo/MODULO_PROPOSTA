@@ -24,6 +24,7 @@ namespace PROPOSTA
                 Adp.SelectCommand.Parameters.AddWithValue("@Par_Login", this.CurrentUser);
                 Adp.SelectCommand.Parameters.AddWithValue("@Par_Numero_Negociacao", Param.Numero_Negociacao);
                 Adp.SelectCommand.Parameters.AddWithValue("@Par_Numero_Mr", Param.Numero_Mr);
+                Adp.SelectCommand.Parameters.AddWithValue("@Par_Sequencia_Mr", Param.Sequencia_Mr);
                 Adp.SelectCommand.Parameters.AddWithValue("@Par_Numero_Pi", Param.Numero_Pi);
                 Adp.SelectCommand.Parameters.AddWithValue("@Par_Cod_Empresa_Venda", Param.Cod_Empresa_Venda);
                 Adp.SelectCommand.Parameters.AddWithValue("@Par_Cod_Empresa_Faturamento", Param.Cod_Empresa_Faturamento);
@@ -35,6 +36,9 @@ namespace PROPOSTA
                 Adp.SelectCommand.Parameters.AddWithValue("@Par_TipoVenda", Param.TipoVenda);
                 Adp.SelectCommand.Parameters.AddWithValue("@Par_Cod_Veiculo", Param.Cod_Veiculo);
                 Adp.SelectCommand.Parameters.AddWithValue("@Par_Cod_Programa", Param.Cod_Programa);
+                Adp.SelectCommand.Parameters.AddWithValue("@Par_Cod_Agencia", Param.Cod_Agencia);
+                Adp.SelectCommand.Parameters.AddWithValue("@Par_Cod_Cliente", Param.Cod_Cliente);
+
                 Adp.Fill(dtb);
             }
             catch (Exception)

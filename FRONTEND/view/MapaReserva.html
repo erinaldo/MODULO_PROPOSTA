@@ -31,6 +31,13 @@
                             <input type="text" id="txtNumeroContrato" class="form-control" ng-model="Filtro.Numero_Mr" maxlength="10" onkeypress="return NumericOnly(event)" ng-model-options="{updateOn: 'blur'}" />
                         </div>
                     </div>
+                    <!--==================Numero Contrato-->
+                    <div class="col-md-2">
+                        <div class="form-group">
+                            <label class="field-x" for="txtNumeroContrato">Sequencia</label>
+                            <input type="text" id="txtNumeroContrato" class="form-control" ng-model="Filtro.Sequencia_Mr" maxlength="10" onkeypress="return NumericOnly(event)" ng-model-options="{updateOn: 'blur'}" />
+                        </div>
+                    </div>
                     <!--==================Numero Pi-->
                     <div class="col-md-2">
                         <div class="form-group">
@@ -39,7 +46,7 @@
                         </div>
                     </div>
                     <!--==============================================Competencia Inicio-->
-                    <div class="col-md-3">
+                    <div class="col-md-2">
                         <div class="dictionary" dictionary="Competencia" caption="Comp. Inicial">
                             <input ng-model="Filtro.Competencia_Inicio"
                                    ui-MesAno ng-model-options="{updateOn: 'blur'}" />
@@ -48,7 +55,7 @@
                     </div>
 
                     <!--==============================================Validade Termino-->
-                    <div class="col-md-3">
+                    <div class="col-md-2">
                         <div class="dictionary" dictionary="Competencia" caption="Comp. Final">
                             <input ng-model="Filtro.Competencia_Fim"
                                    ui-MesAno ng-model-options="{updateOn: 'blur'}" />
@@ -79,20 +86,30 @@
                                    secondarybind="">
                         </div>
                     </div>
-
-                    <!--==============================================Agencia-->
-                    <div class="col-md-5" ng-controller="dictionaryController">
+                    <!--==============================================Cod Agencia-->
+                    <div class="col-md-2" ng-controller="dictionaryController">
                         <div class="form-group">
-                            <label class="field-x" for=" txtAgencia">Agência</label>
-                            <input id="txtAgencia"
+                            <label class="field-x" for="txtCodAgencia">Cod. Agência</label>
+                            <input id="txtCodAgencia"
                                    class="form-control"
-                                   ng-model="Filtro.Agencia"
-                                   placeholder="Digite parte do nome da agência"
+                                   maxlength="6"
+                                   ng-model="Filtro.Cod_Agencia"
                                    ng-model-options="{updateOn: 'blur'}" />
                         </div>
                     </div>
-                    <!--==============================================Caracteristica do Contrato-->
-                    <div class="col-md-3">
+                    <!--==============================================Cod Cliente-->
+                    <div class="col-md-2" ng-controller="dictionaryController">
+                        <div class="form-group">
+                            <label class="field-x" for=" txtCodCliente">Cod. Cliente</label>
+                            <input id="txtCodCliente"
+                                   class="form-control"
+                                   maxlength="6"
+                                   ng-model="Filtro.Cod_Cliente"
+                                   ng-model-options="{updateOn: 'blur'}" />
+                        </div>
+                    </div>
+                    <!--==============================================Tipo do Contrato-->
+                    <div class="col-md-4">
                         <div class="form-group">
                             <label class="field-x " for="txtTipoVenda">Tipo</label>
                             <select class="form-control"
@@ -103,10 +120,23 @@
                     </div>
                 </div>
                 <div class="row">
-                    <!--==============================================Cliente-->
-                    <div class="col-md-4" ng-controller="dictionaryController">
+                    <!--==============================================Agencia-->
+                    <div class="col-md-6" ng-controller="dictionaryController">
                         <div class="form-group">
-                            <label class="field-x" for="txtCliente">Cliente</label>
+                            <label class="field-x" for=" txtAgencia">Nome Agência</label>
+                            <input id="txtAgencia"
+                                   class="form-control"
+                                   ng-model="Filtro.Agencia"
+                                   placeholder="Digite parte do nome da agência"
+                                   ng-model-options="{updateOn: 'blur'}" />
+                        </div>
+                    </div>
+
+
+                    <!--==============================================Cliente-->
+                    <div class="col-md-6" ng-controller="dictionaryController">
+                        <div class="form-group">
+                            <label class="field-x" for="txtCliente">Nome Cliente</label>
                             <input id="txtCliente"
                                    class="form-control"
                                    ng-model="Filtro.Cliente"
@@ -115,7 +145,7 @@
                         </div>
                     </div>
                     <!--==============================================Contato-->
-                    <div class="col-md-4" ng-controller="dictionaryController">
+                    <div class="col-md-6" ng-controller="dictionaryController">
                         <div class="form-group">
                             <label class="field-x" for="txtContato">Contato</label>
                             <input id="txtContato"

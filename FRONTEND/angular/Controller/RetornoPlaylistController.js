@@ -247,25 +247,43 @@
 
     //===========================Imprimir retorno pdf
     $scope.GerarPdf = function (pVeiculacao, pStatus) {
-        //var _data = [];
-        //for (var i = 0; i < pVeiculacao.length; i++) {
-        //    if (pVeiculacao[i].Status == pStatus) {
-        //        _data.push(pVeiculacao[i]);
-        //    };
-        //};
-        if (pVeiculacao.length == 0) {
+
+        var table = $('#dataTable').DataTable();
+        var order = table.order();
+        var _data = [];
+        for (var i = 0; i < pVeiculacao.length; i++) {
+            if (pVeiculacao[i].Status == pStatus) {
+                _data.push(pVeiculacao[i]);
+            };
+        };
+        if (_data.length == 0) {
             ShowAlert("Não ha dados a ser Impresso.")
             return;
         }
+        _data[0].SortOrder = order[0][0];
+        _data[0].SortType= order[0][1];
+
         
-        httpService.Post("RetornoPlayGerarPdf/", pVeiculacao).then(function (response) {
+        httpService.Post("RetornoPlayGerarPdf/", _data).then(function (response) {
             if (response.data) {
                 url = $rootScope.baseUrl + "PDFFILES/RETORNOPLAYLIST/" + $rootScope.UserData.Login.trim() + "/" + response.data;
                 var win = window.open(url, '_blank');
                 win.focus();
             }
+            else {
+                ShowAlert("Não há dados a ser impresso.")
+            }
         });
     };
+
+    //===========================Fecha a Conciliacao
+    $scope.FechaConciliacao = function()
+    {
+        $scope.Veiculacoes = [];
+        $('#dataTable').dataTable().fnDestroy();
+        $scope.ShowGrid = false;
+        $scope.ShowFilter = true;
+    }
 
     //===========================Evento chamado ao fim do ngrepeat ao carregar grid 
     $scope.$on('ngRepeatFinished', function (ngRepeatFinishedEvent) {

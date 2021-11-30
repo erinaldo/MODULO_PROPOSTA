@@ -380,5 +380,31 @@ namespace PROPOSTA
 
         }
 
+
+        public Int32 GetIdUsuario(String pLogin)
+        {
+            clsConexao cnn = new clsConexao(this.Credential);
+            cnn.Open();
+            SqlDataAdapter Adp = new SqlDataAdapter();
+            DataTable dtb = new DataTable("dtb");
+            SimLib clsLib = new SimLib();
+            Int32 Retorno;
+            try
+            {
+                SqlCommand cmd = cnn.Text(cnn.Connection, "Select DBO.Fn_Proposta_Id_Usuario('" + pLogin.Trim() + "')" );
+                Adp.SelectCommand = cmd;
+                Adp.Fill(dtb);
+                Retorno = dtb.Rows[0][0].ToString().ConvertToInt32();
+            }
+            catch (Exception)
+            {
+                throw;
+            }
+            finally
+            {
+                cnn.Close();
+            }
+            return Retorno;
+        }
     }
 }

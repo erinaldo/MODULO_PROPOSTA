@@ -194,6 +194,7 @@
                 { 'Title': 'Ordenação', 'Url': $rootScope.pageUrl + 'IndexRoteiro.html#/Roteiro' },
                 { 'Title': 'Consulta do Roteiro', 'Url': $rootScope.pageUrl + 'IndexRoteiro.html#/ConsultaRoteiroOrdenado' },
                 { 'Title': 'Composição de Breaks', 'Url': $rootScope.pageUrl + 'IndexRoteiro.html#/Breaks' },
+                { 'Title': 'Desconsiderar Breaks', 'Url': $rootScope.pageUrl + 'IndexRoteiro.html#/BreaksDesconsiderar' },
                 { 'Title': 'Consulta de Fitas Ordenadas', 'Url': $rootScope.pageUrl + 'IndexRoteiro.html#/ConsultaFitasOrdenadas' },
                 { 'Title': 'Envio Play-List', 'Url': $rootScope.pageUrl + 'IndexRoteiro.html#/EnvioPlayList' },
                 { 'Title': 'Parâmetros de Numeração de Fitas ', 'Url': $rootScope.pageUrl + 'IndexRoteiro.html#/ParamNumFitas' },

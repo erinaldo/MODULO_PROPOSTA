@@ -158,6 +158,7 @@ namespace PROPOSTA
         public Int32? Sequencia_Break { get; set; }
         public String Observacao { get; set; }
         public String Hora_Inicio { get; set; }
+        public Boolean Indica_Desconsiderado { get; set; }
         }
         public class TipoBreakModel
         {

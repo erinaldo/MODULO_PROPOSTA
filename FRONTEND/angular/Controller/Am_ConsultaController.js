@@ -80,8 +80,8 @@
 
     $scope.CarregarMapaReservaCompensacao = function (pFiltro) {
         
-        if (!pFiltro.Competencia){
-            ShowAlert("Competência é um filtro obrigatório");
+        if (!pFiltro.Competencia && !pFiltro.Numero_Negociacao && !pFiltro.Numero_Mr) {
+            ShowAlert("Preencha pelo menos um filtro entre Competência/Negociacao/Contrato");
             return ;
         }
         $scope.Ams = [];

@@ -1245,7 +1245,7 @@
         controller: 'LogListaEMSController',
         authorize: true,
         routeName: 'Log da Lista',
-        RouteId: 'EMS@LogListaEMS'
+        RouteId: 'EMS@LISTANEGRA'
     })
     .when('/IntegrarEMS', {
         templateUrl: 'view/IntegrarEMS.html',
@@ -1267,15 +1267,22 @@
     controller: 'InfoValorProgramaController',
     authorize: true,
     routeName: 'Informação de Valor por Programa',
-    RouteId: 'EMS@RETORNAR'
+    RouteId: 'Fatura@InfoValorPrograma'
     })
     .when('/DeParaNegociacao', {
         templateUrl: 'view/DeParaNegociacao.html',
         controller: 'DeParaNegociacaoController',
         authorize: true,
         routeName: 'De-Para de Negociação',
-        RouteId: 'EMS@RETORNAR'
+        RouteId: 'Mapa@xDeParaNegociacao'
     })
+.when('/BreaksDesconsiderar', {
+    templateUrl: 'view/BreaksDesconsiderar.html',
+    controller: 'BreaksDesconsiderarController',
+    authorize: true,
+    routeName: 'Informação de Breaks Desconsiderados',
+    RouteId: 'Roteiro@DesconsiderarBreak'
+})
     .otherwise({ redirectTo: "/blank" })
 });
 

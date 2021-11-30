@@ -38,13 +38,13 @@ namespace PROPOSTA
             try
             {
                 Usuario.UsuarioModel Usuario = new Usuario.UsuarioModel();
-                if (pIdUsuario==0)
+                if (pIdUsuario == 0)
                 {
-                    Usuario.Nivel_Superior= new List<Usuario.HierarquiaModel>();
+                    Usuario.Nivel_Superior = new List<Usuario.HierarquiaModel>();
                     Usuario.Nivel_Inferior = new List<Usuario.HierarquiaModel>();
                     Usuario.Perfil = Cls.addPerfil(0);
                     Usuario.Empresas = Cls.addEmpresas(0);
-                    Usuario.Grupos= Cls.addGrupos(0);
+                    Usuario.Grupos = Cls.addGrupos(0);
                     Usuario.Modulos = Cls.addModulos(0);
 
                 }
@@ -52,7 +52,7 @@ namespace PROPOSTA
                 {
                     Usuario = Cls.GetUsuario(pIdUsuario);
                 }
-                
+
                 return Ok(Usuario);
             }
             catch (Exception Ex)
@@ -66,8 +66,8 @@ namespace PROPOSTA
         [HttpPost]
         [ActionName("SalvarUsuario")]
         [Authorize()]
-        
-        public IHttpActionResult SalvarUsuario([FromBody] Usuario.UsuarioModel Usuario )
+
+        public IHttpActionResult SalvarUsuario([FromBody] Usuario.UsuarioModel Usuario)
         {
             SimLib clsLib = new SimLib();
             Usuario Cls = new Usuario(User.Identity.Name);
@@ -123,7 +123,29 @@ namespace PROPOSTA
             }
         }
 
+
+        [Route("api/Usuario/ImportarPerfil/{Login}")]
+        [HttpGet]
+        [ActionName("ImportarPerfil")]
+        [Authorize()]
+        public IHttpActionResult GetIdUsuario(String Login)
+        {
+            SimLib clsLib = new SimLib();
+            Usuario Cls = new Usuario(User.Identity.Name);
+            try
+            {
+                Int32 Id_Usuario = Cls.GetIdUsuario(Login);
+                Usuario.UsuarioModel Usuario = new Usuario.UsuarioModel();
+                Usuario.Perfil = Cls.addPerfil(Id_Usuario);
+                Usuario.Modulos = Cls.addModulos(Id_Usuario);
+                return Ok(Usuario);
+            }
+            catch (Exception Ex)
+            {
+                clsLib.EmailErrorToSuporte(User.Identity.Name, Ex.Message.ToString(), Ex.Source, Ex.StackTrace);
+                throw new Exception(Ex.Message);
+            }
+        }
     }
 
 }
-

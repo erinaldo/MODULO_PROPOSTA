@@ -36,6 +36,20 @@ namespace PROPOSTA
             cnn.Open();
             try
             {
+                String xmlRetorno = null;
+                if (Filtro.Count > 0)
+                {
+                    xmlRetorno = clsLib.SerializeToString(Filtro);
+                }
+                SqlCommand cmd = cnn.Procedure(cnn.Connection, "Pr_Proposta_Retorno_Playlist_Print");
+                SqlDataAdapter Adp = new SqlDataAdapter();
+                Adp.SelectCommand = cmd;
+                Adp.SelectCommand.Parameters.AddWithValue("@Par_Retorno", xmlRetorno);
+                Adp.SelectCommand.Parameters.AddWithValue("@Par_Order_Column", Filtro[0].SortOrder);
+                Adp.SelectCommand.Parameters.AddWithValue("@Par_Order_Type", Filtro[0].SortType );
+                
+                Adp.Fill(dtbEsquema);
+
                 //'------------------------Diretorio Temporario para geracao dos PDF
                 String sPath = HttpContext.Current.Server.MapPath("~/PDFFILES/RETORNOPLAYLIST");
                 if (sPath.Right(1) != @"\")
@@ -47,7 +61,7 @@ namespace PROPOSTA
                 if (!System.IO.Directory.Exists(sPath))
                 {
                     System.IO.Directory.CreateDirectory(sPath);
-                }
+                }   
                 //=========================Apaga todos os arquivos da pasta antes da geracao do strFilePDf 
                 var list = System.IO.Directory.GetFiles(sPath, "*.pdf");
                 try
@@ -63,7 +77,7 @@ namespace PROPOSTA
 
                 //=========================Gera pdf 
                 strFilePdf = "" + DateTime.Now.ToString("yyyyMMddHHmmss") + ".PDF";
-                if (GerarPdf(Filtro, sPath, strFilePdf))
+                if (GerarPdf(dtbEsquema, sPath, strFilePdf))
                 {
                     PdfFinal = strFilePdf;
                 }
@@ -79,7 +93,7 @@ namespace PROPOSTA
             }
             return PdfFinal;
         }
-        private Boolean GerarPdf(List<RetornoPlayList.RetornoPlayListBaixaModel> Filtro, String Path, String FileName)
+        private Boolean GerarPdf(DataTable Filtro, String Path, String FileName)
         {
             Boolean bolRetorno = true;
             String strFile = Path + FileName;
@@ -95,8 +109,9 @@ namespace PROPOSTA
                 doc.SetMargins(10, 10, 10, 10);
                 doc.Open();
                 PdfPTable TbRetorno = clsPdf.CreateTable(new float[] { 100, 50, 70, 50, 50, 70, 200, 50, 75, 70 });
-                for (int i = 0; i < Filtro.Count; i++)
-                {
+                //for (int i = 0; i < Filtro.Count; i++)
+                foreach (DataRow drw  in Filtro.Rows)
+                { 
                     //------------------------Quebrou o tamanho da pagina
                     if (CurrentPosition - TbRetorno.TotalHeight < 50)
                     {
@@ -106,20 +121,20 @@ namespace PROPOSTA
                             TbRetorno.WriteSelectedRows(0, -1, 10, CurrentPosition, pc);
                             TbRetorno = clsPdf.CreateTable(new float[] { 100, 50, 70, 50, 50, 70, 200, 50, 75, 70 });
                         }
-                        this.ImprimeCabecalho(write, doc,Filtro[i]);
+                        this.ImprimeCabecalho(write, doc,drw);
                     }
 
                     //------------------------Imprime Linha
-                    clsPdf.addCell(TbRetorno, new pdfLibCell() { Text = NomeStatus[Filtro[i].Status]});
-                    clsPdf.addCell(TbRetorno, new pdfLibCell() { Text = Filtro[i].Cod_Veiculo });
-                    clsPdf.addCell(TbRetorno, new pdfLibCell() { Text = Filtro[i].Data_Exibicao.ToString("dd/MM/yyyy") });
-                    clsPdf.addCell(TbRetorno, new pdfLibCell() { Text = Filtro[i].Cod_Programa });
-                    clsPdf.addCell(TbRetorno, new pdfLibCell() { Text = Filtro[i].Chave_Acesso});
-                    clsPdf.addCell(TbRetorno, new pdfLibCell() { Text = Filtro[i].Numero_Fita });
-                    clsPdf.addCell(TbRetorno, new pdfLibCell() { Text = Filtro[i].Titulo_Comercial,Align = PdfPCell.ALIGN_LEFT } );
-                    clsPdf.addCell(TbRetorno, new pdfLibCell() { Text = Filtro[i].Cod_Qualidade });
-                    clsPdf.addCell(TbRetorno, new pdfLibCell() { Text = Filtro[i].Horario_Exibicao });
-                    clsPdf.addCell(TbRetorno, new pdfLibCell() { Text = Filtro[i].Numero_Ce });
+                    clsPdf.addCell(TbRetorno, new pdfLibCell() { Text = NomeStatus[drw["Status"].ToString().ConvertToInt32()] });
+                    clsPdf.addCell(TbRetorno, new pdfLibCell() { Text = drw["Cod_Veiculo"].ToString() });
+                    clsPdf.addCell(TbRetorno, new pdfLibCell() { Text = drw["Data_Exibicao"].ToString().ConvertToDatetime().ToString("dd/MM/yyyy")});
+                    clsPdf.addCell(TbRetorno, new pdfLibCell() { Text = drw["Cod_Programa"].ToString() });
+                    clsPdf.addCell(TbRetorno, new pdfLibCell() { Text = drw["Chave_Acesso"].ToString()});
+                    clsPdf.addCell(TbRetorno, new pdfLibCell() { Text = drw["Numero_Fita"].ToString() });
+                    clsPdf.addCell(TbRetorno, new pdfLibCell() { Text = drw["Titulo_Comercial"].ToString(), Align = PdfPCell.ALIGN_LEFT } );
+                    clsPdf.addCell(TbRetorno, new pdfLibCell() { Text = drw["Cod_Qualidade"].ToString() });
+                    clsPdf.addCell(TbRetorno, new pdfLibCell() { Text = drw["Horario_Exibicao"].ToString() });
+                    clsPdf.addCell(TbRetorno, new pdfLibCell() { Text = drw["Numero_Ce"].ToString() });
 
                     hasRow = true;
                 }
@@ -153,7 +168,7 @@ namespace PROPOSTA
             }
             return bolRetorno;
         }
-        private void ImprimeCabecalho(PdfWriter ww, Document dd, RetornoPlayList.RetornoPlayListBaixaModel drw)
+        private void ImprimeCabecalho(PdfWriter ww, Document dd, DataRow drw)
         {
             PageNumber++;
             if (PageNumber > 1)
@@ -161,7 +176,7 @@ namespace PROPOSTA
                 dd.NewPage();
             }
 
-            String LogoName = "logo_Roteiro_" + drw.Cod_Veiculo;
+            String LogoName = "logo_Roteiro_" + drw["Cod_Veiculo"].ToString();
             String sPathLogo = HttpContext.Current.Server.MapPath("~/logos/" + LogoName);
             if (!File.Exists(sPathLogo))
             {
