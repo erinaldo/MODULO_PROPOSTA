@@ -58,12 +58,11 @@ angular.module("App").directive("uiCalendar", function () {
                     { 'Dom': '', 'Seg': '', 'Ter': '', 'Qua': '', 'Qui': '', 'Sex': '', 'Sab': '' },
                     { 'Dom': '', 'Seg': '', 'Ter': '', 'Qua': '', 'Qui': '', 'Sex': '', 'Sab': '' },
                     { 'Dom': '', 'Seg': '', 'Ter': '', 'Qua': '', 'Qui': '', 'Sex': '', 'Sab': '' },
-                    
         ];
         var grid = [];
         var semana=0
         for (var i = 1; i < 32; i++) {
-            var d = new Date(y, m, i,12  ,0,0)
+            var d = new Date(y, m, i, 12, 0, 0)
             var wk = d.getDay();
             if (d.getMonth() != m) {
                 break;
@@ -77,6 +76,7 @@ angular.module("App").directive("uiCalendar", function () {
                     break;
                 case 2:
                     aDays[semana].Ter = i;
+                    break;
                 case 3:
                     aDays[semana].Qua = i;
                     break;
@@ -91,8 +91,8 @@ angular.module("App").directive("uiCalendar", function () {
                     semana++
                     break;
           }
-
         }
+        
         for (var i = 0; i < aDays.length; i++) {
 
             if (!aDays[i].Dom && !aDays[i].Seg && !aDays[i].Ter && !aDays[i].Qua && !aDays[i].Qui && !aDays[i].Sex && !aDays[i].Sab) {

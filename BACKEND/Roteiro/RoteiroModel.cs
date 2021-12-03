@@ -149,6 +149,8 @@ namespace PROPOSTA
         public class ComposicaoBreakModel
         {
         public Int32 Id_Composicao { get; set; }
+        public String Cod_Programa { get; set; }
+        public String Cod_Veiculo { get; set; }
         public Int32? Breaks { get; set; }
         public Int32? Sequencia_Faixa { get; set; }
         public Int32? Sequencia { get; set; }
@@ -160,6 +162,24 @@ namespace PROPOSTA
         public String Hora_Inicio { get; set; }
         public Boolean Indica_Desconsiderado { get; set; }
         }
+        public class BreakDesconsideradoModel
+        {
+            public String Cod_Veiculo { get; set; }
+            public String Data_Exibicao { get; set; }
+            public String Cod_Programa { get; set; }
+            public String Data_Inicio_Propagacao { get; set; }
+            public String Data_Fim_Propagacao { get; set; }
+            public Int32? Breaks { get; set; }
+            public Boolean Indica_Desconsiderado { get; set; }
+            public Boolean Grade_Domingo { get; set; }
+            public Boolean Grade_Segunda { get; set; }
+            public Boolean Grade_Terca { get; set; }
+            public Boolean Grade_Quarta { get; set; }
+            public Boolean Grade_Quinta { get; set; }
+            public Boolean Grade_Sexta { get; set; }
+            public Boolean Grade_Sabado { get; set; }
+        }
+
         public class TipoBreakModel
         {
             public Int32 Codigo { get; set; }

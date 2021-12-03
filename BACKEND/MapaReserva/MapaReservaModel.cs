@@ -162,6 +162,7 @@ namespace PROPOSTA
             public String Cod_Programa { get; set; }
             public String Cod_Agencia{ get; set; }
             public String Cod_Cliente{ get; set; }
+            public String Operacao { get; set; }
         }
         public class MapaReservaMidiaFiltroModel
         {

@@ -128,7 +128,7 @@ namespace PROPOSTA
                 throw new Exception(Ex.Message);
             }
         }
-        //=================================Salvar Ordenacao
+        //=================================Listar Break
         [Route("api/Roteiro/ListarBreak")]
         [HttpGet]
         [ActionName("RoteiroListarBreak")]
@@ -308,17 +308,38 @@ namespace PROPOSTA
             }
         }
 
-        [Route("api/Roteiro/GravarBreakDesconsiserado")]
-        [HttpPost]
-        [ActionName("GravarBreakDesconsiserado")]
+        //=================================Listar Break
+        [Route("api/Roteiro/ListarBreakDesconsiserado")]
+        [HttpGet]
+        [ActionName("RoteiroListarBreakDesconsiserado")]
         [Authorize()]
-        public IHttpActionResult GravarBreakDesconsiserado([FromBody] Roteiro.BreakModel Param)
+        public IHttpActionResult RoteiroListarBreakDesconsiserado([FromUri] Roteiro.RoteiroFiltroModel Param)
         {
             SimLib clsLib = new SimLib();
             Roteiro Cls = new Roteiro(User.Identity.Name);
             try
             {
-                DataTable retorno = Cls.GravarBreakDesconsiserado(Param);
+                DataTable Retorno = Cls.ListarBreakDesconsiserado(Param);
+                return Ok(Retorno);
+            }
+            catch (Exception Ex)
+            {
+                clsLib.EmailErrorToSuporte(User.Identity.Name, Ex.Message.ToString(), Ex.Source, Ex.StackTrace);
+                throw new Exception(Ex.Message);
+            }
+        }
+
+        [Route("api/Roteiro/GravarBreakDesconsiderado")]
+        [HttpPost]
+        [ActionName("GravarBreakDesconsiderado")]
+        [Authorize()]
+        public IHttpActionResult GravarBreakDesconsiderado([FromBody] List<Roteiro.BreakDesconsideradoModel> Param)
+        {
+            SimLib clsLib = new SimLib();
+            Roteiro Cls = new Roteiro(User.Identity.Name);
+            try
+            {
+                DataTable retorno = Cls.GravarBreakDesconsiderado(Param);
                 return Ok(retorno);
             }
             catch (Exception Ex)

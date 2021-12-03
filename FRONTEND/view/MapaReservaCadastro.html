@@ -74,10 +74,10 @@
                     </strong>
                 </div>
             </div>
-            <!--========================Criar Nova Sequencia-->
+            <!--========================Criar Nova Sequencia/Importar Mapa-->
             <div class="row"  ng-show="Parameters.Action!='Edit'">
                 <div class="col-md-3 margin-top-30">
-                    <div class="app-checkbox" style="width:auto;margin-top:5px">
+                    <div class="app-checkbox" style="width:auto;margin-top:5px" ng-show="!Importar_Mapa">
                         <label>
                             <input type="checkbox"
                                    tabindex="-1 "
@@ -85,18 +85,49 @@
                                    ng-model="Nova_Sequencia"> &nbsp;&nbsp;Criar nova Sequencia de Contrato<span></span>
                         </label>
                     </div>
+                 </div>
+                <div class="col-md-3 margin-top-30" ng-show="!Nova_Sequencia && PermiteImportarMapa">
+                    <div class="app-checkbox" style="width:auto;margin-top:5px">
+                        <label>
+                            <input type="checkbox"
+                                   tabindex="-1 "
+                                   name="app-checkbox-1"
+                                   ng-model="Importar_Mapa"> &nbsp;&nbsp;Importar de outro Mapa<span></span>
+                        </label>
+                    </div>
                 </div>
                 <div class="col-md-2" ng-show="Nova_Sequencia">
                     <div class="form-group">
                         <label for="txtNumeroMr" class="field-x">Numero do Contrato</label>
-                        <input type="text" id="txtNumeroMr" class="form-control"
+                        <input type="text" id="txtNumeroMr" class="form-control numeric"
                                ng-model="Contrato.Numero_Mr"
                                ng-model-options="{updateOn: 'blur'}"
                                maxlength="10" />
                     </div>
                 </div>
+                <div class="col-md-2" ng-show="Importar_Mapa && PermiteImportarMapa">
+                    <div class="form-group">
+                        <label for="txtImportarNumero" class="field-x">Numero do Contrato</label>
+                        <input type="text" id="txtImportarNumero" class="form-control  numeric"
+                               ng-model="FiltroImportar.Numero_Mr"
+                               ng-model-options="{updateOn: 'blur'}"
+                               maxlength="10" />
+                    </div>
+                </div>
+                <div class="col-md-1" ng-show="Importar_Mapa && PermiteImportarMapa">
+                    <div class="form-group">
+                        <label for="txtImportarSeq" class="field-x">Seq.</label>
+                        <input type="text" id="txtImportarSeq" class="form-control  numeric"
+                               ng-model="FiltroImportar.Sequencia_Mr"
+                               ng-model-options="{updateOn: 'blur'}"
+                               maxlength="3" />
+                    </div>
+                </div>
                 <div class="col-md-2" style="margin-top:35px" ng-show="Nova_Sequencia">
                     <button class="btn btn-default" ng-click="NovaSequencia(Contrato.Numero_Mr)">Carregar Dados</button>
+                </div>
+                <div class="col-md-2" style="margin-top:35px" ng-show="Importar_Mapa && PermiteImportarMapa"">
+                    <button class="btn btn-default" ng-click="CarregarDadosImportar(FiltroImportar)">Carregar Dados</button>
                 </div>
 
             </div>
@@ -731,7 +762,7 @@
                 </div>
                 <div class="col-md-9" ng-hide="Contrato.Comprovado || Contrato.Indica_Midia_Online">
                     <div class="app-checkbox">
-                        <label>
+                        <label style="font-weight: bold;color: red;">
                             <input type="checkbox"
                                    name="app-checkbox-1"
                                    ng-model="Contrato.Indica_Tqp"> &nbsp;&nbsp;Estourar saldo quando não houver espaço (Tqp)<span></span>

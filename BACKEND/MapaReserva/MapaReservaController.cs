@@ -437,17 +437,17 @@ namespace PROPOSTA
         }
 
 
-        [Route("api/MapaReserva/GetNovaSequencia/{Numero_Contrato}")]
-        [HttpGet]
+        [Route("api/MapaReserva/GetNovaSequencia")]
+        [HttpPost]
         [ActionName("MapaReservaGetNovaSequencia")]
         [Authorize()]
-        public IHttpActionResult MapaReservaGetNovaSequencia(Int32 Numero_Contrato)
+        public IHttpActionResult MapaReservaGetNovaSequencia(MapaReserva.MapaReservaFiltroModel Param)
         {
             SimLib clsLib = new SimLib();
             MapaReserva Cls = new MapaReserva(User.Identity.Name);
             try
             {
-                Int32 Id_Contrato = Cls.GetIdContrato(Numero_Contrato);
+                Int32 Id_Contrato = Cls.GetIdContrato(Param);
                 MapaReserva.ContratoModel Retorno = new MapaReserva.ContratoModel();
                 Retorno = Cls.MapaReservaGetContrato(Id_Contrato);
                 Retorno.Tem_Fatura = false;
@@ -522,6 +522,35 @@ namespace PROPOSTA
             try
             {
                 DataTable Retorno = Cls.ProcessaDeParaNegociacao(param);
+                return Ok(Retorno);
+            }
+            catch (Exception Ex)
+            {
+                clsLib.EmailErrorToSuporte(User.Identity.Name, Ex.Message.ToString(), Ex.Source, Ex.StackTrace);
+                throw new Exception(Ex.Message);
+            }
+        }
+
+        [Route("api/MapaReserva/GetImportarDados")]
+        [HttpPost]
+        [ActionName("MapaReservaGetImportarDados")]
+        [Authorize()]
+        public IHttpActionResult MapaReservaGetImportarDados(MapaReserva.MapaReservaFiltroModel Param)
+        {
+            SimLib clsLib = new SimLib();
+            MapaReserva Cls = new MapaReserva(User.Identity.Name);
+            try
+            {
+                Int32 Id_Contrato = Cls.GetIdContrato(Param);
+                MapaReserva.ContratoModel Retorno = new MapaReserva.ContratoModel();
+                Retorno = Cls.MapaReservaGetContrato(Id_Contrato);
+                Retorno.Tem_Fatura = false;
+                Retorno.Comprovado = false;
+                Retorno.Id_Contrato = 0;
+                Retorno.Numero_Mr = 0;
+                Retorno.Sequencia_Mr = 0;
+                Retorno.Veiculacoes = Cls.AddVeiculacoes(Id_Contrato,Param.Operacao);
+                Retorno.VeiculacoesOnLine = new List<MapaReserva.VeiculacaoOnLineModel>();
                 return Ok(Retorno);
             }
             catch (Exception Ex)

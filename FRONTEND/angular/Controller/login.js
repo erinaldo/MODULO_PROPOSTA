@@ -52,6 +52,7 @@ angular.module('App').controller('loginController', ['$scope', '$rootScope', 'to
                         $rootScope.Mensagens = response.data;
                         $rootScope.ShowMensagem = $rootScope.Mensagens.length;
                     });
+
                     $location.path("/PortalApp")
                 }
                 else {

@@ -14,7 +14,7 @@
                 <div class="col-md-2  " ng-controller="dictionaryController">
                     <div class="dictionary" dictionary="Veiculo" caption="Veículo">
                         <input id="txtCodVeiculo"
-                               ng-model="Filtro.Veiculo"
+                               ng-model="Filtro.Cod_Veiculo"
                                ng-model-options="{updateOn: 'blur'}"
                                ng-change="DicionaryValidate('txtCodVeiculo')"
                                primarybind="txtCodVeiculo"
@@ -75,7 +75,7 @@
                         <input ng-model="Filtro.CompetenciaFinal"
                                ui-MesAno ng-model-options="{updateOn: 'blur'}"
                                placeholder="Informe a Competência">
-                        <div class="dictionary-ui-competencia" ui-Competencia typmesano="Filtro.CompetenciaInicial" params="CompetenciaKeys"></div>
+                        <div class="dictionary-ui-competencia" ui-Competencia typmesano="Filtro.CompetenciaFinal" params="CompetenciaKeys"></div>
                     </div>
                 </div>
                 <!--====================Pendente-->

@@ -20,6 +20,10 @@
     $scope.Abrangencia = [{ 'Codigo': 0, 'Descricao': 'Net' }, { 'Codigo': 1, 'Descricao': 'Rede' }, { 'Codigo': 2, 'Descricao': 'Local' }]
     $scope.Periodo_Campanha_Inicio_Original = "";
     $scope.Periodo_Campanha_Termino_Original = "";
+    $scope.Nova_Sequencia = false;
+    $scope.Importar_Mapa = false;
+    $scope.FiltroImportar = { 'Numero_Mr': '', 'Sequencia_Mr': '' }
+    $scope.PermiteImportarMapa = true;
     //===========================Carrega Dados do Contrato / Vindo de Proposta
     $scope.CarregaContratoFromProposta = function (pIdEsquema) {
         httpService.Get('MapaReserva/CarregarEsquema/' + pIdEsquema).then(function (response) {
@@ -73,12 +77,14 @@
             };
         });
     };
+    //===========================Dados para nova sequencia 
     $scope.NovaSequencia = function (pNumeroMr) {
         if (!pNumeroMr) {
             ShowAlert("Informe o Numero do Contrato.")
             return;
         }
-        httpService.Get('MapaReserva/GetNovaSequencia/' + pNumeroMr).then(function (response) {
+        var _data = { 'Numero_Mr': pNumeroMr, 'Sequencia_Mr': 0 }
+        httpService.Post('MapaReserva/GetNovaSequencia',_data).then(function (response) {
             if (!response.data.Numero_Mr) {
                 ShowAlert("Numero de Contrato não encontrado.")
                 return
@@ -86,6 +92,17 @@
             else {
                 $scope.Contrato = response.data;
                 $scope.Contrato.Operacao = $scope.Parameters.Action;
+            }
+        });
+    }
+    //===========================Carrega dados para Importacao do Mapa
+    $scope.CarregarDadosImportar = function (pMapa) {
+        var _data = { 'Numero_Mr': pMapa.Numero_Mr, 'Sequencia_Mr': pMapa.Sequencia_Mr ,'Operacao':'ImportarMapa'}
+        httpService.Post("MapaReserva/GetImportarDados", _data).then(function (response) {
+            if (response.data) {
+                $scope.Contrato = response.data;
+                $scope.Contrato.Operacao = $scope.Parameters.Action;
+                $scope.PermiteImportarMapa = false;
             }
         });
     }
@@ -883,10 +900,10 @@
     }
     //===========================Salvar Contrato
     $scope.SalvarMapaReserva = function (pContrato) {
+        if ($scope.Parameters.Action == 'New' && !$scope.Nova_Sequencia) {
+            pContrato.Numero_Mr = "";
+        }
         httpService.Post('MapaReserva/Salvar', pContrato).then(function (response) {
-            if ($scope.Parameters.Action == 'New' && !$scope.NovaSequencia)   {
-                pcontrato.Numero_Mr = "";
-            }
             if (response.data[0].Status == 1) {
                 ShowAlert(response.data[0].Mensagem, 'success');
                 if ($scope.Parameters.Action == 'Import') {

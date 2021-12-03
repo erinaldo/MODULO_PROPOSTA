@@ -9,7 +9,11 @@
             $scope.UrlPowerBi = response.data;
         };
     });
-   
+    httpService.Get('GetUserData').then(function (response) {
+        if (response) {
+            $rootScope.UserData = response.data;
+        }
+    });
     $scope.AppModulos = [
         {
             'Id': 1,

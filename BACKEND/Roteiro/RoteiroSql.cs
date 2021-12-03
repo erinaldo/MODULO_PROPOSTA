@@ -1019,7 +1019,7 @@ namespace PROPOSTA
             }
             return dtb;
         }
-        public DataTable GravarBreakDesconsiserado(BreakModel pParam)
+        public DataTable GravarBreakDesconsiderado(List<BreakDesconsideradoModel> pParam)
         {
             clsConexao cnn = new clsConexao(this.Credential);
             cnn.Open();
@@ -1029,34 +1029,61 @@ namespace PROPOSTA
             try
             {
                 String strDiaSemana = "";
-                strDiaSemana += pParam.Grade_Domingo ? "S" : "N";
-                strDiaSemana += pParam.Grade_Segunda? "S" : "N";
-                strDiaSemana += pParam.Grade_Terca? "S" : "N";
-                strDiaSemana += pParam.Grade_Quarta? "S" : "N";
-                strDiaSemana += pParam.Grade_Quinta? "S" : "N";
-                strDiaSemana += pParam.Grade_Sexta? "S" : "N";
-                strDiaSemana += pParam.Grade_Sabado? "S" : "N";
+                strDiaSemana += pParam[0].Grade_Domingo ? "S" : "N";
+                strDiaSemana += pParam[0].Grade_Segunda ? "S" : "N";
+                strDiaSemana += pParam[0].Grade_Terca ? "S" : "N";
+                strDiaSemana += pParam[0].Grade_Quarta ? "S" : "N";
+                strDiaSemana += pParam[0].Grade_Quinta ? "S" : "N";
+                strDiaSemana += pParam[0].Grade_Sexta ? "S" : "N";
+                strDiaSemana += pParam[0].Grade_Sabado ? "S" : "N";
 
                 String strBreaks = "";
-                for (int i = 0; i < pParam.Composicao.Count; i++)
+                for (int i = 0; i < pParam.Count; i++)
                 {
-                    if (pParam.Composicao[i].Indica_Desconsiderado)
+                    if (pParam[i].Indica_Desconsiderado)
                     {
-                        strBreaks += pParam.Composicao[i].Breaks.ToString() + "^";
+                        strBreaks += pParam[i].Breaks.ToString() + "^";
                     }
                 }
                 SqlCommand cmd = cnn.Procedure(cnn.Connection, "Sp_Roteiro_Afiliadas_Grava_Break_Desconsiderado");
                 Adp.SelectCommand = cmd;
-                Adp.SelectCommand.Parameters.AddWithValue("@Par_Cod_Veiculo", pParam.Cod_Veiculo + "^");
-                Adp.SelectCommand.Parameters.AddWithValue("@Par_Data_Exibicao", pParam.Data_Exibicao.ConvertToDatetime());
-                Adp.SelectCommand.Parameters.AddWithValue("@Par_Cod_Programa", pParam.Cod_Programa);
+                Adp.SelectCommand.Parameters.AddWithValue("@Par_Cod_Veiculo", pParam[0].Cod_Veiculo + "^");
+                Adp.SelectCommand.Parameters.AddWithValue("@Par_Data_Exibicao", pParam[0].Data_Exibicao.ConvertToDatetime());
+                Adp.SelectCommand.Parameters.AddWithValue("@Par_Cod_Programa", pParam[0].Cod_Programa);
                 Adp.SelectCommand.Parameters.AddWithValue("@Par_Dia_Semana", strDiaSemana);
                 Adp.SelectCommand.Parameters.AddWithValue("@Par_Break", strBreaks);
-                Adp.SelectCommand.Parameters.AddWithValue("@Par_Data_Inicio", pParam.Data_Fim_Propagacao.ConvertToDatetime());
-                Adp.SelectCommand.Parameters.AddWithValue("@Par_Data_Final", pParam.Data_Fim_Propagacao.ConvertToDatetime());
+                Adp.SelectCommand.Parameters.AddWithValue("@Par_Data_Inicio", pParam[0].Data_Fim_Propagacao.ConvertToDatetime());
+                Adp.SelectCommand.Parameters.AddWithValue("@Par_Data_Final", pParam[0].Data_Fim_Propagacao.ConvertToDatetime());
                 Adp.SelectCommand.Parameters.AddWithValue("@Par_Login", this.CurrentUser);
 
 
+                Adp.Fill(dtb);
+            }
+            catch (Exception)
+            {
+                throw;
+            }
+            finally
+            {
+                cnn.Close();
+            }
+            return dtb;
+        }
+
+        public DataTable ListarBreakDesconsiserado(RoteiroFiltroModel pParam)
+        {
+            clsConexao cnn = new clsConexao(this.Credential);
+            cnn.Open();
+            SqlDataAdapter Adp = new SqlDataAdapter();
+            DataTable dtb = new DataTable("dtb");
+            SimLib clsLib = new SimLib();
+            try
+            {
+                SqlCommand cmd = cnn.Procedure(cnn.Connection, "Sp_Break_Desconsiderado");
+                Adp.SelectCommand = cmd;
+                Adp.SelectCommand.Parameters.AddWithValue("@Par_Cod_Veiculo", pParam.Cod_Veiculo );
+                Adp.SelectCommand.Parameters.AddWithValue("@Par_Data_Exibicao", pParam.Data_Exibicao.ConvertToDatetime());
+                Adp.SelectCommand.Parameters.AddWithValue("@Par_Cod_Programa", pParam.Cod_Programa);
                 Adp.Fill(dtb);
             }
             catch (Exception)

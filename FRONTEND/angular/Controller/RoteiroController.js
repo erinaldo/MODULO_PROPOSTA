@@ -26,6 +26,7 @@
         return { 'Comerciais': [], 'FitaPendente': [], 'Break': [], 'Restricao': [], 'Concorrencia': [] }
     }
     $scope.RoteiroConsistencia = $scope.newRoteiroConsistencia();
+    $scope.Unsaved = false;
     //===========================Carregar Guia de Programas
     $scope.CarregarGuiaProgramas = function (pFiltro) {
         if (!pFiltro.Cod_Veiculo || !pFiltro.Data_Exibicao) {
@@ -100,11 +101,35 @@
     };
     //===========================CancelaRoteiro
     $scope.CancelarRoteiro = function () {
+        console.log("fechando");
         $scope.Roteiro = "";
         $scope.Comerciais = "";
         $scope.Filtro = $scope.NewFiltro();
         $scope.ShowFiltro = true;
         $scope.ShowGuiaProgramas = false;
+        $scope.Unsaved = false;
+    };
+
+    //===========================Deseja Cancelar Ordenacao 
+    $scope.PreCancelarRoteiro = function () {
+        if ($scope.Unsaved) {
+            swal({
+                title: 'Existem alteração não salvas, Confirma fechar esse roteiro ? ',
+                fontsize: 11,
+                showCancelButton: true,
+                confirmButtonClass: "btn-warning",
+                confirmButtonText: "Sim, fechar",
+                cancelButtonText: "Não",
+                closeOnConfirm: true
+            }, function () {
+                console.log("vai fechar1");
+                $scope.CancelarRoteiro();
+                $scope.$digest();
+            });
+        }
+        else {
+            $scope.CancelarRoteiro();
+        };
     };
     //===========================Mostrar todos os programas
     $scope.MostrarTodos = function (pRoteiro, pValue) {
@@ -286,6 +311,7 @@
         //----------------Renumera Itens
         $scope.RenumeraItens($scope.Roteiro)
         //----------------Atualiza scope
+        $scope.Unsaved = true;
         $scope.$digest();
     }
     //===========================Desordenar Comercial do Roteiro / Devolve para table de comerciais
@@ -302,6 +328,7 @@
         //------------------------Exclui da Ordenacao
         $scope.Roteiro.splice(pItem.Id_Item, 1);
         //----------------Renumera Itens
+        $scope.Unsaved = true;
         $scope.RenumeraItens($scope.Roteiro)
     };
     //===========================Cortar Comercial do Roteiro
@@ -445,6 +472,7 @@
                 else {
                     pRoteiro.splice(pIndex + 1, 1);
                 };
+                $scope.Unsaved = true;
                 $scope.RenumeraItens(pRoteiro);
                 $scope.$digest();
             });
@@ -465,6 +493,7 @@
             else {
                 pRoteiro.splice(pIndex + 1, 1);
             }
+            $scope.Unsaved = true;
             $scope.RenumeraItens(pRoteiro);
         };
     };
@@ -494,6 +523,7 @@
     $scope.SalvarRoteiro = function (pRoteiro) {
         httpService.Post("Roteiro/Salvar", pRoteiro).then(function (response) {
             if (response) {
+                $scope.Unsaved = false;
                 $scope.Critica = response.data;
             }
         });

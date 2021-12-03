@@ -441,7 +441,7 @@ namespace PROPOSTA
             }
             return Comerciais;
         }
-        private List<VeiculacacaoModel> AddVeiculacoesEsquema(Int32 pId_Esquema)
+        public List<VeiculacacaoModel> AddVeiculacoesEsquema(Int32 pId_Esquema)
         {
             clsConexao cnn = new clsConexao(this.Credential);
             cnn.Open();
@@ -481,7 +481,7 @@ namespace PROPOSTA
             }
             return Veiculacoes;
         }
-        private List<VeiculacaoOnLineModel> AddVeiculacoesOnLineEsquema(Int32 pId_Esquema)
+        public List<VeiculacaoOnLineModel> AddVeiculacoesOnLineEsquema(Int32 pId_Esquema)
         {
             clsConexao cnn = new clsConexao(this.Credential);
             cnn.Open();
@@ -839,7 +839,7 @@ namespace PROPOSTA
             }
             return Comerciais;
         }
-        private List<VeiculacacaoModel> AddVeiculacoes(Int32 pIdContrato)
+        public List<VeiculacacaoModel> AddVeiculacoes(Int32 pIdContrato,String pOperacao)
         {
             clsConexao cnn = new clsConexao(this.Credential);
             cnn.Open();
@@ -849,11 +849,21 @@ namespace PROPOSTA
             List<VeiculacacaoModel> Veiculacoes = new List<VeiculacacaoModel>();
             try
             {
+                Boolean bolPermiteEditar = false;
+                Boolean SomenteDemanda = false;
+                if (pOperacao.ToUpper() == "IMPORTARMAPA")
+                {
+                    bolPermiteEditar = true;
+                    SomenteDemanda = true;
+                }
+
                 SqlCommand cmd = cnn.Procedure(cnn.Connection, "[Pr_Proposta_MapaReserva_Get_Midia_Contrato]");
                 Adp.SelectCommand = cmd;
                 Adp.SelectCommand.Parameters.AddWithValue("@Par_Login", this.CurrentUser);
                 Adp.SelectCommand.Parameters.AddWithValue("@Par_Id_Contrato", pIdContrato);
+                Adp.SelectCommand.Parameters.AddWithValue("@Par_Indica_Somente_Demanda", SomenteDemanda);
                 Adp.Fill(dtb);
+                
                 foreach (DataRow drw in dtb.Rows)
                 {
                     Sequenciador_Veiculacao++;
@@ -864,8 +874,9 @@ namespace PROPOSTA
                         Cod_Comercial = drw["Cod_Comercial"].ToString(),
                         Qtd_Total = drw["Qtd_Total"].ToString().ConvertToInt32(),
                         Id_Veiculacao = Sequenciador_Veiculacao,
-                        Insercoes = AddInsercoes(pIdContrato, drw),
-                        Permite_Editar = false,
+                        Insercoes = AddInsercoes(pIdContrato, drw,SomenteDemanda),
+                        Permite_Editar = bolPermiteEditar,
+
                         
                     });
                 }
@@ -880,7 +891,7 @@ namespace PROPOSTA
             }
             return Veiculacoes;
         }
-        private List<InsercoesModel> AddInsercoes(Int32 pIdContrato, DataRow pRow)
+        private List<InsercoesModel> AddInsercoes(Int32 pIdContrato, DataRow pRow,Boolean Indica_Somenta_Demanda)
         {
             clsConexao cnn = new clsConexao(this.Credential);
             cnn.Open();
@@ -897,6 +908,7 @@ namespace PROPOSTA
                 Adp.SelectCommand.Parameters.AddWithValue("@Par_Cod_Programa", pRow["Cod_Programa"].ToString());
                 Adp.SelectCommand.Parameters.AddWithValue("@Par_Cod_Caracteristica", pRow["Cod_Caracteristica"].ToString());
                 Adp.SelectCommand.Parameters.AddWithValue("@Par_Cod_Comercial", pRow["Cod_Comercial"].ToString());
+                Adp.SelectCommand.Parameters.AddWithValue("@Par_Indica_Somente_Demanda", Indica_Somenta_Demanda);
 
                 Adp.Fill(dtb);
                 foreach (DataRow drw in dtb.Rows)
@@ -1184,7 +1196,7 @@ namespace PROPOSTA
             }
             return dtb;
         }
-        public Int32 GetIdContrato(Int32 pNumeroMr)
+        public Int32 GetIdContrato(MapaReservaFiltroModel Param)
         {
             clsConexao cnn = new clsConexao(this.Credential);
             cnn.Open();
@@ -1196,7 +1208,8 @@ namespace PROPOSTA
             {
                 SqlCommand cmd = cnn.Procedure(cnn.Connection, "Pr_Get_Id_Contrato");
                 Adp.SelectCommand = cmd;
-                clsLib.NewParameter(Adp, "@Par_Numero_Mr", pNumeroMr);
+                clsLib.NewParameter(Adp, "@Par_Numero_Mr", Param.Numero_Mr);
+                clsLib.NewParameter(Adp, "@Par_Sequencia_Mr", Param.Sequencia_Mr);
                 Adp.Fill(dtb);
                 if (dtb.Rows.Count>0)
                 {

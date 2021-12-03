@@ -1,6 +1,5 @@
 ﻿angular.module('App').controller('NumeracaoFitasController', ['$scope', '$rootScope', '$location', 'httpService', '$location', function ($scope, $rootScope, $location, httpService, $location) {
 
-
     //====================Inicializa scopes
 
     $scope.CurrentShow = "Filtro";
@@ -14,17 +13,17 @@
     { 'title': 'N.Fita', 'visible': true, 'searchable': true, 'config': true, 'sortable': true },
     { 'title': 'Veículo', 'visible': true, 'searchable': true, 'config': true, 'sortable': true },
     { 'title': 'Status', 'visible': true, 'searchable': true, 'config': true, 'sortable': true },
-    { 'title': 'Agencia', 'visible': true, 'searchable': true, 'config': true, 'sortable': true },
-    { 'title': 'Cliente', 'visible': true, 'searchable': true, 'config': true, 'sortable': true },
     { 'title': 'Inicio.Prog', 'visible': true, 'searchable': true, 'config': true, 'sortable': true },
     { 'title': 'Térm.Prog', 'visible': true, 'searchable': true, 'config': true, 'sortable': true },
+    { 'title': 'Agencia', 'visible': true, 'searchable': true, 'config': true, 'sortable': true },
+    { 'title': 'Cliente', 'visible': true, 'searchable': true, 'config': true, 'sortable': true },
     { 'title': 'Apresentador', 'visible': true, 'searchable': true, 'config': true, 'sortable': true },
     { 'title': 'Localização', 'visible': true, 'searchable': true, 'config': true, 'sortable': true },
     ];
     //====================Inicializa o Filtro
     $scope.Filtro = {};
     $scope.NewFiltro = function () {
-        localStorage.removeItem('NumeracaoFitas_filter');
+        //localStorage.removeItem('NumeracaoFitas_filter');
         return {
             'Cod_Veiculo': '',
             'Cod_Programa': '',
@@ -39,13 +38,8 @@
         }
     }
     //===========================Se ja tiver filtro anterior gravado
-    var _Filter = JSON.parse(localStorage.getItem('NumeracaoFitas_filter'));
-    if (_Filter) {
-        $scope.Filtro = _Filter;
-    }
-    else {
-        $scope.Filtro = $scope.NewFiltro();
-    };
+    $scope.Filtro = $scope.NewFiltro();
+    
     //====================Quando terminar carga do grid, torna view do grid visible
     $scope.RepeatFinished = function () {
         $rootScope.routeloading = false;
@@ -54,12 +48,20 @@
     };
     //====================Carrega o Grid
     $scope.CarregarFitas = function (pFiltro) {
-        
+    
         if (!pFiltro.Cod_Veiculo) {
             ShowAlert("Codigo veículo é um filtro obrigatório");
             return;
         }
-        localStorage.setItem('NumeracaoFitas_filter', JSON.stringify($scope.Filtro));
+        if (pFiltro.Indica_Pendentes_Numeracao && (!pFiltro.Data_Inicio || !pFiltro.Data_Final)) {
+            ShowAlert("Quando mostrar pendentes estiver marcado, data início  e término da validade são obrigatórios ");
+            return
+        };
+        if (pFiltro.Indica_Numeradas && !pFiltro.Numero_Fita_Inicio && (!pFiltro.Data_Inicio || !pFiltro.Data_Final)) {
+            ShowAlert("Quando mostrar numeradas estiver marcado, numero da fita ou data início  e término da validade são obrigatórios ");
+            return
+        };
+
         $scope.CurrentShow = '';
         $('#dataTable').dataTable().fnDestroy();
         $scope.Fitas = "";
@@ -90,6 +92,29 @@
             pNumeroFita.Numero_Fita = '000000' + pNumeroFita.Numero_Fita;
             pNumeroFita.Numero_Fita = pNumeroFita.Numero_Fita.slice(pNumeroFita.Numero_Fita.length - 6);
             pNumeroFita.Numero_Fita = 'CO' + pNumeroFita.Numero_Fita;
+        };
+    };
+    
+    //====================Formata o Numero da Fita Inicio
+    $scope.FormataFitaInicio = function (pNumeroFita) {
+        
+        if (pNumeroFita) {
+            pNumeroFita= pNumeroFita.replace(/[^0-9]/g, '')
+            pNumeroFita= '000000' + pNumeroFita;
+            pNumeroFita = pNumeroFita.slice(pNumeroFita.length - 6);
+            pNumeroFita = 'CO' + pNumeroFita;
+            $scope.Filtro.Numero_Fita_Inicio = pNumeroFita;
+        };
+    };
+    //====================Formata o Numero da Fita Inicio
+    $scope.FormataFitaFim= function (pNumeroFita) {
+
+        if (pNumeroFita) {
+            pNumeroFita = pNumeroFita.replace(/[^0-9]/g, '')
+            pNumeroFita = '000000' + pNumeroFita;
+            pNumeroFita = pNumeroFita.slice(pNumeroFita.length - 6);
+            pNumeroFita = 'CO' + pNumeroFita;
+            $scope.Filtro.Numero_Fita_Fim = pNumeroFita;
         };
     };
     //=====================BuscarNumero Numero de fita vago
@@ -228,17 +253,17 @@
     $scope.$watch('$viewContentLoaded', function () {
         $rootScope.routeloading = false;
         $scope.ConfiguraGrid();
-        if (_Filter) {
-            var _Carregar = false
-            angular.forEach(_Filter, function (value, key) {
-                if (value) {
-                    _Carregar = true;
-                }
-            });
-            if (_Carregar) {
-                $scope.CarregarFitas(_Filter);
-            }
-        }
+        //if (_Filter) {
+        //    var _Carregar = false
+        //    angular.forEach(_Filter, function (value, key) {
+        //        if (value) {
+        //            _Carregar = true;
+        //        }
+        //    });
+        //    if (_Carregar) {
+        //        $scope.CarregarFitas(_Filter);
+        //    }
+        //}
     });
 
 }]);

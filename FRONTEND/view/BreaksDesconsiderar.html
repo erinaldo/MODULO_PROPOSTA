@@ -75,7 +75,6 @@
                                    class="form-control"
                                    ng-model-options="{updateOn: 'blur'}"
                                    style="text-transform:uppercase"
-                                   ng-change="ProgramaChange(Filtro)"
                                    ng-required="true"
                                    maxlength="4">
                         </div>
@@ -98,45 +97,45 @@
         <!--=========================Table-->
         <div class="block" ng-show="ShowGrid">
             <div class="row">
-                <strong class="margin-left-20">Veículo:</strong>{{Breaks.Cod_Veiculo}}
-                <strong class="margin-left-20">Data:</strong>{{Breaks.Data_Exibicao | date:'dd/MM/yyyy'}}
-                <strong class="margin-left-20">Programa:</strong>{{Breaks.Cod_Programa}}-{{Filtro.Nome_Programa}}
+                <strong class="margin-left-20">Veículo:</strong>{{Breaks[0].Cod_Veiculo}}
+                <strong class="margin-left-20">Data:</strong>{{Breaks[0].Data_Exibicao | date:'dd/MM/yyyy'}}
+                <strong class="margin-left-20">Programa:</strong>{{Breaks[0].Cod_Programa}}
              </div>
 
             <div class="row">
-                <div class="col-md-12">
+                <div class="col-md-6">
                     <div class="table-responsive">
                         <table class="table table-bordered table-striped">
                             <thead>
                                 <tr>
                                     <th></th>
                                     <th style="text-align:center">Break</th>
-                                    <th style="text-align:center">Seq</th>
-                                    <th style="text-align:center">Horario</th>
+                                    <!--<th style="text-align:center">Seq</th>-->
+                                    <!--<th style="text-align:center">Horario</th>-->
                                     <th>Título</th>
-                                    <th style="text-align:center">Intervalo</th>
+                                    <!--<th style="text-align:center">Intervalo</th>-->
                                     <th style="text-align:center">Duração</th>
-                                    <th style="text-align:center">Observação</th>
+                                    <!--<th style="text-align:center">Observação</th>-->
                                 </tr>
                             </thead>
                             <tbody>
-                                <tr ng-repeat="b in Breaks.Composicao | orderBy:['Id_Composicao']">
+                                <tr ng-repeat="b in Breaks | orderBy:['Breaks']">
                                     <td style="width:50px">
                                         <div class="app-checkbox">
                                             <label><input type="checkbox" ng-model="b.Indica_Desconsiderado" name="app-checkbox-1" style="position:relative"><span></span></label>
                                         </div>
                                     </td>
                                     <td style="text-align:center">{{b.Breaks}}</td>
-                                    <td style="text-align:center">{{b.Sequencia}}</td>
-                                    <td style="text-align:center">{{b.Hora_Inicio | hhmm}}</td>
+                                    <!--<td style="text-align:center">{{b.Sequencia}}</td>-->
+                                    <!--<td style="text-align:center">{{b.Hora_Inicio | hhmm}}</td>-->
                                     <td>{{b.Titulo_Break}}</td>
-                                    <td style="text-align:center">
+                                    <!--<td style="text-align:center">
                                         <label ng-class="{'label TipoLocal':b.Tipo_Break.Codigo==0,'label TipoNet':b.Tipo_Break.Codigo==1,'label TipoArtistico':b.Tipo_Break.Codigo==2,'label TipoPE':b.Tipo_Break.Codigo==3}">
-                                            {{b.Tipo_Break.Descricao}}
+                                            {{b.Nome_Tipo_Break}}
                                         </label>
-                                    </td>
+                                    </td>-->
                                     <td style="text-align:center">{{b.Duracao}}</td>
-                                    <td>{{b.Observacao}}</td>
+                                    <!--<td>{{b.Observacao}}</td>-->
                                 </tr>
                             </tbody>
                         </table>
@@ -161,17 +160,17 @@
                         <!--==============================================Data Inicio Propagacao-->
                         <div class="col-md-5">
                             <div class="dictionary" dictionary="Data" caption="Propagar no Período: De ">
-                                <input ng-model="Breaks.Data_Inicio_Propagacao"
+                                <input ng-model="Breaks[0].Data_Inicio_Propagacao"
                                        ui-date ng-model-options="{updateOn: 'blur'}">
-                                <div class="dictionary-ui-calendar" ui-calendar typdate="Breaks.Data_Inicio_Propagacao"></div>
+                                <div class="dictionary-ui-calendar" ui-calendar typdate="Breaks[0].Data_Inicio_Propagacao"></div>
                             </div>
                         </div>
                         <!--==============================================Data Fim Propagacao-->
                         <div class="col-md-5">
                             <div class="dictionary" dictionary="Data" caption="Até">
-                                <input ng-model="Breaks.Data_Fim_Propagacao"
+                                <input ng-model="Breaks[0].Data_Fim_Propagacao"
                                        ui-date ng-model-options="{updateOn: 'blur'}">
-                                <div class="dictionary-ui-calendar" ui-calendar typdate="Breaks.Data_Fim_Propagacao"></div>
+                                <div class="dictionary-ui-calendar" ui-calendar typdate="Breaks[0].Data_Fim_Propagacao"></div>
                             </div>
                         </div>
                         <div class="col-md-2" style="margin-top:35px">
@@ -184,25 +183,25 @@
                             <label for="txtDiaSemana" class="field-x">Dias da Semana</label>
                             <div class="form-control" name="txtDiaSemana">
                                 <div class="app-checkbox" style="width:70px;margin-top:5px;">
-                                    <label><input type="checkbox" ng-model="Breaks.Grade_Domingo" name="app-checkbox-1">DOM<span></span></label>
+                                    <label><input type="checkbox" ng-model="Breaks[0].Grade_Domingo" name="app-checkbox-1">DOM<span></span></label>
                                 </div>
                                 <div class="app-checkbox" style="width:70px;margin-top:5px;">
-                                    <label><input type="checkbox" ng-model="Breaks.Grade_Segunda" name="app-checkbox-1">SEG<span></span></label>
+                                    <label><input type="checkbox" ng-model="Breaks[0].Grade_Segunda" name="app-checkbox-1">SEG<span></span></label>
                                 </div>
                                 <div class="app-checkbox" style="width:70px;margin-top:5px;">
-                                    <label><input type="checkbox" ng-model="Breaks.Grade_Terca" name="app-checkbox-1">TER<span></span></label>
+                                    <label><input type="checkbox" ng-model="Breaks[0].Grade_Terca" name="app-checkbox-1">TER<span></span></label>
                                 </div>
                                 <div class="app-checkbox" style="width:70px;margin-top:5px;">
-                                    <label><input type="checkbox" ng-model="Breaks.Grade_Quarta" name="app-checkbox-1">QUA<span></span></label>
+                                    <label><input type="checkbox" ng-model="Breaks[0].Grade_Quarta" name="app-checkbox-1">QUA<span></span></label>
                                 </div>
                                 <div class="app-checkbox" style="width:70px;margin-top:5px;">
-                                    <label><input type="checkbox" ng-model="Breaks.Grade_Quinta" name="app-checkbox-1">QUI<span></span></label>
+                                    <label><input type="checkbox" ng-model="Breaks[0].Grade_Quinta" name="app-checkbox-1">QUI<span></span></label>
                                 </div>
                                 <div class="app-checkbox" style="width:70px;margin-top:5px;">
-                                    <label><input type="checkbox" ng-model="Breaks.Grade_Sexta" name="app-checkbox-1">SEX<span></span></label>
+                                    <label><input type="checkbox" ng-model="Breaks[0].Grade_Sexta" name="app-checkbox-1">SEX<span></span></label>
                                 </div>
                                 <div class="app-checkbox" style="width:70px;margin-top:5px;">
-                                    <label><input type="checkbox" ng-model="Breaks.Grade_Sabado" name="app-checkbox-1">SAB<span></span></label>
+                                    <label><input type="checkbox" ng-model="Breaks[0].Grade_Sabado" name="app-checkbox-1">SAB<span></span></label>
                                 </div>
                             </div>
                         </div>
@@ -210,7 +209,7 @@
                     <!--==============================================Botao confirma gravacao-->
                     <div class="row margin-top-20">
                         <div class="col-md-12">
-                            <button  type="button" class="btn btn-success" ng-click="GravarBreak(Breaks)" ng-disabled="!Breaks.Data_Inicio_Propagacao || !Breaks.Data_Fim_Propagacao">Confirmar Gravação</button>
+                            <button  type="button" class="btn btn-success" ng-click="GravarBreak(Breaks)" ng-disabled="!Breaks[0].Data_Inicio_Propagacao || !Breaks[0].Data_Fim_Propagacao">Confirmar Gravação</button>
                             <button  type="button" class="btn btn-warning" ng-click="ShowGrid=true;ShowGravacao=false">Cancela</button>
                         </div>
                     </div>

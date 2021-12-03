@@ -346,7 +346,11 @@
                                 <!-----------------------------Titulo do Comercial-->
                                 <td Id="Comercial_Source_{{comercial.Id_Item}}" ng-hide="comercial.Indica_Titulo_Programa">
                                         {{comercial.Titulo_Comercial}}
+
                                         <span ng-show="comercial.Nome_Produto">/{{comercial.Nome_Produto}}</span>
+                                    <div ng-show="comercial.Obs_Roteiro">
+                                        <label style="background-color:lightyellow">{{comercial.Obs_Roteiro}}</label>
+                                    </div>
                                 </td>
                                 <!-----------------------------Duracao-->
                                 <td Id="Comercial_Source_{{comercial.Id_Item}}"
@@ -400,7 +404,7 @@
         <div class="fixed-buttons-bottom">
             <div class="col-md-12">
                 <button class="btn btn-success" ng-show="Roteiro.length>0" ng-click="SalvarRoteiro(Roteiro)">Salvar Roteiro</button>
-                <button class="btn btn-warning" ng-click="CancelarRoteiro()">Cancela</button>
+                <button class="btn btn-warning" ng-click="PreCancelarRoteiro()">Cancela</button>
                 <button class="btn btn-danger"  ng-show="Roteiro.length>0" ng-click="ExcluirRoteiro(Filtro)">Excluir Roteiro</button>
                 <button class="btn btn-default" ng-show="Roteiro.length>0" ng-click="ConsistirOrdenacao(Filtro)"><span class="fa fa-check span-btn"></span></button>
 
@@ -462,4 +466,5 @@
         var id_target = ev.target.id.replace(/[^0-9,]+/g, "");
         angular.element(document.getElementById('frmRoteiro')).scope().ConsisteOrdenacao(parseInt(id_source), parseInt(id_target));
     }
+
 </script>

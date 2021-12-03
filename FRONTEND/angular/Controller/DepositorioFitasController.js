@@ -73,6 +73,41 @@
         }, 1000)
     };
 
+
+    //====================Formata o Numero da Fita Inicio
+    $scope.FormataFitaInicio = function (pNumeroFita) {
+        var _letra = '';
+        if ($scope.Filtro.Situacao==1) {
+            _letra = 'CO'
+        }
+        else {
+            _letra = 'AR'
+        }
+        if (pNumeroFita) {
+            pNumeroFita = pNumeroFita.replace(/[^0-9]/g, '')
+            pNumeroFita = '000000' + pNumeroFita;
+            pNumeroFita = pNumeroFita.slice(pNumeroFita.length - 6);
+            pNumeroFita = _letra + pNumeroFita;
+            $scope.Filtro.Numero_Fita_Inicio = pNumeroFita;
+        };
+    };
+    //====================Formata o Numero da Fita Inicio
+    $scope.FormataFitaFim = function (pNumeroFita) {
+        var _letra = '';
+        if ($scope.Filtro.Situacao == 2) {
+            _letra = 'AR'
+        }
+        else {
+            _letra = 'CO'
+        }
+        if (pNumeroFita) {
+            pNumeroFita = pNumeroFita.replace(/[^0-9]/g, '')
+            pNumeroFita = '000000' + pNumeroFita;
+            pNumeroFita = pNumeroFita.slice(pNumeroFita.length - 6);
+            pNumeroFita = _letra + pNumeroFita;
+            $scope.Filtro.Numero_Fita_Fim = pNumeroFita;
+        };
+    };
     //====================Carrega o Grid
 
     $scope.CarregarDeposFitasAvulsoArtistico = function (pFiltro) {
