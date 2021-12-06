@@ -27,6 +27,7 @@
     }
     $scope.RoteiroConsistencia = $scope.newRoteiroConsistencia();
     $scope.Unsaved = false;
+    $scope.ShowSavedOk = false;
     //===========================Carregar Guia de Programas
     $scope.CarregarGuiaProgramas = function (pFiltro) {
         if (!pFiltro.Cod_Veiculo || !pFiltro.Data_Exibicao) {
@@ -101,13 +102,13 @@
     };
     //===========================CancelaRoteiro
     $scope.CancelarRoteiro = function () {
-        console.log("fechando");
         $scope.Roteiro = "";
         $scope.Comerciais = "";
         $scope.Filtro = $scope.NewFiltro();
         $scope.ShowFiltro = true;
         $scope.ShowGuiaProgramas = false;
         $scope.Unsaved = false;
+        $scope.ShowSavedOk = false;
     };
 
     //===========================Deseja Cancelar Ordenacao 
@@ -122,7 +123,6 @@
                 cancelButtonText: "Não",
                 closeOnConfirm: true
             }, function () {
-                console.log("vai fechar1");
                 $scope.CancelarRoteiro();
                 $scope.$digest();
             });
@@ -139,16 +139,27 @@
     };
     //=================Renumera Itens do Roteiro e Comercial
     $scope.RenumeraItens = function (pRoteiro) {
+        var _xbreak = 0;
+        var _xsequenciafaixa= 0
         var _sequenciaIntervalo = 0;
+
         for (var i = 0; i < pRoteiro.length; i++) {
             if (pRoteiro[i].Indica_Titulo_Break) {
                 _sequenciaIntervalo = 0;
+                _xbreak = pRoteiro[i].Break;
             }
+            if (pRoteiro[i].Indica_Titulo_Intervalo) {
+                _xsequenciafaixa = pRoteiro[i].Sequencia_Faixa;
+            }
+            
             if (pRoteiro[i].Indica_Comercial) {
                 _sequenciaIntervalo++;
             }
             pRoteiro[i].Id_Item = i;
             pRoteiro[i].Sequencia_Intervalo = _sequenciaIntervalo;
+
+            pRoteiro[i].Break = _xbreak;
+            pRoteiro[i].Sequencia_Faixa = _xsequenciafaixa;
         }
         for (var x = 0; x < $scope.Comerciais.length; x++) {
             $scope.Comerciais[x].Id_Item = x;
@@ -312,6 +323,8 @@
         $scope.RenumeraItens($scope.Roteiro)
         //----------------Atualiza scope
         $scope.Unsaved = true;
+        $scope.ShowSavedOk = false;
+        $scope.ShowSavedOk = false;
         $scope.$digest();
     }
     //===========================Desordenar Comercial do Roteiro / Devolve para table de comerciais
@@ -329,6 +342,7 @@
         $scope.Roteiro.splice(pItem.Id_Item, 1);
         //----------------Renumera Itens
         $scope.Unsaved = true;
+        $scope.ShowSavedOk = false;
         $scope.RenumeraItens($scope.Roteiro)
     };
     //===========================Cortar Comercial do Roteiro
@@ -344,8 +358,12 @@
         }, function () {
             httpService.Post("Roteiro/BaixarVeiculacao", pComercial).then(function (response) {
                 if (response.data[0].Status == 1) {
-                    $scope.Comerciais.splice(pComercial.Id_Item, 1)
-                }
+                    for (var i = 0; i < $scope.Comerciais.length; i++) {
+                        if ($scope.Comerciais[i].Id_Item == pComercial.Id_Item) {
+                            $scope.Comerciais.splice(i, 1);
+                        };
+                    };
+                };
                 ShowAlert(response.data[0].Mensagem);
             })
         });
@@ -404,7 +422,8 @@
                     _Id_Break = pRoteiro[i].Id_Break;
                     _Id_Intervalo = pRoteiro[i].Id_Intervalo;
                     _Tipo_Break = pRoteiro[i].Tipo_Break;
-                    Break = pRoteiro[i].Break;
+                    _Break = pRoteiro[i].Break;
+                    
                     _Sequencia_Faixa = pRoteiro[i].Sequencia_Faixa;
                     _NewIndex = i + 1;
                     break;
@@ -433,7 +452,7 @@
             return;
         }
 
-        //-------------------Se Mudou de brak, testa choque de concorrencia novamente
+        //-------------------Se Mudou de break, testa choque de concorrencia novamente
         _Mensagem = "";
         if (pRoteiro[pIndex].Id_Break != _Id_Break) {
             for (var i = 0; i < pRoteiro.length; i++) {
@@ -473,6 +492,7 @@
                     pRoteiro.splice(pIndex + 1, 1);
                 };
                 $scope.Unsaved = true;
+                $scope.ShowSavedOk = false;
                 $scope.RenumeraItens(pRoteiro);
                 $scope.$digest();
             });
@@ -494,6 +514,7 @@
                 pRoteiro.splice(pIndex + 1, 1);
             }
             $scope.Unsaved = true;
+            $scope.ShowSavedOk = false;
             $scope.RenumeraItens(pRoteiro);
         };
     };
@@ -524,7 +545,13 @@
         httpService.Post("Roteiro/Salvar", pRoteiro).then(function (response) {
             if (response) {
                 $scope.Unsaved = false;
-                $scope.Critica = response.data;
+                $scope.ShowSavedOk = false;
+                if (response.data.length == 0) {
+                    $scope.ShowSavedOk = true;
+                }
+                else {
+                    $scope.Critica = response.data;
+                };
             }
         });
     };

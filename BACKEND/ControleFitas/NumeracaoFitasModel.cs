@@ -17,17 +17,21 @@ namespace PROPOSTA
 
         public class NumeracaoFitasModel
         {
+            public Int32 Id_Numeracao{ get; set; }
+            public String Origem { get; set; }
             public String Cod_Tipo_Comercial { get; set; }
             public String Titulo_Comercial { get; set; }
             public Int32 Cod_Red_Produto { get; set; }
-            public String Descricao_Produto { get; set; }
+            public String Nome_Produto { get; set; }
             public Int32 Duracao { get; set; }
             public String Cod_Cliente { get; set; }
             public String Cod_Agencia { get; set; }
+            public String Nome_Cliente { get; set; }
+            public String Nome_Agencia { get; set; }
             public Boolean Indica_Status { get; set; }
             public String Cod_Empresa { get; set; }
-            public Int32 Numero_Mr { get; set; }
-            public Int32 Sequencia_Mr { get; set; }
+            public Int32 Numero_MR  { get; set; }
+            public Int32 Sequencia_MR{ get; set; }
             public String Numero_Fita { get; set; }
             public String Data_Inicio { get; set; }
             public String Data_Final { get; set; }
@@ -38,7 +42,7 @@ namespace PROPOSTA
             public String Cod_Veiculo { get; set; }
             public String Tipo_Midia { get; set; }
             public String Cod_Tipo_Midia { get; set; }
-
+            public Boolean Selected { get; set; }
         }
 
 

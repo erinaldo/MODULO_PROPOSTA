@@ -204,29 +204,29 @@ namespace PROPOSTA
                     pNumeracaoFitas[i].Mensagem = "";
                     pNumeracaoFitas[i].Status = false;
                     pNumeracaoFitas[i].Indica_Reutilizar = false;
-                        //---------------------Processa a Linha
-                        SqlDataAdapter Adp = new SqlDataAdapter();
-                        DataTable dtb = new DataTable("dtb");
-                        SqlCommand cmd = cnn.Procedure(cnn.Connection, "[Pr_Proposta_NumeracaoFitas_Salvar]");
-                        Adp.SelectCommand = cmd;
-                        clsLib.NewParameter(Adp, "@Par_Login", this.CurrentUser);
-                        clsLib.NewParameter(Adp, "@Par_Cod_Empresa", pNumeracaoFitas[i].Cod_Empresa);
-                        clsLib.NewParameter(Adp, "@Par_Numero_Mr", pNumeracaoFitas[i].Numero_Mr.ToString().ConvertToInt32());
-                        clsLib.NewParameter(Adp, "@Par_Sequencia_Mr", pNumeracaoFitas[i].Sequencia_Mr.ToString().ConvertToInt32());
-                        clsLib.NewParameter(Adp, "@Par_Cod_Comercial", pNumeracaoFitas[i].Cod_Comercial);
-                        clsLib.NewParameter(Adp, "@Par_Cod_Veiculo", pNumeracaoFitas[i].Cod_Veiculo);
-                        clsLib.NewParameter(Adp, "@Par_Duracao", pNumeracaoFitas[i].Duracao.ToString().ConvertToInt32());
-                        clsLib.NewParameter(Adp, "@Par_Numero_Fita", pNumeracaoFitas[i].Numero_Fita);
-                        clsLib.NewParameter(Adp, "@Par_Localizacao", pNumeracaoFitas[i].Localizacao);
-                        clsLib.NewParameter(Adp, "@Par_Cod_Apresentador", pNumeracaoFitas[i].Cod_Apresentador);
-                        clsLib.NewParameter(Adp, "@Par_Reutilizar", pNumeracaoFitas[i].Reutilizar);
-                        Adp.Fill(dtb);
-                        pNumeracaoFitas[i].Status = dtb.Rows[0]["Status"].ToString().ConvertToBoolean();
-                        pNumeracaoFitas[i].Mensagem = dtb.Rows[0]["Mensagem"].ToString();
-                        pNumeracaoFitas[i].Indica_Reutilizar = dtb.Rows[0]["Indica_Reutilizar"].ToString().ConvertToBoolean();
-                        cmd.Dispose();
-                        Adp.Dispose();
-                        dtb.Dispose();
+                    //---------------------Processa a Linha
+                    SqlDataAdapter Adp = new SqlDataAdapter();
+                    DataTable dtb = new DataTable("dtb");
+                    SqlCommand cmd = cnn.Procedure(cnn.Connection, "[Pr_Proposta_NumeracaoFitas_Salvar]");
+                    Adp.SelectCommand = cmd;
+                    clsLib.NewParameter(Adp, "@Par_Login", this.CurrentUser);
+                    clsLib.NewParameter(Adp, "@Par_Cod_Empresa", pNumeracaoFitas[i].Cod_Empresa);
+                    clsLib.NewParameter(Adp, "@Par_Numero_Mr", pNumeracaoFitas[i].Numero_Mr.ToString().ConvertToInt32());
+                    clsLib.NewParameter(Adp, "@Par_Sequencia_Mr", pNumeracaoFitas[i].Sequencia_Mr.ToString().ConvertToInt32());
+                    clsLib.NewParameter(Adp, "@Par_Cod_Comercial", pNumeracaoFitas[i].Cod_Comercial);
+                    clsLib.NewParameter(Adp, "@Par_Cod_Veiculo", pNumeracaoFitas[i].Cod_Veiculo);
+                    clsLib.NewParameter(Adp, "@Par_Duracao", pNumeracaoFitas[i].Duracao.ToString().ConvertToInt32());
+                    clsLib.NewParameter(Adp, "@Par_Numero_Fita", pNumeracaoFitas[i].Numero_Fita);
+                    clsLib.NewParameter(Adp, "@Par_Localizacao", pNumeracaoFitas[i].Localizacao);
+                    clsLib.NewParameter(Adp, "@Par_Cod_Apresentador", pNumeracaoFitas[i].Cod_Apresentador);
+                    clsLib.NewParameter(Adp, "@Par_Reutilizar", pNumeracaoFitas[i].Reutilizar);
+                    Adp.Fill(dtb);
+                    pNumeracaoFitas[i].Status = dtb.Rows[0]["Status"].ToString().ConvertToBoolean();
+                    pNumeracaoFitas[i].Mensagem = dtb.Rows[0]["Mensagem"].ToString();
+                    pNumeracaoFitas[i].Indica_Reutilizar = dtb.Rows[0]["Indica_Reutilizar"].ToString().ConvertToBoolean();
+                    cmd.Dispose();
+                    Adp.Dispose();
+                    dtb.Dispose();
                 }
             }
             catch (Exception)
@@ -241,23 +241,32 @@ namespace PROPOSTA
         }
 
 
-        public void ExcluirNumeracaoFitas(NumeracaoFitasModel Param)
+        public void ExcluirNumeracaoFitas(List<NumeracaoFitasModel> Param)
         {
             clsConexao cnn = new clsConexao(this.Credential);
             cnn.Open();
             SimLib clsLib = new SimLib();
             try
             {
-                SqlCommand cmd = cnn.Procedure(cnn.Connection, "Pr_Proposta_NumeracaoFitas_Excluir");
-                cmd.Parameters.AddWithValue("@Par_Login", this.CurrentUser);
-                cmd.Parameters.AddWithValue("@Par_Cod_Empresa", Param.Cod_Empresa);
-                cmd.Parameters.AddWithValue("@Par_Cod_Numero_Mr", Param.Numero_Mr);
-                cmd.Parameters.AddWithValue("@Par_Cod_Sequencia_Mr", Param.Sequencia_Mr);
-                cmd.Parameters.AddWithValue("@Par_Cod_Comercial", Param.Cod_Comercial);
-                cmd.Parameters.AddWithValue("@Par_Cod_Veiculo", Param.Cod_Veiculo);
-                cmd.Parameters.AddWithValue("@Par_Numero_Fita", Param.Numero_Fita);
-                cmd.ExecuteNonQuery();
-                
+                for (int i = 0; i < Param.Count; i++)
+                {
+                    if (Param[i].Selected)
+                    {
+                        SqlCommand cmd = cnn.Procedure(cnn.Connection, "Pr_Proposta_NumeracaoFitas_Excluir");
+                        cmd.Parameters.AddWithValue("@Par_Login", this.CurrentUser);
+                        cmd.Parameters.AddWithValue("@Par_Cod_Empresa", Param[i].Cod_Empresa);
+                        cmd.Parameters.AddWithValue("@Par_Cod_Numero_Mr", Param[i].Numero_MR);
+                        cmd.Parameters.AddWithValue("@Par_Cod_Sequencia_Mr", Param[i].Sequencia_MR);
+                        cmd.Parameters.AddWithValue("@Par_Cod_Comercial", Param[i].Cod_Comercial);
+                        cmd.Parameters.AddWithValue("@Par_Cod_Veiculo", Param[i].Cod_Veiculo);
+                        cmd.Parameters.AddWithValue("@Par_Numero_Fita", Param[i].Numero_Fita);
+                        cmd.ExecuteNonQuery();
+                        cmd.Dispose();
+                        Param[i].Numero_Fita = "";
+                        Param[i].Nome_Apresentador = "";
+                        Param[i].Selected = false;
+                    }
+                }
             }
             catch (Exception)
             {

@@ -44,7 +44,7 @@
                     </div>
                 </div>
             </div>
-            <div class="col-md-8">
+            <div class="col-md-8    ">
                 <div class="block">
                     <div class="row">
                         <!--=====================Periodo Inicio-->
@@ -127,7 +127,7 @@
                     </div>
                     <div class="row">
                         <!--===================Programa De-->
-                        <div class="col-md-4  " ng-controller="dictionaryController">
+                        <div class="col-md-2  " ng-controller="dictionaryController">
                             <div class="dictionary" dictionary="Programa" caption="Programa De">
                                 <input id="txtCodPrograma_De"
                                        ng-model="DePara.Cod_Programa_De"
@@ -137,7 +137,7 @@
                                        secondarybind="txtNomePrograma_De">
                             </div>
                         </div>
-                        <div class="col-md-8">
+                        <div class="col-md-6">
                             <div class="form-group">
                                 <label for="txtNomePrograma_De" class="field-x" style="visibility:hidden">..</label>
                                 <div class="input-group">
@@ -148,7 +148,7 @@
                     </div>
                     <div class="row">
                         <!--===================Programa Para-->
-                        <div class="col-md-4  " ng-controller="dictionaryController">
+                        <div class="col-md-2  " ng-controller="dictionaryController">
                             <div class="dictionary" dictionary="Programa" caption="Programa De">
                                 <input id="txtCodPrograma_Para"
                                        ng-model="DePara.Cod_Programa_Para"
@@ -158,12 +158,48 @@
                                        secondarybind="txtNomePrograma_Para">
                             </div>
                         </div>
-                        <div class="col-md-8">
+                        <div class="col-md-6">
                             <div class="form-group">
                                 <label for="txtNomePrograma_Para" class="field-x" style="visibility:hidden">..</label>
                                 <div class="input-group">
                                     <input type="text" disabled="disabled" id="txtNomePrograma_Para" class="form-control " ng-model="DePara.Nome_Programa_Para">
                                 </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="row">
+                        <!--===================Empresa-->
+                        <div class="col-md-2" ng-controller="dictionaryController">
+                            <div class="dictionary" dictionary="Empresa_Usuario">
+                                <input id="txtCodEmpresa"
+                                       ng-model="DePara.Cod_Empresa"
+                                       ng-model-options="{updateOn: 'blur'}"
+                                       ng-change="DicionaryValidate('txtCodEmpresa')"
+                                       primarybind="txtCodEmpresa"
+                                       style="text-transform:uppercase" />
+                            </div>
+                        </div>
+                        <!--===================Contrato.-->
+                        <div class="col-md-3">
+                            <div class="form-group">
+                                <label class="field-x">Contrato</label>
+                                <input id="txtContrato"
+                                       type="text"
+                                       name="txtContrato"
+                                       class="form-control numeric"
+                                       ng-model="DePara.Numero_Mr" maxlength="6" />
+                            </div>
+                        </div>
+                        <!--===================Sequência-->
+                        <div class="col-md-1">
+                            <div class="form-group">
+                                <label class="field-x">Seq.</label>
+                                <input id="txtSequencia"
+                                       type="text"
+                                       name="txtSequencia"
+                                       class="form-control numeric"
+                                       ng-model="DePara.Sequencia_Mr"
+                                       maxlength="3" />
                             </div>
                         </div>
                     </div>

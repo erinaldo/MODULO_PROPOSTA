@@ -21,7 +21,7 @@ namespace PROPOSTA
             {
                 SqlCommand cmd = cnn.Procedure(cnn.Connection, "sp_Pendente_Complemento");
                 Adp.SelectCommand = cmd;
-                //Adp.SelectCommand.Parameters.AddWithValue("@Par_Login", this.CurrentUser);
+                Adp.SelectCommand.Parameters.AddWithValue("@Par_Login", this.CurrentUser);
                 if (pFiltro.Numero_Negociacao == 0)
                 {
                     Adp.SelectCommand.Parameters.AddWithValue("@Par_Numero_Negociacao", DBNull.Value);

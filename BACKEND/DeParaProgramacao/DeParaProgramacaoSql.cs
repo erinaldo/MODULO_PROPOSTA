@@ -69,6 +69,9 @@ namespace PROPOSTA
                 cmd.Parameters.AddWithValue("@Par_Qui", Param.Qui);
                 cmd.Parameters.AddWithValue("@Par_Sex", Param.Sex);
                 cmd.Parameters.AddWithValue("@Par_Sab", Param.Sab);
+                cmd.Parameters.AddWithValue("@Par_Cod_Empresa", Param.Cod_Empresa);
+                cmd.Parameters.AddWithValue("@Par_Numero_Mr", Param.Numero_Mr);
+                cmd.Parameters.AddWithValue("@Par_Sequencia_Mr", Param.Sequencia_Mr);
                 cmd.Parameters.AddWithValue("@Par_Programa_De", Param.Cod_Programa_De);
                 cmd.Parameters.AddWithValue("@Par_Programa_Para", Param.Cod_Programa_Para);
                 cmd.Parameters.AddWithValue("@Par_Veiculos", xmlVeiculos);
@@ -107,6 +110,9 @@ namespace PROPOSTA
                 cmd.Parameters.AddWithValue("@Par_Data_Para", Param.Data_Para.ConvertToDatetime());
                 cmd.Parameters.AddWithValue("@Par_Programa_De", Param.Cod_Programa_De);
                 cmd.Parameters.AddWithValue("@Par_Programa_Para", Param.Cod_Programa_Para);
+                cmd.Parameters.AddWithValue("@Par_Cod_Empresa", Param.Cod_Empresa);
+                cmd.Parameters.AddWithValue("@Par_Numero_Mr", Param.Numero_Mr);
+                cmd.Parameters.AddWithValue("@Par_Sequencia_Mr", Param.Sequencia_Mr);
                 cmd.Parameters.AddWithValue("@Par_Veiculos", xmlVeiculos);
                 Adp.SelectCommand = cmd;
                 Adp.Fill(dtb);

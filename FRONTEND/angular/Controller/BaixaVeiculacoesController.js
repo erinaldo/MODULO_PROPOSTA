@@ -32,8 +32,8 @@
     { 'title': 'Data Exib.', 'visible': true, 'searchable': true, 'config': true, 'sortable': true },
     { 'title': 'Programa', 'visible': true, 'searchable': true, 'config': true, 'sortable': true },
     { 'title': 'Chave', 'visible': true, 'searchable': true, 'config': true, 'sortable': true },
+    { 'title': 'Horário', 'visible': true, 'searchable': false, 'config': true, 'sortable': false},
     { 'title': 'Qual.', 'visible': true, 'searchable': true, 'config': true, 'sortable': true },
-    { 'title': 'Horário', 'visible': true, 'searchable': true, 'config': true, 'sortable': true },
     { 'title': 'Docto.De', 'visible': true, 'searchable': true, 'config': true, 'sortable': true },
     { 'title': 'Docto.Para', 'visible': true, 'searchable': true, 'config': true, 'sortable': true },
     { 'title': 'Contrato', 'visible': true, 'searchable': true, 'config': true, 'sortable': true },
@@ -91,8 +91,8 @@
             ShowAlert("Veículo não pode ficar em branco.");
             return;
         }
-        if (pFiltro.Data_Exibicao == "") {
-            ShowAlert("Data de Exibição não pode ficar em branco.");
+        if (pFiltro.Data_Exibicao == "" && !pFiltro.Numero_Mr) {
+            ShowAlert("Data de Exibição não pode ficar em branco quando contrato não é informado");
             return;
         }
 
@@ -296,8 +296,15 @@
             }
         });
     }
-
-
+    //===========================Preenche a qualidade quando digitar o horario
+    $scope.PreencheQualidade = function (pBaixaVeiculacao) {
+        if (pBaixaVeiculacao.Horario_Exibicao) {
+            pBaixaVeiculacao.Cod_Qualidade = 'VEI'
+        }
+        else {
+            pBaixaVeiculacao.Cod_Qualidade = ''
+        };
+    };
     //===========================CancelaRoteiro
     $scope.CancelarBaixa = function () {
         $scope.BaixaVeiculacoesS = "";

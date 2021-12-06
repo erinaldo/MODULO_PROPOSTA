@@ -90,8 +90,6 @@ namespace PROPOSTA
                     //---------------------Limpa as critica da linha
                     pHoraExibicao.HorarioExibicao[i].Mensagem = "";
                     pHoraExibicao.HorarioExibicao[i].Status= true;
-
-
                     //---------------------Processa a Linha
                     SqlDataAdapter Adp = new SqlDataAdapter();
                     DataTable dtb = new DataTable("dtb");
@@ -121,53 +119,11 @@ namespace PROPOSTA
                     }
                     Adp.SelectCommand.Parameters.AddWithValue("@Par_Veiculos_Replicar", xmlVeiculo);
                     Adp.Fill(dtb);
-
-                    if (String.IsNullOrEmpty(dtb.Rows[0]["Horario_Inicio_Real"].ToString()))
-                    {
-                        if (String.IsNullOrEmpty(dtb.Rows[0]["HoraErrado"].ToString()))
-                        {
-                            pHoraExibicao.HorarioExibicao[i].Mensagem = "";
-                        }
-                        else {
-
-                            pHoraExibicao.HorarioExibicao[i].Mensagem = dtb.Rows[0]["Mensagem"].ToString();
-
-                        }
-                    }
-                    else
-                    {
-                        pHoraExibicao.HorarioExibicao[i].Mensagem = dtb.Rows[0]["Mensagem"].ToString();
-                    }
-
-
-                    if (String.IsNullOrEmpty(dtb.Rows[0]["Horario_Final_Real"].ToString()))
-                    {
-                        if (String.IsNullOrEmpty(dtb.Rows[0]["HoraErrado"].ToString()))
-                        {
-                            pHoraExibicao.HorarioExibicao[i].Mensagem = "";
-                        }
-                        else
-                        {
-
-                            pHoraExibicao.HorarioExibicao[i].Mensagem = dtb.Rows[0]["Mensagem"].ToString();
-
-                        }
-
-                        // pHoraExibicao.HorarioExibicao[i].Mensagem = "";
-                    }
-                    else
-                    {
-                        pHoraExibicao.HorarioExibicao[i].Mensagem = dtb.Rows[0]["Mensagem"].ToString();
-                    }
-
-                    //pHoraExibicao.HorarioExibicao[i].Mensagem = dtb.Rows[0]["Mensagem"].ToString();
                     pHoraExibicao.HorarioExibicao[i].Status = dtb.Rows[0]["Status"].ToString().ConvertToBoolean();
-
-
+                    pHoraExibicao.HorarioExibicao[i].Mensagem = dtb.Rows[0]["Mensagem"].ToString();
                     cmd.Dispose();
                     Adp.Dispose();
                     dtb.Dispose();
-
                 }
             }
             catch (Exception)
@@ -179,7 +135,6 @@ namespace PROPOSTA
                 cnn.Close();
             }
             return pHoraExibicao;
-
         }
 
 

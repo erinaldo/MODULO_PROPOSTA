@@ -820,6 +820,7 @@ namespace PROPOSTA
             {
                 SqlCommand cmd = cnn.Procedure(cnn.Connection, "Pr_Proposta_PreOrdenacao_Consistencias");   // Faz consistencias e chama a proc Sp_Ru_Pre_Ordenacao
                 Adp.SelectCommand = cmd;
+                cmd.CommandTimeout = 0;
                 Adp.SelectCommand.Parameters.AddWithValue("@Par_Login", this.CurrentUser);
                 Adp.SelectCommand.Parameters.AddWithValue("@Par_Cod_Veiculo", pFiltro.Veiculo);
                 Adp.SelectCommand.Parameters.AddWithValue("@Par_Data_Exibicao", pFiltro.Data.ConvertToDatetime());

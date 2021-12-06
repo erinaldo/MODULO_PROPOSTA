@@ -155,6 +155,7 @@
                     <button type="submit" class="btn btn-success" ng-click="CarregarFitas(Filtro)">Filtrar</button>
                     <button type="button" class="btn btn-warning" ng-click="Filtro=NewFiltro()">Limpar Filtros</button>
                     <button type="button" id="btnNovoFiltro" class="btn btn-warning" style="display:none" ng-click="CurrentShow='Filtro'">Novo Filtro</button>
+                    <button type="button" id="btnExcluir" class="btn btn-warning" style="display:none" ng-click="ExcluirSelecionadas(Fitas)">Novo Filtro</button>
                 </div>
             </div>
         </div>
@@ -164,9 +165,14 @@
                 <table id="dataTable" class="table table-striped table-bordered" cellspacing="0">
                     <thead>
                         <tr>
+                            <th>
+                                <div class="app-checkbox" >
+                                    <label><input type="checkbox" ng-model="SelectedAll" ng-click="MarcarTodas(Fitas,SelectedAll)" name="app-checkbox-1" style="position:relative"><span></span></label>
+                                </div>
+                            </th>
                             <th></th>
                             <th>Contrato</th>
-                            <th>Tipo Com. </th>
+                            <th>Tipo Com. </th> 
                             <th>Tit.Comercial</th>
                             <th>Produto</th>
                             <th>Dur.</th>
@@ -183,6 +189,11 @@
                     </thead>
                     <tbody>
                         <tr ng-repeat="fita in Fitas track by $index" on-finish-render="ngRepeatFinished()">
+                            <td style="width:50px">
+                                <div class="app-checkbox" ng-show="fita.Numero_Fita">
+                                    <label><input type="checkbox" ng-model="fita.Selected" name="app-checkbox-1" style="position:relative"><span></span></label>
+                                </div>
+                            </td>
                             <td style="width:50px; text-align:center">
                                 <div class="AppToolTip">
                                     <button class="btn btn-default btn-sm" ng-click="CarregarNumeracao(fita)">
@@ -190,14 +201,10 @@
                                     </button>
                                     <span class="AppToolTipText AppToolTipTop">Numerar</span>
                                 </div>
-                                <div class="AppToolTip">
-                                    <button class="btn btn-sm btn-default" ng-click="ExcluirNumeracao(fita)" ng-disabled="!fita.Numero_Fita">
-                                        <span class="fa fa-trash"></span>
-                                    </button>
-                                    <span class="AppToolTipText AppToolTipTop" ng-show="fita.Numero_Fita">Excluir Fita</span>
-                                </div>
                             </td>
-                            <td>{{fita.Cod_Empresa}}-{{fita.Numero_MR}}-{{fita.Sequencia_MR}}</td>
+                            <td>
+                                <span ng-show="fita.Numero_MR">{{fita.Cod_Empresa}}-{{fita.Numero_MR}}-{{fita.Sequencia_MR}}</span>
+                            </td>
                             <td>{{fita.Cod_Tipo_Comercial}}</td>
                             <td>{{fita.Titulo_Comercial}}</td>
                             <td>{{fita.Nome_Produto}}</td>
@@ -205,7 +212,6 @@
                             <td>{{fita.Numero_Fita}}</td>
                             <td>{{fita.Cod_Veiculo}}</td>
                             <td>
-                                {{fita.Indica_Status}}
                                 <label class="label label-success" ng-show="fita.Numero_Fita">Numerada</label>
                                 <label class="label label-danger" ng-show="!fita.Numero_Fita">Pendente</label>
                             </td>

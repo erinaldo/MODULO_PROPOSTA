@@ -29,6 +29,9 @@ namespace PROPOSTA
             public Boolean Sab{ get; set; }
             public String Cod_Programa_De{ get; set; }
             public String Cod_Programa_Para { get; set; }
+            public String Cod_Empresa { get; set; }
+            public Int32 Numero_Mr { get; set; } 
+            public Int32 Sequencia_Mr { get; set; } 
             public List<VeiculoModel> Veiculos { get; set; }
         }
         public class DeParaDataModel
@@ -37,6 +40,9 @@ namespace PROPOSTA
             public String Data_Para{ get; set; }
             public String Cod_Programa_De { get; set; }
             public String Cod_Programa_Para { get; set; }
+            public String Cod_Empresa { get; set; }
+            public Int32 Numero_Mr { get; set; }
+            public Int32 Sequencia_Mr { get; set; }
             public List<VeiculoModel> Veiculos { get; set; }
         }
         public class VeiculoModel

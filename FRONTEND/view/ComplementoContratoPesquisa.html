@@ -10,6 +10,15 @@
                 <strong>Filtros</strong>
             </div>
             <div class="row">
+                <!--===================Competência-->
+                <div class="col-md-2">
+                    <div class="dictionary" dictionary="Competencia" caption="Competência">
+                        <input ng-model="Filtro.Competencia"
+                               ui-MesAno ng-model-options="{updateOn: 'blur'}"
+                               placeholder="Informe a Competência">
+                        <div class="dictionary-ui-competencia" ui-Competencia typmesano="Filtro.Competencia" params="CompetenciaKeys"></div>
+                    </div>
+                </div>
                 <!--===================Empresa-->
                 <div class="col-md-2  " ng-controller="dictionaryController">
                     <div class="dictionary" dictionary="Empresa_Usuario" caption="Empresa Fat.">
@@ -21,7 +30,7 @@
                                secondarybind="txtNomeEmpresa">
                     </div>
                 </div>
-                <div class="col-md-5">
+                <div class="col-md-3">
                     <div class="form-group">
                         <label for="txtNomeEmpresa" class="field-x" style="visibility:hidden">..</label>
                         <div class="input-group">
@@ -41,7 +50,7 @@
                                maxlength="10" />
                     </div>
                 </div>
-                <!--===================Negociação-->
+                <!--===================Fatura-->
                 <div class="col-md-2">
                     <div class="form-group">
                         <label class="field-x">N.Fatura</label>

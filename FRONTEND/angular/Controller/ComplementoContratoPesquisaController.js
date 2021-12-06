@@ -7,7 +7,7 @@
     $scope.currentRateio = 0;
     $scope.ComplementoDados = "";
     $scope.NewFiltro = function () {
-        $scope.Filtro = { 'Negociacao': '', 'Cod_Empresa_Faturamento': '', 'Contrato': '', 'Sequencia': '', 'Agencia': '', 'Cliente': '','Indica_Somente_Pendente':false };
+        $scope.Filtro = { 'Competencia':'','Negociacao': '', 'Cod_Empresa_Faturamento': '', 'Contrato': '', 'Sequencia': '', 'Agencia': '', 'Cliente': '','Indica_Somente_Pendente':false };
         localStorage.removeItem('ComplementosPesquisa_Filter');
     }
     //========================Verifica Permissoes
@@ -55,7 +55,11 @@
     $scope.CarregaComplementos = function (pFiltro) {
         if (!pFiltro.Cod_Empresa_Faturamento) {
             ShowAlert("Filtro Empresa de Faturamento é obrigatório.")
-            return
+            return;
+        }
+        if (!pFiltro.Competencia && !pFiltro.Negociacao && !pFiltro.Fatura && !pFiltro.Contrato) {
+            ShowAlert("Preencha um dos filtros (Competência/Negociação/Fatura ou Contrato")
+            return;
         }
         $rootScope.routeloading = true;
         $scope.Complementos = [];

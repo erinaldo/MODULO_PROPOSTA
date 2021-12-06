@@ -5,6 +5,7 @@
     $scope.CurrentShow = "Filtro";
 
     $scope.gridheaders = [{ 'title': '', 'visible': true, 'searchable': false, 'config': false, 'sortable': false },
+        { 'title': '', 'visible': true, 'searchable': false, 'config': false, 'sortable': false },
         { 'title': 'Contrato', 'visible': true, 'searchable': true, 'config': true, 'sortable': true },
     { 'title': 'Tipo', 'visible': true, 'searchable': true, 'config': true, 'sortable': true },
     { 'title': 'Tit.Comercial', 'visible': true, 'searchable': true, 'config': true, 'sortable': true },
@@ -191,6 +192,7 @@
                     }
                 },
                 { text: 'Novo Filtro' + '<span class="fa fa-filter margin-left-10"></span>', className: 'btn btn-info', action: function (e, dt, button, config) { $('#btnNovoFiltro').click(); } },
+                { text: 'Excluir Selecionadas' + '<span class="fa fa-trash margin-left-10"></span>', className: 'btn btn-danger', action: function (e, dt, button, config) { $('#btnExcluir').click(); } },
             ];
         param.order = [[1, 'asc']];
         ////param.autoWidth = false;
@@ -243,6 +245,49 @@
                 };
             });
         });
+    };
+    //===========================Excluir Numero da Fita
+    $scope.ExcluirSelecionadas = function (pFitas) {
+        var marcadas = 0 ;
+        for (var i = 0; i < pFitas.length; i++) {
+            if (pFitas[i].Selected) {
+                marcadas++;
+            };
+        }
+        if (marcadas == 0) {
+            ShowAlert("Nenhuma fita foi selecionada para exclusão.");
+            return;
+        };
+        swal({
+            title: "Confirma a Exclusão das Fitas selecionadas ?"  +"\n" +  marcadas + ' fita(s) marcada(s)',
+            showCancelButton: true,
+            confirmButtonClass: "btn-danger",
+            confirmButtonText: "Sim, Excluir?",
+            cancelButtonText: "Não,Cancelar",
+            closeOnConfirm: true
+        }, function () {
+            httpService.Post("ExcluirNumeracaoFitas", pFitas).then(function (response) {
+                if (response) {
+                    //$scope.Fitas = response.data;
+                    //$scope.RepeatFinished();
+                    for (var i = 0; i < pFitas.length; i++) {
+                        if (pFitas[i].Selected) {
+                            pFitas[i].selected = false;
+                            pFitas[i].Numero_Fita = "";
+                            pFitas[i].Nome_Apresentador = "";
+                        };
+                    }
+                };
+            });
+        });
+    };
+    //===========================Marcar / Desmarcar todas as filtas 
+    $scope.MarcarTodas = function (pFitas, value) {
+        for (var i = 0; i < pFitas.length; i++) {
+            if (pFitas[i].Numero_Fita) {
+                pFitas[i].Selected = value;
+            };
+        };
     };
     //===========================Evento chamado ao fim do ngrepeat ao carregar grid 
     $scope.$on('ngRepeatFinished', function (ngRepeatFinishedEvent) {

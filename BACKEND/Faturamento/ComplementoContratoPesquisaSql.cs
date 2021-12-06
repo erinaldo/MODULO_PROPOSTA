@@ -20,6 +20,10 @@ namespace PROPOSTA
                 SqlCommand cmd = cnn.Procedure(cnn.Connection, "Sp_PROPOSTA_Pendente_Pesquisa_Complemento");
                 Adp.SelectCommand = cmd;
                 Adp.SelectCommand.Parameters.AddWithValue("@Par_Login", this.CurrentUser);
+                if (!String.IsNullOrEmpty(pFiltro.Competencia))
+                {
+                    Adp.SelectCommand.Parameters.AddWithValue("@Par_Competencia", clsLib.CompetenciaInt(pFiltro.Competencia));
+                }
                 Adp.SelectCommand.Parameters.AddWithValue("@Par_Numero_Negociacao", pFiltro.Negociacao);
                 Adp.SelectCommand.Parameters.AddWithValue("@Par_Numero_Fatura", pFiltro.Fatura);
                 Adp.SelectCommand.Parameters.AddWithValue("@Par_Cod_Empresa_Faturamento", pFiltro.Cod_Empresa_Faturamento);
@@ -80,6 +84,7 @@ namespace PROPOSTA
                 Complemento.Comissao_Intermediario = dtb.Rows[0]["Comissao_Intermediario"].ToString().ConvertToDouble();
                 Complemento.Intermediario = dtb.Rows[0]["Nome_Intermediario"].ToString();
                 Complemento.Nome_Intermediario = dtb.Rows[0]["Intermediario"].ToString();
+                Complemento.Descricao = dtb.Rows[0]["Descricao"].ToString();
                 Complemento.Forma_Pgto = dtb.Rows[0]["Forma_Pgto"].ToString().ConvertToByte();
                 Complemento.Descricao_Forma_Pgto = dtb.Rows[0]["Descricao_Forma_Pgto"].ToString();
                 Complemento.Cod_Empresa_Faturamento = dtb.Rows[0]["Cod_Empresa_Faturamento"].ToString();

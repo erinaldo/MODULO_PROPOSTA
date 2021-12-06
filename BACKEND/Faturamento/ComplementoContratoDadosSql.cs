@@ -45,6 +45,7 @@ namespace PROPOSTA
                         cmd.Parameters.AddWithValue("@Par_Indica_Comprovado", DBNull.Value);
                         cmd.Parameters.AddWithValue("@Par_retorno", DBNull.Value);
                         cmd.Parameters.AddWithValue("@Par_Empresa_Faturamento", pFiltro[i].Cod_Empresa_Faturamento);
+                        cmd.Parameters.AddWithValue("@Par_Login", this.CurrentUser);
                     }
                     else // Antecipado 
                     {
@@ -77,12 +78,13 @@ namespace PROPOSTA
                             dados.Nome_Forma_Pgto = dtb.Rows[0]["Nome_Forma_Pgto"].ToString();
                             dados.Cod_Empresa_Faturamento = dtb.Rows[0]["Cod_Empresa_Faturamento"].ToString();
                             dados.Indica_Venda_Net = false;
-                            dados.Indica_Faturamento_liquido = false;
+                            dados.Indica_Faturamento_liquido = dtb.Rows[0]["Indica_Faturamento_liquido"].ToString().ConvertToBoolean();
                             dados.Numero_Mr = dtb.Rows[0]["Numero_Mr"].ToString().ConvertToInt32();
                             dados.Sequencia_Mr= dtb.Rows[0]["Sequencia_Mr"].ToString().ConvertToInt32();
                             dados.Id_Contrato= dtb.Rows[0]["Id_Contrato"].ToString().ConvertToInt32();
                             dados.Origem = dtb.Rows[0]["Origem"].ToString().ConvertToByte();
                             dados.Numero_Parcela = dtb.Rows[0]["Numero_Parcela"].ToString().ConvertToByte();
+                            dados.Descricao = dtb.Rows[0]["Descricao"].ToString();
                             //=============================Adiciona o Rateio  -- no inicio tem apenas 1
                             Rateios.Add(new RateioModel
                             {
@@ -95,8 +97,9 @@ namespace PROPOSTA
                                 Cod_Veiculo = "",
                                 Indica_Log_Agencia = 1,
                                 Indica_Log_Cliente = 1,
-                                Referencia = "",
+                                Referencia = dtb.Rows[0]["Descricao"].ToString(),
                                 Perc_Rateio = "100"
+                               
                                 
                             }); 
                             };

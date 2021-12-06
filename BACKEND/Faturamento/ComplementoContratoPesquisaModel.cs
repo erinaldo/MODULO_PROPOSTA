@@ -103,7 +103,8 @@ namespace PROPOSTA
             public String Agencia { get; set; }
             public String Cliente { get; set; }
             public  Boolean Indica_Somente_Pendente { get; set; }
-        }
+            public String Competencia  { get; set; }
+    }
         public class Rateio_AuxiliarModel
         {
             public Int32 Numero_Complemento { get; set; }

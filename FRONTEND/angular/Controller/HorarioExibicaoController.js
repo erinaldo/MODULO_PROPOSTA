@@ -160,21 +160,14 @@
     //==========================Salvar
     $scope.SalvarHorarioExibicao = function (pHorarioExibicao,pVeiculos) {
         vHorario_Valido = false;
-
-
-
         var _data = {
             'HorarioExibicao': pHorarioExibicao,
             'Veiculos': pVeiculos
         };
-        console.log(_data)
         httpService.Post("SalvarHorarioExibicao", _data).then(function (response) {
             if (response) {
                 $scope.HorarioExibicaoS = response.data.HorarioExibicao;
-
             }
-    
-
         })
     };
 

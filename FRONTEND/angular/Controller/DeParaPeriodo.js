@@ -7,6 +7,8 @@
         httpService.Post("DeParaProgramacao/CarregarDadosPeriodo").then(function (response) {
             if (response.data) {
                 $scope.DePara = response.data;
+                $scope.DePara.Numero_Mr = "";
+                $scope.DePara.Sequencia_Mr= "";
                 $scope.checkMarcarVeiculo = false
             };
         });

@@ -141,14 +141,14 @@ namespace PROPOSTA
         [ActionName("ExcluirNumeracaoFitas")]
         [Authorize()]
 
-        public IHttpActionResult ExcluirNumeracaoFitas([FromBody] NumeracaoFitas.NumeracaoFitasModel pNumeracaoFitas)
+        public IHttpActionResult ExcluirNumeracaoFitas([FromBody] List<NumeracaoFitas.NumeracaoFitasModel> pNumeracaoFitas)
         {
             SimLib clsLib = new SimLib();
             NumeracaoFitas Cls = new NumeracaoFitas(User.Identity.Name);
             try
             {
                 Cls.ExcluirNumeracaoFitas(pNumeracaoFitas);
-                return Ok(true);
+                return Ok(pNumeracaoFitas);
             }
             catch (Exception Ex)
             {
