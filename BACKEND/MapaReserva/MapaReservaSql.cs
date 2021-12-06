@@ -255,6 +255,7 @@ namespace PROPOSTA
                 Adp.SelectCommand = cmd;
                 Adp.SelectCommand.Parameters.AddWithValue("@Par_Login", this.CurrentUser);
                 Adp.SelectCommand.Parameters.AddWithValue("@Par_Id_Contrato", Param.Id_Contrato);
+                Adp.SelectCommand.Parameters.AddWithValue("@Par_Cod_Veiculo", Param.Cod_Veiculo);
                 Adp.Fill(dtb);
             }
             catch (Exception)
@@ -1326,6 +1327,51 @@ namespace PROPOSTA
                 cnn.Close();
             }
             return dtb;
+        }
+
+        public BaixaVeiculacaoModel MapaBaixarVeiculacao(BaixaVeiculacaoModel param)
+        {
+            clsConexao cnn = new clsConexao(this.Credential);
+            cnn.Open();
+            SqlDataAdapter Adp = new SqlDataAdapter();
+            DataTable dtb = new DataTable("dtb");
+            SimLib clsLib = new SimLib();
+
+            try
+            {
+                SqlCommand cmd = cnn.Procedure(cnn.Connection, "Pr_Proposta_Baixa_Veiculacao");
+                Adp.SelectCommand = cmd;
+                Adp.SelectCommand.Parameters.AddWithValue("@Par_Login", this.CurrentUser);
+                Adp.SelectCommand.Parameters.AddWithValue("@Par_Cod_Qualidade", param.Cod_Qualidade);
+                Adp.SelectCommand.Parameters.AddWithValue("@Par_Cod_Veiculo", param.Cod_Veiculo);
+                Adp.SelectCommand.Parameters.AddWithValue("@Par_Documento_De", param.Documento_De);
+                Adp.SelectCommand.Parameters.AddWithValue("@Par_Documento_Para", param.Documento_Para);
+                Adp.SelectCommand.Parameters.AddWithValue("@Par_Cod_Empresa", param.Cod_Empresa);
+                Adp.SelectCommand.Parameters.AddWithValue("@Par_Numero_Mr", param.Numero_Mr);
+                Adp.SelectCommand.Parameters.AddWithValue("@Par_Sequencia_Mr", param.Sequencia_Mr);
+                Adp.SelectCommand.Parameters.AddWithValue("@Par_Data_Exibicao", param.Data_Exibicao);
+                Adp.SelectCommand.Parameters.AddWithValue("@Par_Horario_Exibicao", param.Horario_Exibicao);
+                Adp.SelectCommand.Parameters.AddWithValue("@Par_Chave_Acesso   ", param.Chave_Acesso);
+                Adp.SelectCommand.Parameters.AddWithValue("@Par_Cod_Programa", param.Cod_Programa);
+                Adp.Fill(dtb);
+                if (dtb.Rows.Count > 0)
+                {
+                    param.Cod_Qualidade = dtb.Rows[0]["Cod_Qualidade"].ToString();
+                    param.Documento_De= dtb.Rows[0]["Documento_De"].ToString();
+                    param.Documento_Para = dtb.Rows[0]["Documento_Para"].ToString();
+                    param.Critica= dtb.Rows[0]["Mensagem"].ToString();
+                    param.Status = dtb.Rows[0]["Status"].ToString().ConvertToBoolean();
+                }
+            }
+            catch (Exception)
+            {
+                throw;
+            }
+            finally
+            {
+                cnn.Close();
+            }
+            return param;
         }
 
 

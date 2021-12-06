@@ -21,6 +21,8 @@
 
     #tbVeiculacao td {
         font-size: 11px !important;
+        padding-top:5px;
+        padding-bottom:5px;
     }
 
     #tbMidia th {
@@ -32,9 +34,9 @@
     }
     
 </style>
-<form autocomplete="off">
-    <div class="container">
-        <div class="block">
+<form autocomplete="off" id="frmMapa">
+    <div class="container" id="idContainer">
+        <div class="block" ng-show="ShowMidia">
             <!--=====================Dados do Contrato-->
             <div class="row" id="divContrato">
                 <div class="alert alert-primary alert-icon-block" role="alert">
@@ -251,7 +253,7 @@
             </div>
         </div>
         <!--======================Dados dos comerciais-->
-        <div class="block">
+        <div class="block" ng-show="ShowMidia">
             <div class="row" id="divComercial">
                 <div class="alert alert-primary alert-icon-block" role="alert">
                     <strong>2-Comerciais</strong>
@@ -289,8 +291,8 @@
             </div>
         </div>
 
-        <div class="block">
-            <!--=============================Filtrod de Midia -->
+        <div class="block" ng-show="ShowMidia">
+            <!--=============================Filtros de Midia -->
             <div class="row" id="divMidia">
                 <div class="alert alert-primary alert-icon-block" role="alert">
                     <strong>3-{{Display[FiltroMidia.Display-1].Nome}}</strong>
@@ -394,6 +396,7 @@
                                 <thead>
                                     <tr>
                                         <th>Origem</th>
+                                        <th>Veiculo</th>
                                         <th>Dt.Exibição</th>
                                         <th>Programa</th>
                                         <th>Ch.Acesso</th>
@@ -403,54 +406,63 @@
                                         <th>Aut.</th>
                                         <th>Qual.</th>
                                         <th>Hor.Exibicao</th>
-                                        <th>AM</th>
+                                        <th></th>
+                                        <th>Docto De</th>
+                                        <th>Docto Para</th>
                                         <th>Vlr Negociado</th>
                                         <th>Vlr Tabela</th>
                                         <th>Desconto</th>
                                         <th>Vlr Informado</th>
                                         <th>Numero Ce</th>
-                                        <th>Dt Emissao Ce</th>
+                                        <th>Dt Emi Ce</th>
                                         <th>TQP</th>
                                         <th>Cadastramento</th>
                                         <th>Tabela Neg.</th>
                                         <th>Tabela Vig.</th>
-                                        <th>Break Previsto</th>
+                                        <!--<th>Break Previsto</th>
                                         <th>Horario Previsto</th>
-                                        <th>Posicao</th>
+                                        <th>Posicao</th>-->
                                     </tr>
                                 </thead>
                                 <tbody>
                                     <tr ng-repeat="veic in Veiculacoes track by $index">
-                                        <td>{{::veic.Origem}}</td>
-                                        <td>{{::veic.Data_Exibicao | date:'dd/MM/yyyy'}}</td>
-                                        <td>{{::veic.Cod_Programa}}</td>
-                                        <td>{{::veic.Chave_Acesso}}</td>
-                                        <td>{{::veic.Cod_Caracteristica}}</td>
-                                        <td>{{::veic.Cod_Comercial}}</td>
-                                        <td>{{::veic.Qtd_Insercoes}}</td>
+                                        <td>{{veic.Origem}}</td>
+                                        <td>{{veic.Cod_Veiculo}}</td>
+                                        <td>{{veic.Data_Exibicao | date:'dd/MM/yyyy'}}</td>
+                                        <td>{{veic.Cod_Programa}}</td>
+                                        <td>{{veic.Chave_Acesso}}</td>
+                                        <td>{{veic.Cod_Caracteristica}}</td>
+                                        <td>{{veic.Cod_Comercial}}</td>
+                                        <td>{{veic.Qtd_Insercoes}}</td>
                                         <td>
                                             <span class="fa fa-check bg-success" ng-show="veic.Indica_Valoracao"></span>
                                         </td>
-                                        <td>{{::veic.Cod_Qualidade}}</td>
-                                        <td>{{::veic.Horario_Exibicao | date:'hh:mm'}}</td>
-                                        <td>{{::veic.Documento_Para}}</td>
-                                        <td>{{::veic.Valor | currency}}</td>
-                                        <td>{{::veic.Vlr_Tabela | currency}}</td>
-                                        <td>{{::veic.Desconto |number:4}}%</td>
-                                        <td>{{::veic.Indica_Vlr_Informado}}</td>
-                                        <td>{{::veic.Numero_Ce}}</td>
-                                        <td>{{::veic.Data_Emissao_Ce | date: 'dd/MM/yyyy'}}</td>
-                                        <td>{{::veic.Indica_Estouro}}</td>
-                                        <!--<td>{{::veic.Data_Cadastramento | date:'dd/MM/yyyy'}} por {{::veic.Cod_Usuario}}</td>-->
-                                        <td>{{::veic.Data_Cadastramento | date:'dd/MM/yyyy'}}</td>
+                                        <td>{{veic.Cod_Qualidade}}</td>
+                                        <td>{{veic.Horario_Exibicao | date:'hh:mm'}}</td>
+                                        <td>
+                                            <button class="btn btn-default btn-sm" ng-disabled="!PermissaoBaixa" 
+                                                    style="padding-bottom:0px;padding-top:0px;margin-top:0px;margin-bottom:0px"
+                                                    ng-click="BaixarVeiculacao(veic)">Baixar</button>
+                                        </td>
+                                        <td>{{veic.Documento_De}}</td>
+                                        <td>{{veic.Documento_Para}}</td>
+                                        <td>{{veic.Valor | currency}}</td>
+                                        <td>{{veic.Vlr_Tabela | currency}}</td>
+                                        <td>{{veic.Desconto |number:4}}%</td>
+                                        <td>{{veic.Indica_Vlr_Informado}}</td>
+                                        <td>{{veic.Numero_Ce}}</td>
+                                        <td>{{veic.Data_Emissao_Ce | date: 'dd/MM/yyyy'}}</td>
+                                        <td>{{veic.Indica_Estouro}}</td>
+                                        <!--<td>{{veic.Data_Cadastramento | date:'dd/MM/yyyy'}} por {{veic.Cod_Usuario}}</td>-->
+                                        <td>{{veic.Data_Cadastramento | date:'dd/MM/yyyy'}}</td>
                                         <td>
                                             <span ng-show="!veic.Tabela_Negociada">Vigente</span>
-                                            <span ng-show="veic.Tabela_Negociada">{{::veic.Tabela_Negociada}}<span ng-show="veic.Sequencia_Negociada">-{{::veic.Sequencia_Negociada}}</span></span>
+                                            <span ng-show="veic.Tabela_Negociada">{{veic.Tabela_Negociada}}<span ng-show="veic.Sequencia_Negociada">-{{veic.Sequencia_Negociada}}</span></span>
                                         </td>
-                                        <td>{{::veic.Tabela_Vigente}}<span ng-show="veic.Sequencia_Vigente">-{{::veic.Sequencia_Vigente}}</span></td>
-                                        <td>{{::veic.Pre_Roteiro_Break}}</td>
-                                        <td>{{::veic.Pre_Roteiro_Horario}}</td>
-                                        <td>{{::veic.Pre_Roteiro_Posicao}}</td>
+                                        <td>{{veic.Tabela_Vigente}}<span ng-show="veic.Sequencia_Vigente">-{{veic.Sequencia_Vigente}}</span></td>
+                                        <!--<td>{{veic.Pre_Roteiro_Break}}</td>
+                                        <td>{{veic.Pre_Roteiro_Horario}}</td>
+                                        <td>{{veic.Pre_Roteiro_Posicao}}</td>-->
                                     </tr>
                                 </tbody>
                             </table>
@@ -460,8 +472,9 @@
             </div>
 
         </div>
+        
         <!--===========================Resumo-->
-        <div class="block">
+        <div class="block" ng-show="ShowMidia">
             <div class="row" id="divResumo">
                 <div class="alert alert-primary alert-icon-block" role="alert">
                     <strong>4-Resumo</strong>
@@ -518,10 +531,90 @@
                 <div class="col-md-2 pull-right hidden-mobile hidden-sm">
                     <button class="btn btn-primary btn-sm anchorscroll" target="divContrato">1</button>
                     <button class="btn btn-primary btn-sm anchorscroll" target="divComercial">2</button>
-                    <button class="btn btn-primary btn-sm anchorscroll" target="divMidia">3</button>
+                    <button id="btnMidia" class="btn btn-primary btn-sm anchorscroll" target="divMidia">3</button>
                     <button class="btn btn-primary btn-sm anchorscroll" target="divResumo">4</button>
-
-
+                </div>
+            </div>
+        </div>
+        <!--======================Baixa da Veiculacao-->
+        <div class="col-md-8 col-md-offset-2" ng-show="ShowBaixa">
+            <div class="block id=divBaixa">
+                <div class="alert alert-info">Baixa da Veiculação</div>
+                <div class="row">
+                    <div class="col-md-2">
+                        <div class="form-group">
+                            <label class="field-x">Veiculo</label>
+                            <label class="form-control">{{DadosBaixa.Cod_Veiculo}}</label>
+                        </div>
+                    </div>
+                    <div class="col-md-2">
+                        <div class="form-group">
+                            <label class="field-x">Data</label>
+                            <label class="form-control">{{DadosBaixa.Data_Exibicao | date:'dd/MM/yyyy'}}</label>
+                        </div>
+                    </div>
+                    <div class="col-md-2">
+                        <div class="form-group">
+                            <label class="field-x">Programa</label>
+                            <label class="form-control">{{DadosBaixa.Cod_Programa}}</label>
+                        </div>
+                    </div>
+                    <div class="col-md-2">
+                        <div class="form-group">
+                            <label class="field-x">Ch.Acesso</label>
+                            <label class="form-control">{{DadosBaixa.Chave_Acesso}}</label>
+                        </div>
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col-md-6">
+                        <div class="form-group">
+                            <label class="field-x">Comercial</label>
+                            <label class="form-control">{{DadosBaixa.Cod_Comercial}}-{{DadosBaixa.Titulo_Comercial}}</label>
+                        </div>
+                    </div>
+                    <div class="col-md-2">
+                        <div class="form-group">
+                            <label class="field-x">Duração</label>
+                            <label class="form-control">{{DadosBaixa.Duracao}}</label>
+                        </div>
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col-md-2">
+                        <div class="form-group">
+                            <label for="txtHorarioExibicao" class="field-x">Horario</label>
+                            <input type="text" 
+                                   class="form-control time" 
+                                   ng-change="ChangeHorario(DadosBaixa)"
+                                   ng-model-options="{updateOn: 'blur'}"
+                                   ng-model="DadosBaixa.Horario_Exibicao" />
+                        </div>
+                    </div>
+                    <div class="col-md-2" ng-controller="dictionaryController">
+                        <div class="dictionary" dictionary="Qualidade" caption="Qualidade">
+                            <input id="txtQualidade"
+                                   ng-model="DadosBaixa.Cod_Qualidade"
+                                   ng-model-options="{updateOn: 'blur'}"
+                                   ng-change="DicionaryValidate('txtQualidade')"
+                                   style="text-transform:uppercase"
+                                   primarybind="txtQualidade"
+                                   secondarybind="">
+                        </div>
+                    </div>
+                </div>
+                <div class="row margin-top-20">
+                    <div class="col-md-2">
+                        <button type="button" class="btn btn-success btn-block" ng-click="SalvarBaixarVeiculacao(DadosBaixa)">Ok</button>
+                    </div>
+                    <div class="col-md-2">
+                        <button type="button" class="btn btn-warning btn-block" ng-click="CancelarBaixar()">Cancela</button>
+                    </div>
+                </div>
+                <div class="row margin-top-20">
+                    <div class="col-md-12">
+                        <label class="alert alert-danger" ng-show="AvisoBaixa">{{AvisoBaixa}}</label>
+                    </div>
                 </div>
             </div>
         </div>
@@ -548,4 +641,5 @@
             };
         });
     });
+
 </script>

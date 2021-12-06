@@ -92,8 +92,8 @@
 
     //====================Carrega Contrato            
     $scope.CarregaContratosComplemento = function (pFiltro, pAviso) {
-        if (!pFiltro.Emp_Faturamento ) {
-            ShowAlert("Empresa de Faturamento é de seleção obrigatória!");
+        if (!pFiltro.Emp_Faturamento || !pFiltro.Competencia) {
+            ShowAlert("Empresa de Faturamento  e Competência são obrigatórios !");
             return
         }
 

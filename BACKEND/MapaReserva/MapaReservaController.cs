@@ -559,6 +559,26 @@ namespace PROPOSTA
                 throw new Exception(Ex.Message);
             }
         }
+
+        [Route("api/MapaReserva/BaixarVeiculacao")]
+        [HttpPost]
+        [ActionName("MapaBaixarVeiculacao")]
+        [Authorize()]
+        public IHttpActionResult MapaBaixarVeiculacao(MapaReserva.BaixaVeiculacaoModel Param)
+        {
+            SimLib clsLib = new SimLib();
+            MapaReserva Cls = new MapaReserva(User.Identity.Name);
+            try
+            {
+                MapaReserva.BaixaVeiculacaoModel retorno = Cls.MapaBaixarVeiculacao(Param);
+                return Ok(retorno);
+            }
+            catch (Exception Ex)
+            {
+                clsLib.EmailErrorToSuporte(User.Identity.Name, Ex.Message.ToString(), Ex.Source, Ex.StackTrace);
+                throw new Exception(Ex.Message);
+            }
+        }
     }
 }
 

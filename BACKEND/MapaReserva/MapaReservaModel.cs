@@ -229,6 +229,22 @@ namespace PROPOSTA
             public Boolean Indica_Comprovado { get; set; }
 
         }
+        public class BaixaVeiculacaoModel
+        {
+            public  String  Cod_Veiculo { get; set; }
+            public  String Data_Exibicao { get; set; }
+            public  String Cod_Programa{ get; set; }
+            public  Int32 Chave_Acesso{ get; set; }
+            public  String Cod_Qualidade { get; set; }
+            public  String Horario_Exibicao{ get; set; }
+            public  String Documento_De{ get; set; }
+            public String Documento_Para{ get; set; }
+            public String Cod_Empresa { get; set; }
+            public Int32 Numero_Mr { get; set; }
+            public Int32 Sequencia_Mr { get; set; }
+            public Boolean Status { get; set; }
+            public String Critica { get; set; }
+        }
     }
     
 }
