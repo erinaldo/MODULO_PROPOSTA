@@ -231,6 +231,7 @@ function GetDictionary() {
             this.value = "";
         }
     });
+
     $(".cnpj").blur(function () {
         this.value = cnpjFormat(this.value);
     });

@@ -92,11 +92,14 @@ namespace PROPOSTA
                                 Numero_Rateio = 1,
                                 Cod_Cliente = dtb.Rows[0]["Cod_Cliente"].ToString().TrimEnd(),
                                 Cod_Agencia = dtb.Rows[0]["Cod_Agencia"].ToString().TrimEnd(),
+                                Cod_Cobranca= dtb.Rows[0]["Cod_Agencia"].ToString().TrimEnd(), /*---Assume aos cuidados da Agencia*/
+                                Nome_Cobranca = dtb.Rows[0]["Nome_Agencia"].ToString().TrimEnd(), /*---Assume aos cuidados da Agencia*/
                                 Data_Emissao = DateTime.Now.ToString("dd/MM/yyyy"),
                                 Cod_Condicao = dtb.Rows[0]["Cod_Condicao"].ToString().TrimEnd(),
                                 Cod_Veiculo = "",
                                 Indica_Log_Agencia = 1,
                                 Indica_Log_Cliente = 1,
+                                Indica_Log_Cobranca= 1,
                                 Referencia = dtb.Rows[0]["Descricao"].ToString(),
                                 Perc_Rateio = "100"
                                
@@ -277,6 +280,37 @@ namespace PROPOSTA
                 Adp.SelectCommand.Parameters.AddWithValue("@Par_Numero_Negociacao", Param.Numero_Negociacao);
                 Adp.SelectCommand.Parameters.AddWithValue("@Par_Tipo", Param.Tipo);
                 Adp.SelectCommand.Parameters.AddWithValue("@Par_Tipo_Chamada", 0);
+                Adp.Fill(dtb);
+            }
+            catch (Exception)
+            {
+                throw;
+            }
+            finally
+            {
+                cnn.Close();
+            }
+            return dtb;
+        }
+
+        public DataTable ComplementoGetEnderecos(EnderecoFiltroModel Param)
+        {
+            clsConexao cnn = new clsConexao(this.Credential);
+            cnn.Open();
+            SqlDataAdapter Adp = new SqlDataAdapter();
+            DataTable dtb = new DataTable("dtb");
+            SimLib clsLib = new SimLib();
+            try
+            {
+                SqlCommand cmd = cnn.Procedure(cnn.Connection, "Pr_Complemento_Get_Enderecos");
+                Adp.SelectCommand = cmd;
+                Adp.SelectCommand.Parameters.AddWithValue("@Par_Cod_Empresa_Faturamento", Param.Cod_Empresa_Faturamento);
+                Adp.SelectCommand.Parameters.AddWithValue("@Par_Cod_Agencia",Param.Cod_Agencia);
+                Adp.SelectCommand.Parameters.AddWithValue("@Par_Log_Agencia", Param.Log_Agencia);
+                Adp.SelectCommand.Parameters.AddWithValue("@Par_Cod_Cliente", Param.Cod_Cliente);
+                Adp.SelectCommand.Parameters.AddWithValue("@Par_Log_Cliente", Param.Log_Cliente);
+                Adp.SelectCommand.Parameters.AddWithValue("@Par_Cod_Cobranca", Param.Cod_Cobranca);
+                Adp.SelectCommand.Parameters.AddWithValue("@Par_Log_Cobranca", Param.Log_Cobranca);
                 Adp.Fill(dtb);
             }
             catch (Exception)

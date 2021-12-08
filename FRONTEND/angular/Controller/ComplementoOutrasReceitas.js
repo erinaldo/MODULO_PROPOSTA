@@ -300,6 +300,60 @@
         }
 
     });
+    //===========================Mudou a Agencia
+    $scope.ChangeAgencia = function (pRateio) {
+        if (!pRateio.Cod_Agencia) {
+            return;
+        }
+        var _url = "ValidarTabela/Terceiro/" + pRateio.Cod_Agencia.trim()
+        httpService.Get(_url).then(function (response) {
+            if (response.data[0].Status == 0) {
+                ShowAlert(response.data[0].Mensagem);
+                pRateio.Cod_Agencia = "";
+                pRateio.Nome_Agencia = "";
+            }
+            else {
+                pRateio.Nome_Agencia = response.data[0].Descricao;
+                pRateio.Cod_Cobranca = pRateio.Cod_Agencia;
+                pRateio.Nome_Cobranca = pRateio.Nome_Agencia;
+
+            }
+        })
+    };
+
+    //===========================Mudou Log da Agencia
+    $scope.ChangeLogAgencia = function (pRateio) {
+        pRateio.Indica_Log_Cobranca = pRateio.Indica_Log_Agencia;
+    };
+    //===========================Gravar o Complemento de Midia
+    $scope.SalvarComplemento = function (pComplemento) {
+        httpService.Post('SalvarComplemento', pComplemento).then(function (response) {
+            if (response) {
+                ShowAlert(response.data[0].Mensagem);
+            }
+            if (response.data[0].Status == 1) {
+                $scope.CarregaContratosComplemento($scope.Filtro, false);
+            };
+        });
+    };
+    //===========================Mostra os Enderecos
+    $scope.MostraEndereco = function (pRateio) {
+        var _data = {
+            'Cod_Empresa_Faturamento': $scope.ContratoDados.Cod_Empresa_Faturamento,
+            'Cod_Agencia': pRateio.Cod_Agencia,
+            'Log_Agencia': pRateio.Indica_Log_Agencia,
+            'Cod_Cliente': pRateio.Cod_Cliente,
+            'Log_Cliente': pRateio.Indica_Log_Cliente,
+            'Cod_Cobranca': pRateio.Cod_Cobranca,
+            'Log_Cobranca': pRateio.Indica_Log_Cobranca,
+        };
+        httpService.Post('Complemento/GetEnderecos', _data).then(function (response) {
+            if (response.data) {
+                $scope.Enderecos = response.data;
+                $("#modalDadosEndereco").modal(true);
+            };
+        });
+    };
     //===========================Gravar o Complemento 
     $scope.SalvarComplemento = function (pComplemento) {
         httpService.Post('SalvarComplemento', pComplemento).then(function (response) {

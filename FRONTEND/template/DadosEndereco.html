@@ -1,0 +1,83 @@
+﻿<style>
+    .tbendereco{
+        margin-bottom:0px;
+    }
+    .tbendereco td{
+        padding:5px !important;
+        vertical-align:top !important;
+        font-size:11px;
+    }
+
+</style>
+<div class="modal fade" id="modalDadosEndereco" tabindex="-1" role="dialog" aria-labelledby="modal-warning-header">
+    <div class="modal-dialog modal-primary" role="document" style="width:900px">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h4 class="modal-title" id="modal-info-header">Endereços da Fatura</h4>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span class="fa fa-times" style="color:#fff"></span></button>
+            </div>
+            <div class="modal-body">
+                <div class="row">
+                    <table class="table table-bordered tbendereco" ng-repeat="endereco in Enderecos track by $index">
+                        <tr style="background-color:#ededed;text-align:center">
+                            <td colspan="7">
+                                <span>{{endereco.Tipo}}</span>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td colspan="7">
+                                <span style="font-size:12px;font-weight:bold">Razão Social</span>
+                                <br />
+                                <span>{{endereco.Razao_Social}}</span>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td>
+                                <span style="font-size:12px;font-weight:bold">Endereço</span>
+                                <br />
+                                <span>{{endereco.Endereco}}</span>
+                            </td>
+                            <td>
+                                <span style="font-size:12px;font-weight:bold">Número</span>
+                                <br />
+                                <span>{{endereco.Numero}}</span>
+                            </td>
+                            <td>
+                                <span style="font-size:12px;font-weight:bold">Compl</span>
+                                <br />
+                                <span>{{endereco.Complemento}}</span>
+                            </td>
+                        
+                            <td>
+                                <span style="font-size:12px;font-weight:bold">Município</span>
+                                <br />
+                                <span>{{endereco.Municipio}}</span>
+                            </td>
+                            <td>
+                                <span style="font-size:12px;font-weight:bold">Bairro</span>
+                                <br />
+                                <span>{{endereco.Bairro}}</span>
+                            </td>
+                            <td>
+                                <span style="font-size:12px;font-weight:bold">Uf</span>
+                                <br />
+                                <span>{{endereco.Uf}}</span>
+                            </td>
+                            <td>
+                                <span style="font-size:12px;font-weight:bold">CEP</span>
+                                <br />
+                                <span>{{endereco.Cep}}</span>
+                            </td>
+                        </tr>
+                        
+                    </table>
+                </div>
+                
+            </div>
+            
+            <div class="modal-footer">
+                <button type="button" class="btn btn-warning" data-dismiss="modal">Cancela</button>
+            </div>
+        </div>
+    </div>
+</div>

@@ -306,7 +306,7 @@
                                 <input id="txtAgencia"
                                        ng-model="ContratoDados.Rateios[currentTab].Cod_Agencia"
                                        ng-model-options="{updateOn: 'blur'}"
-                                       ng-change="DicionaryValidate('txtAgencia')"
+                                       ng-change="ChangeAgencia(ContratoDados.Rateios[currentTab])"
                                        primarybind="txtAgencia"
                                        secondarybind="txtNomeAgencia" />
                             </div>
@@ -317,13 +317,15 @@
                             <div class="form-group">
                                 <label for="txtNomeAgencia" class="field-x" style="visibility:hidden">..</label>
                                 <div class="input-group">
-                                    <input type="text" disabled="disabled" id="txtNomeAgencia" class="form-control " ng-model="ContratoDados.Rateios[currentTab].Nome_Agencia">
+                                    <input type="text" disabled="disabled" id="txtNomeAgencia" class="form-control " 
+                                            ng-change="ChangeLogAgencia(ContratoDados.Rateios[currentTab])"
+                                           ng-model="ContratoDados.Rateios[currentTab].Nome_Agencia">
                                 </div>
                             </div>
                         </div>
 
                         <!--===================Log Agência-->
-                        <div class="col-md-2">
+                        <div class="col-md-1">
                             <div class="form-group">
                                 <label class="field-x">Log.</label>
                                 <input style="text-transform:uppercase" type="number" min="1" max="2" name="txtIndica_Log_Agencia" class="form-control numeric" ng-model="ContratoDados.Rateios[currentTab].Indica_Log_Agencia " maxlength="1" />
@@ -334,30 +336,63 @@
                         <!--===================Cliente-->
                         <div class="col-md-3" ng-controller="dictionaryController">
                             <div class="dictionary" dictionary="Terceiro" caption="Cliente">
-                                <input id="txtClientea"
+                                <input id="txtCliente"
                                        ng-model="ContratoDados.Rateios[currentTab].Cod_Cliente"
                                        ng-model-options="{updateOn: 'blur'}"
-                                       ng-change="DicionaryValidate('txtClientea')"
-                                       primarybind="txtClientea"
-                                       secondarybind="txtNomeClientea" />
+                                       ng-change="DicionaryValidate('txtCliente')"
+                                       primarybind="txtCliente"
+                                       secondarybind="txtNomeCliente" />
                             </div>
                         </div>
 
                         <!--===================Nome Clientea -->
                         <div class="col-md-7">
                             <div class="form-group">
-                                <label for="txtNomeClientea" class="field-x" style="visibility:hidden">..</label>
+                                <label for="txtNomeCliente" class="field-x" style="visibility:hidden">..</label>
                                 <div class="input-group">
-                                    <input type="text" disabled="disabled" id="txtNomeClientea" class="form-control " ng-model="ContratoDados.Rateios[currentTab].Nome_Cliente">
+                                    <input type="text" disabled="disabled" id="txtNomeCliente" class="form-control " ng-model="ContratoDados.Rateios[currentTab].Nome_Cliente">
                                 </div>
                             </div>
                         </div>
                         <!--===================Log Cliente-->
-                        <div class="col-md-2">
+                        <div class="col-md-1">
                             <div class="form-group">
                                 <label class="field-x">Log.</label>
                                 <input style="text-transform:uppercase" type="number" min="1" max="2" name="txtIndica_Log_Cliente" class="form-control numeric" ng-model="ContratoDados.Rateios[currentTab].Indica_Log_Cliente " maxlength="1" />
                             </div>
+                        </div>
+                    </div>
+                    <div class="row">
+                        <!--===================Aos Cuidados-->
+                        <div class="col-md-3" ng-controller="dictionaryController">
+                            <div class="dictionary" dictionary="Cliente" caption="Aos Cuidados">
+                                <input id="txtCodCobranca"
+                                       ng-model="ContratoDados.Rateios[currentTab].Cod_Cobranca"
+                                       ng-model-options="{updateOn: 'blur'}"
+                                       ng-change="DicionaryValidate('txtCodCobranca')"
+                                       primarybind="txtCodCobranca"
+                                       style="text-transform:uppercase"
+                                       secondarybind="txtNomeCobranca" />
+                            </div>
+                        </div>
+                        <!----------------Nome aos Cuidados-->
+                        <div class="col-md-6">
+                            <div class="form-group">
+                                <label for="txtNomeCobranca" class="field-x" style="visibility:hidden">..</label>
+                                <div class="input-group">
+                                    <input type="text" disabled="disabled" id="txtNomeCobranca" class="form-control " ng-model="ContratoDados.Rateios[currentTab].Nome_Cobranca">
+                                </div>
+                            </div>
+                        </div>
+                        <!--------------------------Log aos Cuidados-->
+                        <div class="col-md-1">
+                            <div class="form-group">
+                                <label class="field-x">Log.</label>
+                                <input style="text-transform:uppercase" type="number" min="1" max="2" name="Indica_Log_Cobranca" class="form-control numeric" ng-model="ContratoDados.Rateios[currentTab].Indica_Log_Cobranca" maxlength="1" />
+                            </div>
+                        </div>
+                        <div class="col-md-2">
+                            <button  type="button"  class="btn btn-default btn-sm" style="margin-top:35px;height:40px" ng-click="MostraEndereco(ContratoDados.Rateios[currentTab])">Ver Endereços</button>
                         </div>
                     </div>
                     <div class="row">

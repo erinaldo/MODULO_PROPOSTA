@@ -87,7 +87,9 @@ namespace PROPOSTA
             public DateTime Data_Cadastramento { get; set; }
             public String Cod_Usuario { get; set; }
             public String Cod_Cobranca { get; set; }
+            public String Nome_Cobranca{ get; set; }
             public Byte Cod_Endereco_Cobranca { get; set; }
+            public Byte Indica_Log_Cobranca{ get; set; }
             public Int32 Id_Portador{ get; set; }
             public String Nome_Portador { get; set; }
             public List<Rateio_AuxiliarModel> Duplicatas { get; set; }

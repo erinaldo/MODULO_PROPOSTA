@@ -57,7 +57,6 @@ namespace PROPOSTA
         [HttpGet]
         [ActionName("GetNaturezaRegra")]
         [Authorize()]
-
         public IHttpActionResult GetNaturezaRegra([FromUri] ComplementoContratoDados.RegraNaturezaModel Param)
         {
             SimLib clsLib = new SimLib();
@@ -99,13 +98,16 @@ namespace PROPOSTA
                     Cod_Cliente = "",
                     Cod_Agencia = "",
                     Data_Emissao = DateTime.Now.ToString("dd/MM/yyyy"),
-                    Vlr_A_Faturar = "" ,
+                    Vlr_A_Faturar = "",
                     Cod_Condicao = "15DFM",
                     Cod_Veiculo = "",
                     Indica_Log_Agencia = 1,
                     Indica_Log_Cliente = 1,
                     Referencia = "",
-                    Perc_Rateio = "100"
+                    Perc_Rateio = "100",
+                    Cod_Cobranca = "",
+                    Indica_Log_Cobranca = 1
+                    
 
                 });
 
@@ -131,6 +133,27 @@ namespace PROPOSTA
                 Retorno.ComplementoMapas = ComplementoMapas;
                 Retorno.Origem = 3;
                 return Ok(Retorno);
+            }
+            catch (Exception Ex)
+            {
+                clsLib.EmailErrorToSuporte(User.Identity.Name, Ex.Message.ToString(), Ex.Source, Ex.StackTrace);
+                throw new Exception(Ex.Message);
+            }
+        }
+
+        //===========================Get Regra Natureza de servicos
+        [Route("api/Complemento/GetEnderecos")]
+        [HttpPost]
+        [ActionName("ComplementoGetEnderecos")]
+        [Authorize()]
+        public IHttpActionResult ComplementoGetEnderecos([FromBody] ComplementoContratoDados.EnderecoFiltroModel Param)
+        {
+            SimLib clsLib = new SimLib();
+            ComplementoContratoDados Cls = new ComplementoContratoDados(User.Identity.Name);
+            try
+            {
+                DataTable retorno = Cls.ComplementoGetEnderecos(Param);
+                return Ok(retorno);
             }
             catch (Exception Ex)
             {

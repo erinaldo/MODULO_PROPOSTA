@@ -91,6 +91,7 @@
                                    style="width:100px;height:35px"
                                    onblur="this.value =TimeFormat(this)"
                                    onfocus="this.value = TimeUnformat(this);"
+                                    onkeypress="return NumericOnly(event)"
                                    ng-model-options="{updateOn: 'blur'}" />
                         </td>
 
@@ -101,6 +102,7 @@
                                    style="width:100px;height:35px"
                                    onblur="this.value =TimeFormat(this)"
                                    onfocus="this.value = TimeUnformat(this);"
+                                   onkeypress="return NumericOnly(event)"
                                    ng-model-options="{updateOn: 'blur'}" />
                         </td>
                         <td>

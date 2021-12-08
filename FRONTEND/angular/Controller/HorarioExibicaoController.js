@@ -117,7 +117,7 @@
 
             ];
 
-        param.order = [[0, 'desc']];
+        //param.order = [[0, 'desc']];
         param.autoWidth = false;
         param.columns = [];
         for (var i = 0; i < $scope.gridheaders.length; i++) {

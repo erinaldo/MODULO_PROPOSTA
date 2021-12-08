@@ -187,11 +187,14 @@ namespace PROPOSTA
                         Data_Cadastramento = drw["Data_Cadastramento"].ToString().ConvertToDatetime(),
                         Cod_Usuario = drw["Cod_Usuario"].ToString(),
                         Cod_Cobranca = drw["Cod_Cobranca"].ToString(),
+                        Nome_Cobranca = drw["Nome_Cobranca"].ToString(),
                         Cod_Endereco_Cobranca = drw["Cod_Endereco_Cobranca"].ToString().ConvertToByte(),
+                        Indica_Log_Cobranca= drw["Cod_Endereco_Cobranca"].ToString().ConvertToByte(),
                         Id_Portador = drw["Id_Portador"].ToString().ConvertToInt32(),
                         Nome_Portador = drw["Nome_Portador"].ToString(),
                         Duplicatas = AddDuplicatas(pComplemento,drw["Numero_Rateio"].ToString().ConvertToInt32()),
                         
+                       
                     });
                 };
             }

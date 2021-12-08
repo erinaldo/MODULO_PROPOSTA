@@ -500,8 +500,21 @@
         if (newValue != oldValue) {
             $scope.CalculaParcelas();
         }
-
     });
+    //===========================Mudou a Agencia
+    $scope.ChangeAgencia = function (pRateio) {
+        pRateio.Cod_Cobranca = pRateio.Cod_Agencia;
+        for (var i = 0; i < $scope.Agencias.length; i++) {
+            if (pRateio.Cod_Agencia.trim() == $scope.Agencias[i].Codigo.trim()) {
+                pRateio.Nome_Cobranca = $scope.Agencias[i].Descricao;
+                break;
+            };
+        };
+    };
+    //===========================Mudou Log da Agencia
+    $scope.ChangeLogAgencia = function (pRateio) {
+        pRateio.Indica_Log_Cobranca = pRateio.Indica_Log_Agencia;
+    };
     //===========================Gravar o Complemento de Midia
     $scope.SalvarComplemento = function (pComplemento) {
         httpService.Post('SalvarComplemento', pComplemento).then(function (response) {
@@ -510,6 +523,25 @@
             }
             if (response.data[0].Status == 1) {
                 $scope.CarregaContratosComplemento($scope.Filtro,false);
+            };
+        });
+    };
+    //===========================Mostra os Enderecos
+    $scope.MostraEndereco = function (pRateio) {
+        var _data = {
+            'Cod_Empresa_Faturamento': $scope.ContratoDados.Cod_Empresa_Faturamento,
+            'Cod_Agencia': pRateio.Cod_Agencia,
+            'Log_Agencia': pRateio.Indica_Log_Agencia,
+            'Cod_Cliente': pRateio.Cod_Cliente,
+            'Log_Cliente': pRateio.Indica_Log_Cliente,
+            'Cod_Cobranca': pRateio.Cod_Cobranca,
+            'Log_Cobranca': pRateio.Indica_Log_Cobranca,
+        };
+        httpService.Post('Complemento/GetEnderecos', _data).then(function (response) {
+            
+            if (response.data) {
+                $scope.Enderecos = response.data;
+                $("#modalDadosEndereco").modal(true);
             };
         });
     };

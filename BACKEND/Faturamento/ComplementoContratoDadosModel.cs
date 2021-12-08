@@ -53,12 +53,15 @@ namespace PROPOSTA
             public int Numero_Rateio { get; set; }
             public String Cod_Cliente { get; set; }
             public String Cod_Agencia { get; set; }
+            public String Cod_Cobranca{ get; set; }
+            public String Nome_Cobranca { get; set; }
             public String Vlr_A_Faturar { get; set; }
             public String Data_Emissao { get; set; }
             public String Cod_Condicao { get; set; }
             public String Cod_Veiculo { get; set; }
             public int Indica_Log_Agencia { get; set; }
             public int Indica_Log_Cliente { get; set; }
+            public int Indica_Log_Cobranca{ get; set; }
             public String Referencia { get; set; }
             public Int32 Id_Portador { get; set; }
             public String Nome_Portador { get; set; }
@@ -109,6 +112,19 @@ namespace PROPOSTA
             public String Vencimento{ get; set; }
             public String Valor { get; set; }
             public String Dia_Semana{ get; set; }
+
+        }
+        public class EnderecoFiltroModel
+        {
+            public String Cod_Empresa_Faturamento { get; set; }
+            public String Cod_Agencia{ get; set; }
+            public Byte Log_Agencia{ get; set; }
+            public String Cod_Cliente{ get; set; }
+            public Byte Log_Cliente{ get; set; }
+            public String Cod_Cobranca{ get; set; }
+            public Byte Log_Cobranca{ get; set; }
+
+
 
         }
     }
