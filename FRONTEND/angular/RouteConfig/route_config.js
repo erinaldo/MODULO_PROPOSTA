@@ -1183,7 +1183,7 @@
             authorize: true,
             controller: 'NucleoCadastroController',
             routeName: 'Edição do Nucleo',
-            RouteId: 'NucleoCadastro@New'
+            RouteId: 'Nucleo@New'
         })
     .when('/report', {
         templateUrl: 'view/MenuReport.html',

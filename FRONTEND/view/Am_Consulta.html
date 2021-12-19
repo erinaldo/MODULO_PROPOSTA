@@ -218,7 +218,7 @@
                         <tr ng-repeat="am in Ams track by $index" on-finish-render="ngRepeatFinished()">
                             <td style="width:50px; text-align:center">
 
-                                <a class="btn btn-sm btn-primary" ng-show="!am.Solucao" href="#Am_Compensacao/{{am.Cod_Empresa}}/{{am.Numero_MR}}/{{am.Sequencia_MR}}/{{am.Numero_Docto}}/{{am.Cod_Veiculo}}">
+                                <a class="btn btn-sm btn-default" ng-show="!am.Solucao" href="#Am_Compensacao/{{am.Cod_Empresa}}/{{am.Numero_MR}}/{{am.Sequencia_MR}}/{{am.Numero_Docto}}/{{am.Cod_Veiculo}}">
                                     Compensar
                                 </a>
                                 <button class="btn btn-sm btn-danger" ng-show="am.Solucao" ng-click="ReabrirAm(am)" ng-disabled="!PermissaoReabrir">
@@ -226,18 +226,12 @@
                                 </button>
 
                             </td>
-                            <!--<td ng-hide="!PermissaoReencaixe">
-                                <a data-toggle="tooltip" data-placement="top" title="Reencaixe de Falhas" 
-                                   ng-show="PermissaoReencaixe && !am.Solucao && am.Indica_Desencaixe ==1"
-                                   href="#Am_Reencaixe/{{am.Cod_Empresa}}/{{am.Numero_MR}}/{{am.Sequencia_MR}}/{{am.Numero_Docto}}/{{am.Competencia}}/{{am.Cod_Veiculo}}">
-                                    <span class="fa fa-edit fa-crud"></span>
-                                </a>
-                            </td>-->
                             <td ng-hide="!PermissaoReencaixe">
-                                <span class="fa fa-edit fa-crud span-btn" 
-                                      ng-click="Reencaixar(am)"
-                                      ng-show="PermissaoReencaixe && !am.Solucao && am.Indica_Desencaixe ==1">
-                                </span> 
+                                <button class="btn btn-sm btn-default"
+                                        ng-click="Reencaixar(am)"
+                                        ng-show="PermissaoReencaixe && !am.Solucao && am.Indica_Desencaixe ==1">
+                                    Reencaixar
+                                </button> 
                             </td>
 
                             <td>{{::am.Numero_Docto}}</td>

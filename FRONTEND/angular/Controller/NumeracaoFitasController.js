@@ -21,6 +21,7 @@
     { 'title': 'Apresentador', 'visible': true, 'searchable': true, 'config': true, 'sortable': true },
     { 'title': 'Localização', 'visible': true, 'searchable': true, 'config': true, 'sortable': true },
     ];
+    $scope.yPosition = (window.scrollY);
     //====================Inicializa o Filtro
     $scope.Filtro = {};
     $scope.NewFiltro = function () {
@@ -77,6 +78,7 @@
     };
     //====================Carrega o Grid para Numeracao
     $scope.CarregarNumeracao = function (pFita) {
+        $scope.yPosition = (window.scrollY);
         $rootScope.routeloading = true;
         $scope.NumeracaoFitas = "";
         httpService.Post("ExibirVeiculosFitas",pFita).then(function (response) {
@@ -86,6 +88,18 @@
             }
         });
     };
+    //====================Cancelar janela Numeracao
+    $scope.CancelarNumeracao = function()
+    {
+        console.log("passou")
+        console.log($scope.yPosition);
+        $scope.NumeracaoFitas = '';
+        $scope.CurrentShow = 'Grid';
+        setTimeout(function () {
+            window.scroll(0, $scope.yPosition);
+        }, 100)
+    }
+
     //====================Formata o Numero da Fita
     $scope.FormataNumeroFita = function (pNumeroFita) {
         if (pNumeroFita.Numero_Fita) {

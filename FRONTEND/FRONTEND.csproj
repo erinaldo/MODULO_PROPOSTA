@@ -169,6 +169,7 @@
     <Content Include="angular\Controller\PropagacaoMapaController.js" />
     <Content Include="angular\Controller\ReabreCEController.js" />
     <Content Include="angular\Controller\RetornarEMSController.js" />
+    <Content Include="angular\Controller\RetornoPlaylistController - Copy.js" />
     <Content Include="angular\Controller\RetornoPlaylistController.js" />
     <Content Include="angular\Controller\RoteiroMerchaController.js" />
     <Content Include="angular\Controller\TabelaPrecoImportacaoController.js" />
@@ -343,6 +344,7 @@
     <Content Include="js\vendor\XTABLES\Buttons-1.5.1\css\common.scss" />
     <Content Include="js\vendor\XTABLES\Buttons-1.5.1\css\mixins.scss" />
     <Content Include="js\vendor\XTABLES\language\Pt_BR.json" />
+    <Content Include="template\ModalFitaOrdenada.html" />
     <Content Include="template\RoteiroConsistencia.html" />
     <Content Include="template\DadosEndereco.html" />
     <Content Include="template\Roteiro_Dados_Comercial.html" />

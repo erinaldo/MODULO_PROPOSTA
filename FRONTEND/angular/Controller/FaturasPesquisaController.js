@@ -59,6 +59,8 @@
     
     $scope.gridheaders = [/*{ 'title': '', 'visible': true, 'searchable': false, 'sortable': false },*/ //- se nao tem a coluna no grid nao pode ter no config
         { 'title': 'Fatura', 'visible': true, 'searchable': true, 'sortable': true },
+        { 'title': 'Selo Fiscal', 'visible': true, 'searchable': true, 'sortable': true },
+        { 'title': 'Cancelada', 'visible': true, 'searchable': true, 'sortable': true },
         { 'title': 'Negociação', 'visible': true, 'searchable': true, 'sortable': true },
         { 'title': 'Origem', 'visible': true, 'searchable': true, 'sortable': true },
         { 'title': 'Emp.Fat', 'visible': true, 'searchable': true, 'sortable': true },
@@ -72,7 +74,7 @@
         { 'title': 'Vlr.Pago', 'visible': true, 'searchable': true, 'sortable': true },
         { 'title': 'Vlr.Liqui.', 'visible': true, 'searchable': true, 'sortable': true },
         { 'title': 'Nat.Serviço', 'visible': true, 'searchable': true, 'sortable': true },
-        { 'title': 'Cancelada', 'visible': true, 'searchable': true, 'sortable': true },
+        
     ];
 
     //====================Quando terminar carga do grid, torna view do grid visible

@@ -404,7 +404,7 @@ namespace PROPOSTA
             {
                 iTextSharp.text.Image logo = iTextSharp.text.Image.GetInstance(sPathLogo);
                 logo.SetAbsolutePosition(15, 770);
-                //logo.ScalePercent(50);
+                logo.ScalePercent(70);
                 dd.Add(logo);
             }
 

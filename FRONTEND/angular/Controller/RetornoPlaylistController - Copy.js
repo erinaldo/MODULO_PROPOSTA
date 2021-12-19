@@ -1,4 +1,4 @@
-﻿angular.module('App').controller('RetornoPlayListController', ['$scope', 'orderByFilter', '$rootScope', 'httpService', '$location', '$timeout', function ($scope, orderByFilter, $rootScope, httpService, $location, $timeout) {
+﻿angular.module('App').controller('RetornoPlayListController', ['$scope', '$rootScope', 'httpService', '$location', '$timeout', function ($scope, $rootScope, httpService, $location, $timeout) {
 
     //------------------- Inicializa Scopes --------------------
     $scope.ShowFilter = true;
@@ -8,28 +8,22 @@
     $scope.Parametros = "";
     $scope.Veiculacoes = [];
     $scope.DownloadUrl = $rootScope.baseUrl + 'ANEXOS\\RETORNO_PLAYLIST\\';
-    $scope.gridheaders = [{ 'title': '', 'visible': true, 'searchable': false, 'sortable': false, 'currentSort': 0, 'fieldName': '' },
-        { 'title': '', 'visible': true, 'searchable': false, 'sortable': false,'currentSort':0 ,'fieldName':''},
-   { 'title': 'Veículo', 'visible': true, 'searchable': true, 'sortable': true, 'currentSort': 0, 'fieldName': 'Cod_Veiculo' },
-   { 'title': 'Data Exib', 'visible': true, 'searchable': true, 'sortable': true, 'currentSort': 0, 'fieldName': 'Data_Exibicao' },
-   { 'title': 'Programa', 'visible': true, 'searchable': true, 'sortable': true, 'currentSort': 0, 'fieldName': 'Cod_Programa' },
-   { 'title': 'Ch.Acesso', 'visible': true, 'searchable': true, 'sortable': true, 'currentSort': 0, 'fieldName': 'Chave_Acesso' },
-   { 'title': 'Fita', 'visible': true, 'searchable': true, 'sortable': true, 'currentSort': 0, 'fieldName': 'Numero_Fita' },
-   { 'title': 'Título', 'visible': true, 'searchable': true, 'sortable': true, 'currentSort': 0, 'fieldName': 'Titulo_Comercial' },
-   { 'title': 'Qual', 'visible': true, 'searchable': true, 'sortable': true, 'currentSort': 0, 'fieldName': 'Cod_Qualidade' },
-   { 'title': 'Horário', 'visible': true, 'searchable': true, 'sortable': true, 'currentSort': 0, 'fieldName': 'Horario_Exibicao' },
-   { 'title': 'C.E', 'visible': true, 'searchable': true, 'sortable': true, 'currentSort': 0, 'fieldName': 'Numero_Ce' },
-   { 'title': 'Baixado', 'visible': true, 'searchable': true, 'sortable': true, 'currentSort': 0, 'fieldName': '' },
-    { 'title': 'Dur.Sctv', 'visible': true, 'searchable': true, 'sortable': true, 'currentSort': 0, 'fieldName': 'Duracao' },
-    { 'title': 'Dur.Exibidor', 'visible': true, 'searchable': true, 'sortable': true, 'currentSort': 0, 'fieldName': 'Duracao_Exibidor' },
-    { 'title': 'Dif', 'visible': true, 'searchable': true, 'sortable': true, 'currentSort': 0, 'fieldName': 'Diferenca' },
-    { 'title': 'Perc', 'visible': true, 'searchable': true, 'sortable': true, 'currentSort': 0, 'fieldName': 'Pct_Exibido' },
+    $scope.gridheaders = [{ 'title': '', 'visible': true, 'searchable': false, 'sortable': false },
+   { 'title': 'Veiculo', 'visible': true, 'searchable': true, 'sortable': true },
+   { 'title': 'Data', 'visible': true, 'searchable': true, 'sortable': true },
+   { 'title': 'Programa Falha', 'visible': true, 'searchable': true, 'sortable': true },
+   { 'title': 'Ch.Acesso', 'visible': true, 'searchable': true, 'sortable': true },
+   { 'title': 'Fita', 'visible': true, 'searchable': true, 'sortable': true },
+   { 'title': 'Título', 'visible': true, 'searchable': true, 'sortable': true },
+   { 'title': 'Qual', 'visible': true, 'searchable': true, 'sortable': true },
+   { 'title': 'Horário', 'visible': true, 'searchable': true, 'sortable': true },
+   { 'title': 'C.E', 'visible': true, 'searchable': true, 'sortable': true },
+   { 'title': 'Baixado', 'visible': true, 'searchable': true, 'sortable': true },
+    { 'title': 'Dur.Sctv', 'visible': true, 'searchable': true, 'sortable': true },
+    { 'title': 'Dur.Exibidor', 'visible': true, 'searchable': true, 'sortable': true },
+    { 'title': 'Dif', 'visible': true, 'searchable': true, 'sortable': true },
+    { 'Perc': 'Perc', 'visible': true, 'searchable': true, 'sortable': true },
     ];
-    $scope.orderBy = "Horario_Exibicao";
-    $scope.pdfFieldSort = "Horario_Exibicao";
-    $scope.pdfTypeSort = "asc";
-
-    $scope.sorticon = ['fa fa-sort','fa fa-sort-desc','fa fa-sort-asc']
     //------------------- Novo Filtro ------------------------
     $scope.NewFilter = function () {
         $scope.Parametros = {
@@ -53,13 +47,13 @@
     $scope.NewFilter();
 
     //====================Quando terminar carga do grid, torna view do grid visible
-    //$scope.RepeatFinished = function () {
-    //    $rootScope.routeloading = false;
-    //    $scope.ConfiguraGrid();
-    //    setTimeout(function () {
-    //        $("#dataTable").dataTable().fnAdjustColumnSizing();
-    //    }, 10)
-    //};
+    $scope.RepeatFinished = function () {
+        $rootScope.routeloading = false;
+        $scope.ConfiguraGrid();
+        setTimeout(function () {
+            $("#dataTable").dataTable().fnAdjustColumnSizing();
+        }, 10)
+    };
     //------------------- Carrega os Dados ------------------------
     $scope.RetornoPlayListCarregaDados = function (pParam) {
         //-----Só carrega os dados após digitação de Veiculo e Data Exibição
@@ -77,7 +71,6 @@
         httpService.Get(_url).then(function (response) {
             if (response) {
                 $scope.Parametros = response.data;
-                $scope.SortClick($scope.gridheaders[9]);
             }
         });
     };
@@ -130,32 +123,34 @@
         });
     };
     //====================Funcao para configurar o Grid
-    //$scope.ConfiguraGrid = function () {
-    //    param = {};
-    //    param.language = fnDataTableLanguage();
-    //    param.lengthMenu = [[7, 10, 25, 50, -1], [7, 10, 25, 50, "Todos"]];
-    //    param.pageLength = 7;
-    //    param.scrollCollapse = true;
-    //    param.paging = true;
+    $scope.ConfiguraGrid = function () {
+        param = {};
+        param.language = fnDataTableLanguage();
+        param.lengthMenu = [[7, 10, 25, 50, -1], [7, 10, 25, 50, "Todos"]];
+        param.pageLength = 7;
+        param.scrollCollapse = true;
+        param.paging = true;
 
-    //    param.dom = "<'row'<'col-sm-3'l><'col-sm-5'B>>" + "<'row'<'col-sm-12'tr>>" + "<'row'<'col-sm-5'i><'col-sm-7'p>>",
-    //        param.buttons = [
-    //            {
-    //                text: 'Exportar<span class="fa fa-file-excel-o margin-left-10" style="color:white"></span>', type: 'excel', className: 'btn btn-warning HideButton', extend: 'excel', exportOptions: {
-    //                    columns: ':visible:not(:first-child)'
-    //                }
-    //            }
-    //        ];
-    //    param.order = [[0, 'asc']];
-    //    param.autoWidth = false;
-    //    param.columns = [];
-    //    for (var i = 0; i < $scope.gridheaders.length; i++) {
-    //        param.columns.push({ "visible": $scope.gridheaders[i].visible, "searchable": $scope.gridheaders[i].searchable, "sortable": $scope.gridheaders[i].sortable });
-    //    }
-    //    $('#dataTable').DataTable(param);
-    //};
-    ////-------------Processar Baixar------------------------------
+        param.dom = "<'row'<'col-sm-3'l><'col-sm-5'B>>" + "<'row'<'col-sm-12'tr>>" + "<'row'<'col-sm-5'i><'col-sm-7'p>>",
+            param.buttons = [
+                {
+                    text: 'Exportar<span class="fa fa-file-excel-o margin-left-10" style="color:white"></span>', type: 'excel', className: 'btn btn-warning HideButton', extend: 'excel', exportOptions: {
+                        columns: ':visible:not(:first-child)'
+                    }
+                }
+            ];
+        param.order = [[0, 'asc']];
+        param.autoWidth = false;
+        param.columns = [];
+        for (var i = 0; i < $scope.gridheaders.length; i++) {
+            param.columns.push({ "visible": $scope.gridheaders[i].visible, "searchable": $scope.gridheaders[i].searchable, "sortable": $scope.gridheaders[i].sortable });
+        }
+        $('#dataTable').DataTable(param);
+    };
+    //-------------Processar Baixar------------------------------
     $scope.ProcessarBaixa = function (pVeiculacoes) {
+
+
         swal({
             title: "Essa Operação irá baixar todas as Veiculações em todas as Pastas. Confirma ? ",
             //type: "warning",
@@ -197,7 +192,7 @@
     }
     //===============Clicou na lupa de qualidade
     $scope.PesquisaQualidade = function (pQualidade) {
-
+        7
         $scope.PesquisaTabelas = NewPesquisaTabela();
         httpService.Get('ListarTabela/Qualidade').then(function (response) {
             if (response.data) {
@@ -214,9 +209,6 @@
     $scope.ValidarQualidade = function (pCodQualidade) {
         if (pCodQualidade.Cod_Qualidade == "") {
             return;
-        };
-        if (pCodQualidade.Cod_Qualidade.toUpperCase() == 'VEI') {
-            return;
         }
         if (pCodQualidade.Cod_Qualidade == pCodQualidade.Cod_Qualidade_Ant) {
             return;
@@ -227,6 +219,7 @@
                     ShowAlert(response.data[0].Mensagem)
                     pCodQualidade.Cod_Qualidade = pCodQualidade.Cod_Qualidade_Ant;
                     pCodQualidade.Horario_Exibicao = "";
+
                     return;
                 }
                 if (response.data[0].Critica == 1) {
@@ -254,6 +247,9 @@
 
     //===========================Imprimir retorno pdf
     $scope.GerarPdf = function (pVeiculacao, pStatus) {
+
+        var table = $('#dataTable').DataTable();
+        var order = table.order();
         var _data = [];
         for (var i = 0; i < pVeiculacao.length; i++) {
             if (pVeiculacao[i].Status == pStatus) {
@@ -264,8 +260,9 @@
             ShowAlert("Não ha dados a ser Impresso.")
             return;
         }
-        _data[0].SortOrder = $scope.pdfFieldSort;
-        _data[0].SortType = $scope.pdfTypeSort;
+        _data[0].SortOrder = order[0][0];
+        _data[0].SortType= order[0][1];
+
         
         httpService.Post("RetornoPlayGerarPdf/", _data).then(function (response) {
             if (response.data) {
@@ -288,55 +285,10 @@
         $scope.ShowFilter = true;
     }
 
-    //===========================Sort Column
-    $scope.SortClick = function (pHeader) {
-        for (var i = 0; i < $scope.gridheaders.length; i++) {
-            if (pHeader.title != $scope.gridheaders[i].title) {
-                $scope.gridheaders[i].currentSort = 0;
-            }     
-        };
-        pHeader.currentSort++
-        if (pHeader.currentSort > 2) {
-            pHeader.currentSort = 1
-        };
-        //$scope.orderBy = (pHeader.currentSort == 1 ? '' : '-') + pHeader.fieldName;
-        $scope.pdfFieldSort = pHeader.fieldName;
-        $scope.pdfTypeSort = (pHeader.currentSort == 1 ? 'ASC' : 'DESC')
-
-        var _reverse = false;
-        if ($scope.pdfTypeSort.toUpperCase() == 'DESC') {
-            _reverse = true;
-        };
-        angular.forEach(orderByFilter($scope.Veiculacoes, $scope.pdfFieldSort, _reverse), function (value, key) {
-            value["Chave"] = value[$scope.pdfFieldSort];
-        });
-        $scope.orderBy = (pHeader.currentSort == 1 ? '' : '-') + 'Chave';
-    }
-    //===========================Procurar Fita no Roteiro
-    $scope.ProcurarRoteiro = function (pFiltro) {
-        var _url = 'ConsultaFitasOrdenadasListar';
-        _url += '?Cod_Veiculo=' + $scope.Parametros.Cod_Veiculo;
-        _url += '&Data_Inicio=' + $scope.Parametros.Data_Exibicao;
-        _url += '&Data_Fim=' + $scope.Parametros.Data_Exibicao;
-        _url += '&Numero_Fita_Inicio=' + pFiltro.Numero_Fita;
-        _url += '&Numero_Fita_Fim=' + pFiltro.Numero_Fita;
-        _url += '&';
-        httpService.Get(_url).then(function (response) {
-            if (response) {
-                if (response.data.length > 0) {
-                    $scope.ConsultaFitasOrdenadaS = response.data;
-                    $("#modaFitaOrdenada").modal(true);
-                }
-                else {
-                    ShowAlert("Fita não encontrada no Roteiro.")
-                }
-            };
-        });
-    }
     //===========================Evento chamado ao fim do ngrepeat ao carregar grid 
-    //$scope.$on('ngRepeatFinished', function (ngRepeatFinishedEvent) {
-    //    $scope.RepeatFinished();
-    //});
+    $scope.$on('ngRepeatFinished', function (ngRepeatFinishedEvent) {
+        $scope.RepeatFinished();
+    });
     //===========================fim do load da pagina
     //$scope.$watch('$viewContentLoaded', function () {
     //    $scope.ConfiguraGrid();

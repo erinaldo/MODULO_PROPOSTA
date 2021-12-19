@@ -162,13 +162,15 @@
     <div class="block" id="divGrid" ng-show="ShowGrid">
         <div id="divGrid" class="table-responsive">
             <!--===================================Botoes
-            <!--<button class="btn btn-success" ng-click="RateioImportarSalvar(Rateios)">Salvar Rateios</button>-->
+        <!--<button class="btn btn-success" ng-click="RateioImportarSalvar(Rateios)">Salvar Rateios</button>-->
             <!--<a href="#MrConsulta" class="btn btn-warning">Cancelar</a>-->
             <div class="table-responsive">
                 <table id="dataTable" class="table table-striped table-bordered">
                     <thead>
                         <tr>
                             <th style="text-align:center">Fatura</th>
+                            <th style="text-align:center">Selo Fical</th>
+                            <th></th>
                             <th style="text-align:center">Negociação</th>
                             <th>Origem</th>
                             <th style="text-align:center">Emp.Fat</th>
@@ -182,7 +184,7 @@
                             <th style="text-align:right">Vlr.Pago</th>
                             <th style="text-align:right">Vlr.Liqui.</th>
                             <th>Nat.Serv.</th>
-                            <th></th>
+
                         </tr>
                     </thead>
                     <tbody>
@@ -191,6 +193,10 @@
                                 <button class="btn btn-default btn-sm" ng-click="ShowFatura(Fatura)">
                                     {{::Fatura.Numero_Fatura}}
                                 </button>
+                            </td>
+                            <td style="text-align:center">{{::Fatura.Numero_Selo_Fiscal}}</td>
+                            <td>
+                                <label class="label label-danger" ng-show="Fatura.Data_Cancelamento">Can</label>
                             </td>
                             <td style="text-align:center">{{::Fatura.Numero_Negociacao}}</td>
                             <td>
@@ -204,19 +210,23 @@
                             <td style="text-align:center">{{::Fatura.Sequencia_Mr}}</td>
                             <td>{{::Fatura.Produto}}</td>
                             <td>{{::Fatura.Cod_Agencia}}-{{::Fatura.Nome_Agencia}}</td>
-                            <td>{{::Fatura.Cod_Cliente}}-{{::Fatura.Nome_Cliente}}</td>
-                            <td style="text-align:right">{{::Fatura.Vlr_Bruto | currency}}</td>
-                            <td style="text-align:right">{{::Fatura.Vlr_Comissao | currency}}</td>
-                            <td style="text-align:right">{{::Fatura.Vlr_Pago | currency}}</td>
-                            <td style="text-align:right">{{::Fatura.Vlr_Liquido | currency}}</td>
-                            <td>{{::Fatura.Cod_Natureza}}</td>
+                            <!--<td>{{::Fatura.Cod_Cliente}}-{{::Fatura.Nome_Cliente}}</td>-->
                             <td>
-                                <label class="label label-danger" ng-show="Fatura.Data_Cancelamento">Cancelada</label>
-                            </td>
-                        </tr>
-                    </tbody>
-                </table>
-            </div>
+                                <div class="AppToolTip">
+                                    {{::Fatura.Nome_Cliente}}
+                                <span class="AppToolTipText AppToolTipBottom">{{Fatura.CNPJ_Cliente}}</span>
+                            </div>
+            </td>
+
+            <td style="text-align:right">{{::Fatura.Vlr_Bruto | currency}}</td>
+            <td style="text-align:right">{{::Fatura.Vlr_Comissao | currency}}</td>
+            <td style="text-align:right">{{::Fatura.Vlr_Pago | currency}}</td>
+            <td style="text-align:right">{{::Fatura.Vlr_Liquido | currency}}</td>
+            <td>{{::Fatura.Cod_Natureza}}</td>
+            </tr>
+            </tbody>
+            </table>
+        </div>
         </div>
     </div>
     <!--------------Div dos Dados-------------------------------------------------------------------------------------------------------------------------------------------->
@@ -507,7 +517,7 @@
                     <div class="form-group">
                         <div class="input-group" style="display:flex">
                             <div class="app-checkbox">
-                                <label><input type="checkbox"  ng-disabled="FaturaDados.Indica_Cancelado" name="app-checkbox-1" ng-model="FaturaDados.Reemissao" />Reemissão da Fatura<span></span></label>
+                                <label style="font-weight:bold;color:red"><input type="checkbox"  ng-disabled="FaturaDados.Indica_Cancelado" name="app-checkbox-1" ng-model="FaturaDados.Reemissao" />Reemissão da Fatura<span></span></label>
                             </div>
                         </div>
                     </div>

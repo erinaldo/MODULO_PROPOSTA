@@ -409,6 +409,9 @@
     };
     //===========================Recalcula as parcelas();
     $scope.CalculaParcelas = function () {
+        if (!$scope.ContratoDados.Rateios) {
+            return;
+        }
         if (!$scope.ContratoDados.Rateios[$scope.currentTab].Data_Emissao) {
             return;
         }

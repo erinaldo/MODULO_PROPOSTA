@@ -45,7 +45,7 @@ namespace PROPOSTA
                 SqlDataAdapter Adp = new SqlDataAdapter();
                 Adp.SelectCommand = cmd;
                 Adp.SelectCommand.Parameters.AddWithValue("@Par_Retorno", xmlRetorno);
-                Adp.SelectCommand.Parameters.AddWithValue("@Par_Order_Column", Filtro[0].SortOrder);
+                Adp.SelectCommand.Parameters.AddWithValue("@Par_Order_ColumnName", Filtro[0].SortOrder);
                 Adp.SelectCommand.Parameters.AddWithValue("@Par_Order_Type", Filtro[0].SortType );
                 
                 Adp.Fill(dtbEsquema);

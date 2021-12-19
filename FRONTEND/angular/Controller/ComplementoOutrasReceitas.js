@@ -349,6 +349,7 @@
         };
         httpService.Post('Complemento/GetEnderecos', _data).then(function (response) {
             if (response.data) {
+                console.log("psss1");
                 $scope.Enderecos = response.data;
                 $("#modalDadosEndereco").modal(true);
             };

@@ -64,10 +64,14 @@
 
     $scope.CarregarConsultaFitasOrdenadas = function (pFiltro) {
         $scope.ConsultaFitasOrdenadaS = [];
-        //if (!pFiltro.Cod_Veiculo) {
-        //    ShowAlert("Codigo veículo é um filtro obrigatório");
-        //    return;
-        //}
+        if (!pFiltro.Cod_Veiculo) {
+            ShowAlert("Codigo veículo é um filtro obrigatório");
+            return;
+        };
+        if (!pFiltro.Numero_Fita_Inicio && !pFiltro.Data_Inicio) {
+            ShowAlert("Preencha Numero de Fita ou Período.");
+            return;
+        }
         localStorage.setItem('ConsultaFitasOrdenadas_filter', JSON.stringify($scope.Filtro));
         $scope.CurrentShow = '';
         $('#dataTable').dataTable().fnDestroy();

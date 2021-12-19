@@ -14,8 +14,7 @@
         { 'Id': 9, 'Key': 'R0179', 'Title': 'TRE' },
         { 'Id': 10, 'Key': 'R0085', 'Title': 'Vendas por Contato' },
         { 'Id': 11, 'Key': 'R0010', 'Title': 'Veiculacoes Sem Faturamento' },
-        { 'Id': 12, 'Key': 'R0021', 'Title': 'Resumo das Disponibilidades' },
-        { 'Id': 13, 'Key': 'R0161', 'Title': 'Veiculacoes' },
+        { 'Id': 12, 'Key': 'R0161', 'Title': 'Veiculacoes' },
 
 
     ];

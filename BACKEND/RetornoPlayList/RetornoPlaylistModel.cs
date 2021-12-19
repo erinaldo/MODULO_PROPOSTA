@@ -63,7 +63,7 @@ namespace PROPOSTA
             public Boolean Indica_Estouro_Tolerancia { get; set; }
             public Boolean Indica_Critica { get; set; } 
             public String Mensagem_Critica { get; set; }
-            public Int32 SortOrder{ get; set; }
+            public String SortOrder{ get; set; }
             public String SortType { get; set; }
         }
         public class AnexoModel

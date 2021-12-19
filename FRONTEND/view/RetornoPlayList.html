@@ -223,11 +223,18 @@
             </div>
         </div>
         <!-----------------------Grid-->
-        <div class="table-responsive">
-            <table id="dataTable" class="table table-striped table-bordered">
+        <div class="table-responsive" style="max-height:500px">
+            <table class="table table-striped table-bordered">
                 <thead>
                     <tr>
-                        <th></th>
+
+                        <th ng-repeat="head in gridheaders track by $index">
+                            <span class="span-btn" ng-show="head.visible" ng-click="SortClick(head)">
+                                {{head.title}}
+                                <!--<span class="pull-right margin-top-5" ng-click="SortClick(head)" ng-class="sorticon[head.currentSort]" ng-show="head.sortable"></span>-->
+                            </span>
+                        </th>
+                        <!--<th></th>
                         <th>Veículo</th>
                         <th>Data Exib</th>
                         <th>Programa</th>
@@ -241,21 +248,23 @@
                         <th>Dur.Sctv</th>
                         <th>Dur. Exibidor</th>
                         <th>Dif.</th>
-                        <th>% Exib.</th>
+                        <th>% Exib.</th>-->
                     </tr>
                 </thead>
                 <tbody>
-                    <!--<tr ng-repeat="veiculacao in Veiculacoes | filter: {Status:currentTab}" on-finish-render="ngRepeatFinished()">-->
-                    <tr ng-repeat="veiculacao in Veiculacoes track by $index" on-finish-render="ngRepeatFinished()" ng-show="veiculacao.Status==currentTab">
+                    <tr ng-repeat="veiculacao in Veiculacoes | filter: {Status:currentTab} | orderBy: orderBy">
                         <td>
                             <label class="label label-success" ng-show="veiculacao.Indica_Processado">Processado</label>
                             <label class="label label-danger" ng-show="veiculacao.Mensagem_Critica">{{veiculacao.Mensagem_Critica}}</label>
+                        </td>
+                        <td>
+                            <button type="button" class="btn btn-default btn-sm" ng-click="ProcurarRoteiro(veiculacao)">Procurar no Roteiro</button>
                         </td>
                         <td>{{veiculacao.Cod_Veiculo}}</td>
                         <td>{{veiculacao.Data_Exibicao | date:"dd/MM/yyyy"}}</td>
                         <td>{{veiculacao.Cod_Programa}}</td>
                         <td>{{veiculacao.Chave_Acesso}}</td>
-                        <td>{{veiculacao.Numero_Fita}}</td>
+                        <td>  {{veiculacao.Numero_Fita}}</td>
                         <td>{{veiculacao.Titulo_Comercial}}</td>
                         <td style="width:100px">
                             <span ng-show="veiculacao.Status!=1  || veiculacao.Indica_Processado || veiculacao.Cod_Qualidade_Anterior">{{veiculacao.Cod_Qualidade || veiculacao.Numero_Ce}}</span>
@@ -283,6 +292,7 @@
                                    onkeypress="return NumericOnly(event)"
                                    ng-change="ValidarHorario(veiculacao)"
                                    onblur="this.value =TimeFormat(this)"
+                                   ng-keypress="LimparOrderBy()"
                                    onfocus="this.value = TimeUnformat(this);"
                                    ng-model-options="{updateOn: 'blur'}" />
                         </td>
@@ -325,6 +335,7 @@
 </div>
 <div ng-include="'template/SelectItem.html'"></div>
 <div ng-include="'template/PesquisaTabela.html'"></div>
+<div ng-include="'template/ModalFitaOrdenada.html'"></div>
 <script type="text/javascript">
     $(document).ready(function () {
         GetDictionary();

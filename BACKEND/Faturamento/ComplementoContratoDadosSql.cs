@@ -27,9 +27,9 @@ namespace PROPOSTA
 
                     DataTable dtb = new DataTable("dtb");
                     SqlCommand cmd = cmd = new SqlCommand();
-                    
 
-                    if (pFiltro[i].Origem==1) //-----Complemento de Contrato Midia 
+
+                    if (pFiltro[i].Origem == 1) //-----Complemento de Contrato Midia 
                     {
                         cmd = cnn.Procedure(cnn.Connection, "sp_Pendente_Complemento");
                         cmd.Parameters.AddWithValue("@Par_Numero_Negociacao", DBNull.Value);
@@ -56,21 +56,24 @@ namespace PROPOSTA
                     }
                     SqlDataAdapter Adp = new SqlDataAdapter(cmd);
                     Adp.Fill(dtb);
-                    if (dtb.Rows.Count>0)
+                    if (dtb.Rows.Count > 0)
                     {
-                        if (i==0) // carrega dados somente do 1. contrato e acumula o valor de todos 
+                        if (i == 0) // carrega dados somente do 1. contrato e acumula o valor de todos 
                         {
                             dados.Cod_Empresa = dtb.Rows[0]["Cod_Empresa"].ToString();
                             dados.Numero_Negociacao = dtb.Rows[0]["Numero_Negociacao"].ToString().ConvertToInt32();
                             dados.Cod_Nucleo = dtb.Rows[0]["Cod_Nucleo"].ToString();
                             dados.Cod_Contato = dtb.Rows[0]["Cod_Contato"].ToString();
-                            if (!string.IsNullOrEmpty(dtb.Rows[0]["Periodo_Inicial"].ToString()))
+                            if (pFiltro[i].Origem == 1)
                             {
-                                dados.Periodo_Inicial = dtb.Rows[0]["Periodo_Inicial"].ToString().ConvertToDatetime().ToString("dd/MM/yyyy");
-                            }
-                            if (!string.IsNullOrEmpty(dtb.Rows[0]["Periodo_Final"].ToString()))
-                            {
-                                dados.Periodo_Inicial = dtb.Rows[0]["Periodo_Final"].ToString().ConvertToDatetime().ToString("dd/MM/yyyy");
+                                if (!string.IsNullOrEmpty(dtb.Rows[0]["Periodo_Inicial"].ToString()))
+                                {
+                                    dados.Periodo_Inicial = dtb.Rows[0]["Periodo_Inicial"].ToString().ConvertToDatetime().ToString("dd/MM/yyyy");
+                                }
+                                if (!string.IsNullOrEmpty(dtb.Rows[0]["Periodo_Final"].ToString()))
+                                {
+                                    dados.Periodo_Inicial = dtb.Rows[0]["Periodo_Final"].ToString().ConvertToDatetime().ToString("dd/MM/yyyy");
+                                }
                             }
                             dados.Cod_Intermediario = "";
                             dados.Descricao = "";
@@ -80,8 +83,8 @@ namespace PROPOSTA
                             dados.Indica_Venda_Net = false;
                             dados.Indica_Faturamento_liquido = dtb.Rows[0]["Indica_Faturamento_liquido"].ToString().ConvertToBoolean();
                             dados.Numero_Mr = dtb.Rows[0]["Numero_Mr"].ToString().ConvertToInt32();
-                            dados.Sequencia_Mr= dtb.Rows[0]["Sequencia_Mr"].ToString().ConvertToInt32();
-                            dados.Id_Contrato= dtb.Rows[0]["Id_Contrato"].ToString().ConvertToInt32();
+                            dados.Sequencia_Mr = dtb.Rows[0]["Sequencia_Mr"].ToString().ConvertToInt32();
+                            dados.Id_Contrato = dtb.Rows[0]["Id_Contrato"].ToString().ConvertToInt32();
                             dados.Origem = dtb.Rows[0]["Origem"].ToString().ConvertToByte();
                             dados.Numero_Parcela = dtb.Rows[0]["Numero_Parcela"].ToString().ConvertToByte();
                             dados.Descricao = dtb.Rows[0]["Descricao"].ToString();
@@ -92,30 +95,32 @@ namespace PROPOSTA
                                 Numero_Rateio = 1,
                                 Cod_Cliente = dtb.Rows[0]["Cod_Cliente"].ToString().TrimEnd(),
                                 Cod_Agencia = dtb.Rows[0]["Cod_Agencia"].ToString().TrimEnd(),
-                                Cod_Cobranca= dtb.Rows[0]["Cod_Agencia"].ToString().TrimEnd(), /*---Assume aos cuidados da Agencia*/
+                                Cod_Cobranca = dtb.Rows[0]["Cod_Agencia"].ToString().TrimEnd(), /*---Assume aos cuidados da Agencia*/
                                 Nome_Cobranca = dtb.Rows[0]["Nome_Agencia"].ToString().TrimEnd(), /*---Assume aos cuidados da Agencia*/
                                 Data_Emissao = DateTime.Now.ToString("dd/MM/yyyy"),
                                 Cod_Condicao = dtb.Rows[0]["Cod_Condicao"].ToString().TrimEnd(),
                                 Cod_Veiculo = "",
                                 Indica_Log_Agencia = 1,
                                 Indica_Log_Cliente = 1,
-                                Indica_Log_Cobranca= 1,
+                                Indica_Log_Cobranca = 1,
                                 Referencia = dtb.Rows[0]["Descricao"].ToString(),
                                 Perc_Rateio = "100"
-                               
-                                
-                            }); 
-                            };
+
+
+                            });
+                        };
                         Vlr_Fatura += dtb.Rows[0]["Vlr_A_Faturar"].ToString().ConvertToDouble();
-                        
+
                         //-------------------------Seta Periodo
-                        if (dtb.Rows[0]["Periodo_Inicial"].ToString().ConvertToDatetime()  < dados.Periodo_Inicial.ConvertToDatetime())
+                        if (pFiltro[i].Origem == 1) { 
+                            if (dtb.Rows[0]["Periodo_Inicial"].ToString().ConvertToDatetime() < dados.Periodo_Inicial.ConvertToDatetime())
                         {
                             dados.Periodo_Inicial = dtb.Rows[0]["Periodo_Inicial"].ToString().ConvertToDatetime().ToString("dd/MM/yyyy");
                         }
                         if (dtb.Rows[0]["Periodo_Final"].ToString().ConvertToDatetime() > dados.Periodo_Final.ConvertToDatetime())
                         {
                             dados.Periodo_Final = dtb.Rows[0]["Periodo_Final"].ToString().ConvertToDatetime().ToString("dd/MM/yyyy");
+                        }
                         }
                         //----------------------Adiciona Contratos
                         ComplementoMapas.Add(new ComplementoMapasModel
@@ -126,43 +131,43 @@ namespace PROPOSTA
                             ContratoString = dtb.Rows[0]["Cod_Empresa"].ToString() + '-' + dtb.Rows[0]["Numero_Mr"].ToString() + '-' + dtb.Rows[0]["Sequencia_Mr"].ToString(),
                             Vlr_A_Faturar = dtb.Rows[0]["Vlr_A_Faturar"].ToString().ConvertToDouble(),
                             Id_Contrato = dtb.Rows[0]["Id_Contrato"].ToString().ConvertToInt32(),
-                        }) ;
+                        });
                     }
                     //if (Duplicatas.Count>0)
                     //{
                     //    Rateios[0].Duplicatas = Duplicatas;
                     //}
-                    
+
 
                     dtb.Dispose();
                     cmd.Dispose();
                     Adp.Dispose();
                 }
                 //-------------------Seta o valor do Rateio e a primeira parcela / duplicata
-                if (Rateios.Count>0)
+                if (Rateios.Count > 0)
                 {
 
-                
-                Rateios[0].Vlr_A_Faturar = Vlr_Fatura.ToString().ConvertToMoney();
-                Rateios[0].Perc_Rateio = Rateios[0].Perc_Rateio.ConvertToPercent();
 
-                var _dtemissao = Rateios[0].Data_Emissao.ConvertToDatetime();
-                var _vencimento_year = _dtemissao.Year;
-                var _vencimento_month = _dtemissao.Month;
-                DateTime _Vencimento_base =  new DateTime(_vencimento_year, _vencimento_month, DateTime.DaysInMonth(_vencimento_year, _vencimento_month));
-                _Vencimento_base.AddDays(-1);
-                var _Vencimento = _Vencimento_base.AddDays(15);
-                Duplicatas.Add(new DuplicataModel()
-                {
-                    Id_Rateio = 0,
-                    Id_Parcela = 1,
-                    Parcela = 1,
-                    Vencimento = _Vencimento.ToString("dd/MM/yyyy"),
-                    Dia_Semana = ((int)_Vencimento.DayOfWeek).ToString(),
-                    Valor = Rateios[0].Vlr_A_Faturar,
+                    Rateios[0].Vlr_A_Faturar = Vlr_Fatura.ToString().ConvertToMoney();
+                    Rateios[0].Perc_Rateio = Rateios[0].Perc_Rateio.ConvertToPercent();
+
+                    var _dtemissao = Rateios[0].Data_Emissao.ConvertToDatetime();
+                    var _vencimento_year = _dtemissao.Year;
+                    var _vencimento_month = _dtemissao.Month;
+                    DateTime _Vencimento_base = new DateTime(_vencimento_year, _vencimento_month, DateTime.DaysInMonth(_vencimento_year, _vencimento_month));
+                    _Vencimento_base.AddDays(-1);
+                    var _Vencimento = _Vencimento_base.AddDays(15);
+                    Duplicatas.Add(new DuplicataModel()
+                    {
+                        Id_Rateio = 0,
+                        Id_Parcela = 1,
+                        Parcela = 1,
+                        Vencimento = _Vencimento.ToString("dd/MM/yyyy"),
+                        Dia_Semana = ((int)_Vencimento.DayOfWeek).ToString(),
+                        Valor = Rateios[0].Vlr_A_Faturar,
 
                     });
-                Rateios[0].Duplicatas = Duplicatas;
+                    Rateios[0].Duplicatas = Duplicatas;
                 }
                 //===================Complementa dados 
 
@@ -172,7 +177,7 @@ namespace PROPOSTA
                 dados.ComplementoMapas = ComplementoMapas;
                 dados.Rateios = Rateios;
             }
-            catch (Exception)   
+            catch (Exception)
             {
                 throw;
             }
@@ -193,7 +198,7 @@ namespace PROPOSTA
 
             String xmlComplementoMapas = null;
             String xmlRateios = null;
-            
+
             if (Complemento.ComplementoMapas.Count > 0)
             {
                 xmlComplementoMapas = clsLib.SerializeToString(Complemento.ComplementoMapas);
@@ -269,7 +274,7 @@ namespace PROPOSTA
             SqlDataAdapter Adp = new SqlDataAdapter();
             DataTable dtb = new DataTable("dtb");
             SimLib clsLib = new SimLib();
-                       try
+            try
             {
                 SqlCommand cmd = cnn.Procedure(cnn.Connection, "[Pr_Natureza_Servico_Complemento_Regra_S]");
                 Adp.SelectCommand = cmd;
@@ -305,7 +310,7 @@ namespace PROPOSTA
                 SqlCommand cmd = cnn.Procedure(cnn.Connection, "Pr_Complemento_Get_Enderecos");
                 Adp.SelectCommand = cmd;
                 Adp.SelectCommand.Parameters.AddWithValue("@Par_Cod_Empresa_Faturamento", Param.Cod_Empresa_Faturamento);
-                Adp.SelectCommand.Parameters.AddWithValue("@Par_Cod_Agencia",Param.Cod_Agencia);
+                Adp.SelectCommand.Parameters.AddWithValue("@Par_Cod_Agencia", Param.Cod_Agencia);
                 Adp.SelectCommand.Parameters.AddWithValue("@Par_Log_Agencia", Param.Log_Agencia);
                 Adp.SelectCommand.Parameters.AddWithValue("@Par_Cod_Cliente", Param.Cod_Cliente);
                 Adp.SelectCommand.Parameters.AddWithValue("@Par_Log_Cliente", Param.Log_Cliente);
