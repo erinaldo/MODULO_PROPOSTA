@@ -52,6 +52,12 @@
                         $scope.ContratoDados.Natureza_Servico = response.data[0].Cod_Natureza;
                         $scope.ContratoDados.Percentual_Iss = response.data[0].Percentual_Iss;
                         $scope.ContratoDados.Cod_Historico = response.data[0].Cod_Historico;
+                        $scope.ContratoDados.Descricao = response.data[0].Referencia_Padrao;
+                        if (response.data[0].Referencia_Padrao) {
+                            for (var i = 0; i < $scope.ContratoDados.Rateios.length; i++) {
+                                $scope.ContratoDados.Rateios[i].Referencia = response.data[0].Referencia_Padrao;
+                            }
+                            };
                     }
                     else {
                         ShowAlert("Nenhuma Natureza de Serviços está associada a essa Empresa de Faturamento.")

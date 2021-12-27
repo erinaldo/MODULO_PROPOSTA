@@ -4,21 +4,21 @@ using System.Data;
 using System.Collections.Generic;
 namespace PROPOSTA
 {
-    public class DeterminacaoController : ApiController
+    public class RotateController : ApiController
     {
         //===========================Carregar Dados do Contrato
-        [Route("api/Determinacao/CarregarDados")]
+        [Route("api/Rotate/CarregarDados")]
         [HttpPost]
         [ActionName("CarregarDados")]
         [Authorize()]
 
-        public IHttpActionResult CarregarDados([FromBody] Determinacao.FiltroModel Param)
+        public IHttpActionResult CarregarDados([FromBody] Rotate.FiltroModel Param)
         {
             SimLib clsLib = new SimLib();
-            Determinacao Cls = new Determinacao(User.Identity.Name);
+            Rotate Cls = new Rotate(User.Identity.Name);
             try
             {
-                Determinacao.ContratoModel retorno = Cls.CarregarDados(Param);
+                Rotate.DeterminacaoModel retorno = Cls.CarregarDados(Param);
                 return Ok(retorno);
             }
             catch (Exception Ex)
@@ -28,15 +28,15 @@ namespace PROPOSTA
             }
         }
         //===========================Gravar novo Comercial
-        [Route("api/Determinacao/SalvarComercial")]
+        [Route("api/Rotate/SalvarComercial")]
         [HttpPost]
         [ActionName("SalvarComercial")]
         [Authorize()]
 
-        public IHttpActionResult SalvarComercial([FromBody] Determinacao.ComercialModel Param)
+        public IHttpActionResult SalvarComercial([FromBody] Rotate.DeterminacaoComercialModel Param)
         {
             SimLib clsLib = new SimLib();
-            Determinacao Cls = new Determinacao(User.Identity.Name);
+            Rotate Cls = new Rotate(User.Identity.Name);
             try
             {
                 DataTable retorno = Cls.SalvarComercial(Param);
@@ -49,18 +49,18 @@ namespace PROPOSTA
             }
         }
 
-        [Route("api/Determinacao/CarregarVeiculacao")]
+        //===========================Analisar Rotate
+        [Route("api/Rotate/AnalisarRotate")]
         [HttpPost]
-        [ActionName("CarregarVeiculacao")]
+        [ActionName("AnalisarRotate")]
         [Authorize()]
-
-        public IHttpActionResult CarregarVeiculacao([FromBody] Determinacao.FiltroModel Param)
+        public IHttpActionResult AnalisarRotate([FromBody] Rotate.DeterminacaoModel Param)
         {
             SimLib clsLib = new SimLib();
-            Determinacao Cls = new Determinacao(User.Identity.Name);
+            Rotate Cls = new Rotate(User.Identity.Name);
             try
             {
-                List<Determinacao.VeiculacaoModel> retorno = Cls.AddVeiculacao(Param);
+                List<Rotate.AnaliseRotateModel> retorno = Cls.AnalisarRotate(Param);
                 return Ok(retorno);
             }
             catch (Exception Ex)
@@ -69,40 +69,18 @@ namespace PROPOSTA
                 throw new Exception(Ex.Message);
             }
         }
-
-        [Route("api/Determinacao/SalvarDeterminacao")]
+        //===========================Salvar Determinacao
+        [Route("api/Rotate/SalvarDeterminacao")]
         [HttpPost]
         [ActionName("SalvarDeterminacao")]
         [Authorize()]
-
-        public IHttpActionResult SalvarDeterminacao([FromBody] Determinacao.ContratoModel Param)
+        public IHttpActionResult SalvarDeterminacao([FromBody] Rotate.DeterminacaoModel Param)
         {
             SimLib clsLib = new SimLib();
-            Determinacao Cls = new Determinacao(User.Identity.Name);
+            Rotate Cls = new Rotate(User.Identity.Name);
             try
             {
-                List<Determinacao.VeiculacaoModel> retorno = Cls.SalvarDeterminacao(Param);
-                return Ok(retorno);
-            }
-            catch (Exception Ex)
-            {
-                clsLib.EmailErrorToSuporte(User.Identity.Name, Ex.Message.ToString(), Ex.Source, Ex.StackTrace);
-                throw new Exception(Ex.Message);
-            }
-        }
-
-        [Route("api/Determinacao/ExcluirComercialContrato")]
-        [HttpPost]
-        [ActionName("ExcluirComercialContrato")]
-        [Authorize()]
-
-        public IHttpActionResult ExcluirComercialContrato([FromBody] Determinacao.ComercialModel Param)
-        {
-            SimLib clsLib = new SimLib();
-            Determinacao Cls = new Determinacao(User.Identity.Name);
-            try
-            {
-                DataTable retorno = Cls.ExcluirComercialContrato(Param);
+                DataTable retorno = Cls.SalvarDeterminacao(Param);
                 return Ok(retorno);
             }
             catch (Exception Ex)

@@ -246,6 +246,9 @@
     <Compile Include="ConsultaRoteiroOrdenado\ConsultaRoteiroOrdenadoController.cs" />
     <Compile Include="ConsultaRoteiroOrdenado\ConsultaRoteiroOrdenadoModel.cs" />
     <Compile Include="ConsultaRoteiroOrdenado\ConsultaRoteiroOrdenadoSql.cs" />
+    <Compile Include="Determinacao\DeterminacaoController.cs" />
+    <Compile Include="Determinacao\DeterminacaoModel.cs" />
+    <Compile Include="Determinacao\DeterminacaoSql.cs" />
     <Compile Include="InterfacesEMS\AssociacaoContatosController.cs" />
     <Compile Include="InterfacesEMS\AssociacaoContatosModel.cs" />
     <Compile Include="InterfacesEMS\AssociacaoContatosSql.cs" />
@@ -275,9 +278,6 @@
     <Compile Include="DeParaProgramacao\DeParaProgramacaoController.cs" />
     <Compile Include="DeParaProgramacao\DeParaProgramacaoModel.cs" />
     <Compile Include="DeParaProgramacao\DeParaProgramacaoSql.cs" />
-    <Compile Include="Determinacao\DeterminacaoController.cs" />
-    <Compile Include="Determinacao\DeterminacaoModel.cs" />
-    <Compile Include="Determinacao\DeterminacaoSql.cs" />
     <Compile Include="BaixaVeiculacao\BaixaVeiculacoesController.cs" />
     <Compile Include="BaixaVeiculacao\BaixaVeiculacoesModel.cs" />
     <Compile Include="BaixaVeiculacao\BaixaVeiculacoesSql.cs" />
@@ -431,6 +431,9 @@
     <Compile Include="RetornoPlayList\RetornoPlaylistController.cs" />
     <Compile Include="RetornoPlayList\RetornoPlaylistModel.cs" />
     <Compile Include="RetornoPlayList\RetornoPlaylistSql.cs" />
+    <Compile Include="Rotate\RotateController.cs" />
+    <Compile Include="Rotate\RotateModel.cs" />
+    <Compile Include="Rotate\RotateSql.cs" />
     <Compile Include="RoteiroMercha\RoteiroMerchaController.cs" />
     <Compile Include="RoteiroMercha\RoteiroMerchaModel.cs" />
     <Compile Include="RoteiroMercha\RoteiroMerchaSql.cs" />

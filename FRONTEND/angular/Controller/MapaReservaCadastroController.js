@@ -865,10 +865,6 @@
     $scope.PeriodoCampanhaChange = function (pContrato) {
         if (pContrato.Periodo_Campanha_Inicio) {
             var _anomes = parseInt(pContrato.Periodo_Campanha_Inicio.substr(6, 4) + pContrato.Periodo_Campanha_Inicio.substr(3, 2));
-            if ($scope.Parameters.Action == 'New') {
-                pContrato.Competencia = parseInt(pContrato.Periodo_Campanha_Inicio.substr(6, 4) + pContrato.Periodo_Campanha_Inicio.substr(3, 2));
-                pContrato.Competencia_Text = MesExtenso(_anomes);
-            }
         };
         httpService.Post('MapaReserva/ValidarPeriodo', pContrato).then(function (response) {
             if (response.data) {
@@ -880,7 +876,6 @@
                 if (pContrato.Periodo_Campanha_Inicio && pContrato.Periodo_Campanha_Termino) {
                     for (var i = 0; i < pContrato.Veiculacoes.length; i++) {
                         for (var x = 0; x < pContrato.Veiculacoes[i].Insercoes.length; x++) {
-
                             var d1 = parseInt(pContrato.Periodo_Campanha_Inicio.substr(0,2))
                             var d2 = parseInt(pContrato.Periodo_Campanha_Termino.substr(0, 2))
                             if (pContrato.Veiculacoes[i].Insercoes[x].Dia < d1 || pContrato.Veiculacoes[i].Insercoes[x].Dia > d2) {
@@ -890,14 +885,22 @@
                             else {
                                 pContrato.Veiculacoes[i].Insercoes[x].Valido = true;
                             };
-                            $scope.fnTotalizaVeiculacao(pContrato.Veiculacoes[i]);
+                            var _dia = parseInt(pContrato.Veiculacoes[i].Insercoes[x].Data_Exibicao.substr(8,2));
+                            var _mes = parseInt(pContrato.Periodo_Campanha_Inicio.substr(3, 2))
+                            var _ano = parseInt(pContrato.Veiculacoes[i].Insercoes[x].Data_Exibicao.substr(0, 4));
+                            var _data = new Date(_ano,_mes-1,_dia)
+                            pContrato.Veiculacoes[i].Insercoes[x].Dia_Semana = ['Dom', 'Seg', 'Ter', 'Qua', 'Qui', 'Sex', 'Sab'][_data.getDay()];
                         };
+                        $scope.fnTotalizaVeiculacao(pContrato.Veiculacoes[i]);
                     };
-                    
                 };
             };
+            pContrato.Competencia = parseInt(pContrato.Periodo_Campanha_Inicio.substr(6, 4) + pContrato.Periodo_Campanha_Inicio.substr(3, 2));
+            pContrato.Competencia_Text = MesExtenso(_anomes);
+
         }); 
     }
+    
     //===========================Salvar Contrato
     $scope.SalvarMapaReserva = function (pContrato) {
         if ($scope.Parameters.Action == 'New' && !$scope.Nova_Sequencia) {

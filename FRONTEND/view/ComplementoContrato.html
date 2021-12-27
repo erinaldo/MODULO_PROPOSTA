@@ -157,7 +157,12 @@
                             <td style="text-align:center">{{::Contrato.Numero_Negociacao}}</td>
                             <td  ng-show="Parameters.Origem==0" style="text-align:center">{{::Contrato.Numero_Parcela}}</td>
                             <td>{{::Contrato.Cod_Agencia}}-{{Contrato.Nome_Agencia}}</td>
-                            <td>{{::Contrato.Cod_Cliente}}-{{::Contrato.Nome_Cliente}}</td>
+                            <td>
+                                <div class="AppToolTip">
+                                    {{::Contrato.Cod_Cliente}}-{{::Contrato.Nome_Cliente}}
+                                    <span class="AppToolTipText AppToolTipBottom">{{Contrato.CNPJ_Cliente}}</span>
+                                </div>
+                            </td>
                             <td ng-show="Parameters.Origem==1" style="text-align:center">{{::Contrato.Cod_Empresa}}-{{::Contrato.Numero_Mr}}-{{::Contrato.Sequencia_Mr}}</td>
                             <td ng-show="Parameters.Origem==1">
                                 <span class="fa fa-check" style="color:seagreen" ng-show="Contrato.Indica_Autorizado"></span>

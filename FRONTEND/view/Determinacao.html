@@ -1,0 +1,585 @@
+﻿<style>
+    .tbComercial td, .tbComercial th {
+        white-space: nowrap;
+        padding-top: 5px !important;
+        padding-bottom: 5px !important;
+    }
+
+    input {
+        text-transform: uppercase;
+    }
+
+    #tbMapa td, #tbMapa th {
+        font-size: 11px;
+        padding: 5px 2px 5px 2px !important;
+        text-align: center !important;
+    }
+
+    .td-ins {
+        max-width: 20px;
+    }
+
+    .td-clickable:hover {
+        cursor: pointer;
+        color: darkblue;
+        font-weight: bold;
+    }
+
+    .insMarcado {
+        background-color: yellow;
+    }
+
+    .insDesmarcado {
+        background-color: White;
+    }
+
+    .td-comercialpara {
+        /*max-width:100px;*/
+    }
+
+        .td-comercialpara input {
+            max-width: 30px;
+            border: solid 1px silver;
+        }
+        .Cor_Original{
+            background-color:yellow;
+            color:black !important;
+        }
+        .Cor_Nova{
+            background-color:#1d1;;
+            color:black
+        }
+        .Cor_Vazio{
+            background-color:white;
+        }
+        .Cor_Baixa{
+            background-color:red;
+            color:white !important;
+        }
+        
+</style>
+<form name="frmDeterminacao" autocomplete="off">
+    <div class="container">
+        <div class="block" ng-show="ShowFilter && ShowDados">
+            <div class="row">
+                <!--===================Empresa-->
+                <div class="col-md-2" ng-controller="dictionaryController">
+                    <div class="dictionary" dictionary="Empresa_Usuario">
+                        <input id="txtCodEmpresa"
+                               ng-model="Filtro.Cod_Empresa"
+                               ng-disabled="Contrato.Id_Contrato"
+                               ng-model-options="{updateOn: 'blur'}"
+                               ng-change="DicionaryValidate('txtCodEmpresa')"
+                               primarybind="txtCodEmpresa"
+                               style="text-transform:uppercase" />
+                    </div>
+                </div>
+                <!--===================Contrato.-->
+                <div class="col-md-2">
+                    <div class="form-group">
+                        <label class="field-x">Contrato</label>
+                        <input id="txtContrato"
+                               type="text"
+                               name="txtContrato"
+                               class="form-control numeric"
+                               ng-disabled="Contrato.Id_Contrato"
+                               ng-model="Filtro.Numero_Mr" maxlength="6" />
+                    </div>
+                </div>
+                <!--===================Sequência-->
+                <div class="col-md-1">
+                    <div class="form-group">
+                        <label class="field-x">Seq.</label>
+                        <input id="txtSequencia"
+                               type="text"
+                               name="txtSequencia"
+                               class="form-control numeric"
+                               ng-disabled="Contrato.Id_Contrato"
+                               ng-model="Filtro.Sequencia_Mr"
+                               maxlength="3" />
+                    </div>
+                </div>
+                <!--===================botão Carregar -->
+                <div class="col-md-2">
+                    <button class="btn btn-primary row margin-left-10"
+                            style="margin-top:35px"
+                            ng-click="CarregarComerciais(Filtro)"
+                            ng-disabled="!Filtro.Cod_Empresa || !Filtro.Numero_Mr || !Filtro.Sequencia_Mr"
+                            ng-show="!Contrato.Id_Contrato">
+                        Carregar Dados
+                    </button>
+                </div>
+            </div>
+            <!--========================Dados Agencia/Cliente/Veiculo.etc-->
+            <div class="row" ng-show="Contrato">
+                <div class="col-md-2">
+                    <div class="form-group">
+                        <label for="txtAgencia" class="field-x">Per.Campanha</label>
+                        <label class="form-control">{{Contrato.Data_Inicio}} a {{Contrato.Data_Fim}}</label>
+                    </div>
+                </div>
+                <div class="col-md-5">
+                    <div class="form-group">
+                        <label for="txtAgencia" class="field-x">Agência</label>
+                        <label class="form-control">{{Contrato.Cod_Agencia}}-{{Contrato.Nome_Agencia}}</label>
+                    </div>
+                </div>
+                <div class="col-md-5">
+                    <div class="form-group">
+                        <label for="txtAgencia" class="field-x">Cliente</label>
+                        <label class="form-control">{{Contrato.Cod_Cliente}}-{{Contrato.Nome_Cliente}}</label>
+                    </div>
+                </div>
+            </div>
+            <div class="row margin-top-10" ng-show="Contrato">
+                <div class="col-md-12">
+                    <button type="button" ng-class="CurrentTab=='Comercial' ? 'btn btntab-Selected' : 'btn btntab'" ng-click="CurrentTab='Comercial'">Comerciais</button>
+                    <button type="button" ng-class="CurrentTab=='Veiculacao' ? 'btn btntab-Selected' : 'btn btntab'" ng-click="CurrentTab='Veiculacao'">Determinacao por Comercial</button>
+                    <button type="button" ng-class="CurrentTab=='Mapa' ? 'btn btntab-Selected' : 'btn btntab'" ng-click="CurrentTab='Mapa'">Determinacao por Mapa</button>
+                </div>
+            </div>
+        </div>
+        <!--=================Lista de Comerciais-->
+        <div class="block" ng-show="CurrentTab=='Comercial' && ShowDados">
+            <div class="row">
+                <div class="col-md-12">
+                    <button class="btn btn-default btn-icon-fixed btn-sm"
+                            ng-click="AdicionarComercial(Contrato)">
+                        <span class="fa fa-plus" ng-disabled="true"></span> Adicionar Comercial
+                    </button>
+                </div>
+            </div>
+            <div class="table-responsive" ng-show="Contrato.Comerciais.length>0">
+                <table class="table table-striped table-bordered tbComercial">
+                    <thead>
+                        <tr>
+                            <th>Cód</th>
+                            <th>Título</th>
+                            <th>Dur</th>
+                            <th>Tipo</th>
+                            <th>Produto</th>
+                            <th>A Determinar</th>
+                            <td></td>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr ng-repeat="comercial in Contrato.Comerciais track by $index">
+                            <td>{{comercial.Cod_Comercial | uppercase}}</td>
+                            <td>{{comercial.Titulo_Comercial | uppercase}}</td>
+                            <td>{{comercial.Duracao}}</td>
+                            <td>{{comercial.Cod_Tipo_Comercial | uppercase}}-{{comercial.Nome_Tipo_Comercial}}</td>
+                            <td>{{comercial.Cod_Red_Produto}}-{{comercial.Nome_Produto}}</td>
+                            <td style="text-align:center">
+                                <span class="fa fa-check" style="color:seagreen" ng-show="comercial.Indica_Titulo_Determinar"></span>
+                            </td>
+                            <td>
+                                <span class="fa fa-trash span-btn" style="font-size:20px" ng-click="ExcluirComercialContrato(comercial)"></span>
+                            </td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+        </div>
+        <!--=================Determinacao por Comercial-->
+        <div class="block" ng-show="CurrentTab=='Veiculacao' && ShowDados">
+            <div class="row">
+                <!--====================Data Inicial-->
+                <div class="col-md-2">
+                    <div class="dictionary" dictionary="Data" caption="Data Inicio">
+                        <input ng-model="DeterminacaoVei.Data_Inicio"
+                               ui-date ng-model-options="{updateOn: 'blur'}"
+                               placeholder="Informe a Data Inicio">
+                        <div class="dictionary-ui-calendar" ui-calendar typdate="DeterminacaoVei.Data_Inicio"></div>
+                    </div>
+                </div>
+                <!--====================Data Inicial-->
+                <div class="col-md-2">
+                    <div class="dictionary" dictionary="Data" caption="Data Final">
+                        <input ng-model="DeterminacaoVei.Data_Fim"
+                               ui-date ng-model-options="{updateOn: 'blur'}"
+                               placeholder="Informe a Data Inicial">
+                        <div class="dictionary-ui-calendar" ui-calendar typdate="DeterminacaoVei.Data_Fim"></div>
+                    </div>
+                </div>
+                <!--=====================programa-->
+                <div class="col-md-2">
+                    <div class="form-group">
+                        <label class="field-x" for="txtCod_Programa">Programa</label>
+                        <div class="input-group">
+                            <div class="input-group-addon">
+                                <span class="fa fa-search span-btn" ng-click="SelecionarProgramas(Contrato)"></span>
+                            </div>
+                            <input type="text" class="form-control"
+                                   id="txtCod_Programa"
+                                   ng-model="DeterminacaoVei.Cod_Programa"
+                                   maxlength="4"
+                                   ng-change="ValidarPrograma(DeterminacaoVei)"
+                                   ng-model-options="{updateOn: 'blur'}" />
+                        </div>
+                    </div>
+                </div>
+                <!--=====================Comercial-->
+                <div class="col-md-1">
+                    <div class="form-group">
+                        <label class="field-x" for="txtCod_Comercial">Comercial</label>
+                        <div class="input-group">
+                            <div class="input-group-addon">
+                                <span class="fa fa-search span-btn" ng-click="SelecionarComercial(DeterminacaoVei)"></span>
+
+                            </div>
+                            <input type="text" class="form-control"
+                                   id="txtCod_Comercial"
+                                   ng-model="DeterminacaoVei.Cod_Comercial"
+                                   maxlength="2"
+                                   ng-change="ValidarComercial(DeterminacaoVei)"
+                                   ng-model-options="{updateOn: 'blur'}" />
+                        </div>
+                    </div>
+                </div>
+                <div class="col-md-2">
+                    <label class="field-x">Titulo</label>
+                    <label class="form-control">{{DeterminacaoVei.Titulo_Comercial}}</label>
+                </div>
+                <div class="col-md-1">
+                    <label class="field-x">Tp/Dur</label>
+                    <label class="form-control">{{DeterminacaoVei.Cod_Tipo_Comercial}}-{{DeterminacaoVei.Duracao}}<span ng-show="DeterminacaoVei.Duracao">"</span></label>
+                </div>
+                <div class="col-md-2">
+                    <div class="form-group">
+                        <label class="field-x">Qtd a Sub. por Dia/Prog</label>
+                        <input type="text"  ng-model="DeterminacaoVei.Qtd_Trocar" class="form-control numeric" maxlength="4"  placeholder="Todos"/>
+                    </div>
+                </div>
+
+            </div>
+            <!--=======================Depara comercial - Trocar Por-->
+            <div class="table-responsive margin-top-20">
+                <table class="table table-bordered tbComercial">
+                    <thead>
+                        <tr>
+                            <th colspan="5">
+                                <button class="btn btn-default btn-icon-fixed btn-sm pull-left"
+                                        ng-click="AdicionarComercialVei(DeterminacaoVei)">
+                                    <span class="fa fa-plus"></span> Adicionar Linhas
+                                </button>
+                                <button class="btn btn-default btn-icon-fixed btn-sm pull-left margin-left-30"
+                                        ng-click="SelecionarVeiculos(Contrato)">
+                                    <span class="fa fa-search"></span> SelecionarVeiculos
+                                </button>
+                            </th>
+                        </tr>
+                        <tr>
+                            <th colspan="5" style="background-color:#ededed;text-align:center;">
+                                <span>Substituir por</span>
+                            </th>
+                        </tr>
+                        <tr>
+                            <th>Comercial</th>
+                            <th>Titulo</th>
+                            <th>Tipo</th>
+                            <th>Duração</th>
+                            <th></th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr ng-repeat="para in DeterminacaoVei.ComercialPara track by $index">
+                            <td style="width:150px">
+                                <div class="input-group margin-bottom-0">
+                                    <div class="input-group-addon">
+                                        <span class="fa fa-search span-btn" ng-click="SelecionarComercial(para)"></span>
+                                    </div>
+                                    <input type="text" class="form-control"
+                                           id="txtCod_Comercial"
+                                           ng-model="para.Cod_Comercial"
+                                           maxlength="2"
+                                           ng-change="ValidarComercial(para)"
+                                           ng-model-options="{updateOn: 'blur'}" />
+                                </div>
+                            </td>
+                            <td><label class="form-control">{{para.Titulo_Comercial}}</label></td>
+                            <td><label class="form-control">{{para.Cod_Tipo_Comercial}}-{{para.Nome_Tipo_Comercial}}</label></td>
+                            <td><label class="form-control">{{para.Duracao}}</label></td>
+                            <td style="width:50px">
+                                <span class="fa fa-trash span-btn" style="font-size:20px" ng-click="ExcluiComercialVei(para)"></span>
+                            </td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+        </div>
+        <!--=================Determinacao por Mapa-->
+        <div class="block" ng-show="CurrentTab=='Mapa' && ShowDados">
+            <div class="row">
+                <div class="col-md-3">
+                    <div class="form-group">
+                        <select class="form-control"
+                                ng-model="Filtro.Cod_Veiculo"
+                                ng-change="CarregarVeiculacao(Contrato,Filtro)"
+                                ng-options="Veiculo.Codigo as Veiculo.Codigo + '-' + Veiculo.Descricao for Veiculo in Contrato.Veiculos"></select>
+                    </div>
+                </div>
+            </div>
+            <div class="table-responsive">
+                <table class="table table-bordered" id="tbMapa">
+                    <thead>
+                        <tr style="background-color:beige">
+                            <td colspan="4" style="text-align:center" class="td-clickable" ng-click="MarcarVeiculacao('Geral')">
+                                {{Contrato.Competencia_String}}
+                            </td>
+                            <td ng-repeat="ins in Contrato.Veiculacoes[0].Insercoes track by $index" class="td-ins td-clickable" ng-click="MarcarVeiculacao('Dia',ins.Dia)">
+                                {{ins.Dia_Semana}}
+                            </td>
+                            <td class="thHeaderPara" colspan="2">
+                                Trocar Por
+                            </td>
+                        </tr>
+                        <tr style="background-color:beige">
+                            <td style="max-width:100px">Programa</td>
+                            <td style="max-width:50px">Com</td>
+                            <td style="max-width:50px">Dur</td>
+                            <td style="max-width:50px">Car</td>
+                            <td ng-repeat="ins in Contrato.Veiculacoes[0].Insercoes track by $index" class="td-ins  td-clickable" ng-click="MarcarVeiculacao('Dia',ins.Dia)">
+                                {{ins.Data_Exibicao | date:'dd'}}
+                            </td>
+                            <td class="thHeaderPara" colspan="2">
+                                <button class="btn btn-default btn-sm pull-right"
+                                        ng-click="ExcluiComercialPara(Contrato)">
+                                    <span class="fa fa-trash"></span>
+                                </button>
+                                <button class="btn btn-default btn-sm pull-right"
+                                        ng-click="LimparComercialPara(Contrato)">
+                                    <span class="fa fa-eraser"></span>
+                                </button>
+                                <button class="btn btn-default btn-sm pull-right"
+                                        ng-click="AdicionarComercialPara(Contrato)">
+                                    <span class="fa fa-plus"></span>
+                                </button>
+                                <button class="btn btn-default btn-sm pull-right"
+                                        ng-click="SelecionarComercialPara(Contrato)">
+                                    <span class="fa fa-search"></span>
+                                </button>
+                            </td>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr ng-repeat="veic in Contrato.Veiculacoes track by $index">
+                            <td style="max-width:100px" class="td-clickable" ng-click="MarcarVeiculacao('Linha',veic)">{{veic.Cod_Programa}}</td>
+                            <td style="max-width:50px">{{veic.Cod_Comercial}}</td>
+                            <td style="max-width:50px">{{veic.Duracao}}</td>
+                            <td style="max-width:50px">{{veic.Cod_Caracteristica}}</td>
+                            <td ng-repeat="ins in veic.Insercoes track by $index" class="td-ins td-clickable" ng-class="(ins.Selected) ? 'insMarcado':'insDesmarcado'" ng-click="MarcarVeiculacao('Ins',ins)">
+                                <span ng-show="ins.Qtd"> {{ins.Qtd}}</span>
+                            </td>
+                            <td class="td-comercialpara" ng-repeat="para in veic.ComercialPara track by $index">
+                                <input type="text" ng-model="para.Cod_Comercial" maxlength="2"/>
+                            </td>
+
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+
+        </div>
+        <!--===================================Div Inclusao de Comerciais-->
+        <div id="divComercial" ng-show="ShowComercial">
+            <div class="col-md-8 col-md-offset-2">
+                <div class="block">
+                    <div class="alert alert-primary alert-icon-block" role="alert">
+                        <div class="alert-icon">
+                        </div>
+                        <strong>
+                            Inclusão de Comercial
+                            <span style="margin-left:50px">Contrato:{{Contrato.Cod_Empresa}}-{{Contrato.Numero_Mr}}-{{Contrato.Sequencia_Mr}}</span>
+                        </strong>
+                    </div>
+                    <div class="row">
+                        <!--===========================Codigo do Comercial-->
+                        <div class="col-md-2">
+                            <div class="form-group">
+                                <label for="txtCodComercial">Código</label>
+                                <input class="form-control "
+                                       id="txtCodComercial"
+                                       maxlength="2"
+                                       ng-model="Comercial.Cod_Comercial" />
+                            </div>
+                        </div>
+                        <!--===========================Titulo do Comercial-->
+                        <div class="col-md-8">
+                            <div class="form-group">
+                                <label for="txtTituloComercial">Titulo</label>
+                                <input class="form-control"
+                                       id="txtTituloComercial"
+                                       maxlength="30"
+                                       style="text-transform:uppercase"
+                                       ng-model="Comercial.Titulo_Comercial" />
+                            </div>
+                        </div>
+                        <!--===========================Duração-->
+                        <div class="col-md-2">
+                            <div class="form-group">
+                                <label for="txtDuracao">Duração</label>
+                                <input class="form-control numeric"
+                                       id="txtDuracao"
+                                       maxlength="4"
+                                       ng-model="Comercial.Duracao" />
+                            </div>
+                        </div>
+                    </div>
+                    <div class="row">
+                        <!--===========================Tipo do Comercial-->
+                        <div class="col-md-2" ng-controller="dictionaryController">
+                            <div class="dictionary" dictionary="Tipo_Comercial" caption="Tipo">
+                                <input id="txtCodTipoComercial"
+                                       maxlength="2"
+                                       ng-model="Comercial.Cod_Tipo_Comercial"
+                                       ng-model-options="{updateOn: 'blur'}"
+                                       style="text-transform:uppercase"
+                                       ng-change="DicionaryValidate('txtCodTipoComercial')"
+                                       primarybind="txtCodTipoComercial"
+                                       secondarybind="txtNomeTipoComercial" />
+                            </div>
+                        </div>
+                        <!--===========================Nome tipo do Comercial-->
+                        <div class="col-md-8" ng-controller="dictionaryController">
+                            <div class="form-group">
+                                <label class="field-x" style="visibility:hidden" for="txtNomeTipoComercial">..</label>
+                                <input id="txtNomeTipoComercial"
+                                       class="form-control"
+                                       ng-disabled="true"
+                                       ng-model="Comercial.Nome_Tipo_Comercial"
+                                       style="text-transform:uppercase" />
+                            </div>
+                        </div>
+                    </div>
+                    <div class="row">
+                        <!--===================Produto-->
+                        <div class="col-md-2">
+                            <div class="form-group">
+                                <label for="txtProduto" class="field-x">Produto</label>
+                                <div class="input-group">
+                                    <div class="input-group-addon">
+                                        <span class="fa fa-search span-btn margin-left-10" ng-click="PesquisaProduto(Contrato,Comercial)"></span>
+                                    </div>
+                                    <input id="txtProduto"
+                                           class="form-control numeric"
+                                           ng-model="Comercial.Cod_Red_Produto"
+                                           ng-model-options="{updateOn: 'blur'}"
+                                           ng-change="ProdutoChange(Comercial)"
+                                           maxlength="10">
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="col-md-8">
+                            <div class="form-group">
+                                <label for="txtDescricao_Produto" class="field-x" style="visibility:hidden">..</label>
+                                <div class="input-group">
+                                    <input type="text" disabled="disabled"
+                                           id="txtDescricao_Produto" class="form-control "
+                                           ng-model="Comercial.Nome_Produto">
+                                </div>
+                            </div>
+                        </div>
+
+                    </div>
+                    <div class="row margin-top-20">
+                        <div class="col-md-12">
+                            <div class="form-group">
+                                <div class="input-group">
+                                    <div class="app-checkbox">
+                                        <label>
+                                            <input type="checkbox" name="app-checkbox-1"
+                                                   ng-model="Comercial.Indica_Titulo_Determinar" /> Título a Determinar<span></span>
+                                        </label>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="row">
+                        <!--=============Botoes de Salvar Comercial-->
+                        <div class="col-md-12">
+                            <button class="btn btn-success" ng-click="SalvarComercial(Comercial)">Salvar Comercial</button>
+                            <button class="btn btn-warning" ng-click="ShowComercial=false;ShowDados=true">Cancela</button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <!--===============================Div Analise-->
+        <div class="block" ng-show="ShowAnalise">
+            <div class="alert alert-info alert-icon-block" role="alert">
+                <strong>Análise da Determinação</strong>
+            </div>
+            <div class="row">
+                <div class="col-md-3">
+                    <div class="form-group">
+                        <select class="form-control"
+                                ng-model="Cod_Veiculo_Analise"
+                                ng-options="Veiculo.Codigo as Veiculo.Codigo + '-' + Veiculo.Descricao for Veiculo in VeiculosAnalise"></select>
+                    </div>
+                </div>
+                <div class="col-md-9">
+                    <div class="pull-right">
+                        <label class="label Cor_Original">Veiculações Inalteradas</label>
+                        <label class="label Cor_Nova">Veiculações Novas</label>
+                        <label class="label Cor_Baixa">Veiculações Saindo</label>
+                    </div>
+                </div>
+            </div>
+            <div class="table-responsive">
+                <table class="table table-bordered" id="tbMapa">
+                    <thead>
+                        <tr style="background-color:beige">
+                            <td colspan="4" style="text-align:center">
+                                {{Contrato.Competencia_String}}
+                            </td>
+                            <td ng-repeat="ins in Analise[0].Insercoes track by $index">
+                                {{ins.Dia_Semana}}
+                            </td>
+                        </tr>
+                        <tr style="background-color:beige">
+                            <td style="max-width:100px">Programa</td>
+                            <td style="max-width:50px">Com</td>
+                            <td style="max-width:50px">Dur</td>
+                            <td style="max-width:50px">Car</td>
+                            <td ng-repeat="ins in Analise[0].Insercoes track by $index">
+                                {{ins.Data_Exibicao | date:'dd'}}
+                            </td>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr ng-repeat="veic in Analise | filter: { Cod_Veiculo: Cod_Veiculo_Analise} track by $index">
+                            <td style="max-width:100px" >{{veic.Cod_Programa}}</td>
+                            <td style="max-width:50px">{{veic.Cod_Comercial}}</td>
+                            <td style="max-width:50px">{{veic.Duracao}}</td>
+                            <td style="max-width:50px">{{veic.Cod_Caracteristica}}</td>
+                            <td ng-repeat="ins in veic.Insercoes track by $index" ng-class="ins.Classe">
+                                <span ng-show="ins.Qtd" > {{ins.Qtd}}</span>
+                            </td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+        </div>
+        <!--===================================Botoes do Rodapé-->
+        <div class="fixed-buttons-bottom">
+            <div class="row">
+                <div class="col-md-12">
+                    <button type="button" class="btn btn-success" ng-click="AnalisarDeterminacao(Contrato,'A')" ng-show="Contrato && !ShowAnalise" >Analisar Determinação </button>
+                    <button type="button" class="btn btn-warning" ng-show="Contrato && !ShowAnalise" ng-click="CancelarDeterminacao()">Cancelar</button>
+                    <button type="button" class="btn btn-success"  ng-click="AnalisarDeterminacao(Contrato,'D')"  ng-show="ShowAnalise">Confirmar Determinaçao</button>
+                    <button type="button" class="btn btn-warning" ng-show="ShowAnalise" ng-click="CancelarAnalise()">Fechar Análise</button>
+                </div>
+            </div>
+        </div>
+
+    </div>
+</form>
+<div ng-include="'template/SelectItem.html'"></div>
+<div ng-include="'template/PesquisaTabela.html'"></div>
+<script type="text/javascript">
+    $(document).ready(function () {
+        GetDictionary();
+    });
+</script>

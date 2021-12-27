@@ -663,11 +663,19 @@
         routeName: 'Importação de Propostas para Mapa Reserva',
         RouteId: 'MapaReserva@Import'
     })
-    .when('/Determinacao', {
-        templateUrl: 'view/DeterminacaoTitulo.html',
-        controller: 'DeterminacaoTituloController',
+    
+    .when('/Rotate', {
+        templateUrl: 'view/Rotate.html',
+        controller: 'RotateController',
         authorize: true,
-        routeName: "Determinação de Títulos",
+        routeName: "Rotate de Títulos",
+        RouteId: 'MapaReserva@Rotate'
+    })
+    .when('/Determinacao', {
+        templateUrl: 'view/Determinacao.html',
+        controller: 'DeterminacaoController',
+        authorize: true,
+        routeName: "Determinção de Comerciais",
         RouteId: 'MapaReserva@Determinacao'
     })
     .when('/ConsultaVeiculacoes', {

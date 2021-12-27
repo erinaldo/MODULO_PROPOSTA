@@ -6,19 +6,18 @@ using System.Collections.Generic;
 namespace PROPOSTA
 {
 
-    public partial class Determinacao
+    public partial class Rotate
     {
-        public ContratoModel CarregarDados(FiltroModel Param)
+        String[] DiaSemana = { "Sab", "Dom", "Seg", "Ter", "Qua", "Qui", "Sex", };
+        Int32 Count_Id_Rotate = 0;
+        public DeterminacaoModel CarregarDados(FiltroModel Param)
         {
             clsConexao cnn = new clsConexao(this.Credential);
             cnn.Open();
             SqlDataAdapter Adp = new SqlDataAdapter();
             DataTable dtb = new DataTable("dtb");
             SimLib clsLib = new SimLib();
-            ContratoModel Determinacao = new ContratoModel();
-            DeParaComercialModel DePara = new DeParaComercialModel();
-            List<DeParaComercialParaModel> DeParaComercial = new List<DeParaComercialParaModel>();
-            DePara.ComercialPara = DeParaComercial;
+            DeterminacaoModel Determinacao = new DeterminacaoModel();
 
             try
             {
@@ -42,13 +41,9 @@ namespace PROPOSTA
                     Determinacao.Data_Inicio = dtb.Rows[0]["Data_Inicio"].ToString().ConvertToDatetime().ToString("dd/MM/yyyy");
                     Determinacao.Data_Fim = dtb.Rows[0]["Data_Fim"].ToString().ConvertToDatetime().ToString("dd/MM/yyyy");
                     Determinacao.Competencia = dtb.Rows[0]["Competencia"].ToString().ConvertToInt32();
-                    Determinacao.Competencia_String = dtb.Rows[0]["Data_Inicio"].ToString().ConvertToDatetime().ToString("MM/yyyy");
-                    Determinacao.De_Para = DePara;
                     Determinacao.Comerciais = AddComerciais(Param);
                     Determinacao.Veiculos = AddVeiculos(dtb.Rows[0]["Id_Contrato"].ToString().ConvertToInt32());
                     Determinacao.Programas = AddProgramas(Param);
-                    Determinacao.Veiculacoes = AddVeiculacao(Param);
-
                 }
 
             }
@@ -62,14 +57,14 @@ namespace PROPOSTA
             }
             return Determinacao;
         }
-        public List<ComercialModel> AddComerciais(FiltroModel Param)
+        public List<DeterminacaoComercialModel> AddComerciais(FiltroModel Param)
         {
             clsConexao cnn = new clsConexao(this.Credential);
             cnn.Open();
             SqlDataAdapter Adp = new SqlDataAdapter();
             DataTable dtb = new DataTable("dtb");
             SimLib clsLib = new SimLib();
-            List<ComercialModel> Comerciais = new List<ComercialModel>();
+            List<DeterminacaoComercialModel> Comerciais = new List<DeterminacaoComercialModel>();
 
             try
             {
@@ -85,7 +80,7 @@ namespace PROPOSTA
 
                 foreach (DataRow drw in dtb.Rows)
                 {
-                    Comerciais.Add(new ComercialModel()
+                    Comerciais.Add(new DeterminacaoComercialModel()
                     {
                         Cod_Empresa = drw["Cod_Empresa"].ToString(),
                         Numero_Mr = drw["Numero_Mr"].ToString().ConvertToInt32(),
@@ -98,8 +93,11 @@ namespace PROPOSTA
                         Cod_Red_Produto = drw["Cod_Red_Produto"].ToString().ConvertToInt32(),
                         Nome_Produto = drw["Nome_Produto"].ToString(),
                         Indica_Titulo_Determinar = drw["Indica_Titulo_Determinar"].ToString().ConvertToBoolean(),
+                        Tem_Veiculacao = drw["Tem_Veiculacao"].ToString().ConvertToBoolean(),
+                        Rotate = new List<DeterminacaoRotateModel>()
                     });
                 }
+
             }
             catch (Exception)
             {
@@ -111,14 +109,14 @@ namespace PROPOSTA
             }
             return Comerciais;
         }
-        public List<VeiculoModel> AddVeiculos(Int32 pId_Contrato)
+        public List<DeterminacaoVeiculoModel> AddVeiculos(Int32 pId_Contrato)
         {
             clsConexao cnn = new clsConexao(this.Credential);
             cnn.Open();
             SqlDataAdapter Adp = new SqlDataAdapter();
             DataTable dtb = new DataTable("dtb");
             SimLib clsLib = new SimLib();
-            List<VeiculoModel> Veiculos = new List<VeiculoModel>();
+            List<DeterminacaoVeiculoModel> Veiculos = new List<DeterminacaoVeiculoModel>();
 
             try
             {
@@ -129,7 +127,7 @@ namespace PROPOSTA
                 Adp.Fill(dtb);
                 foreach (DataRow drw in dtb.Rows)
                 {
-                    Veiculos.Add(new VeiculoModel()
+                    Veiculos.Add(new DeterminacaoVeiculoModel()
                     {
                         Codigo = drw["Cod_Veiculo"].ToString(),
                         Descricao = drw["Nome_Veiculo"].ToString(),
@@ -148,14 +146,14 @@ namespace PROPOSTA
             }
             return Veiculos;
         }
-        public List<ProgramaModel> AddProgramas(FiltroModel Param)
+        public List<DeterminacaoProgramaModel> AddProgramas(FiltroModel Param)
         {
             clsConexao cnn = new clsConexao(this.Credential);
             cnn.Open();
             SqlDataAdapter Adp = new SqlDataAdapter();
             DataTable dtb = new DataTable("dtb");
             SimLib clsLib = new SimLib();
-            List<ProgramaModel> Programas = new List<ProgramaModel>();
+            List<DeterminacaoProgramaModel> Programas = new List<DeterminacaoProgramaModel>();
 
             try
             {
@@ -169,7 +167,7 @@ namespace PROPOSTA
                 Adp.Fill(dtb);
                 foreach (DataRow drw in dtb.Rows)
                 {
-                    Programas.Add(new ProgramaModel()
+                    Programas.Add(new DeterminacaoProgramaModel()
                     {
                         Codigo = drw["Codigo"].ToString(),
                         Descricao = drw["Descricao"].ToString(),
@@ -188,74 +186,7 @@ namespace PROPOSTA
             }
             return Programas;
         }
-        public List<VeiculacaoModel> AddVeiculacao(FiltroModel Param)
-        {
-            clsConexao cnn = new clsConexao(this.Credential);
-            cnn.Open();
-            SqlDataAdapter Adp = new SqlDataAdapter();
-            DataTable dtb = new DataTable("dtb");
-            SimLib clsLib = new SimLib();
-            List<VeiculacaoModel> Veiculacao = new List<VeiculacaoModel>();
-
-            String strQuebra = "";
-            int Id_Veiculacao = -1;
-            try
-            {
-                SqlCommand cmd = cnn.Procedure(cnn.Connection, "Pr_Determinacao_Get_Veiculacao");
-                cmd.Parameters.AddWithValue("@Par_Login", this.CurrentUser);
-                cmd.Parameters.AddWithValue("@Par_Cod_Empresa", Param.Cod_Empresa);
-                cmd.Parameters.AddWithValue("@Par_Numero_Mr", Param.Numero_Mr);
-                cmd.Parameters.AddWithValue("@Par_Sequencia_Mr", Param.Sequencia_Mr);
-                cmd.Parameters.AddWithValue("@Par_Cod_Veiculo", Param.Cod_Veiculo);
-                Adp.SelectCommand = cmd;
-                Adp.Fill(dtb);
-
-
-                foreach (DataRow drw in dtb.Rows)
-                {
-                    if (strQuebra != drw["Cod_Veiculo"].ToString().Trim() +  drw["Cod_Programa"].ToString().Trim() + drw["Cod_Comercial"].ToString().Trim() + drw["Cod_Caracteristica"].ToString().Trim())
-                    {
-                        Id_Veiculacao++;
-                        //----adicina dois comercias para por linha
-                        List<InsercaoParaModel> ComercialPara = new List<InsercaoParaModel>();
-                        ComercialPara.Add(new InsercaoParaModel() { Id_Veiculacao = Id_Veiculacao, Cod_Comercial = "" });
-                        ComercialPara.Add(new InsercaoParaModel() { Id_Veiculacao = Id_Veiculacao, Cod_Comercial = "" });
-
-                        Veiculacao.Add(new VeiculacaoModel()
-                        {
-                            Id_Veiculacao = Id_Veiculacao,
-                            Cod_Veiculo = drw["Cod_Veiculo"].ToString(),
-                            Cod_Programa = drw["Cod_Programa"].ToString(),
-                            Cod_Comercial = drw["Cod_Comercial"].ToString(),
-                            Duracao = drw["Duracao"].ToString().ConvertToInt32(),
-                            Cod_Caracteristica = drw["Cod_Caracteristica"].ToString(),
-                            ComercialPara = ComercialPara,
-                            Insercoes = new List<InsercaoModel>()
-                        });
-                        strQuebra = drw["Cod_Veiculo"].ToString().Trim() + drw["Cod_Programa"].ToString().Trim() + drw["Cod_Comercial"].ToString().Trim() + drw["Cod_Caracteristica"].ToString().Trim();
-                    };
-                    Veiculacao[Id_Veiculacao].Insercoes.Add(new InsercaoModel()
-                    {
-                        Id_Veiculacao = Id_Veiculacao,
-                        Dia = drw["Dia"].ToString().ConvertToInt32(),
-                        Data_Exibicao = drw["Data_Exibicao"].ToString().ConvertToDatetime(),
-                        Dia_Semana = drw["Dia_Semana"].ToString(),
-                        Numero_Semana = drw["Numero_Semana"].ToString().ConvertToInt32(),
-                        Qtd = drw["Qtd"].ToString().ConvertToInt32(),
-                    });
-                };
-            }
-            catch (Exception)
-            {
-                throw;
-            }
-            finally
-            {
-                cnn.Close();
-            }
-            return Veiculacao;
-        }
-        public DataTable SalvarComercial(ComercialModel Param)
+        public DataTable SalvarComercial(DeterminacaoComercialModel Param)
         {
             clsConexao cnn = new clsConexao(this.Credential);
             cnn.Open();
@@ -290,77 +221,85 @@ namespace PROPOSTA
             }
             return dtb;
         }
-        public List<VeiculacaoModel> SalvarDeterminacao(ContratoModel Param)
+        public List<AnaliseRotateModel> AnalisarRotate(DeterminacaoModel Param)
         {
             clsConexao cnn = new clsConexao(this.Credential);
             cnn.Open();
             SqlDataAdapter Adp = new SqlDataAdapter();
             DataTable dtb = new DataTable("dtb");
             SimLib clsLib = new SimLib();
-
-            String xmlComerciaisDePara = null;
-            String xmlVeiculacoes = null;
             String xmlVeiculos = null;
-            Generic clsGeneric = new Generic(this.Credential);
-
-            if (Param.De_Para.ComercialPara.Count > 0)
-            {
-                xmlComerciaisDePara = clsLib.SerializeToString(Param.De_Para);
-            }
-            if (Param.Veiculacoes.Count > 0)
-            {
-                xmlVeiculacoes = clsLib.SerializeToString(Param.Veiculacoes);
-            }
+            String xmlProgramas = null;
+            String xmlComerciais = null;
+            List<AnaliseRotateModel> AnaliseRotate = new List<AnaliseRotateModel>();
             if (Param.Veiculos.Count > 0)
             {
                 xmlVeiculos = clsLib.SerializeToString(Param.Veiculos);
             }
-            String strQuebra = "X";
-            List<VeiculacaoModel> Analise = new List<VeiculacaoModel>();
+            if (Param.Programas.Count > 0)
+            {
+                xmlProgramas = clsLib.SerializeToString(Param.Programas);
+            }
+            if (Param.Comerciais.Count > 0)
+            {
+                xmlComerciais = clsLib.SerializeToString(Param.Comerciais);
+            }
+
             try
             {
-                SqlCommand cmd = cnn.Procedure(cnn.Connection, "Pr_Proposta_Determinacao_Simular");
+                SqlCommand cmd = cnn.Procedure(cnn.Connection, "[Pr_Proposta_Rotate_Simular]");
                 cmd.Parameters.AddWithValue("@Par_Login", this.CurrentUser);
-                cmd.Parameters.AddWithValue("@Par_Operacao", Param.Operacao);
                 cmd.Parameters.AddWithValue("@Par_Cod_Empresa", Param.Cod_Empresa);
                 cmd.Parameters.AddWithValue("@Par_Numero_Mr", Param.Numero_Mr);
                 cmd.Parameters.AddWithValue("@Par_Sequencia_Mr", Param.Sequencia_Mr);
-                cmd.Parameters.AddWithValue("@Par_Comercial_De_Para", xmlComerciaisDePara);
-                cmd.Parameters.AddWithValue("@Par_Veiculacoes", xmlVeiculacoes);
+                if (!String.IsNullOrEmpty(Param.Data_Inicio))
+                {
+                    cmd.Parameters.AddWithValue("@Par_Data_Inicio", Param.Data_Inicio.ConvertToDatetime());
+                }
+
+                if (!String.IsNullOrEmpty(Param.Data_Fim))
+                {
+                    cmd.Parameters.AddWithValue("@Par_Data_Fim", Param.Data_Fim.ConvertToDatetime());
+                }
+                cmd.Parameters.AddWithValue("@Par_Comerciais", xmlComerciais);
                 cmd.Parameters.AddWithValue("@Par_Veiculos", xmlVeiculos);
+                cmd.Parameters.AddWithValue("@Par_Programas", xmlProgramas);
+                cmd.Parameters.AddWithValue("@Par_Processo", "SIMULAR");
+
                 Adp.SelectCommand = cmd;
                 Adp.Fill(dtb);
-                String Classe = "";
-                int Id_Veiculacao = -1;
-                foreach (DataRow drw in dtb.Rows)
+
+                if (dtb.Rows[0]["Status"].ToString().ConvertToBoolean())
                 {
-                    if (strQuebra != drw["Cod_Veiculo"].ToString().Trim() + drw["Cod_Programa"].ToString().Trim() + drw["Cod_Comercial"].ToString().Trim() + drw["Cod_Caracteristica"].ToString().Trim() + drw["Tipo_Linha"].ToString().Trim())
+                    DataView view = new DataView(dtb);
+                    DataTable distinctValues = view.ToTable(true, "Identificador","Cod_Veiculo","Cod_Programa","Cod_Comercial","Duracao","Operacao","Mes","Ano");
+                    
+                    
+                    foreach (DataRow drw in distinctValues.Rows)
                     {
-                        Id_Veiculacao++;
-                        Analise.Add(new VeiculacaoModel()
+
+
+                        Count_Id_Rotate++;
+                        AnaliseRotate.Add(new AnaliseRotateModel()
                         {
-                            Cod_Veiculo= drw["Cod_Veiculo"].ToString(),
+                            Status = dtb.Rows[0]["Status"].ToString().ConvertToBoolean(),
+                            Mensagem = dtb.Rows[0]["Mensagem"].ToString(),
+                            Id_Rotate = Count_Id_Rotate,
+                            Cod_Veiculo = drw["Cod_Veiculo"].ToString(),
                             Cod_Programa = drw["Cod_Programa"].ToString(),
                             Cod_Comercial = drw["Cod_Comercial"].ToString(),
                             Duracao = drw["Duracao"].ToString().ConvertToInt32(),
-                            Cod_Caracteristica = drw["Cod_Caracteristica"].ToString(),
-                            Tipo_Linha = drw["Tipo_Linha"].ToString().ConvertToInt32(),
-                            Status = drw["Status"].ToString().ConvertToBoolean(),
-                            Mensagem = drw["Mensagem"].ToString(),
-                            Insercoes = new List<InsercaoModel>()
+                            Operacao = drw["Operacao"].ToString().ConvertToInt32(),
+                            Insercoes = AddAnaliseInsercoes(drw, dtb),
                         });
-                        strQuebra =  drw["Cod_Veiculo"].ToString().Trim() + drw["Cod_Programa"].ToString().Trim() + drw["Cod_Comercial"].ToString().Trim() + drw["Cod_Caracteristica"].ToString().Trim() + drw["Tipo_Linha"].ToString().Trim() ;
-                    };
-                    Classe = drw["Classe"].ToString();
-                    Analise[Id_Veiculacao].Insercoes.Add(new InsercaoModel()
+                    }
+                }
+                else
+                {
+                    AnaliseRotate.Add(new AnaliseRotateModel()
                     {
-                        Id_Veiculacao = Id_Veiculacao,
-                        Dia = drw["Dia"].ToString().ConvertToInt32(),
-                        Data_Exibicao = drw["Data_Exibicao"].ToString().ConvertToDatetime(),
-                        Dia_Semana = drw["Dia_Semana"].ToString(),
-                        Numero_Semana = drw["Numero_Semana"].ToString().ConvertToInt32(),
-                        Qtd = drw["Qtd"].ToString().ConvertToInt32(),
-                        Classe= drw["Classe"].ToString()
+                        Status = dtb.Rows[0]["Status"].ToString().ConvertToBoolean(),
+                        Mensagem = dtb.Rows[0]["Mensagem"].ToString(),
                     });
                 }
             }
@@ -372,27 +311,115 @@ namespace PROPOSTA
             {
                 cnn.Close();
             }
-            return Analise;
+            return AnaliseRotate;
+        }
+        private List<AnaliseRotateInsercoes> AddAnaliseInsercoes(DataRow drw, DataTable Records)
+        {
+            List<AnaliseRotateInsercoes> Insercoes = new List<AnaliseRotateInsercoes>();
+            DateTime DataInicio = new DateTime(drw["Ano"].ToString().ConvertToInt32(), drw["Mes"].ToString().ConvertToInt32(), 1);
+            DateTime DataFim = DataInicio.AddMonths(1).AddDays(-1);
+            String Filter = "";
+            DataRow[] rows;
+            while (DataInicio <= DataFim)
+            {
+                Filter = "Cod_Veiculo = '" + drw["Cod_Veiculo"].ToString() + "'";
+                Filter += " and Cod_Programa = '" + drw["Cod_Programa"].ToString() + "'";
+                Filter += " and Cod_Comercial= '" + drw["Cod_Comercial"].ToString() + "'";
+                Filter += " and Operacao= '" + drw["Operacao"].ToString() + "'";
+                Filter += " and Data_Exibicao= '" + DataInicio + "'";
+                rows = Records.Select(Filter);
+                if (rows.Length == 0)
+                {
+                    Insercoes.Add(new AnaliseRotateInsercoes()
+                    {
+                        Id_Rotate = Count_Id_Rotate,
+                        Data_Exibicao = DataInicio,
+                        Dia_Semana = DiaSemana[(int)DataInicio.DayOfWeek],
+                        Qtd = 0
+                    });
+                }
+                else
+                {
+                    foreach (DataRow dri in rows)
+                    {
+                        Insercoes.Add(new AnaliseRotateInsercoes()
+                        {
+                            Id_Rotate = Count_Id_Rotate,
+                            Data_Exibicao = dri["Data_Exibicao"].ToString().ConvertToDatetime(),
+                            Dia_Semana = DiaSemana[(int)dri["Data_Exibicao"].ToString().ConvertToDatetime().DayOfWeek],
+                            Qtd = dri["Qtd_Insercoes"].ToString().ConvertToInt32(),
+                        });
+                    };
+                };
+                DataInicio = DataInicio.AddDays(1);
+            };
+            return Insercoes;
         }
 
-        public DataTable ExcluirComercialContrato(ComercialModel Param)
+        public DataTable SalvarDeterminacao(DeterminacaoModel Param)
         {
             clsConexao cnn = new clsConexao(this.Credential);
             cnn.Open();
             SqlDataAdapter Adp = new SqlDataAdapter();
             DataTable dtb = new DataTable("dtb");
+            DataTable dtbDeterminacao = new DataTable("dtbDeterminacao");
             SimLib clsLib = new SimLib();
+            String xmlVeiculos = null;
+            String xmlProgramas = null;
+            String xmlComerciais = null;
+            if (Param.Veiculos.Count > 0)
+            {
+                xmlVeiculos = clsLib.SerializeToString(Param.Veiculos);
+            }
+            if (Param.Programas.Count > 0)
+            {
+                xmlProgramas = clsLib.SerializeToString(Param.Programas);
+            }
+            if (Param.Comerciais.Count > 0)
+            {
+                xmlComerciais = clsLib.SerializeToString(Param.Comerciais);
+            }
+
             try
             {
-                SqlCommand cmd = cnn.Procedure(cnn.Connection, "PR_comercial_Delete");
+                SqlCommand cmd = cnn.Procedure(cnn.Connection, "[Pr_Proposta_Rotate_Simular]");
                 cmd.Parameters.AddWithValue("@Par_Login", this.CurrentUser);
                 cmd.Parameters.AddWithValue("@Par_Cod_Empresa", Param.Cod_Empresa);
                 cmd.Parameters.AddWithValue("@Par_Numero_Mr", Param.Numero_Mr);
                 cmd.Parameters.AddWithValue("@Par_Sequencia_Mr", Param.Sequencia_Mr);
-                cmd.Parameters.AddWithValue("@Par_Cod_Comercial", Param.Cod_Comercial);
+                if (!String.IsNullOrEmpty(Param.Data_Inicio))
+                {
+                    cmd.Parameters.AddWithValue("@Par_Data_Inicio", Param.Data_Inicio.ConvertToDatetime());
+                }
+
+                if (!String.IsNullOrEmpty(Param.Data_Fim))
+                {
+                    cmd.Parameters.AddWithValue("@Par_Data_Fim", Param.Data_Fim.ConvertToDatetime());
+                }
+                cmd.Parameters.AddWithValue("@Par_Comerciais", xmlComerciais);
+                cmd.Parameters.AddWithValue("@Par_Veiculos", xmlVeiculos);
+                cmd.Parameters.AddWithValue("@Par_Programas", xmlProgramas);
+                cmd.Parameters.AddWithValue("@Par_Processo", "Gravar");
+
                 Adp.SelectCommand = cmd;
                 Adp.Fill(dtb);
-
+                /// Se retornou status ok executa sp_determinacao
+                if (dtb.Rows[0]["Status"].ToString().ConvertToBoolean())
+                {
+                    SqlCommand cmdDeterminacao = cnn.Procedure(cnn.Connection, "Sp_Determinacao");
+                    cmdDeterminacao.Parameters.AddWithValue("@Par_Cod_Empresa" , Param.Cod_Empresa);
+                    cmdDeterminacao.Parameters.AddWithValue("@Par_Numero_MR", Param.Numero_Mr);
+                    cmdDeterminacao.Parameters.AddWithValue("@Par_Sequencia_Mr", Param.Sequencia_Mr);
+                    cmdDeterminacao.Parameters.AddWithValue("@Par_Cod_Usuario", this.CurrentUser);
+                    cmdDeterminacao.Parameters.AddWithValue("@Par_Identificador", dtb.Rows[0]["Id_Determinacao"].ToString());
+                    SqlDataAdapter adpDeterminacao = new SqlDataAdapter(cmdDeterminacao);
+                    adpDeterminacao.Fill(dtbDeterminacao);
+                }
+                else
+                {
+                    return dtb;
+                }
+                    
             }
             catch (Exception)
             {
@@ -402,7 +429,8 @@ namespace PROPOSTA
             {
                 cnn.Close();
             }
-            return dtb;
+            return dtbDeterminacao;
         }
+
     }
 }

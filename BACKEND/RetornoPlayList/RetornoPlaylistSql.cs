@@ -439,7 +439,8 @@ namespace PROPOSTA
                 cmd.Parameters.AddWithValue("@Par_Cod_Comercial", Param.Cod_Comercial);
                 cmd.Parameters.AddWithValue("@Par_Cod_Veiculo", Param.Cod_Veiculo);
                 cmd.Parameters.AddWithValue("@Par_Data_Exibicao", Param.Data_Exibicao);
-                cmd.Parameters.AddWithValue("@Par_Cod_Programa", Param.Cod_Programa);
+                //cmd.Parameters.AddWithValue("@Par_Cod_Programa", Param.Cod_Programa);
+                cmd.Parameters.AddWithValue("@Par_Cod_Programa", Param.Cod_Programa_Origem);
                 cmd.Parameters.AddWithValue("@Par_Chave_Acesso", Param.Chave_Acesso);
                 cmd.Parameters.AddWithValue("@Par_Cod_Qualidade", Param.Cod_Qualidade);
                 cmd.Parameters.AddWithValue("@Par_Horario_Exibicao", Param.Horario_Exibicao);

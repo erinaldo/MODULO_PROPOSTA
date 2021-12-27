@@ -113,6 +113,7 @@
     <Content Include="angular\Controller\CriticaValoracaoController.js" />
     <Content Include="angular\Controller\DeParaData.js" />
     <Content Include="angular\Controller\DeParaPeriodo.js" />
+    <Content Include="angular\Controller\DeterminacaoController.js" />
     <Content Include="angular\Controller\DeterminacaoTituloController.js" />
     <Content Include="angular\Controller\BaixaVeiculacoesController.js" />
     <Content Include="angular\Controller\ComplementoOutrasReceitas.js" />
@@ -171,6 +172,7 @@
     <Content Include="angular\Controller\RetornarEMSController.js" />
     <Content Include="angular\Controller\RetornoPlaylistController - Copy.js" />
     <Content Include="angular\Controller\RetornoPlaylistController.js" />
+    <Content Include="angular\Controller\RotateController.js" />
     <Content Include="angular\Controller\RoteiroMerchaController.js" />
     <Content Include="angular\Controller\TabelaPrecoImportacaoController.js" />
     <Content Include="angular\Controller\TabelaPrecosMolCadastroController.js" />
@@ -385,7 +387,7 @@
     <Content Include="view\DeParaPeriodo.html" />
     <Content Include="view\DepositorioFitas.html" />
     <Content Include="view\DepositorioFitasCadastro.html" />
-    <Content Include="view\DeterminacaoTitulo.html" />
+    <Content Include="view\Determinacao.html" />
     <Content Include="view\EncerramentoRoteiro.html" />
     <Content Include="view\EnvioPlaylist.html" />
     <Content Include="view\FitaPatrocinio.html" />
@@ -494,6 +496,7 @@
     <Content Include="view\RetornarEMS.html" />
     <Content Include="view\RetornoPlayList - Copy.html" />
     <Content Include="view\RetornoPlayList.html" />
+    <Content Include="view\Rotate.html" />
     <Content Include="view\RoteiroMercha.html" />
     <Content Include="view\Roteiro.html" />
     <Content Include="view\ConsultaVeiculacao.html" />
