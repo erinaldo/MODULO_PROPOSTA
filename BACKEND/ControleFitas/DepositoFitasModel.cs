@@ -56,6 +56,7 @@ namespace PROPOSTA
             public String Cod_Comercial { get; set; }
             public String Origem { get; set; }
             public Int32 Situacao { get; set; }
+            public String Letra { get; set; }
             public List<Veiculos_Model> Veiculos { get; set; }
             public String Tipo_Midia { get; set; }
         }
@@ -70,12 +71,17 @@ namespace PROPOSTA
             public String Data_Final { get; set; }
         }
 
-
-
         public class Veiculos_Model
         {
             public String Cod_Veiculo { get; set; }
             public String Nome_Veiculo { get; set; }
+        }
+
+        public class ExclusaoFitaModel
+        {
+            public String Cod_Veiculo { get; set; }
+            public String Numero_Fita { get; set; }
+            public String Tipo_Fita{ get; set; }
         }
 
     }

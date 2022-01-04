@@ -1,4 +1,8 @@
-﻿
+﻿<style>
+    input {
+        text-transform: uppercase;
+    }
+</style>
 <div class="container">
     <form name="frmDepositorioFitasCadastro" autocomplete="off">
         <div class="block">
@@ -9,7 +13,7 @@
                         <label>Tipo de Fita</label>
                         <select class="form-control"
                                 ng-model="DepositorioFitas.Tipo_Fita"
-                                ng-disabled="Parameters.Action=='Edit'"
+                                ng-disabled="Parameters.Action=='Edit' || DepositorioFitas.Numero_Fita"
                                 name="optTipoFita"
                                 ng-options="PosTipoFita.id as PosTipoFita.nome for PosTipoFita in PosTipoFita"></select>
                     </div>
@@ -43,7 +47,7 @@
                     <div class="form-group">
                         <label>Quantidade</label>
                         <div class="input-group">
-                            <input type="text" id="txtQuantidade" class="form-control" ng-model="DepositorioFitas.Quantidade">
+                            <input type="text" id="txtQuantidade" class="form-control numeric"  maxlength="4" ng-model="DepositorioFitas.Quantidade">
                         </div>
                     </div>
                 </div>
@@ -77,7 +81,7 @@
                     <div class="form-group">
                         <label>Duração</label>
                         <div class="input-group">
-                            <input type="text" id="txtDuracao" class="form-control" ng-model="DepositorioFitas.Duracao">
+                            <input type="text" id="txtDuracao" class="form-control numeric" maxlength="4" ng-model="DepositorioFitas.Duracao">
                         </div>
                     </div>
                 </div>
@@ -264,188 +268,135 @@
                         </div>
                     </div>
                 </div>
-
-                <!--<div class="table-responsive margin-top-30">
-        <table class="table table-bordered">
-            <thead>
-                <tr>
-                    <th colspan="2" style="background-color:#f5f5f5">Veículos</th>
-                </tr>
-            </thead>
-            <tbody>
-                <tr>
-
-                    <td style="border-right:none">
-                        <label ng-repeat="veiculo in DepositorioFitas.Veiculos track by $index"
-                               class="label label-info"
-                               style="margin-right:10px;display:inline-block">
-                            {{veiculo.Cod_Veiculo}}-{{veiculo.Nome_Veiculo}}
-                            <span class="fa fa-times span-btn pull-right" ng-click="RemoverVeiculos(veiculo.Cod_Veiculo)"></span>
-                        </label>
-                    </td>
-                    <td style="width:90px;min-width:90px;border-left:none">
-
-                        <button type="button" class="btn btn-default btn-sm" ng-click="SelecionarVeiculos(veiculo)">
-                            <span class="fa fa-search"></span>
-                        </button>
-
-                    </td>
-                </tr>
-            </tbody>
-        </table>
-    </div>-->
             </div>
         </div>
 
 
-        <!--<div class="row">
-            <div class="col-md-10 margin-top-10">
-                <div class="form-group">
-                    <label for="txtArquivoMidia">Selecione o aquivo de Mídia</label>
-                    <div class="input-group">
-                        <input type="file" id="txtArquivoMidia" name="txtArquivoMidia" class="form-control" ng-model="DepositorioFitas.Arquivo_Midia">
+
+
+        <!--====================Numero Fita-->
+        <div class="block">
+            <div class="row">
+                <table class="table table-noborder">
+                    <tbody>
+                        <tr>
+                            <td style="width:150px;min-width:150px">
+                                <input type="text" 
+                                       id="txtNumero_Fita" 
+                                       class="form-control"
+                                        maxlength="10" 
+                                        ng-change="FormataNumeroFita(DepositorioFitas)"
+                                       ng-model-options="{updateOn: 'blur'}"
+                                       ng-model="DepositorioFitas.Numero_Fita" 
+                                       ng-disabled="Parameters.Action!='New' || !DepositorioFitas.Tipo_Fita">
+                            </td>
+                            <td>
+                                <button type="submit" class="btn btn-success" ng-click="CarregarNumeroFita(DepositorioFitas)" ng-disabled="Parameters.Action!='New' || !DepositorioFitas.Tipo_Fita">Numero Fita</button>
+                            </td>
+                        </tr>
+                    </tbody>
+                </table>
+
+
+            </div>
+        </div>
+
+        <div class="block">
+            <label for="txtDiaSemana" class="field-x">Dias da Semana</label>
+            <div class="row">
+                <!--====================Dia da semana segunda-->
+                <div class="col-md-1 margin-top-10">
+                    <div class="form-group">
+                        <div class="input-group">
+                            <div class="app-checkbox">
+                                <label><input type="checkbox" name="app-checkbox-1" ng-model="DepositorioFitas.Indica_DiaSeg" /> Seg<span></span></label>
+                            </div>
+                        </div>
                     </div>
                 </div>
-            </div>
-        </div>-->
 
+                <!--====================Dia da semana Terça-->
+                <div class="col-md-1 margin-top-10">
+                    <div class="form-group">
+                        <div class="input-group">
+                            <div class="app-checkbox">
+                                <label><input type="checkbox" name="app-checkbox-1" ng-model="DepositorioFitas.Indica_DiaTer" /> Ter<span></span></label>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <!--====================Dia da semana Quarta-->
+                <div class="col-md-1 margin-top-10">
+                    <div class="form-group">
+                        <div class="input-group">
+                            <div class="app-checkbox">
+                                <label><input type="checkbox" name="app-checkbox-1" ng-model="DepositorioFitas.Indica_DiaQua" /> Qua<span></span></label>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <!--====================Dia da semana Quinta-->
+                <div class="col-md-1 margin-top-10">
+                    <div class="form-group">
+                        <div class="input-group">
+                            <div class="app-checkbox">
+                                <label><input type="checkbox" name="app-checkbox-1" ng-model="DepositorioFitas.Indica_DiaQui" /> Qui<span></span></label>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <!--====================Dia da semana Sexta-->
+                <div class="col-md-1 margin-top-10">
+                    <div class="form-group">
+                        <div class="input-group">
+                            <div class="app-checkbox">
+                                <label><input type="checkbox" name="app-checkbox-1" ng-model="DepositorioFitas.Indica_DiaSex" /> Sex<span></span></label>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <!--====================Dia da semana Sábado-->
+                <div class="col-md-1 margin-top-10">
+                    <div class="form-group">
+                        <div class="input-group">
+                            <div class="app-checkbox">
+                                <label><input type="checkbox" name="app-checkbox-1" ng-model="DepositorioFitas.Indica_DiaSab" /> Sab<span></span></label>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <!--====================Dia da semana Domingo-->
+                <div class="col-md-1 margin-top-10">
+                    <div class="form-group">
+                        <div class="input-group">
+                            <div class="app-checkbox">
+                                <label><input type="checkbox" name="app-checkbox-1" ng-model="DepositorioFitas.Indica_DiaDom" /> Dom<span></span></label>
+                            </div>
+                        </div>
+                    </div>
+                </div>
 
-<!--====================Numero Fita-->
-<div class="block">
+                <!--====================Escolhendo todos os dias-->
+                <div class="col-md-3 margin-top-10">
+                    <div class="form-group">
+                        <div class="input-group">
+                            <div class="app-checkbox">
+                                <label><input type="checkbox" name="app-checkbox-1" ng-model="DepositorioFitas.MarcarDesmarcar" ng-click="MarcaDepositorioFitas()" />  Marcar/Desmarcar Todos<span></span></label>
 
-    <div class="row">
-
-        <table class="table table-noborder">
-            <tbody>
-                <tr>
-                    <td style="width:150px;min-width:150px">
-
-                        <input type="text" id="txtNumero_Fita" class="form-control" ng-model="DepositorioFitas.Numero_Fita" ng-disabled="!PermissaoEdit">
-
-                    </td>
-
-                    <td>
-                        <button type="submit" class="btn btn-success" ng-click="CarregarNumeroFita(DepositorioFitas)" ng-disabled="Parameters.Action!='New'">Numero Fita</button>
-                    </td>
-                </tr>
-            </tbody>
-        </table>
-
-
-    </div>
-</div>
-
-<div class="block">
-    <label for="txtDiaSemana" class="field-x">Dias da Semana</label>
-    <div class="row">
-        <!--====================Dia da semana segunda-->
-        <div class="col-md-1 margin-top-10">
-            <div class="form-group">
-                <div class="input-group">
-                    <div class="app-checkbox">
-                        <label><input type="checkbox" name="app-checkbox-1" ng-model="DepositorioFitas.Indica_DiaSeg" /> Seg<span></span></label>
+                            </div>
+                        </div>
                     </div>
                 </div>
             </div>
         </div>
-
-        <!--====================Dia da semana Terça-->
-        <div class="col-md-1 margin-top-10">
-            <div class="form-group">
-                <div class="input-group">
-                    <div class="app-checkbox">
-                        <label><input type="checkbox" name="app-checkbox-1" ng-model="DepositorioFitas.Indica_DiaTer" /> Ter<span></span></label>
-                    </div>
-                </div>
+        <!--===================Botoes-->
+        <div class="row margin-top-20">
+            <div class="col-md-12">
+                <button type="submit" class="btn btn-success" ng-click="SalvarDepositorioFitas(DepositorioFitas)" ng-disabled="frmDepositorioFitasCadastro.$invalid">Salvar</button>
+                <button type="button" class="btn btn-danger" ng-click="ExcluirDepositorioFitas(DepositorioFitas)" ng-show="Parameters.Action=='Edit'" ng-disabled="!PermissaoDelete">Excluir</button>
+                <a href="#/DepositorioFitas" class="btn btn-warning">Cancelar</a>
             </div>
         </div>
-        <!--====================Dia da semana Quarta-->
-        <div class="col-md-1 margin-top-10">
-            <div class="form-group">
-                <div class="input-group">
-                    <div class="app-checkbox">
-                        <label><input type="checkbox" name="app-checkbox-1" ng-model="DepositorioFitas.Indica_DiaQua" /> Qua<span></span></label>
-                    </div>
-                </div>
-            </div>
-        </div>
-        <!--====================Dia da semana Quinta-->
-        <div class="col-md-1 margin-top-10">
-            <div class="form-group">
-                <div class="input-group">
-                    <div class="app-checkbox">
-                        <label><input type="checkbox" name="app-checkbox-1" ng-model="DepositorioFitas.Indica_DiaQui" /> Qui<span></span></label>
-                    </div>
-                </div>
-            </div>
-        </div>
-        <!--====================Dia da semana Sexta-->
-        <div class="col-md-1 margin-top-10">
-            <div class="form-group">
-                <div class="input-group">
-                    <div class="app-checkbox">
-                        <label><input type="checkbox" name="app-checkbox-1" ng-model="DepositorioFitas.Indica_DiaSex" /> Sex<span></span></label>
-                    </div>
-                </div>
-            </div>
-        </div>
-        <!--====================Dia da semana Sábado-->
-        <div class="col-md-1 margin-top-10">
-            <div class="form-group">
-                <div class="input-group">
-                    <div class="app-checkbox">
-                        <label><input type="checkbox" name="app-checkbox-1" ng-model="DepositorioFitas.Indica_DiaSab" /> Sab<span></span></label>
-                    </div>
-                </div>
-            </div>
-        </div>
-        <!--====================Dia da semana Domingo-->
-        <div class="col-md-1 margin-top-10">
-            <div class="form-group">
-                <div class="input-group">
-                    <div class="app-checkbox">
-                        <label><input type="checkbox" name="app-checkbox-1" ng-model="DepositorioFitas.Indica_DiaDom" /> Dom<span></span></label>
-                    </div>
-                </div>
-            </div>
-        </div>
-
-        <!--====================Escolhendo todos os dias-->
-        <div class="col-md-3 margin-top-10">
-            <div class="form-group">
-                <div class="input-group">
-                    <div class="app-checkbox">
-                        <label><input type="checkbox" name="app-checkbox-1" ng-model="DepositorioFitas.MarcarDesmarcar" ng-click="MarcaDepositorioFitas()" />  Marcar/Desmarcar Todos<span></span></label>
-
-                    </div>
-                </div>
-            </div>
-        </div>
-    </div>
-
-    <!--====================Dia da semana Domingo-->
-    <!--<div class="row">
-        <div class="col-md-2 margin-top-10">
-            <div class="form-group">
-                <div class="input-group">
-                    <div class="app-checkbox">
-                        <label style="color:#fff"><input type="checkbox" name="app-checkbox-1" ng-model="checkBoxReencaixe" ng-click="MarcaReencaixe()" />Todos</label>
-                    </div>
-                </div>
-            </div>
-        </div>
-    </div>-->
-
-
-</div>
-<!--===================Botoes-->
-<div class="row margin-top-20">
-    <div class="col-md-12">
-        <button type="submit" class="btn btn-success" ng-click="SalvarDepositorioFitas(DepositorioFitas)" ng-disabled="frmDepositorioFitasCadastro.$invalid">Salvar</button>
-        <button type="button" class="btn btn-danger" ng-click="ExcluirDepositorioFitas(DepositorioFitas)" ng-show="Parameters.Action=='Edit'" ng-disabled="!PermissaoDelete">Excluir</button>
-        <a href="#/DepositorioFitas" class="btn btn-warning">Cancelar</a>
-    </div>
-</div>
 
 
     </form>

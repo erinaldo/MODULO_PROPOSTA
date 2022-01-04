@@ -3,6 +3,7 @@
     //========================Verifica Permissoes
     $scope.PermissaoNew = false;
     $scope.PermissaoEdit = false;
+    $scope.PermissaoDelete = false;
     $scope.PermissaoProgramaAvulso = false;
 
     httpService.Get("credential/DepositorioFitas@New").then(function (response) {
@@ -10,6 +11,9 @@
     });
     httpService.Get("credential/DepositorioFitas@Edit").then(function (response) {
         $scope.PermissaoEdit = response.data;
+    });
+    httpService.Get("credential/DepositorioFitas@Destroy").then(function (response) {
+        $scope.PermissaoDelete = response.data;
     });
 
 
@@ -31,13 +35,11 @@
     { 'title': 'Tit.Comercial', 'visible': true, 'searchable': true, 'config': true, 'sortable': true },
     { 'title': 'Produto', 'visible': true, 'searchable': true, 'config': true, 'sortable': true },
     { 'title': 'Dur.', 'visible': true, 'searchable': true, 'config': true, 'sortable': true },
-    //{ 'title': 'Agencia', 'visible': true, 'searchable': true, 'config': true, 'sortable': true },
-    //{ 'title': 'Cliente', 'visible': true, 'searchable': true, 'config': true, 'sortable': true },
     { 'title': 'Status', 'visible': true, 'searchable': true, 'config': true, 'sortable': true },
-    //{ 'title': 'Empresa-Contrato-Seq-Com-Veic', 'visible': true, 'searchable': true, 'config': true, 'sortable': true },
     { 'title': 'N.Fita', 'visible': true, 'searchable': true, 'config': true, 'sortable': true },
     { 'title': 'Inicio.Prog', 'visible': true, 'searchable': true, 'config': true, 'sortable': true },
     { 'title': 'Térm.Prog', 'visible': true, 'searchable': true, 'config': true, 'sortable': true },
+    { 'title': '', 'visible': true, 'searchable': false, 'config': false, 'sortable': false }
     ];
     //====================Inicializa o Filtro
     $scope.Filtro = {};
@@ -178,6 +180,41 @@
         else {
             buttons.enable();
         }
+    };
+    //======================Excluir
+    $scope.ExcluirDepositorioFitas = function (pDepositorioFitas) {
+        swal({
+            title: "Tem certeza que deseja Excluir esta  Fita ?",
+            type: "warning",
+            showCancelButton: true,
+            confirmButtonClass: "btn-danger",
+            confirmButtonText: "Sim, Excluir?",
+            cancelButtonText: "Cancelar",
+            closeOnConfirm: true
+        }, function () {
+            var _data = {"Cod_Veiculo":pDepositorioFitas.Cod_Veiculo,
+                "Numero_Fita":pDepositorioFitas.Numero_Fita,
+                "Tipo_Fita":pDepositorioFitas.Numero_Fita.substr(0,2)
+            }
+            httpService.Post("ExcluirDepositorioFitas", _data).then(function (response) {
+                if (response) {
+
+                    if (response.data[0].Status) {
+                        ShowAlert(response.data[0].Mensagem, 'success');
+                        for (var i = 0; i < $scope.DepositorioFitasS.length; i++) {
+                            if ($scope.DepositorioFitasS[i].Cod_Veiculo==pDepositorioFitas.Cod_Veiculo && $scope.DepositorioFitasS[i].Numero_Fita==pDepositorioFitas.Numero_Fita) {
+                                $scope.DepositorioFitasS.splice(i,1);
+                                break;
+                            }
+                        };
+                    }
+                    else {
+                        ShowAlert(response.data[0].Mensagem, 'warning');
+                    }
+                };
+            });
+        });
+
     };
 
     //===========================Evento chamado ao fim do ngrepeat ao carregar grid 

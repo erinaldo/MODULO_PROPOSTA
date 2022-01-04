@@ -579,6 +579,25 @@ namespace PROPOSTA
                 throw new Exception(Ex.Message);
             }
         }
+        [Route("api/MapaReserva/AlterarCV")]
+        [HttpPost]
+        [ActionName("AlterarCV")]
+        [Authorize()]
+        public IHttpActionResult AlterarCV([FromBody] List<MapaReserva.AlterarCVModel> Param)
+        {
+            SimLib clsLib = new SimLib();
+            MapaReserva Cls = new MapaReserva(User.Identity.Name);
+            try
+            {
+                List<MapaReserva.AlterarCVModel> retorno = Cls.AlterarCV(Param);
+                return Ok(retorno);
+            }
+            catch (Exception Ex)
+            {
+                clsLib.EmailErrorToSuporte(User.Identity.Name, Ex.Message.ToString(), Ex.Source, Ex.StackTrace);
+                throw new Exception(Ex.Message);
+            }
+        }
     }
 }
 

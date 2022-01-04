@@ -1,0 +1,116 @@
+﻿{
+  "Title": "Contratos Complementados/A Complementar",
+  "ProcName": "pr_proposta_R0076",
+  "RptName": "R0076",
+  "Url": "R0076/Print",
+  "ShowGrid":true,
+  "Filters": [
+    {
+      "Class": "row"
+    },
+    {
+      "ParameterName": "@Par_Cod_Empresa_Faturamento",
+      "Type": "Text",
+      "Label": "Emp.Fat",
+      "Search": true,
+      "BigQuery": false,
+      "Dictionary": "Empresa_Usuario",
+      "Value": "",
+      "Multiple": false,
+      "Required": true,
+      "Class": "col-md-2",
+      "ArrayValue": [ ]
+    },
+    {
+      "ParameterName": "@Par_Dt_Inicial",
+      "Type": "Date",
+      "Label": "Data Inicio",
+      "Search": false,
+      "BigQuery": false,
+      "Dicionary": "",
+      "Value": "",
+      "Multiple": false,
+      "Class": "col-md-2",
+      "Required": true,
+      "ArrayValue": [ ]
+    },
+    {
+      "ParameterName": "@Par_Dt_Final",
+      "Type": "Date",
+      "Label": "Data Término",
+      "Search": false,
+      "BigQuery": false,
+      "Dicionary": "",
+      "Value": "",
+      "Multiple": false,
+      "Required": true,
+      "Class": "col-md-2",
+      "ArrayValue": [ ]
+    },
+    {
+      "ParameterName": "@Par_Situacao",
+      "Type": "Options",
+      "Label": "Complementados/A Complementar",
+      "Search": false,
+      "BigQuery": false,
+      "Dictionary": "",
+      "Value": 2,
+      "Multiple": false,
+      "Class": "col-md-3",
+      "ArrayValue": [ ],
+      "Options": [
+        {
+          "Id": 1,
+          "Descricao": "Complementados"
+        },
+        {
+          "Id": 2,
+          "Descricao": "A Complementar"
+        },
+        {
+          "Id": 3,
+          "Descricao": "Ambos"
+        }
+      ]
+    },
+    {
+      "Class": "row"
+    },
+    {
+      "ParameterName": "@Par_Cod_Agencia",
+      "Type": "Text",
+      "Label": "Agencia",
+      "Search": true,
+      "BigQuery": true,
+      "Dictionary": "Agencia",
+      "Value": "",
+      "Multiple": false,
+      "Class": "col-md-2",
+      "ArrayValue": [ ]
+    },
+    {
+      "ParameterName": "@Par_Cod_Cliente",
+      "Type": "Text",
+      "Label": "Cliente",
+      "Search": true,
+      "BigQuery": true,
+      "Dictionary": "Cliente",
+      "Value": "",
+      "Multiple": false,
+      "Class": "col-md-2",
+      "ArrayValue": [ ]
+    },
+    {
+      "ParameterName": "@Par_Cod_Veiculo",
+      "Type": "Text",
+      "Label": "Veiculo",
+      "Search": true,
+      "BigQuery": false,
+      "Dictionary": "Veiculo",
+      "Value": "",
+      "Multiple": false,
+      "Class": "col-md-2",
+      "ArrayValue": [ ]
+    }
+  ]
+}

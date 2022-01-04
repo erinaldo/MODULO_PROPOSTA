@@ -70,6 +70,9 @@
       "ArrayValue": [ ]
     },
     {
+      "Class": "row",
+    },
+    {
       "ParameterName": "@Par_Cod_Agencia",
       "Type": "Text",
       "Label": "Agência",

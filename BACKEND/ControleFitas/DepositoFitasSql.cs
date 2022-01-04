@@ -179,7 +179,7 @@ namespace PROPOSTA
                 Adp.SelectCommand = cmd;
                 Adp.SelectCommand.Parameters.AddWithValue("@Par_Operacao", pDepositorioFitas.Id_operacao);
                 Adp.SelectCommand.Parameters.AddWithValue("@Par_Login", this.CurrentUser);
-                Adp.SelectCommand.Parameters.AddWithValue("@Par_Tipo_Fita", pDepositorioFitas.Tipo_Fita);
+                Adp.SelectCommand.Parameters.AddWithValue("@Par_Tipo_Fita", pDepositorioFitas.Letra);
                 Adp.SelectCommand.Parameters.AddWithValue("@Par_Data_Inicio", pDepositorioFitas.Data_Inicio.ConvertToDatetime());
                 Adp.SelectCommand.Parameters.AddWithValue("@Par_Data_Final", pDepositorioFitas.Data_Final.ConvertToDatetime());
                 Adp.SelectCommand.Parameters.AddWithValue("@Par_Quantidade", pDepositorioFitas.Quantidade);
@@ -218,7 +218,7 @@ namespace PROPOSTA
         }
 
 
-        public DataTable ExcluirDepositorioFitas(DepositoFitasModel pDepositorioFitas)
+        public DataTable ExcluirDepositorioFitas(ExclusaoFitaModel pDepositorioFitas)
         {
             clsConexao cnn = new clsConexao(this.Credential);
             cnn.Open();
@@ -230,6 +230,7 @@ namespace PROPOSTA
                 SqlCommand cmd = cnn.Procedure(cnn.Connection, "PR_PROPOSTA_DepositorioFitas_Excluir");
                 Adp.SelectCommand = cmd;
                 Adp.SelectCommand.Parameters.AddWithValue("@Par_Login", this.CurrentUser);
+                Adp.SelectCommand.Parameters.AddWithValue("@Par_Cod_Veiculo", pDepositorioFitas.Cod_Veiculo);
                 Adp.SelectCommand.Parameters.AddWithValue("@Par_Numero_Fita", pDepositorioFitas.Numero_Fita);
                 Adp.SelectCommand.Parameters.AddWithValue("@Par_Tipo_Fita", pDepositorioFitas.Tipo_Fita);
                 Adp.Fill(dtb);

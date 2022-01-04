@@ -161,6 +161,9 @@ namespace PROPOSTA
             public String Cod_Veiculo { get; set; }
             public String Cod_Programa { get; set; }
             public String Cod_Agencia{ get; set; }
+            public String Cod_Tipo_Midia{ get; set; }
+            public String Cod_Nucleo{ get; set; }
+            public Byte Situacao{ get; set; }
             public String Cod_Cliente{ get; set; }
             public String Operacao { get; set; }
         }
@@ -244,6 +247,25 @@ namespace PROPOSTA
             public Int32 Sequencia_Mr { get; set; }
             public Boolean Status { get; set; }
             public String Critica { get; set; }
+        }
+        public class AlterarCVModel
+        {
+            public String Cod_Empresa { get; set; }
+            public Int32 Numero_Mr { get; set; }
+            public Int32 Sequencia_Mr { get; set; }
+            public String Cod_Comercial { get; set; }
+            public String Cod_Veiculo { get; set; }
+            public String Data_Exibicao { get; set; }
+            public String Cod_Programa { get; set; }
+            public Int32 Chave_Acesso { get; set; }
+            public String Cod_Caracteristica_De { get; set; }
+            public String Cod_Caracteristica_Para { get; set; }
+            public Int32 Qtd_Alterada { get; set; }
+            public Int32 Qtd_Existente { get; set; }
+            public Int32 Qtd_Comprovante { get; set; }
+            public Int32 Qtd_Am_Utilizada { get; set; }
+            public String Critica { get; set; }
+
         }
     }
     

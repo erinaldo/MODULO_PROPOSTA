@@ -1,9 +1,12 @@
 ﻿{
   "Title": "Valores Investidos",
   "ProcName": "PR_PROPOSTA_R0063",
-  "RptName": "R0063D",
+  "RptName": "R0063",
   "ShowGrid":true,
   "Filters": [
+        {
+      "Class":"row"
+    },
     {
       "ParameterName": "@Par_Dt_Inicial",
       "Type": "Date",
@@ -43,7 +46,7 @@
       "Class": "col-md-2",
       "ArrayValue": [ ]
     },
-        {
+    {
       "ParameterName": "@Par_Cod_Empresa_Venda",
       "Type": "Text",
       "Label": "Emp.Venda",
@@ -122,7 +125,7 @@
       "Search": false,
       "BigQuery": false,
       "Dictionary": "",
-      "Value": "",
+      "Value": 2,
       "Multiple": false,
       "Class": "col-md-3",
       "ArrayValue": [ ],
@@ -140,6 +143,9 @@
           "Descricao": "Ambos"
         }
       ]
+    },
+        {
+      "Class":"row"
     },
     {
       "ParameterName": "@Par_Visualiza_Nucleo",
@@ -208,11 +214,11 @@
       "Search": false,
       "BigQuery": false,
       "Dictionary": "",
-      "Value": "",
+      "Value": true,
       "Multiple": false,
       "Class": "col-md-3",
       "ArrayValue": [ ]
     }
-    
+
   ]
 }

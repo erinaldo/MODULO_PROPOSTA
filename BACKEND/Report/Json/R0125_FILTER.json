@@ -1,0 +1,372 @@
+{
+  "Title": "Analise de Rotativo",
+  "ProcName": "PR_PROPOSTA_R0125",
+  "RptName": "R0125",
+  "ShowGrid": true,
+  "Filters": [
+    {
+      "Class":"Row"
+    },
+    {
+      "ParameterName": "@PAR_DATA_INICIAL",
+      "Type": "Date",
+      "Label": "Data Inicial",
+      "Search": false,
+      "BigQuery": false,
+      "Dictionary": "",
+      "Value": "",
+      "Multiple": false,
+      "Class": "col-md-2",
+      "Required": true,
+      "ArrayValue": [ ]
+    },
+    {
+      "ParameterName": "@PAR_DATA_FINAL",
+      "Type": "Date",
+      "Label": "Data Final",
+      "Search": false,
+      "BigQuery": false,
+      "Dictionary": "",
+      "Value": "",
+      "Multiple": false,
+      "Class": "col-md-2",
+      "Required": true,
+      "ArrayValue": [ ]
+    },
+    {
+      "ParameterName": "@PAR_COD_VEICULO",
+      "Type": "Text",
+      "Label": "Veiculo",
+      "Search": true,
+      "BigQuery": false,
+      "Dictionary": "Veiculo",
+      "Value": "",
+      "Multiple": false,
+      "Class": "col-md-2",
+      "Required": true,
+      "ArrayValue": [ ]
+    },
+    {
+      "ParameterName": "@PAR_COD_PROGRAMA",
+      "Type": "Text",
+      "Label": "Programa Exibido",
+      "Search": true,
+      "BigQuery": false,
+      "Dictionary": "Programa",
+      "Value": "",
+      "Multiple": false,
+      "Class": "col-md-2",
+      "Required": false,
+      "ArrayValue": [ ]
+    },
+    {
+      "ParameterName": "@PAR_COD_PROGRAMA_ORIGEM",
+      "Type": "Text",
+      "Label": "Programa Origem",
+      "Search": true,
+      "BigQuery": false,
+      "Dictionary": "Programa",
+      "Value": "",
+      "Multiple": false,
+      "Class": "col-md-2",
+      "Required": false,
+      "ArrayValue": [ ]
+    },
+    {
+      "ParameterName": "@PAR_COD_CLIENTE",
+      "Type": "Text",
+      "Label": "Cliente",
+      "Search": true,
+      "BigQuery": true,
+      "Dictionary": "Terceiro",
+      "Value": "",
+      "Multiple": false,
+      "Class": "col-md-2",
+      "ArrayValue": [ ]
+    },
+    {
+      "ParameterName": "@PAR_COD_CONTATO",
+      "Type": "Text",
+      "Label": "Contato",
+      "Search": true,
+      "BigQuery": false,
+      "Dictionary": "Contato",
+      "Value": "",
+      "Multiple": false,
+      "Class": "col-md-2",
+      "ArrayValue": [ ]
+    },
+    {
+      "ParameterName": "@PAR_INDICA_RECEITA",
+      "Type": "Options",
+      "Label": "Tipo Receita",
+      "Search": false,
+      "BigQuery": false,
+      "Dictionary": "",
+      "Value": 3,
+      "Multiple": false,
+      "Class": "col-md-2",
+      "Required": true,
+      "ArrayValue": [ ],
+      "Options": [
+        {
+          "Id": 1,
+          "Descricao": "Gera Receita"
+        },
+        {
+          "Id": 2,
+          "Descricao": "Não Gera Receita"
+        },
+        {
+          "Id": 3,
+          "Descricao": "Ambos"
+        }
+      ]
+    },
+    {
+      "ParameterName": "@PAR_INDICA_ROTATIVO",
+      "Type": "Options",
+      "Label": "Tipos de Programas",
+      "Search": false,
+      "BigQuery": false,
+      "Dictionary": "",
+      "Value": 1,
+      "Multiple": false,
+      "Class": "col-md-2",
+      "Required": true,
+      "ArrayValue": [ ],
+      "Options": [
+        {
+          "Id": 1,
+          "Descricao": "Todos"
+        },
+        {
+          "Id": 2,
+          "Descricao": "Somente Rotativo"
+        }
+      ]
+    },
+    {
+      "Class":"row"
+    },
+    {
+      "ParameterName": "@PAR_GRUPO_1",
+      "Type": "Options",
+      "Label": "Grupo 1",
+      "Search": false,
+      "BigQuery": false,
+      "Dictionary": "",
+      "Value": 1,
+      "Multiple": false,
+      "Class": "break-line col-md-2",
+      "Required": true,
+      "ArrayValue": [ ],
+      "Options": [
+        {
+          "Id": 1,
+          "Descricao": "Cliente"
+        },
+        {
+          "Id": 2,
+          "Descricao": "Data Exibicao"
+        },
+        {
+          "Id": 3,
+          "Descricao": "Programa Exibido"
+        },
+        {
+          "Id": 4,
+          "Descricao": "Contato"
+        }
+      ]
+    },
+    {
+      "ParameterName": "@PAR_GRUPO_2",
+      "Type": "Options",
+      "Label": "Grupo 2",
+      "Search": false,
+      "BigQuery": false,
+      "Dictionary": "",
+      "Value": 2,
+      "Multiple": false,
+      "Class": "col-md-2",
+      "Required": true,
+      "ArrayValue": [ ],
+      "Options": [
+        {
+          "Id": 1,
+          "Descricao": "Cliente"
+        },
+        {
+          "Id": 2,
+          "Descricao": "Data Exibicao"
+        },
+        {
+          "Id": 3,
+          "Descricao": "Programa Exibido"
+        },
+        {
+          "Id": 4,
+          "Descricao": "Contato"
+        }
+      ]
+    },
+    {
+      "ParameterName": "@PAR_GRUPO_3",
+      "Type": "Options",
+      "Label": "Grupo 3",
+      "Search": false,
+      "BigQuery": false,
+      "Dictionary": "",
+      "Value": 3,
+      "Multiple": false,
+      "Class": "col-md-2",
+      "Required": true,
+      "ArrayValue": [ ],
+      "Options": [
+        {
+          "Id": 1,
+          "Descricao": "Cliente"
+        },
+        {
+          "Id": 2,
+          "Descricao": "Data Exibicao"
+        },
+        {
+          "Id": 3,
+          "Descricao": "Programa Exibido"
+        },
+        {
+          "Id": 4,
+          "Descricao": "Contato"
+        }
+      ]
+    },
+    {
+      "ParameterName": "@PAR_GRUPO_4",
+      "Type": "Options",
+      "Label": "Grupo 4",
+      "Search": false,
+      "BigQuery": false,
+      "Dictionary": "",
+      "Value": 4,
+      "Multiple": false,
+      "Class": "col-md-2",
+      "Required": true,
+      "ArrayValue": [ ],
+      "Options": [
+        {
+          "Id": 1,
+          "Descricao": "Cliente"
+        },
+        {
+          "Id": 2,
+          "Descricao": "Data Exibicao"
+        },
+        {
+          "Id": 3,
+          "Descricao": "Programa Exibido"
+        },
+        {
+          "Id": 4,
+          "Descricao": "Contato"
+        }
+      ]
+    },
+     {
+      "Class":"row"
+    },
+    {
+      "ParameterName": "@PAR_INDICA_CONSOLIDADO_1",
+      "Type": "Options",
+      "Label": "Tipo 1",
+      "Search": false,
+      "BigQuery": false,
+      "Dictionary": "",
+      "Value": 0,
+      "Multiple": false,
+      "Class": "col-md-2",
+      "Required": true,
+      "ArrayValue": [ ],
+      "Options": [
+        {
+          "Id": 0,
+          "Descricao": "Detalhado"
+        },
+        {
+          "Id": 1,
+          "Descricao": "Consolidado"
+        }
+      ]
+    },
+    {
+      "ParameterName": "@PAR_INDICA_CONSOLIDADO_2",
+      "Type": "Options",
+      "Label": "Tipo 2",
+      "Search": false,
+      "BigQuery": false,
+      "Dictionary": "",
+      "Value": 0,
+      "Multiple": false,
+      "Class": "col-md-2",
+      "Required": true,
+      "ArrayValue": [ ],
+      "Options": [
+        {
+          "Id": 0,
+          "Descricao": "Detalhado"
+        },
+        {
+          "Id": 1,
+          "Descricao": "Consolidado"
+        }
+      ]
+    },
+    {
+      "ParameterName": "@PAR_INDICA_CONSOLIDADO_3",
+      "Type": "Options",
+      "Label": "Tipo 3",
+      "Search": false,
+      "BigQuery": false,
+      "Dictionary": "",
+      "Value": 0,
+      "Multiple": false,
+      "Class": "col-md-2",
+      "Required": true,
+      "ArrayValue": [ ],
+      "Options": [
+        {
+          "Id": 0,
+          "Descricao": "Detalhado"
+        },
+        {
+          "Id": 1,
+          "Descricao": "Consolidado"
+        }
+      ]
+    },
+    {
+      "ParameterName": "@PAR_INDICA_CONSOLIDADO_4",
+      "Type": "Options",
+      "Label": "Tipo 4",
+      "Search": false,
+      "BigQuery": false,
+      "Dictionary": "",
+      "Value": 0,
+      "Multiple": false,
+      "Class": "col-md-2",
+      "Required": true,
+      "ArrayValue": [ ],
+      "Options": [
+        {
+          "Id": 0,
+          "Descricao": "Detalhado"
+        },
+        {
+          "Id": 1,
+          "Descricao": "Consolidado"
+        }
+      ]
+    }
+  ]
+}

@@ -121,7 +121,7 @@
                 </div>
                 <div class="row">
                     <!--==============================================Agencia-->
-                    <div class="col-md-6" ng-controller="dictionaryController">
+                    <div class="col-md-4" ng-controller="dictionaryController">
                         <div class="form-group">
                             <label class="field-x" for=" txtAgencia">Nome Agência</label>
                             <input id="txtAgencia"
@@ -134,7 +134,7 @@
 
 
                     <!--==============================================Cliente-->
-                    <div class="col-md-6" ng-controller="dictionaryController">
+                    <div class="col-md-4" ng-controller="dictionaryController">
                         <div class="form-group">
                             <label class="field-x" for="txtCliente">Nome Cliente</label>
                             <input id="txtCliente"
@@ -145,7 +145,7 @@
                         </div>
                     </div>
                     <!--==============================================Contato-->
-                    <div class="col-md-6" ng-controller="dictionaryController">
+                    <div class="col-md-4" ng-controller="dictionaryController">
                         <div class="form-group">
                             <label class="field-x" for="txtContato">Contato</label>
                             <input id="txtContato"
@@ -155,6 +155,8 @@
                                    ng-model-options="{updateOn: 'blur'}" />
                         </div>
                     </div>
+                    </div>
+                <div class="row">
                     <!--==============================================Veiculo-->
                     <div class="col-md-2" ng-controller="dictionaryController">
                         <div class="dictionary" dictionary="Veiculo" caption="Veículo">
@@ -175,6 +177,37 @@
                                    ng-change="DicionaryValidate('txtCodEmpresa')"
                                    primarybind="txtCodPrograma"
                                    secondarybind="">
+                        </div>
+                    </div>
+                    <!--==============================================Tipo de Midia-->
+                    <div class="col-md-2" ng-controller="dictionaryController">
+                        <div class="dictionary" dictionary="TipoMidias" caption="Tipo de Mídia">
+                            <input id="txtTipoMidia"
+                                   ng-model="Filtro.Cod_Tipo_Midia"
+                                   ng-model-options="{updateOn: 'blur'}"
+                                   ng-change="DicionaryValidate('txtTipoMidia')"
+                                   primarybind="txtTipoMidia"
+                                   secondarybind="">
+                        </div>
+                    </div>
+                    <!--==============================================Nucleo-->
+                    <div class="col-md-2" ng-controller="dictionaryController">
+                        <div class="dictionary" dictionary="Nucleo" caption="Nucleo">
+                            <input id="txtNucleo"
+                                   ng-model="Filtro.Cod_Nucleo"
+                                   ng-model-options="{updateOn: 'blur'}"
+                                   ng-change="DicionaryValidate('txtNucleo')"
+                                   primarybind="txtNucleo"
+                                   secondarybind="">
+                        </div>
+                    </div>
+                    <!--====================Situacao-->
+                    <div class="col-md-2">
+                        <div class="form-group">
+                            <label class="field-x " for="txtSituacao">Cancelados/Não Cancelados</label>
+                            <select class="form-control"
+                                    ng-model="Filtro.Situacao"
+                                    ng-options="Situacao.Id as Situacao.Descricao for Situacao in Situacao"></select>
                         </div>
                     </div>
                 </div>
@@ -227,7 +260,7 @@
                                 </a>
                             </td>
                             <td>
-                                <a class="label label-danger" href="#CriticaValoracao/{{contrato.Cod_Empresa}}/{{contrato.Numero_Mr}}/{{contrato.Sequencia_Mr}}" target="_blank"  ng-show="contrato.Indica_Critica"><span ng-class="span-btn" ng-click="VerCritica(contrato)">C</span></a>
+                                <a class="label label-danger" href="#CriticaValoracao/{{contrato.Cod_Empresa}}/{{contrato.Numero_Mr}}/{{contrato.Sequencia_Mr}}" target="_blank"  ng-show="contrato.Indica_Critica"><span ng-class="span-btn" ng-click="VerCritica(contrato)">Critica</span></a>
                             </td>
                             <td>
                                 <label class="label label-warning" ng-show="contrato.Indica_Midia_OnLine">On-Line</label>

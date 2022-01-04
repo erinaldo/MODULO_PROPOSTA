@@ -1,0 +1,284 @@
+﻿{
+  "Title": "Relatório de Análise do Preço Médio das Veiculações",
+  "ProcName": "PR_PROPOSTA_R0124",
+  "RptName": "R0124",
+  "ShowGrid": true,
+  "Filters": [
+    {
+      "Class":"row"
+    },
+    {
+      "ParameterName": "@Par_Cod_Empresa_Venda",
+      "Type": "Text",
+      "Label": "Emp.Venda",
+      "Search": true,
+      "BigQuery": false,
+      "Dictionary": "Empresa_Usuario",
+      "Value": "",
+      "Multiple": false,
+      "Class": "col-md-2",
+      //"Required": true,
+      "ArrayValue": [ ]
+    },
+    {
+      "ParameterName": "@Par_Data_Inicial",
+      "Type": "Date",
+      "Label": "Data Inicial",
+      "Search": false,
+      "BigQuery": false,
+      "Dictionary": "",
+      "Value": "",
+      "Multiple": false,
+      "Class": "col-md-2",
+      "Required": true,
+      "ArrayValue": [ ]
+    },
+    {
+      "ParameterName": "@Par_Data_Final",
+      "Type": "Date",
+      "Label": "Data Final",
+      "Search": false,
+      "BigQuery": false,
+      "Dictionary": "",
+      "Value": "",
+      "Multiple": false,
+      "Class": "col-md-2",
+      "Required": true,
+      "ArrayValue": [ ]
+    },
+    {
+      "ParameterName": "@Par_Cod_Veiculo",
+      "Type": "Text",
+      "Label": "Cod Veiculo",
+      "Search": true,
+      "BigQuery": false,
+      "Dictionary": "Veiculo",
+      "Value": "",
+      "Multiple": false,
+      "Required": true,
+      "Class": "col-md-2",
+      "ArrayValue": [ ]
+    },
+    {
+      "ParameterName": "@Par_Cod_Produto",
+      "Type": "Text",
+      "Label": "Segmento de Mercado",
+      "Search": true,
+      "BigQuery": false,
+      "Dictionary": "Setor",
+      "Value": "",
+      "Multiple": false,
+      "Required": false,
+      "Class": "col-md-2",
+      "ArrayValue": [ ]
+    },
+    {
+      "ParameterName": "@Par_Cod_Programa",
+      "@Par_Login": null,
+      "Type": "Text",
+      "Label": "Programa",
+      "Search": true,
+      "BigQuery": false,
+      "Dictionary": "Programa",
+      "Value": "",
+      "Multiple": false,
+      "Class": "col-md-2",
+      "Required": false,
+      "ArrayValue": [ ]
+    },
+    {
+      "ParameterName": "@PAR_COD_CLIENTE",
+      "Type": "Text",
+      "Label": "Cliente",
+      "Search": true,
+      "BigQuery": true,
+      "Dictionary": "Terceiro",
+      "Value": "",
+      "Multiple": false,
+      "Class": "col-md-2",
+      "ArrayValue": [ ]
+    },
+    {
+      "ParameterName": "@Par_Cod_Tipo_Comercial",
+      "Type": "Text",
+      "Label": "Tipo Comercial",
+      "Search": true,
+      "BigQuery": false,
+      "Dictionary": "Tipo_Comercial",
+      "Value": "",
+      "Multiple": false,
+      "Class": "col-md-2",
+      "Required": false,
+      "ArrayValue": [ ]
+    },
+    {
+      "ParameterName": "@Par_Cod_Contato",
+      "Type": "Text",
+      "Label": "Contato",
+      "Search": true,
+      "BigQuery": false,
+      "Dictionary": "Contato",
+      "Value": "",
+      "Multiple": false,
+      "Class": "col-md-2",
+      "Required": false,
+      "ArrayValue": [ ]
+    },
+    {
+      "Class": "row"
+    },
+    {
+      "ParameterName": "@PAR_GRUPO_1",
+      "Type": "Options",
+      "Label": "Grupo 1",
+      "Search": false,
+      "BigQuery": false,
+      "Dictionary": "",
+      "Value": 1,
+      "Multiple": false,
+      "Required": false,
+      "Class": "col-md-2",
+      "ArrayValue": [ ],
+      "Options": [
+        {
+          "Id": 1,
+          "Descricao": "Cliente"
+        },
+        {
+          "Id": 2,
+          "Descricao": "Programa"
+        },
+        {
+          "Id": 3,
+          "Descricao": "Segmento"
+        }
+      ]
+    },
+    {
+      "ParameterName": "@PAR_GRUPO_2",
+      "Type": "Options",
+      "Label": "Grupo 2",
+      "Search": false,
+      "BigQuery": false,
+      "Dictionary": "",
+      "Value": 2,
+      "Multiple": false,
+      "Required": false,
+      "Class": "col-md-2",
+      "ArrayValue": [ ],
+      "Options": [
+        {
+          "Id": 1,
+          "Descricao": "Cliente"
+        },
+        {
+          "Id": 2,
+          "Descricao": "Programa"
+        },
+        {
+          "Id": 3,
+          "Descricao": "Segmento"
+        }
+      ]
+    },
+    {
+      "ParameterName": "@PAR_GRUPO_3",
+      "Type": "Options",
+      "Label": "Grupo 3",
+      "Search": false,
+      "BigQuery": false,
+      "Dictionary": "",
+      "Value": 3,
+      "Multiple": false,
+      "Required": false,
+      "Class": "col-md-2",
+      "ArrayValue": [ ],
+      "Options": [
+        {
+          "Id": 1,
+          "Descricao": "Cliente"
+        },
+        {
+          "Id": 2,
+          "Descricao": "Programa"
+        },
+        {
+          "Id": 3,
+          "Descricao": "Segmento"
+        }
+      ]
+    },
+        {
+      "Class":"row"
+    },
+    {
+      "ParameterName": "@PAR_INDICA_CONSOLIDADO_1",
+      "Type": "Options",
+      "Label": "Tipo 1",
+      "Search": false,
+      "BigQuery": false,
+      "Dictionary": "",
+      "Value": 1,
+      "Multiple": false,
+      "Required": false,
+      "Class": "col-md-2",
+      "ArrayValue": [ ],
+      "Options": [
+        {
+          "Id": 1,
+          "Descricao": "Detalhado"
+        },
+        {
+          "Id": 2,
+          "Descricao": "Consolidado"
+        }
+      ]
+    },
+    {
+      "ParameterName": "@PAR_INDICA_CONSOLIDADO_2 ",
+      "Type": "Options",
+      "Label": "Tipo 2",
+      "Search": false,
+      "BigQuery": false,
+      "Dictionary": "",
+      "Value": 1,
+      "Multiple": false,
+      "Required": false,
+      "Class": "col-md-2",
+      "ArrayValue": [ ],
+      "Options": [
+        {
+          "Id": 1,
+          "Descricao": "Detalhado"
+        },
+        {
+          "Id": 2,
+          "Descricao": "Consolidado"
+        }
+      ]
+    },
+    {
+      "ParameterName": "@PAR_INDICA_CONSOLIDADO_3",
+      "Type": "Options",
+      "Label": "Tipo 3",
+      "Search": false,
+      "BigQuery": false,
+      "Dictionary": "",
+      "Value": 1,
+      "Multiple": false,
+      "Required": false,
+      "Class": "col-md-2",
+      "ArrayValue": [ ],
+      "Options": [
+        {
+          "Id": 1,
+          "Descricao": "Detalhado"
+        },
+        {
+          "Id": 2,
+          "Descricao": "Consolidado"
+        }
+      ]
+    }
+  ]
+}

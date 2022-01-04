@@ -678,6 +678,14 @@
         routeName: "Determinção de Comerciais",
         RouteId: 'MapaReserva@Determinacao'
     })
+    .when('/AlteraCaracteristica', {
+        templateUrl: 'view/AlteracaoCaracteristica.html',
+        controller: 'AlteracaoCaracteristicaController',
+        authorize: true,
+        routeName: "Alteração da Característica da Veiculação",
+        RouteId: 'MapaReserva@AltCV'
+    })
+
     .when('/ConsultaVeiculacoes', {
         templateUrl: 'view/ConsultaVeiculacao.html',
         controller: 'ConsultaVeiculacaoController',

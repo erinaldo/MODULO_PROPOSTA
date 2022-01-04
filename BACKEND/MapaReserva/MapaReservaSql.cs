@@ -38,6 +38,9 @@ namespace PROPOSTA
                 Adp.SelectCommand.Parameters.AddWithValue("@Par_Cod_Programa", Param.Cod_Programa);
                 Adp.SelectCommand.Parameters.AddWithValue("@Par_Cod_Agencia", Param.Cod_Agencia);
                 Adp.SelectCommand.Parameters.AddWithValue("@Par_Cod_Cliente", Param.Cod_Cliente);
+                Adp.SelectCommand.Parameters.AddWithValue("@Par_Cod_Tipo_Midia", Param.Cod_Tipo_Midia);
+                Adp.SelectCommand.Parameters.AddWithValue("@Par_Cod_Nucleo", Param.Cod_Nucleo);
+                Adp.SelectCommand.Parameters.AddWithValue("@Par_Situacao", Param.Situacao);
 
                 Adp.Fill(dtb);
             }
@@ -1362,6 +1365,72 @@ namespace PROPOSTA
                     param.Critica= dtb.Rows[0]["Mensagem"].ToString();
                     param.Status = dtb.Rows[0]["Status"].ToString().ConvertToBoolean();
                 }
+            }
+            catch (Exception)
+            {
+                throw;
+            }
+            finally
+            {
+                cnn.Close();
+            }
+            return param;
+        }
+        public List<AlterarCVModel> AlterarCV(List<AlterarCVModel> param)
+        {
+            clsConexao cnn = new clsConexao(this.Credential);
+            cnn.Open();
+            SqlDataAdapter Adp = new SqlDataAdapter();
+            DataTable dtb = new DataTable("dtb");
+            SimLib clsLib = new SimLib();
+            Boolean Valido = false;
+            try
+            {
+                for (int i = 0; i < param.Count; i++)
+                {
+                    Valido = !String.IsNullOrEmpty(param[i].Cod_Empresa) ||
+                        param[i].Numero_Mr != 0 ||
+                        param[i].Sequencia_Mr != 0 ||
+                        param[i].Cod_Comercial != "" ||
+                        !String.IsNullOrEmpty(param[i].Cod_Veiculo) ||
+                        !String.IsNullOrEmpty(param[i].Data_Exibicao) ||
+                        !String.IsNullOrEmpty(param[i].Cod_Programa) ||
+                        param[i].Chave_Acesso != 0 ||
+                        !String.IsNullOrEmpty(param[i].Cod_Caracteristica_De) ||
+                        !String.IsNullOrEmpty(param[i].Cod_Caracteristica_Para);
+
+                    if (Valido)
+                    {
+                        SqlCommand cmd = cnn.Procedure(cnn.Connection, "Pr_Proposta_Altera_Caracteristica");
+                        Adp.SelectCommand = cmd;
+                        Adp.SelectCommand.Parameters.AddWithValue("@Par_Cod_Usuario", this.CurrentUser);
+                        Adp.SelectCommand.Parameters.AddWithValue("@Par_Cod_Empresa", param[i].Cod_Empresa);
+                        Adp.SelectCommand.Parameters.AddWithValue("@Par_Numero_MR", param[i].Numero_Mr);
+                        Adp.SelectCommand.Parameters.AddWithValue("@Par_Sequencia_MR", param[i].Sequencia_Mr);
+                        Adp.SelectCommand.Parameters.AddWithValue("@Par_Cod_Comercial", param[i].Cod_Comercial);
+                        Adp.SelectCommand.Parameters.AddWithValue("@Par_Cod_Veiculo", param[i].Cod_Veiculo);
+                        if (!string.IsNullOrEmpty(param[i].Data_Exibicao))
+                        {
+                            Adp.SelectCommand.Parameters.AddWithValue("@Par_Data_Exibicao", param[i].Data_Exibicao.ConvertToDatetime());
+                        }
+                        Adp.SelectCommand.Parameters.AddWithValue("@Par_Cod_Programa", param[i].Cod_Programa);
+                        Adp.SelectCommand.Parameters.AddWithValue("@Par_Chave_Acesso", param[i].Chave_Acesso);
+                        Adp.SelectCommand.Parameters.AddWithValue("@Par_Cod_Caracteristica", param[i].Cod_Caracteristica_De);
+                        Adp.SelectCommand.Parameters.AddWithValue("@Par_Caracteristica_Nova", param[i].Cod_Caracteristica_Para);
+                        Adp.SelectCommand.Parameters.AddWithValue("@Par_Indica_Gravacao", 1);
+
+                        Adp.Fill(dtb);
+                        param[i].Qtd_Alterada = dtb.Rows[0]["Qtd_Alterada"].ToString().ConvertToInt32();
+                        param[i].Qtd_Existente = dtb.Rows[0]["Qtd_Existente"].ToString().ConvertToInt32();
+                        param[i].Qtd_Am_Utilizada = dtb.Rows[0]["Qtd_Am_Utilizada"].ToString().ConvertToInt32();
+                        param[i].Qtd_Comprovante = dtb.Rows[0]["Qtd_Comprovante"].ToString().ConvertToInt32();
+                        param[i].Critica = dtb.Rows[0]["Mensagem"].ToString();
+                        cmd.Dispose();
+                        dtb.Dispose();
+                        Adp.Dispose();
+                    }
+                }
+
             }
             catch (Exception)
             {

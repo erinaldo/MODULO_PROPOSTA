@@ -61,6 +61,12 @@
         width: 100px;
         font-size: 12px !important;
     }
+    .SemNumero{
+        background-color: black;
+        display: inline-block;
+        width: 100px;
+        font-size: 12px !important;
+    }
 
     .FitaNet {
         background-color: deeppink;
@@ -248,7 +254,7 @@
                                         <label id="Target_Fitay_{{item.Id_Item}}"
                                                ng-show="!item.Numero_Fita"
                                                ng-dblclick="MostraDadosFita(item,'Roteiro')"
-                                               ng-class="{'label FitaLocal':item.Tipo_Break==0, 'label FitaNet':item.Tipo_Break==1,'label FitaPE':item.Tipo_Break==3}">
+                                               ng-class="{'label SemNumero':!item.Numero_Fita, 'label FitaLocal':item.Tipo_Break==0, 'label FitaNet':item.Tipo_Break==1,'label FitaPE':item.Tipo_Break==3}">
                                             ({{item.Sequencia_Intervalo}}) Sem Número
                                         </label>
 
@@ -339,7 +345,7 @@
                                 <!---------------------------Numero da Fita-->
                                 <td ng-hide="comercial.Indica_Titulo_Programa">
                                     <label id="Fita_Source_{{comercial.Id_Item}}"
-                                           ng-class="{'label FitaNet': comercial.Origem=='Midia' && comercial.Indica_Grade==0,'label FitaLocal': comercial.Origem=='Midia' && comercial.Indica_Grade!=0,'label FitaAvulso': comercial.Origem=='Avulso','label FitaArtistica': comercial.Origem=='Artistico'}"
+                                           ng-class="{'label SemNumero':!comercial.Numero_Fita,'label FitaNet': comercial.Origem=='Midia' && comercial.Indica_Grade==0,'label FitaLocal': comercial.Origem=='Midia' && comercial.Indica_Grade!=0,'label FitaAvulso': comercial.Origem=='Avulso','label FitaArtistica': comercial.Origem=='Artistico'}"
                                            draggable="true"
                                            ondragstart="drag(event)">
                                         <span ng-show="comercial.Numero_Fita" ng-dblclick="MostraDadosFita(comercial,'Comercial')">{{comercial.Numero_Fita}}</span>

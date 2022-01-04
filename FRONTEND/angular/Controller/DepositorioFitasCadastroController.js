@@ -15,23 +15,21 @@
     //========================Verifica Permissoes
 
     $scope.PermissaoDelete = false;
-
-
-    //$scope.PermiteAvulso = function (pAvulso) {
-    //    if (pAvulso.Tipo_Fita == 1) {
-    //        $scope.PermissaoAvulso = false;
-    //    }
-    //}
-
-
-
-
     httpService.Get("credential/DepositorioFitas@Destroy").then(function (response) {
         $scope.PermissaoDelete = response.data;
     });
 
+    //====================Formata o Numero da Fita
+    $scope.FormataNumeroFita = function (pNumeroFita) {
+        if (pNumeroFita.Numero_Fita) {
+            var _letra = pNumeroFita.Tipo_Fita == 1 ? "CO" : "AR";
+            pNumeroFita.Numero_Fita = pNumeroFita.Numero_Fita.replace(/[^0-9]/g, '')
+            pNumeroFita.Numero_Fita = '000000' + pNumeroFita.Numero_Fita;
+            pNumeroFita.Numero_Fita = pNumeroFita.Numero_Fita.slice(pNumeroFita.Numero_Fita.length - 6);
+            pNumeroFita.Numero_Fita = _letra + pNumeroFita.Numero_Fita;
+        };
+    };
     //==========================Busca dados dos Depositorio Fitas
-
     var _url = "GetDepositorioFitasData/" + $scope.Parameters.Id;
     httpService.Get(_url).then(function (response) {
 
@@ -121,7 +119,6 @@
         }
 
         if (pDepositorioFitas.Cod_Veiculo == null && pDepositorioFitas.Cod_Veiculo == undefined) {
-
             ShowAlert("Código de Veículo  de Fita não pode ficar em branco");
             return;
         }
@@ -130,16 +127,12 @@
         pDepositorioFitas.Arquivo_Midia = ct_Arquivo_Midia;
 
         if (pDepositorioFitas.Tipo_Fita == 1) {
-            pDepositorioFitas.Tipo_Fita = 'CO';
-            tipo_fita_n = 1;
-
+            pDepositorioFitas.Letra= 'CO';
         }
         else {
-            pDepositorioFitas.Tipo_Fita = 'AR'
-            tipo_fita_n = 2;
+            pDepositorioFitas.Letra = 'AR'
+            
         }
-
-        //pDepositorioFitas.Cod_Veiculo = $scope.DepositorioFitas.Veiculos[0].Cod_Veiculo
 
         httpService.Post("SalvarDepositorioFitas", pDepositorioFitas).then(function (response) {
             if (response) {
@@ -169,15 +162,14 @@
             cancelButtonText: "Cancelar",
             closeOnConfirm: true
         }, function () {
+           
+            var _data = {
+                "Cod_Veiculo": pDepositorioFitas.Cod_Veiculo,
+                "Numero_Fita": pDepositorioFitas.Numero_Fita,
+                "Tipo_Fita": pDepositorioFitas.Numero_Fita.substr(0, 2)
+            };
 
-           if (pDepositorioFitas.Tipo_Fita == 1) {
-               pDepositorioFitas.Tipo_Fita = 'CO';
-           }
-           else {
-                 pDepositorioFitas.Tipo_Fita = 'AR'
-           }
-
-            httpService.Post("ExcluirDepositorioFitas", pDepositorioFitas).then(function (response) {
+            httpService.Post("ExcluirDepositorioFitas", _data).then(function (response) {
                 if (response) {
 
                     if (response.data[0].Status) {
@@ -192,117 +184,44 @@
         });
 
     };
+  
  
-
-    // Aqui foi definindo funções para veículos
-    //$scope.SelecionarVeiculos = function () {
-    //    //$scope.PesquisaTabelas = NewPesquisaTabela();
-    //    var _url = 'ListarTabela/Veiculo'
-    //    httpService.Get(_url).then(function (response) {
-    //        $scope.PesquisaTabelas = {}
-    //        if (response.data) {
-    //            $scope.ListadeVeiculos = response.data;
-    //            if ($scope.DepositorioFitas.Veiculos == null && $scope.DepositorioFitas.Veiculos == undefined) {
-    //                $scope.DepositorioFitas.Veiculos = 0;
-    //            }
-
-    //            for (var i = 0; i < $scope.DepositorioFitas.Veiculos.length; i++) {
-    //                for (var y = 0; y < $scope.ListadeVeiculos.length; y++) {
-    //                    if ($scope.DepositorioFitas.Veiculos[i].Cod_Veiculo == $scope.ListadeVeiculos[y].Codigo) {
-    //                        $scope.ListadeVeiculos[y].Selected = true;
-    //                    }
-    //                };
-    //            };
-    //            $scope.PesquisaTabelas.Items = $scope.ListadeVeiculos;
-    //            $scope.PesquisaTabelas.FiltroTexto = "";
-    //            $scope.PesquisaTabelas.Titulo = "Seleção de Veiculos";
-    //            $scope.PesquisaTabelas.MultiSelect = true;
-    //            $scope.PesquisaTabelas.ClickCallBack = function () {
-    //                $scope.DepositorioFitas.Veiculos = [];
-    //                for (var i = 0; i < $scope.ListadeVeiculos.length; i++) {
-    //                    if ($scope.ListadeVeiculos[i].Selected) {
-    //                        $scope.DepositorioFitas.Veiculos.push({ 'Cod_Veiculo': $scope.ListadeVeiculos[i].Codigo, 'Nome_Veiculo': $scope.ListadeVeiculos[i].Descricao });
-    //                    }
-    //                };
-    //            };
-    //            $("#modalTabela").modal(true);
-    //        };
-    //    });
-    //}
-
-    ////=====================Clicou no X da lista de Veiculos selecionados- remover Veiculos
-    //$scope.RemoverVeiculos = function (pCod_Veiculo) {
-    //    var n = 0;
-    //    for (var i = 0; i < $scope.DepositorioFitas.Veiculos.length; i++) {
-    //        if ($scope.DepositorioFitas.Veiculos[i].Cod_Veiculo == pCod_Veiculo) {
-    //            $scope.DepositorioFitas.Veiculos.splice(i, 1);
-    //            break;
-    //        }
-    //    }
-    //}
-
     //=====================Carregar Numero de Fita 
     $scope.CarregarNumeroFita = function (pNumero_Fita) {
-        //var n = 0;
-        var tipo_fita_n = 0;
+        var _Tipo = "";
 
         if ($scope.DepositorioFitas.Tipo_Fita == "") {
             ShowAlert("Para utilizar numeração automática, primeiro selecione Tipo de Fita");
             return;
-           
         }
-
 
         if ($scope.DepositorioFitas.Cod_Veiculo == null && $scope.DepositorioFitas.Cod_Veiculo == undefined) {
 
             ShowAlert("Para utilizar numeração automática, primeiro selecione um veiculo");
             return;
         }
-        //else {
-        //    for (var i = 0; i < $scope.DepositorioFitas.Veiculos.length; i++) {
-        //        n = n + 1;
-
-        //    }
-        //}
-        //if (n > 1) {
-
-        //    ShowAlert("Numeração automática somente é permitida quando selecionado apenas um veiculo");
-        //    return;
-        //}
 
         if (pNumero_Fita.Tipo_Fita == 1) {
-            pNumero_Fita.Tipo_Fita = 'CO'
-            tipo_fita_n=1
+            _Tipo= 'CO'
         }
         else {
-            pNumero_Fita.Tipo_Fita = 'AR'
-            tipo_fita_n=2
+            _Tipo= 'AR'
+            
         }
-
-
         var _data = {
             'Cod_Veiculo': pNumero_Fita.Cod_Veiculo,
-           // 'Cod_Veiculo': pNumero_Fita.Veiculos[0].Cod_Veiculo,
-            'Tipo_Fita': pNumero_Fita.Tipo_Fita,
+            'Tipo_Fita': _Tipo,
             'Tipo_Midia': '',
             'Cod_Tipo_Comercial': pNumero_Fita.Cod_Tipo_Comercial
         };
 
         httpService.Post("RangeFita", _data).then(function (response) {
             if (response) {
-               
                 if (response.data[0].Status == 0) {
-
-
                     ShowAlert('Veículo não esta parametrizado corretamente em Paramêtros de Numeração de Fitas');
-                   //Atribuir dado ao campo numeracao de fita 
                 }
                 else {
-                    $scope.DepositorioFitas.Tipo_Fita = tipo_fita_n
                     $scope.DepositorioFitas.Numero_Fita = response.data[0].Numero_Fita;
-
-                  
-
                 }
             }
         })    

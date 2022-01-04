@@ -3,12 +3,12 @@ using System.Collections.Generic;
 
 namespace PROPOSTA
 {
-    public partial class Report
+    public partial class R0095
     {
         private String Credential;
         private String CurrentUser;
         private SimLib clsLib = new SimLib();
-        public Report(String pCredential)
+        public R0095(String pCredential)
         {
             this.Credential = pCredential;
             this.CurrentUser = clsLib.Decriptografa(clsLib.GetJsonItem(this.Credential, "Name"));
@@ -20,6 +20,8 @@ namespace PROPOSTA
             public String Title { get; set; }
             public String ProcName { get; set; }
             public String RptName { get; set; }
+            public String Output{ get; set; }
+            public Boolean Custom{ get; set; }
             public List<FilterModel> Filters { get; set; }
 
         }
@@ -43,30 +45,21 @@ namespace PROPOSTA
             public String Descricao { get; set; }
             public Boolean Selected { get; set; }
         }
-        public class ReportDefModel
+
+        public class TotalizadorModel
         {
-            public String ReportName { get; set; }
-            public String PageSize { get; set; }
-            public String PageOrientation { get; set; }
-            public List<FieldsModel> Fields { get; set; }
-        }
-        public class FieldsModel
-        {
-            public String SqlField { get; set; }
-            public String Position { get; set; }
-            public String FontName { get; set; }
-            public String FontSize { get; set; }
-            public String FontStyle { get; set; }
-            public Boolean FontBold { get; set; }
-            public String Backcolor { get; set; }
-            public String Color { get; set; }
-            public String Align { get; set; }
-            public String HeaderText { get; set; }
-            public String HeaderFontName { get; set; }
-            public String HeaderFontSize { get; set; }
-            public String HeaderFontStyle { get; set; }
-            public Boolean HeaderFontBold { get; set; }
-            public String width { get; set; }
+            public Double Vlr_Midia_Bruto { get; set; }
+            public Double Vlr_Midia_Liquido { get; set; }
+            public Double Vlr_Merchandising_Bruto { get; set; }
+            public Double Vlr_Merchandising_Liquido { get; set; }
+            public Double Vlr_Patrocinio_Bruto { get; set; }
+            public Double Vlr_Patrocinio_Liquido { get; set; }
+            public Double Vlr_Reaplicacao_Bruto { get; set; }
+            public Double Vlr_Reaplicacao_Liquido { get; set; }
+            public Double Vlr_Evento_Bruto { get; set; }
+            public Double Vlr_Evento_Liquido { get; set; }
+            public Double Vlr_Faturado_Bruto { get; set; }
+            public Double Vlr_Faturado_Liquido { get; set; }
         }
     }
 }

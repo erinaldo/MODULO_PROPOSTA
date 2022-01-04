@@ -33,10 +33,10 @@
     //========================Verifica Permissoes
     $scope.PermissaoNew = false;
     $scope.PermissaoEdit = false;
-    httpService.Get("credential/AssociacaoProgramas@New").then(function (response) {
+    httpService.Get("credential/EMS@PROGRAMA").then(function (response) {
         $scope.PermissaoNew = response.data;
     });
-    httpService.Get("credential/AssociacaoProgramas@Edit").then(function (response) {
+    httpService.Get("credential/EMS@PROGRAMA").then(function (response) {
         $scope.PermissaoEdit = response.data;
     });
 

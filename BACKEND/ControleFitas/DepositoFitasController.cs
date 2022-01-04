@@ -114,7 +114,7 @@ namespace PROPOSTA
         [ActionName("ExcluirDepositorioFitas")]
         [Authorize()]
 
-        public IHttpActionResult ExcluirDepositorioFitas([FromBody] DepositoFitas.DepositoFitasModel pDepositorioFitas)
+        public IHttpActionResult ExcluirDepositorioFitas([FromBody] DepositoFitas.ExclusaoFitaModel pDepositorioFitas)
         {
             SimLib clsLib = new SimLib();
             DepositoFitas Cls = new DepositoFitas(User.Identity.Name);

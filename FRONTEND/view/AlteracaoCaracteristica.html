@@ -1,0 +1,132 @@
+﻿<style>
+    input {
+        text-transform: uppercase;
+    }
+
+    #tbFiltro td {
+        vertical-align: top;
+    }
+
+    table .input-group {
+        margin-bottom: 0px !important;
+    }
+</style>
+
+<div class="container">
+    <form name="frmAlteraContato" autocomplete="off">
+        <div class="block">
+            <button class="btn btn-default btn-icon-fixed btn-sm"
+                    ng-click="AdicionarLinhas(Filtros)">
+                <span class="fa fa-plus"></span> Adicionar Linhas
+            </button>
+            <div style="overflow:auto">
+                <table class="table table-bordered" id="tbFiltro">
+                    <thead>
+                        <tr>
+                            <th>Empresa</th>
+                            <th>Contrato</th>
+                            <th>Seq.</th>
+                            <th>Legenda</th>
+                            <th>Veículo</th>
+                            <th>Data Exibição</th>
+                            <th>Programa</th>
+                            <th>Ch Ac</th>
+                            <th>Carac. De</th>
+                            <th>Carac. Para</th>
+                            <th></th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr ng-repeat="filtro in Filtros track by $index">
+                            <td>
+                                <input type="text"
+                                       ng-model="filtro.Cod_Empresa"
+                                       maxlength="3"
+                                       ng-model-options="{updateOn: 'blur'}"
+                                       class="form-control" />
+                            </td>
+                            <td>
+                                <input type="text"
+                                       ng-model="filtro.Numero_Mr"
+                                       maxlength="10"
+                                       style="min-width:100px"
+                                       ng-model-options="{updateOn: 'blur'}"
+                                       onkeypress="return NumericOnly(event)"
+                                       class="form-control" />
+                            </td>
+                            <td>
+                                <input type="text"
+                                       ng-model="filtro.Sequencia_Mr"
+                                       maxlength="3"
+                                       style="min-width:50px"
+                                       ng-model-options="{updateOn: 'blur'}"
+                                       onkeypress="return NumericOnly(event)"
+                                       class="form-control" />
+                            </td>
+                            <td>
+                                <input type="text" ng-model="filtro.Cod_Comercial" maxlength="2" ng-model-options="{updateOn: 'blur'}" class="form-control" />
+                            </td>
+                            <td>
+
+                                <input type="text" ng-model="filtro.Cod_Veiculo" maxlength="3" ng-model-options="{updateOn: 'blur'}" class="form-control" />
+
+                            </td>
+                            <td>
+                                <div class="input-group">
+                                    <div class="input-group-addon">
+                                        <span class="fa fa-calendar dropdown-toggle" data-toggle="dropdown"></span>
+                                        <ul id="calendar" ui-calendar="" typdate="filtro.Data_Exibicao"></ul>
+                                    </div>
+                                    <input class="form-control" ng-model="filtro.Data_Exibicao" ui-date="" ng-model-options="{updateOn: 'blur'}" style="min-width:120px !important" />
+                                </div>
+                            </td>
+                            <td>
+                                <input type="text" ng-model="filtro.Cod_Programa" maxlength="4" ng-model-options="{updateOn: 'blur'}" class="form-control" />
+                            </td>
+                            <td>
+                                <input type="text"
+                                       ng-model="filtro.Chave_Acesso"
+                                       maxlength="4"
+                                       style="min-width:50px"
+                                       ng-model-options="{updateOn: 'blur'}"
+                                       class="form-control numeric" />
+                            </td>
+                            <td>
+                                <input type="text"
+                                       ng-model="filtro.Cod_Caracteristica_De"
+                                       maxlength="2"
+                                       ng-model-options="{updateOn: 'blur'}"
+                                       class="form-control" />
+                            </td>
+                            <td>
+                                <input type="text"
+                                       ng-model="filtro.Cod_Caracteristica_Para"
+                                       maxlength="2"
+                                       ng-model-options="{updateOn: 'blur'}"
+                                       class="form-control" />
+                            </td>
+                            <td style="color:red;white-space:nowrap">
+                                <span ng-show="filtro.Critica">{{filtro.Critica}}</span>
+                            </td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+        </div>
+        <div class="fixed-buttons-bottom">
+            <div class="row">
+                <div class="col-md-12">
+                    <button class="btn btn-success" ng-click="AlterarCaracteristica(Filtros)">Salvar</button>
+                    <button class="btn btn-warning" ng-click="NewFiltro()">Novo Filtro</button>
+                </div>
+            </div>
+        </div>
+    </form>
+</div>
+
+<div ng-include="'template/SelectItem.html'"></div>
+<script type="text/javascript">
+    $(document).ready(function () {
+        GetDictionary();
+    });
+</script>

@@ -556,7 +556,8 @@ function NewPesquisaTabela()
         'PreFilter' : false,
         'ButtonText': '',
         'LoadCallBack': '',
-        'ButtonCallBack':'',
+        'ButtonCallBack': '',
+        'MarcarTodos':false
     };
 }
 function MergeCommonRows(table, cols) {

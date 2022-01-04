@@ -1,0 +1,207 @@
+﻿{
+  "Title": "Receita por Programa",
+  "ProcName": "Pr_Proposta_R0118",
+  "RptName": "R0118",
+  "ShowGrid": false,
+  "Url": "R0118/Print",
+  "Note": "Esse relatório é gerado sobre dados congelados até o dia anterior a hoje.",
+  "Filters": [
+    {
+      "Class": "row"
+    },
+    {
+      "ParameterName": "@Par_Cod_Empresa_Faturamento",
+      "Type": "Text",
+      "Label": "Emp.Fat",
+      "Search": true,
+      "BigQuery": false,
+      "Dictionary": "Empresa_Usuario",
+      "Value": "",
+      "Multiple": false,
+      "Required": true,
+      "Class": "col-md-2",
+      "ArrayValue": [ ]
+    },
+    {
+      "ParameterName": "@Par_Dt_Inicial",
+      "Type": "Date",
+      "Label": "Data Inicio",
+      "Search": false,
+      "BigQuery": false,
+      "Dicionary": "",
+      "Value": "",
+      "Multiple": false,
+      "Class": "col-md-2",
+      "Required": true,
+      "ArrayValue": [ ]
+    },
+    {
+      "ParameterName": "@Par_Dt_Final",
+      "Type": "Date",
+      "Label": "Data Término",
+      "Search": false,
+      "BigQuery": false,
+      "Dicionary": "",
+      "Value": "",
+      "Multiple": false,
+      "Required": true,
+      "Class": "col-md-2",
+      "ArrayValue": [ ]
+    },
+    {
+      "ParameterName": "@Par_Indica_Midia_Paga",
+      "Type": "Options",
+      "Label": "Opções de Mídias",
+      "Search": false,
+      "BigQuery": false,
+      "Dictionary": "",
+      "Value": 3,
+      "Multiple": false,
+      "Class": "col-md-3",
+      "ArrayValue": [ ],
+      "Options": [
+        {
+          "Id": 1,
+          "Descricao": "Mídias pagas"
+        },
+        {
+          "Id": 2,
+          "Descricao": "Mídias não pagas"
+        },
+        {
+          "Id": 3,
+          "Descricao": "Ambos"
+        }
+      ]
+    },
+    {
+      "Class": "row"
+    },
+    {
+      "ParameterName": "@Par_Veiculos",
+      "Type": "List",
+      "Label": "Veiculos",
+      "Search": true,
+      "BigQuery": false,
+      "Dictionary": "Veiculo",
+      "Value": "",
+      "Multiple": true,
+      "Class": "col-md-2",
+      "ArrayValue": [ ]
+    },
+    {
+      "ParameterName": "@Par_Programas",
+      "Type": "List",
+      "Label": "Programa",
+      "Search": true,
+      "BigQuery": false,
+      "Dictionary": "Programa",
+      "Value": "",
+      "Multiple": true,
+      "Class": "col-md-2",
+      "ArrayValue": [ ]
+    },
+    {
+      "ParameterName": "@Par_Tipo_Midias",
+      "Type": "List",
+      "Label": "Tipos de Mídia",
+      "Search": true,
+      "BigQuery": false,
+      "Dictionary": "TipoMidias",
+      "Value": "",
+      "Multiple": true,
+      "Class": "col-md-2",
+      "ArrayValue": [ ]
+    },
+    {
+      "ParameterName": "@Par_Nucleos",
+      "Type": "List",
+      "Label": "Núcleos de Venda",
+      "Search": true,
+      "BigQuery": false,
+      "Dictionary": "Nucleo",
+      "Value": "",
+      "Multiple": true,
+      "Class": "col-md-2",
+      "ArrayValue": [ ]
+    },
+    
+    {
+      "ParameterName": "",
+      "ConfigUrl": true,
+      "Type": "Options",
+      "Label": "Visualizaçao",
+      "Search": false,
+      "BigQuery": false,
+      "Dictionary": "",
+      "Value": 0,
+      "Multiple": false,
+      "Class": "col-md-3",
+      "ArrayValue": [ ],
+      "Options": [
+        {
+          "Id": 0,
+          "Descricao": "Por Abrangencia",
+          "UrlName": "R0118/Print"
+
+        },
+        {
+          "Id": 1,
+          "Descricao": "Diaria",
+          "UrlName": "R0118Diaria/Print"
+        }
+      ]
+    },
+      {
+      "Class": "row"
+    },
+     {
+      "ParameterName": "@Par_Receita_Nor",
+      "Type": "Boolean",
+      "Label": "Normal",
+      "Search": false,
+      "BigQuery": false,
+      "Dictionary": "",
+      "Value": true,
+      "Multiple": false,
+      "Class": "col-md-2",
+      "ArrayValue": [ ]
+    },
+    {
+      "ParameterName": "@Par_Receita_Mer",
+      "Type": "Boolean",
+      "Label": "Merchandising",
+      "Search": false,
+      "BigQuery": false,
+      "Dictionary": "",
+      "Value": true,
+      "Multiple": false,
+      "Class": "col-md-2",
+      "ArrayValue": [ ]
+    },
+    {
+      "ParameterName": "@Par_Receita_Pat",
+      "Type": "Boolean",
+      "Label": "Patrocinio",
+      "Search": false,
+      "BigQuery": false,
+      "Dictionary": "",
+      "Value": true,
+      "Multiple": false,
+      "Class": "col-md-2",
+      "ArrayValue": [ ]
+    },
+    {
+      "ParameterName": "@Par_Receita_Cal",
+      "Type": "Boolean",
+      "Label": "Calhau",
+      "Search": false,
+      "BigQuery": false,
+      "Dictionary": "",
+      "Value": true,
+      "Multiple": false,
+      "Class": "col-md-2",
+      "ArrayValue": [ ]
+    }
+  ]
+}

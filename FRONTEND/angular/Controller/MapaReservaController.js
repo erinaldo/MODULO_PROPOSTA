@@ -22,7 +22,7 @@
     ];
     $scope.MesAnoKeys = { 'Year': new Date().getFullYear(), 'First': '', 'Last': '' }
     $scope.TipoVenda = [{ 'Codigo': 1, 'Descricao': 'On-Line' },{'Codigo':2,'Descricao':'Off-Line'},{'Codigo':3,'Descricao':'Ambos'}]
-
+    $scope.Situacao= [{ 'Id': 1,'Descricao' :'Cancelados'}, {'Id': 2,'Descricao' :'Não Cancelados'}, {'Id': 3,'Descricao':'Ambos'}];
     //====================Inicializa o Filtro
     $scope.NewFiltro = function () {
         localStorage.removeItem('MapaReservaFilter');
@@ -43,7 +43,10 @@
             'Cod_Veiculo': '',
             'Cod_Programa': '',
             'Cod_Agencia': '',
-            'Cod_Cliente':''
+            'Cod_Cliente': '',
+            'Cod_Tipo_Midia': '',
+            'Cod_Nucleo': '',
+            'Situacao':3,
         }
     }
     //===========================Se ja tiver filtro anterior gravado

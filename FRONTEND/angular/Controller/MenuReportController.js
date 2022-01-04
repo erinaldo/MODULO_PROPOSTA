@@ -3,20 +3,27 @@
     //===================Inicializa Scopes
     $scope.Reports = [
         //{ 'Id': 1, 'Key': 'R0063R', 'Title': 'Valores Investidos - Resumido' },
-        { 'Id': 1, 'Key': 'R0063D', 'Title': 'Valores Investidos' },
+        { 'Id': 1, 'Key': 'R0063', 'Title': 'Valores Investidos' },
         { 'Id': 2, 'Key': 'R0067', 'Title': 'Valores por Contrato' },
         { 'Id': 3, 'Key': 'R0015', 'Title': 'Relatório de Faturas' },
         { 'Id': 4, 'Key': 'R0098', 'Title': 'Listagem de Checking' },
         { 'Id': 5, 'Key': 'R0106', 'Title': 'Desconto por Contato' },
         { 'Id': 6, 'Key': 'R0052', 'Title': 'Demonstrativo Agência Cliente' },
-        { 'Id': 7, 'Key': 'R0054', 'Title': 'Demonstrativo Programa Produto' },
-        { 'Id': 8, 'Key': 'R0027', 'Title': 'Comissões Extra-Faturamento' },
-        { 'Id': 9, 'Key': 'R0179', 'Title': 'TRE' },
-        { 'Id': 10, 'Key': 'R0085', 'Title': 'Vendas por Contato' },
-        { 'Id': 11, 'Key': 'R0010', 'Title': 'Veiculacoes Sem Faturamento' },
-        { 'Id': 12, 'Key': 'R0161', 'Title': 'Veiculacoes' },
-
-
+        { 'Id': 7, 'Key': 'R0118', 'Title': 'Receita por Programa' },
+        //{ 'Id': 7, 'Key': 'R0054', 'Title': 'Demonstrativo Programa Produto' },
+        //{ 'Id': 8, 'Key': 'R0027', 'Title': 'Comissões Extra-Faturamento' },
+        //{ 'Id': 9, 'Key': 'R0179', 'Title': 'TRE' },
+        //{ 'Id': 10, 'Key': 'R0085', 'Title': 'Vendas por Contato' },
+        //{ 'Id': 11, 'Key': 'R0010', 'Title': 'Veiculacoes Sem Faturamento' },
+        //{ 'Id': 12, 'Key': 'R0021', 'Title': 'Resumo das Disponibilidades' },
+        //{ 'Id': 13, 'Key': 'R0161', 'Title': 'Veiculacoes' },
+         { 'Id': 8, 'Key': 'R0050', 'Title': 'Negociações Antecipadas' },
+         { 'Id': 14, 'Key': 'R0124', 'Title': 'Preço Médio' },
+        { 'Id': 15, 'Key': 'R0125', 'Title': 'Análise de Rotativo' },
+        { 'Id': 16, 'Key': 'R0095', 'Title': 'Conta Corrente da Negociação' },
+        //{ 'Id': 16, 'Key': 'R0183', 'Title': 'Valor Médio por Programa' },
+        { 'Id': 17, 'Key': 'R0076', 'Title': 'Contratos Complementados/A Complementar' },
+        { 'Id': 17, 'Key': 'R0183', 'Title': 'Análise dos Breaks' },
     ];
     $scope.gridheaders = [];
     $scope.CurrentShow = 'Menu';
@@ -24,7 +31,6 @@
     $scope.MesAnoKeys = { 'Year': new Date().getFullYear(), 'First': '', 'Last': '' }
     $scope.ReportData = [];
     $scope.CurrentReport = "";
-    $scope.QtdLoad = 0;
     //===========================Apresenta Filtro do Relatorio
     $scope.ReportFilter = function (pReport) {
         $scope.CurrentReport = pReport;
@@ -89,6 +95,7 @@
     };
     //===========================Lupa de Pesquisa - Multipla escolha
     $scope.PesquisaArrayItems = function (pFilter) {
+        $scope.PesquisaTabelas = NewPesquisaTabela();
         $scope.PesquisaTabelas.Items = pFilter.ArrayValue;
         $scope.PesquisaTabelas.FiltroTexto = ""
         $scope.PesquisaTabelas.Titulo = "Pesquisa"
@@ -105,9 +112,10 @@
     };
     //===========================Valida Item
     $scope.ValidarItem = function (pFilter) {
-        if (!pFilter.Value) {
+        if (!pFilter.Value || !pFilter.Dictionary) {
             return;
         }
+        
         var _url = "ValidarTabela/" + pFilter.Dictionary.trim() + '/' + pFilter.Value.trim();
         httpService.Get(_url).then(function (response) {
             if (response.data) {
@@ -129,8 +137,27 @@
         });
     };
     //===========================Gera o Relatorio
-    $scope.PrintReport = function (pFilter) {
-        httpService.Post("Report/Print", pFilter).then(function (response) {
+    $scope.PrintReport = function () {
+        for (var i = 0; i < $scope.Filter.Filters.length; i++) {
+            if ($scope.Filter.Filters[i].ConfigRptName) {
+                $scope.Filter.RptName = $scope.Filter.Filters[i].Options[$scope.Filter.Filters[i].Value].RptName;
+            };
+            if ($scope.Filter.Filters[i].ConfigUrl) {
+                console.log($scope.Filter.Filters[i]);
+                $scope.Filter.Url = $scope.Filter.Filters[i].Options[$scope.Filter.Filters[i].Value].UrlName;
+            };
+        };
+
+
+        var _url = "";
+        if ($scope.Filter.Url) {
+            _url = $scope.Filter.Url;
+        }
+        else {
+            _url = "Report/Print";
+        }
+        $scope.Filter.Output = 'PDF';
+        httpService.Post(_url, $scope.Filter).then(function (response) {
             if (response.data) {
                 url = $rootScope.baseUrl + "PDFFILES/REPORT/" + $rootScope.UserData.Login.trim() + "/" + response.data;
                 var win = window.open(url, '_blank');
@@ -142,17 +169,19 @@
         });
     };
     //====================Configuracao do Grid
-    $scope.ConfiguraGrid = function (pFilter) {
+    $scope.ConfiguraGrid = function () {
         param = {};
         param.language = fnDataTableLanguage();
         param.lengthMenu = [[7,10, 15,20, 50, -1], [7,10,15, 20, 50, "Todos"]];
+        param.pageLength= 10;
 
         param.scrollCollapse = true;
         param.paging = true;
         param.dom = "<'row'<'col-sm-6'B><'col-sm-3'l><'col-sm-3'f>>" + "<'row'<'col-sm-12'tr>>" + "<'row'<'col-sm-5'i><'col-sm-7'p>>",
         param.buttons = [
-            { text: 'Abrir no Excel<span class="fa fa-file-excel-o margin-left-10" style="color:white"></span>', type: 'excel', className: 'btn btn-warning', extend: 'excel', },
-            { text: 'Voltar' + '<span class="fa fa-arrow-circle-o-left margin-left-10"></span>', className: 'btn btn-info', action: function (e, dt, button, config) { $('#btnNovoFiltro').click(); } },
+            { text: 'Abrir no Excel<span class="fa fa-file-excel-o margin-left-10" style="color:white"></span>', type: 'excel', className: 'btn btn-primary', extend: 'excel', },
+            { text: 'Gerar PDF' + '<span class="fa fa-file-pdf"></span>', className: 'btn btn-primary', action: function (e, dt, button, config) { $('#btnGerarPdf').click(); } },
+            { text: 'Voltar' + '<span class="fa fa-arrow-circle-o-left margin-left-10"></span>', className: 'btn btn-warning', action: function (e, dt, button, config) { $('#btnNovoFiltro').click(); } },
         ];
         param.order = [];
         param.autoWidth = false;
@@ -173,16 +202,16 @@
     };
     //===========================Carrega os dados para exibicao na tela
     $scope.CarregaGrid = function (pFilter) {
-        
+        pFilter.Output = 'TELA';
         httpService.Post("Report/LoadData", pFilter).then(function (response) {
             if (response.data.length > 0) {
-                $scope.QtdLoad++;
-                $scope.ReportData = response.data;
-                if ($scope.QtdLoad == 1) {
-                    angular.forEach($scope.ReportData[0], function (value, key) {
-                        $scope.gridheaders.push({ 'title': key, 'visible': true, 'searchable': true, 'config': false, 'sortable': false });
+                
+                $scope.gridheaders = [];
+                angular.forEach(response.data[0], function (value, key) {
+                        $scope.gridheaders.push({ 'title': key, 'visible': true, 'searchable': true, 'config': false, 'sortable': true });
                     });
-                }
+
+                $scope.ReportData = response.data
                 $scope.CurrentShow = 'Grid';
             }
             else {
@@ -193,17 +222,19 @@
     //===========================Repeat finished
     $scope.RepeatFinished = function () {
         $rootScope.routeloading = false;
-        $scope.ConfiguraGrid($scope.ReportData);
+        $scope.ConfiguraGrid();
         setTimeout(function () {
             $("#dataTable").dataTable().fnAdjustColumnSizing();
         }, 1000)
+        setHeader($scope.gridheaders);
     };
     //===========================novo filtro
     $scope.NovoFiltro = function () {
         $scope.ReportData = [];
+        $("#dataTable").dataTable().fnClearTable();
         $("#dataTable").dataTable().fnDestroy();
         $scope.CurrentShow = "Filter";
-        //$scope.gridheaders = [];
+        $scope.gridheaders = [];
     };
     $scope.CancelarReport = function () {
         location.reload();
@@ -217,3 +248,10 @@
     });
 }]);
 
+function setHeader(head) {
+    var elements = document.getElementsByClassName("sorting");
+    for (var i = 0, len = elements.length; i < len; i++) {
+        elements[i].innerText = head[i].title;
+    };
+
+}

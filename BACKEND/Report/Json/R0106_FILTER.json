@@ -54,7 +54,32 @@
       "Value": "",
       "Multiple": false,
       "Class": "col-md-2",
-      "ArrayValue": []
+      "ArrayValue": [ ]
+    },
+     {
+      "ParameterName": "@Par_Tipo_Relatorio",
+      "ConfigRptName": true,
+      "Type": "Options",
+      "Label": "Tipo do Relatorio",
+      "Search": false,
+      "BigQuery": false,
+      "Dictionary": "",
+      "Value": 0,
+      "Multiple": false,
+      "Class": "col-md-3",
+      "ArrayValue": [ ],
+      "Options": [
+        {
+          "Id": 0,
+          "Descricao": "Resumido",
+          "RptName": "R0106_RESUMIDO"
+        },
+        {
+          "Id": 1,
+          "Descricao": "Detalhado",
+          "RptName": "R0106_DETALHADO"
+        }
+      ]
     }
   ]
 }

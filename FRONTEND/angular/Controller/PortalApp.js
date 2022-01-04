@@ -155,6 +155,7 @@
             'SubItens': [
                 { 'Title': 'Manutenção de Mapa Reserva', 'Url': $rootScope.pageUrl + 'IndexOpec.html#/MapaReserva' },
                 { 'Title': 'Determinação de Títulos', 'Url': $rootScope.pageUrl + 'IndexOpec.html#/Determinacao' },
+                { 'Title': 'Alteração da Carac.Veiculação', 'Url': $rootScope.pageUrl + 'IndexOpec.html#/AlteraCaracteristica' },
                 { 'Title': 'Importar Propostas', 'Url': $rootScope.pageUrl + 'IndexOpec.html#/MapaReservaImport' },
                 { 'Title': 'Propagação de Mapa Reserva', 'Url': $rootScope.pageUrl + 'IndexOpec.html#/PropagacaoMapa' },
                 { 'Title': 'Consulta de Veiculações', 'Url': $rootScope.pageUrl + 'IndexOpec.html#/ConsultaVeiculacoes' },

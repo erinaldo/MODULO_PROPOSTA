@@ -1,0 +1,65 @@
+﻿{
+  "Title": "Negociações Antecipadas",
+  "ProcName": "Pr_Proposta_R0050",
+  "RptName": "R0050",
+  "ShowGrid": true,
+  "Url": "R0050/Print",
+  "Note": "",
+  "Filters": [
+    {
+      "Class": "row"
+    },
+    {
+      "ParameterName": "@Par_Cod_Empresa_Faturamento",
+      "Type": "Text",
+      "Label": "Emp.Fat",
+      "Search": true,
+      "BigQuery": false,
+      "Dictionary": "Empresa_Usuario",
+      "Value": "",
+      "Multiple": false,
+      "Required": true,
+      "Class": "col-md-2",
+      "ArrayValue": [ ]
+    },
+    {
+      "ParameterName": "@PAR_COMPETENCIA_INICIAL",
+      "Type": "Month",
+      "Label": "Competência Inicio",
+      "Search": false,
+      "BigQuery": false,
+      "Dicionary": "",
+      "Value": "",
+      "Multiple": false,
+      "Class": "col-md-2",
+      "Required": true,
+      "ArrayValue": [ ]
+    },
+    {
+      "ParameterName": "@PAR_COMPETENCIA_FINAL",
+      "Type": "Month",
+      "Label": "Competência Término",
+      "Search": false,
+      "BigQuery": false,
+      "Dicionary": "",
+      "Value": "",
+      "Multiple": false,
+      "Required": true,
+      "Class": "col-md-2",
+      "ArrayValue": [ ]
+    },
+    {
+      "ParameterName": "@Par_Negociacao",
+      "Type": "Int",
+      "Label": "Negociação",
+      "Search": false,
+      "BigQuery": false,
+      "Dictionary": "",
+      "Value": "",
+      "Required": false,
+      "Multiple": false,
+      "Class": "col-md-3",
+      "ArrayValue": [ ]
+    }
+  ]
+}

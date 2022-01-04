@@ -116,13 +116,11 @@
                             <th>Tit.Comercial</th>
                             <th>Produto</th>
                             <th>Dur.</th>
-                            <!--<th>Agencia</th>
-                            <th>Cliente</th>-->
                             <th>Status</th>
-                            <!--<th>Empresa-Contrato-Seq-Com-Veic</th>-->
                             <th>N.Fita</th>
                             <th>Inicio.Prog</th>
                             <th>Térm.Prog</th>
+                            <th></th>
                          </tr>
                     </thead>
                     <tbody>
@@ -137,13 +135,13 @@
                             <td>{{DepositorioFitas.Titulo_Comercial}}</td>
                             <td>{{DepositorioFitas.Nome_Produto}}</td>
                             <td>{{DepositorioFitas.Duracao}}</td>
-                            <!--<td>{{DepositorioFitas.Cod_Agencia}}</td>
-                            <td>{{DepositorioFitas.Cod_Cliente}}</td>-->
                             <td>{{DepositorioFitas.Origem}}</td>
-                            <!--<td>{{DepositorioFitas.Cod_Empresa}}-{{DepositorioFitas.Numero_MR}}-{{DepositorioFitas.Sequencia_MR}}-{{DepositorioFitas.Cod_Comercial}}-{{DepositorioFitas.Cod_Veiculo}}</td>-->
                             <td>{{DepositorioFitas.Numero_Fita}}</td>
                             <td>{{DepositorioFitas.Data_Inicio}}</td>
                             <td>{{DepositorioFitas.Data_Final}}</td>
+                            <td>
+                                <span class="fa fa-trash span-btn" style="font-size:18px"  ng-click="ExcluirDepositorioFitas(DepositorioFitas)" ng-show="PermissaoDelete"></span>
+                            </td>
                         </tr>
                     </tbody>
                 </table>

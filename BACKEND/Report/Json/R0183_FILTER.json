@@ -1,61 +1,100 @@
 ﻿{
-  "Title": "Valor Médio por Programa",
+  "Title": "Análise de Breaks ",
   "ProcName": "PR_PROPOSTA_R0183",
   "RptName": "R0183",
   "ShowGrid": true,
-  "Custom": true,
+  "Url": "R0183/PRINT",
   "Filters": [
     {
       "ParameterName": "@Par_Data_Inicio",
       "Type": "Date",
-      "Label": "Período Inicio",
+      "Label": "Data Inicio",
       "Search": false,
       "BigQuery": false,
-      "Dictionary": "",
+      "Dicionary": "",
       "Value": "",
       "Multiple": false,
-      "Class": "col-md-2 ",
+      "Class": "col-md-2",
       "Required": true,
       "ArrayValue": []
     },
     {
       "ParameterName": "@Par_Data_Fim",
       "Type": "Date",
-      "Label": "Período Término",
+      "Label": "Data Término",
       "Search": false,
       "BigQuery": false,
-      "Dictionary": "",
+      "Dicionary": "",
       "Value": "",
       "Multiple": false,
-      "Class": "col-md-2 ",
       "Required": true,
-      "ArrayValue": [ ]
+      "Class": "col-md-2",
+      "ArrayValue": []
     },
-      {
-      "ParameterName": "@Par_Cod_Veiculo",
+    {
+      "ParameterName": "@Par_Cod_Cliente",
       "Type": "Text",
-      "Label": "Veiculo",
+      "Label": "Cliente",
+      "Search": true,
+      "BigQuery": true,
+      "Dictionary": "Cliente",
+      "Value": "",
+      "Multiple": false,
+      "Class": "col-md-3",
+      "ArrayValue": []
+    },
+    {
+      "Class": "row"
+    },
+    {
+      "ParameterName": "@Par_Veiculos",
+      "Type": "List",
+      "Label": "Veiculos",
       "Search": true,
       "BigQuery": false,
       "Dictionary": "Veiculo",
       "Value": "",
-      "Multiple": false,
-      "Class": "col-md-2 ",
-      "Required": true,
+      "Multiple": true,
+      "Class": "col-md-2",
       "ArrayValue": []
     },
-      {
-      "ParameterName": "@Par_Cod_Programa",
-      "Type": "Text",
+
+    {
+      "ParameterName": "@Par_Tipo_Midia",
+      "Type": "List",
+      "Label": "Tipo de Midia",
+      "Search": true,
+      "BigQuery": false,
+      "Dictionary": "TipoMidias",
+      "Value": "",
+      "Multiple": true,
+      "Class": "col-md-2",
+      "ArrayValue": []
+    },
+    {
+      "ParameterName": "@Par_Tipo_Comercial",
+      "Type": "List",
+      "Label": "Tipo de Comercial",
+      "Search": true,
+      "BigQuery": false,
+      "Dictionary": "Tipo_Comercial",
+      "Value": "",
+      "Multiple": true,
+      "Class": "col-md-2",
+      "ArrayValue": []
+    },
+    {
+      "ParameterName": "@Par_Programas",
+      "Type": "List",
       "Label": "Programa",
       "Search": true,
       "BigQuery": false,
       "Dictionary": "Programa",
       "Value": "",
-      "Multiple": false,
-      "Class": "col-md-2 ",
-      "Required": false,
+      "Multiple": true,
+      "Class": "col-md-2",
       "ArrayValue": []
     }
+
   ]
 }

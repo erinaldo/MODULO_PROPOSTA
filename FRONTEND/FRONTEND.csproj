@@ -94,6 +94,7 @@
     <Reference Include="System.EnterpriseServices" />
   </ItemGroup>
   <ItemGroup>
+    <Content Include="angular\Controller\AlteracaoCaracteristica.js" />
     <Content Include="angular\Controller\BreaksDesconsiderarController.js" />
     <Content Include="angular\Controller\DeParaNegociacaoController.js" />
     <Content Include="angular\Controller\AlteraContato.js" />
@@ -353,6 +354,7 @@
     <Content Include="template\SimulacaoDispo.html" />
     <Content Include="template\modalHistorico.html" />
     <Content Include="template\PesquisaGradeCompensacao.html" />
+    <Content Include="view\AlteracaoCaracteristica.html" />
     <Content Include="view\BreaksDesconsiderar.html" />
     <Content Include="view\DeParaNegociacao.html" />
     <Content Include="view\AlteraContato.html" />

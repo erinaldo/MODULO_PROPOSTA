@@ -4,33 +4,7 @@
   "RptName": "R0052",
   "ShowGrid":true,
   "Filters": [
-    {
-      "ParameterName": "@Par_Dt_Inicial",
-      "Type": "Date",
-      "Label": "Data Inicial",
-      "Search": false,
-      "BigQuery": false,
-      "Dictionary": "",
-      "Value": "",
-      "Multiple": false,
-      "Class": "col-md-2",
-      "Required": true,
-      "ArrayValue": []
-    },
-    {
-      "ParameterName": "@Par_Dt_Final",
-      "Type": "Date",
-      "Label": "Data Término",
-      "Search": false,
-      "BigQuery": false,
-      "Dictionary": "",
-      "Value": "",
-      "Multiple": false,
-      "Class": "col-md-2",
-      "Required": true,
-      "ArrayValue": []
-    },
-    {
+        {
       "ParameterName": "@Par_Cod_Empresa_Faturamento",
       "Type": "Text",
       "Label": "Emp.Fat",
@@ -44,6 +18,35 @@
       "ArrayValue": []
     },
     {
+      "ParameterName": "@Par_Dt_Inicial",
+      "Type": "Date",
+      "Label": "Data Inicial",
+      "Search": false,
+      "BigQuery": false,
+      "Dictionary": "",
+      "Value": "",
+      "Multiple": false,
+      "Class": "col-md-2",
+      "Required": true,
+      "ArrayValue": [ ]
+    },
+    {
+      "ParameterName": "@Par_Dt_Final",
+      "Type": "Date",
+      "Label": "Data Término",
+      "Search": false,
+      "BigQuery": false,
+      "Dictionary": "",
+      "Value": "",
+      "Multiple": false,
+      "Class": "col-md-2",
+      "Required": true,
+      "ArrayValue": [ ]
+    },
+     {
+      "Class": "row"
+    },
+    {
       "ParameterName": "@Par_Cod_Veiculo",
       "Type": "Text",
       "Label": "Veículo",
@@ -53,19 +56,7 @@
       "Value": "",
       "Multiple": false,
       "Class": "col-md-2",
-      "ArrayValue": []
-    },
-    {
-      "ParameterName": "@Par_Cod_Grupo_Agencia",
-      "Type": "Text",
-      "Label": "Grupo Agencia",
-      "Search": true,
-      "BigQuery": true,
-      "Dictionary": "Terceiro_Grupo",
-      "Value": "",
-      "Multiple": false,
-      "Class": "col-md-2",
-      "ArrayValue": []
+      "ArrayValue": [ ]
     },
     {
       "ParameterName": "@Par_Cod_Agencia",
@@ -77,19 +68,7 @@
       "Value": "",
       "Multiple": false,
       "Class": "col-md-2",
-      "ArrayValue": []
-    },
-    {
-      "ParameterName": "@Par_Cod_Grupo_Cliente",
-      "Type": "Text",
-      "Label": "Grupo Cliente",
-      "Search": true,
-      "BigQuery": true,
-      "Dictionary": "Terceiro_Grupo",
-      "Value": "",
-      "Multiple": false,
-      "Class": "col-md-2",
-      "ArrayValue": []
+      "ArrayValue": [ ]
     },
     {
       "ParameterName": "@Par_Cod_Cliente",
@@ -101,31 +80,32 @@
       "Value": "",
       "Multiple": false,
       "Class": "col-md-2",
-      "ArrayValue": []
+      "ArrayValue": [ ]
     },
-    {
-      "ParameterName": "@Par_Visualiza_Especie",
-      "Type": "Boolean",
-      "Label": "Visualizar Espécie",
+     {
+      "ParameterName": "@Par_Indica_Agencia_Cliente",
+      "Type": "Options",
+      "Label": "Opções de Impressão",
       "Search": false,
       "BigQuery": false,
       "Dictionary": "",
-      "Value": true,
+      "Value": 1,
       "Multiple": false,
       "Class": "col-md-2",
-      "ArrayValue": []
+      "ArrayValue": [ ],
+      "Options": [
+        {
+          "Id": 1,
+          "Descricao": "Agência/Cliente"
+        },
+        {
+          "Id": 2,
+          "Descricao": "Cliente/Agencia"
+        }
+      ]
     },
     {
-      "ParameterName": "@Par_Visualiza_Permuta",
-      "Type": "Boolean",
-      "Label": "Visualizar Permuta",
-      "Search": false,
-      "BigQuery": false,
-      "Dictionary": "",
-      "Value": true,
-      "Multiple": false,
-      "Class": "col-md-2",
-      "ArrayValue": []
+      "Class": "row",
     },
     {
       "ParameterName": "@Par_Visualiza_Veiculo",
@@ -137,7 +117,7 @@
       "Value": true,
       "Multiple": false,
       "Class": "col-md-2",
-      "ArrayValue": []
+      "ArrayValue": [ ]
     },
     {
       "ParameterName": "@Par_Visualiza_Agencia",
@@ -149,7 +129,7 @@
       "Value": true,
       "Multiple": false,
       "Class": "col-md-2",
-      "ArrayValue": []
+      "ArrayValue": [ ]
     },
     {
       "ParameterName": "@Par_Visualiza_Cliente",
@@ -161,7 +141,8 @@
       "Value": true,
       "Multiple": false,
       "Class": "col-md-2",
-      "ArrayValue": []
+      "ArrayValue": [ ]
     }
+    
   ]
 }

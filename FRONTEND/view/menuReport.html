@@ -1,5 +1,4 @@
-﻿
-<form name="frmReport" autocomplete="off">
+﻿<form name="frmReport" autocomplete="off">
     <div class="container container">
         <!--===============================Menu dos Relatorios-->
         <div class="block" id="divMenu" ng-show="CurrentShow=='Menu'">
@@ -15,7 +14,7 @@
                 </div>
                 <strong>{{Filter.Title}}</strong>
             </div>
-            <div class="row">
+            <!--<div class="row">-->
                 <div ng-class="filter.Class" ng-repeat="filter in Filter.Filters track by $index">
                     <!--===========================Type Date-->
                     <div class="form-group" ng-show="filter.Type=='Date'">
@@ -84,11 +83,27 @@
                                    type="text" />
                         </div>
                     </div>
+                    <!--===========================Type Int-->
+                    <div class="form-group" ng-show="filter.Type=='Int'">
+                        <label class="field-x" ng-class="(filter.Required)?'fieldrequired':''">{{filter.Label}}</label>
+                        <div class="input-group">
+                            <div class="input-group-addon" ng-show="filter.Search" style="width:30px">
+                                <span class="fa fa-search span-btn" ng-click="PesquisaItems(filter)"></span>
+                            </div>
+                            <input ng-model="filter.Value"
+                                   ng-model-options="{updateOn: 'blur'}"
+                                   class="form-control"
+                                   onkeypress="return NumericOnly(event)"
+                                   style="text-transform:uppercase"
+                                   ng-change="ValidarItem(filter)"
+                                   type="text" />
+                        </div>
+                    </div>
                     <!--===========================Lista de Multipla Escolhas-->
                     <div class="form-group" ng-show="filter.Type=='List'">
                         <label class="field-x" ng-class="(filter.Required)?'fieldrequired':''">{{filter.Label}}</label>
                         <div class="input-group">
-                            <button class="btn btn-default" ng-click="PesquisaArrayItems(filter)">Selecionar <span ng-show="filter.SelectedCount>0">({{filter.SelectedCount}})</span></button>
+                            <button type="button" class="btn btn-default" ng-click="PesquisaArrayItems(filter)">Selecionar <span ng-show="filter.SelectedCount>0">({{filter.SelectedCount}})</span></button>
                         </div>
                     </div>
                     <!--===========================Lista de Opcoes-->
@@ -101,37 +116,43 @@
                         </div>
                     </div>
                 </div>
+            <!--</div>-->
+            <div class="row">
+                <div class="col-md-12">
+                    <label class="label label-default">{{Filter.Note}}</label>
+                </div>
             </div>
         </div>
         <!--============================Grid-->
-        <div class="table-responsive" ng-show="CurrentShow=='Grid'">
-            <table id="dataTable" class="table table-striped table-bordered " cellspacing="0">
-                <thead>
-                    <tr>
-                        <th ng-repeat="hh in gridheaders track by $index">
-                            {{hh.title}}
-                        </th>
-                        
-                    </tr>
-                </thead>
-                <tbody>
-                    <tr ng-repeat="rpt in ReportData track by $index" on-finish-render="ngRepeatFinished">
-                        <td ng-repeat="(key, value) in rpt">
-                            {{value}}
-                        </td>
-                    </tr>
-                </tbody>
-            </table>
+        <div class="block"  ng-show="CurrentShow=='Grid'">
+            <div class="table-responsive">
+                <table id="dataTable" class="table table-striped table-bordered " cellspacing="0">
+                    <thead>
+                        <tr>
+                            <th class="thgridheader" ng-repeat="hh in gridheaders track by $index">
+                                
+                            </th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr ng-repeat="rpt in ReportData track by $index" on-finish-render="ngRepeatFinished">
+                            <td style="white-space:nowrap" ng-repeat="(key, value) in rpt">
+                                {{value}}
+                            </td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
         </div>
         <!--===========================botoes-->
         <div class="fixed-buttons-bottom">
             <div class="row" ng-show="CurrentShow=='Filter'">
                 <div class="col-md-12">
-                    <button class="btn btn-success"  id="btnGerarPdf" ng-click="PrintReport(Filter)" ng-disabled="frmReport.$invalid">Gerar Pdf</button>
+                    <button class="btn btn-success"  id="btnGerarPdf" ng-click="PrintReport()" ng-disabled="frmReport.$invalid">Gerar Pdf</button>
                     <button class="btn btn-success" ng-show="Filter.ShowGrid" ng-click="CarregaGrid(Filter)" ng-disabled="frmReport.$invalid">Mostrar na Tela</button>
-                    <button type="button" class="btn btn-info" ng-click="ReportFilter (CurrentReport)">Limpar Filtro</button>
+                    <button type="button" class="btn btn-info" ng-click="ReportFilter(CurrentReport)">Limpar Filtro</button>
                     <button class="btn btn-warning" ng-click="CancelarReport()">Cancela</button>
-                    <button type="button" class="btn btn-info" id="btnNovoFiltro" ng-click="NovoFiltro()" style="visibility:hidden">Novo Filtro Filtro</button>
+                    <button type="button" class="btn btn-info" id="btnNovoFiltro" ng-click="NovoFiltro()" style="visibility:hidden">Novo Filtro</button>
                 </div>
             </div>
         </div>
