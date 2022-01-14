@@ -34,8 +34,8 @@
         $scope.ShowGrid = false;
         $scope.ShowFiltro = true;
         $scope.chkMarcar = false;
-        var _dtCompet = new Date();
-        var _dtCompet = LeftZero(_dtCompet.getMonth(), 2) + '/' + _dtCompet.getFullYear()
+        var _dtCompet = CurrentMMYYYY();
+
         $scope.Filtro = {
             'Indica_Faturas': true,
             'Indica_Boletos': false,
@@ -276,7 +276,7 @@
                                     if (response.data.IsSuccessful) {
                                         $scope.FilCrit.Cod_Emp_Fat_Crit = pFiltro.Cod_Empresa_Faturamento;
                                         $scope.FilCrit.Usuario = $rootScope.UserData.Login;
-                                        $scope.CarregarCriticasEMS(FilCrit.Cod_Emp_Fat_Crit, FilCrit.Usuario);
+                                        $scope.CarregarCriticasEMS($scope.FilCrit.Cod_Emp_Fat_Crit, $scope.FilCrit.Usuario);
                                     }
                                     else {
                                         ShowAlert(response.data.Message);

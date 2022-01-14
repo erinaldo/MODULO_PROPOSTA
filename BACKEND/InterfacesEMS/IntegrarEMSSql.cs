@@ -1057,7 +1057,7 @@ namespace PROPOSTA
                 foreach (DataRow drw in dtb.Rows)
                 {
                     str_TTA_COD_TIT_ACR = drw["TTA_COD_TIT_ACR"].ToString().Substring(1, 9);
-                    int_TTA_COD_TIT_ACR = str_TTA_COD_TIT_ACR.ConvertToInt32() + pSequencial.ConvertToInt32();
+                    int_TTA_COD_TIT_ACR = str_TTA_COD_TIT_ACR.ConvertToInt32() + pSequencial.Substring(1,9).ConvertToInt32();
                     novo_TTA_COD_TIT_ACR = "S" + int_TTA_COD_TIT_ACR.ToString().PadLeft(9,'0');            // formato S000000000
 
                     ItemLotes.Add(new IntegrarItemLotesModel
@@ -2025,7 +2025,7 @@ namespace PROPOSTA
                 IRestResponse response = client.Execute(request);
                 if (!response.IsSuccessful || (response.StatusCode != HttpStatusCode.OK && response.StatusCode != HttpStatusCode.Created))
                 {
-                    message = clsLib.GetJsonItem(response.Content, "messenger");
+                    message = clsLib.GetJsonItem(response.Content, "MESSENGER");
                     if (String.IsNullOrEmpty(message))
                     {
                         message = response.ErrorMessage;

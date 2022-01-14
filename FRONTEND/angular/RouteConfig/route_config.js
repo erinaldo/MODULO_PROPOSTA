@@ -1238,7 +1238,7 @@
         controller: 'AssociacaoProgramasCadastroController',
         authorize: true,
         routeName: 'Associacao de Programas',
-        RouteId: 'AssociacaoProgramas@New'
+        RouteId: 'EMS@PROGRAMA'
     })
 
     .when('/Portador', {

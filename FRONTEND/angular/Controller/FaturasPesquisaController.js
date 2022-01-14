@@ -122,7 +122,7 @@
         param.buttons = [
             {
                 text: 'Abrir no Excel<span class="fa fa-file-excel-o margin-left-10" style="color:white"></span>', type: 'excel', className: 'btn btn-primary', extend: 'excel', exportOptions: {
-                    columns: ':visible:not(:first-child)'
+                    columns: ':visible'
                 }
             },
             { text: 'Retornar', className: 'btn btn-warning', action: function (e, dt, button, config) { $('#btnShowFiltro').click(); } },

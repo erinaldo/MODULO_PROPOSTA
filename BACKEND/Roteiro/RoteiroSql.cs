@@ -1053,7 +1053,7 @@ namespace PROPOSTA
                 Adp.SelectCommand.Parameters.AddWithValue("@Par_Cod_Programa", pParam[0].Cod_Programa);
                 Adp.SelectCommand.Parameters.AddWithValue("@Par_Dia_Semana", strDiaSemana);
                 Adp.SelectCommand.Parameters.AddWithValue("@Par_Break", strBreaks);
-                Adp.SelectCommand.Parameters.AddWithValue("@Par_Data_Inicio", pParam[0].Data_Fim_Propagacao.ConvertToDatetime());
+                Adp.SelectCommand.Parameters.AddWithValue("@Par_Data_Inicio", pParam[0].Data_Inicio_Propagacao.ConvertToDatetime());
                 Adp.SelectCommand.Parameters.AddWithValue("@Par_Data_Final", pParam[0].Data_Fim_Propagacao.ConvertToDatetime());
                 Adp.SelectCommand.Parameters.AddWithValue("@Par_Login", this.CurrentUser);
 
