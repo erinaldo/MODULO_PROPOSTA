@@ -184,9 +184,6 @@ namespace PROPOSTA
 
 
         }
-
-      
-
         
         public DataTable ListarTabela(String pTabela)
         {

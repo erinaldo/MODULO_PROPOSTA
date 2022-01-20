@@ -1,27 +1,37 @@
 ﻿<div class="container">
-    <div class="block">
+    <div class="block" ng-show="AppModulos.length>0">
         <div class="row margin-top-20">
             <div class="col-md-3" ng-repeat="mod in AppModulos track by $index" style="cursor:pointer">
-                <a href="{{pageUrl }}{{mod.url}}"  
-                   class="app-widget-tile" 
-                   ng-style="{'background-color':mod.bgcolor}" 
-                   style="height:120px !important;border-radius:12px !important" 
-                   ng-show="mod.url">
-                    <div class="intval intval-lg" style="font-size:20px !important;line-height:30px !important" ng-style="{'color':mod.color}"> {{mod.Name}}</div>
+                <a href="{{pageUrl }}{{mod.Url}}"
+                   class="app-widget-tile"
+                   ng-style="{'background-color':mod.bgcolor}"
+                   style="height:120px !important;border-radius:12px !important"
+                   ng-show="mod.Url">
+                    <div class="intval intval-lg" style="font-size:20px !important;line-height:30px !important" ng-style="{'color':mod.Color}"> {{mod.Descricao}}</div>
                     <div class="line">
-                        <div class="title wide text-center" style="text-transform:none !important" ng-style="{'color':mod.color}">{{mod.Text}}</div>
-                    </div>  
+                        <div class="title wide text-center" style="text-transform:none !important" ng-style="{'color':mod.Color}">{{mod.Texto}}</div>
+                    </div>
                 </a>
-                <a href="{{mod.directurl}}" target="_blank" class="app-widget-tile" 
-                   ng-style="{'background-color':mod.bgcolor}" 
-                   style="height:120px !important;border-radius:12px !important" 
-                   ng-show="mod.directurl && (UserData.Register==mod.Register || !mod.Register )">
-                    <div class="intval intval-lg" style="font-size:20px !important;line-height:30px !important" ng-style="{'color':mod.color}"> {{mod.Name}}</div>
+                <a href="{{mod.DirectUrl}}" target="_blank" class="app-widget-tile"
+                   ng-style="{'background-color':mod.bgcolor}"
+                   style="height:120px !important;border-radius:12px !important"
+                   ng-show="mod.DirectUrl">
+                    <div class="intval intval-lg" style="font-size:20px !important;line-height:30px !important" ng-style="{'color':mod.Color}"> {{mod.Descricao}}</div>
                     <div class="line">
-                        <div class="title wide text-center" style="text-transform:none !important" ng-style="{'color':mod.color}">{{mod.Text}}</div>
+                        <div class="title wide text-center" style="text-transform:none !important" ng-style="{'color':mod.Color}">{{mod.Texto}}</div>
                     </div>
                 </a>
             </div>
         </div>
     </div>
+    <div  ng-show="AppModulos.length==0">
+        <div class="alert alert-info alert-icon-block alert-dismissible" role="alert" style="font-size:18px">
+            <div class="alert-icon">
+                <span class="icon-checkmark-circle"></span>
+            </div>
+            <strong>Atenção!</strong> Seu Perfil não tem acesso a nenhum Módulo. Contacte o Administrador do Sistema !
+            <button type="button" class="close" data-dismiss="alert" aria-label="Close"><span class="fa fa-times"></span></button>
+        </div>
+    </div>
+    
 </div>

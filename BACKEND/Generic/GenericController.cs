@@ -179,6 +179,28 @@ namespace PROPOSTA
 
         }
 
+        [Route("api/PostListarTabela")]
+        [HttpPost]
+        [ActionName("PostListarTabela")]
+        [Authorize()]
+        public IHttpActionResult PostListarTabela([FromBody] Generic.ListarTabelaModel Param)
+        {
+            SimLib clsLib = new SimLib();
+            Generic Cls = new Generic(User.Identity.Name);
+            try
+            {
+                DataTable dtbRetorno = Cls.ListarTabela(Param.Table,Param.Value);
+                return Ok(dtbRetorno);
+
+            }
+            catch (Exception Ex)
+            {
+                clsLib.EmailErrorToSuporte(User.Identity.Name, Ex.Message.ToString(), Ex.Source, Ex.StackTrace);
+                throw new Exception(Ex.Message);
+            }
+
+        }
+
         [Route("api/ValidarTabela/{pTabela}/{pCodigo}")]
         [HttpGet]
         [ActionName("ValidarTabela")]
@@ -199,6 +221,28 @@ namespace PROPOSTA
             }
 
         }
+
+        [Route("api/PostValidarTabela")]
+        [HttpPost]
+        [ActionName("PostValidarTabela")]
+        [Authorize()]
+        public IHttpActionResult PostValidarTabela([FromBody] Generic.ValidarTabelaModel Param)
+        {
+            SimLib clsLib = new SimLib();
+            Generic Cls = new Generic(User.Identity.Name);
+            try
+            {
+                DataTable dtbRetorno = Cls.ValidarTabela(Param.Table, Param.Value);
+                return Ok(dtbRetorno);
+            }
+            catch (Exception Ex)
+            {
+                clsLib.EmailErrorToSuporte(User.Identity.Name, Ex.Message.ToString(), Ex.Source, Ex.StackTrace);
+                throw new Exception(Ex.Message);
+            }
+
+        }
+
         [Route("api/GetNivelAcesso")]
         [HttpGet]
         [ActionName("GetMensagem")]

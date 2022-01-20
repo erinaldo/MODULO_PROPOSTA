@@ -1,5 +1,6 @@
 ﻿
 using System;
+using System.Collections.Generic;
 using System.Data;
 using System.Net.Http;
 using System.Web.Http;
@@ -156,18 +157,35 @@ namespace PROPOSTA
                 throw new Exception(Ex.Message);
             }
         }
-        [Route("api/credential/CheckModulo/{Modulo}")]
+        
+        [Route("api/credential/GetUserModulos")]
         [HttpGet]
-        [ActionName("CheckModulo")]
-        //[Authorize()]
-        public IHttpActionResult CheckModulo(String Modulo)
+        [ActionName("GetUserModulos")]
+        [Authorize()]
+        public IHttpActionResult GetUserModulos()
         {
-
             apiCredential Cls = new apiCredential(User.Identity.Name);
             try
             {
-                Byte Retorno = Cls.CheckModulo(Modulo);
+                DataTable Retorno = Cls.GetUserModulos();
+                return Ok(Retorno);
+            }
+            catch (Exception Ex)
+            {
+                throw new Exception(Ex.Message);
+            }
+        }
 
+        [Route("api/credential/GetUserMenu")]
+        [HttpGet]
+        [ActionName("GetUserMenu")]
+        [Authorize()]
+        public IHttpActionResult GetUserMenu()
+        {
+            apiCredential Cls = new apiCredential(User.Identity.Name);
+            try
+            {
+                List<apiCredential.MenuModel> Retorno = Cls.GetUserMenu();
                 return Ok(Retorno);
             }
             catch (Exception Ex)

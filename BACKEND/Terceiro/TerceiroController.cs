@@ -9,11 +9,11 @@ namespace PROPOSTA
     {
         //=================================Lista de Terceiro
         [Route("api/TerceiroListar")]
-        [HttpGet]
+        [HttpPost]
         [ActionName("TerceiroListar")]
         [Authorize()]
 
-        public IHttpActionResult TerceiroListar([FromUri] Terceiro.TerceiroFiltroModel param)
+        public IHttpActionResult TerceiroListar([FromBody] Terceiro.TerceiroFiltroModel param)
         {
             SimLib clsLib = new SimLib();
             Terceiro Cls = new Terceiro(User.Identity.Name);
@@ -30,11 +30,11 @@ namespace PROPOSTA
             }
         }
         ////=================================Obtem Dados do Terceiro
-        [Route("api/GetTerceiroData/{Cod_Terceiro}")]
-        [HttpGet]
+        [Route("api/GetTerceiroData")]
+        [HttpPost]
         [ActionName("GetTerceiroData")]
         [Authorize()]
-        public IHttpActionResult GetTerceiroData(String Cod_Terceiro)
+        public IHttpActionResult GetTerceiroData([FromBody] Terceiro.TerceiroFiltroModel param)
         {
             SimLib clsLib = new SimLib();
             Terceiro Cls = new Terceiro(User.Identity.Name);
@@ -42,9 +42,9 @@ namespace PROPOSTA
             {
                 
                 Terceiro.TerceiroModel Retorno = new Terceiro.TerceiroModel();
-                if (Cod_Terceiro != "0")
+                if (param.Codigo!= "0")
                 {
-                    Retorno = Cls.GetTerceiroData(Cod_Terceiro);
+                    Retorno = Cls.GetTerceiroData(param.Codigo);
 
                 }
                 else

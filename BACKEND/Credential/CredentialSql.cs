@@ -67,7 +67,6 @@ namespace PROPOSTA
                     Userdata.Cod_Empresa = dtb.Rows[0]["Cod_Empresa"].ToString();
                     Userdata.Nome_Empresa = dtb.Rows[0]["Nome_Empresa"].ToString();
                     Userdata.Register = Register;
-                    Userdata.Modulos = AddUserModulos(pUser);
                 }
                 //DataColumn newColumn = new DataColumn("Register", typeof(String));
                 //newColumn.DefaultValue = Register;
@@ -372,25 +371,60 @@ namespace PROPOSTA
             return dtb;
         }
 
-        public Byte CheckModulo(String pModulo)
+        public DataTable GetUserModulos()
         {
             SimLib clsLib = new SimLib();
-            Byte Retorno = 0;
             DataTable dtb = new DataTable("dtb");
             clsConexao cnn = new clsConexao(this.Credential);
             cnn.Open();
             SqlDataAdapter Adp = new SqlDataAdapter();
             try
             {
-                SqlCommand cmd = cnn.Procedure(cnn.Connection, "Pr_Proposta_CheckModulo");
+                SqlCommand cmd = cnn.Procedure(cnn.Connection, "PR_PROPOSTA_Get_User_Modulos");
                 Adp.SelectCommand = cmd;
                 Adp.SelectCommand.Parameters.AddWithValue("@Par_Login", this.CurrentUser);
-                Adp.SelectCommand.Parameters.AddWithValue("@Par_Modulo", pModulo);
                 Adp.SelectCommand = cmd;
                 Adp.Fill(dtb);
-                if (dtb.Rows[0]["Valido"].ToString().ConvertToBoolean())
+            }
+            catch (Exception)
+            {
+                throw;
+            }
+            finally
+            {
+                cnn.Close();
+            }
+            return dtb;
+        }
+        public List<MenuModel> GetUserMenu()
+        {
+            SimLib clsLib = new SimLib();
+            DataTable dtb = new DataTable("dtb");
+            clsConexao cnn = new clsConexao(this.Credential);
+            cnn.Open();
+            List<MenuModel> Menu = new List<MenuModel>();
+            SqlDataAdapter Adp = new SqlDataAdapter();
+
+            try
+            {
+                SqlCommand cmd = cnn.Procedure(cnn.Connection, "PR_PROPOSTA_Get_User_Menu");
+                Adp.SelectCommand = cmd;
+                Adp.SelectCommand.Parameters.AddWithValue("@Par_Login", this.CurrentUser);
+                Adp.SelectCommand = cmd;
+                Adp.Fill(dtb);
+
+                DataView viewMenu = new DataView(dtb);
+                DataTable dtbMenu = viewMenu.ToTable(true, "Id_Modulo", "Descricao_Modulo");
+
+
+                foreach (DataRow drw in dtbMenu.Rows)
                 {
-                    Retorno = 1;
+                    Menu.Add(new MenuModel()
+                    {
+                        Id = drw["Id_Modulo"].ToString().ConvertToInt32(),
+                        Title = drw["Descricao_Modulo"].ToString(),
+                        SubItens = AddItens(dtb, drw["Id_Modulo"].ToString().ConvertToInt32())
+                    });
                 }
             }
             catch (Exception)
@@ -401,9 +435,26 @@ namespace PROPOSTA
             {
                 cnn.Close();
             }
-            return Retorno;
+            return Menu;
         }
 
+        private List<MenuItemModel> AddItens(DataTable dtb, Int32 Id)
+        {
+            List<MenuItemModel> Itens = new List<MenuItemModel>();
+            DataView viewItem = new DataView(dtb);
+            viewItem.RowFilter = "Id_Modulo = " + Id.ToString();
+            DataTable dtbItem = viewItem.ToTable();
+            foreach (DataRow drw in dtbItem.Rows)
+            {
+                Itens.Add(new MenuItemModel()
+                {
+                    Id = drw["Id_Menu"].ToString().ConvertToInt32(),
+                    Title = drw["Descricao_Menu"].ToString(),
+                    Url = drw["Url"].ToString(),
+                });
+            }
+            return Itens;
+        }
 
     }
 

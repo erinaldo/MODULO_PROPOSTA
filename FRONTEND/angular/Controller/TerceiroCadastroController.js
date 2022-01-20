@@ -38,8 +38,9 @@
 
     //==========================Busca dados da Terceiro
     $scope.CarregaDados = function () {
-        var _url = "GetTerceiroData/" + $scope.Parameters.Id;
-        httpService.Get(_url).then(function (response) {
+        var _data = {'Codigo':$scope.Parameters.Id}
+        //var _url = "GetTerceiroData/" + $scope.Parameters.Id;
+        httpService.Post("GetTerceiroData",_data).then(function (response) {
             if (response) {
                 $scope.Terceiro = response.data;
             }

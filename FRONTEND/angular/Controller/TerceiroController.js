@@ -50,11 +50,13 @@
         $('#dataTable').dataTable().fnDestroy();
 
         var _url = 'TerceiroListar';
-        _url += '?Codigo=' + pFiltro.Codigo;
-        _url += '&RazaoSocial=' + pFiltro.RazaoSocial;
-        _url += '&CNPJ=' + pFiltro.CNPJ;
-        _url += '&';
-        httpService.Get(_url).then(function (response) {
+        //_url += '?Codigo=' + pFiltro.Codigo;
+        //_url += '&RazaoSocial=' + pFiltro.RazaoSocial;
+        //_url += '&CNPJ=' + pFiltro.CNPJ;
+        //_url += '&';
+       
+
+        httpService.Post(_url,pFiltro).then(function (response) {
             if (response) {
                 $scope.Terceiros = response.data;
                 if ($scope.Terceiros.length === 0) {

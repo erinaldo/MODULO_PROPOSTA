@@ -55,13 +55,25 @@ namespace PROPOSTA
             public String Cod_Empresa { get; set; }
             public String Nome_Empresa { get; set; }
             public String Register { get; set; }
-            public List<UserModulosModel> Modulos { get; set; }
         }
         public class UserModulosModel
         {
             public Int32 Id_Modulo { get; set; }
             public String Descricao { get; set; }
             public String Chave { get; set; }
+        }
+        public class MenuModel
+        {
+            public Int32 Id { get; set; }
+            public String Title { get; set; }
+            public List<MenuItemModel> SubItens { get; set; }
+        }
+
+        public class MenuItemModel
+        {
+            public Int32 Id { get; set; }
+            public String Title { get; set; }
+            public String Url { get; set; }
         }
     }
 }

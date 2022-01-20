@@ -82,5 +82,15 @@ namespace PROPOSTA
             public String Cod_Veiculo { get; set; }
 
         }
+        public  class ValidarTabelaModel
+        {
+            public String Table { get; set; }
+            public String Value { get; set; }
+        }
+        public class ListarTabelaModel
+        {
+            public String Table { get; set; }
+            public String Value { get; set; }
+        }
     }
 }
